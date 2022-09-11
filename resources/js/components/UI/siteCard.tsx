@@ -2,7 +2,8 @@ import React, {FC} from 'react';
 import SiteOverview from '../siteCard/siteOverview';
 import SiteInfo from '../siteCard/siteInfo';
 import {ISiteProps} from "../../types/types";
-import noimage from '../../img/noimage.png'
+// @ts-ignore
+import noImage from '../../img/noimage.png';
 
 const SiteCard: FC<ISiteProps> = ({site}) => {
     return (
@@ -15,7 +16,7 @@ const SiteCard: FC<ISiteProps> = ({site}) => {
             <SiteOverview site={site}/>
             <div className={'h-full'}>
                 {site.img ? <img className={'w-full'} src={site.img} alt=""/> :
-                    <div className={'h-full bg-cover bg-center'} style={{backgroundImage: `url(${noimage})`}}/>}
+                    <div className={'h-full bg-cover bg-center'} style={{backgroundImage: `url(${noImage})`}}/>}
             </div>
             <SiteInfo site={site}/>
         </a>
