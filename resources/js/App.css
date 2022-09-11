@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    @apply bg-stone-700 text-stone-300
+}
+
+.siteCard:hover > .siteOverview {
+    @apply opacity-100
+}
+
+.siteOverview {
+    @apply flex items-center text-xl w-full absolute bg-stone-500 p-1 transition-all opacity-0
+}
