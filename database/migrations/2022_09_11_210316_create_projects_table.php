@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('sourceURL')->nullable();
             $table->string('previewURL')->nullable();
             $table->string('status');
-            $table->string('level');
+            $table->integer('level');
             $table->string('framework')->nullable();
             $table->string('stack')->nullable();
             $table->string('host');
