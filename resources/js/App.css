@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-    @apply bg-stone-700 text-stone-300
+html, body {
+    @apply bg-stone-700 text-stone-300 h-full
 }
-
+#senpai {
+    @apply h-full
+}
 .siteCard:hover > .siteOverview {
     @apply opacity-100
 }

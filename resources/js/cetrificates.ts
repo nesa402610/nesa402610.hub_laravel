@@ -1,6 +1,10 @@
+// @ts-ignore
 import SBER_HTMLCSS from './img/sertificates/SBER_osnovy-html-css.png';
+// @ts-ignore
 import SBER__DEVOPS_GIT from './img/sertificates/SBER-DevOps-git.png';
+// @ts-ignore
 import BG_JS_BASIC from './img/sertificates/GB_JS-basic.png';
+// @ts-ignore
 import SBER_JS_BASIC from './img/sertificates/SBER-JS-base.png';
 interface certProps {
   name: string,
