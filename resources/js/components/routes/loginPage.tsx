@@ -4,49 +4,35 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
 interface userProps {
-    name: string;
     password: string;
-    passwordConfirm: string;
     email: string;
 }
 
 const RegistrationPage: FC = () => {
-    const [user, setUser] = useState<userProps>({name: '', password: '', passwordConfirm: '', email: ''})
+    const [user, setUser] = useState<userProps>({password: '', email: ''})
     const [errors, setErrors] = useState<boolean>(false)
     const navigate = useNavigate()
 
     const registrationHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        axios.post<userProps>('/registration',
+        axios.post<userProps>('/login',
             {
-                name: user.name,
                 password: user.password,
-                password_confirmation: user.passwordConfirm,
                 email: user.email
-            }).then(() => {
-                navigate('/');
+            }).then((r) => {
+            console.log(r)
+            navigate('/');
         }).catch(err => {
-            setErrors(err.response.data.errors)
-            // for (const err in errorsArr) {
-            //     let errname
-            //     setErrors({errname: })
-            // console.log(err)
-            // }
+            setErrors(err.response.data.errors)//TODO
+
         })
     }
     return (
         <div className={'flex flex-col items-center justify-center'}>
             <div className={'flex flex-col gap-4 bg-stone-600 p-4 rounded-lg'}>
-                <h3 className={'text-center text-2xl'}>Регистрация</h3>
-                {errors ? <h4 className={'text-center text-rose-400 text-lg'}>Проверьте данные. с ними все впорядке?</h4> : ''}
-
-                <div>
-                    <label>Имя</label>
-                    {/*{errors.name ? <span>Минимальная длинна 2 символа</span> : ''}*/}
-                    <Input onChange={e => setUser({...user, name: e.target.value})}
-                           type={'text'}
-                           placeholder={'Элеонор'}/>
-                </div>
+                <h3 className={'text-center text-2xl'}>Вход в аккаунт</h3>
+                {errors ? <h4 className={'text-center text-rose-400 text-lg'}>Проверьте данные. с ними все
+                                                                              впорядке?</h4> : ''}
                 <div>
                     <label>Email</label>
                     {/*{errors.name ? <span>Проверьте правильность Email</span> : ''}*/}
@@ -62,16 +48,9 @@ const RegistrationPage: FC = () => {
                            placeholder={'QWERTY00'}/>
                 </div>
                 <div>
-                    <label>Подтверждение пароля</label>
-                    {/*{errors.name ? <span>Пароль должен совпадать</span> : ''}*/}
-                    <Input onChange={e => setUser({...user, passwordConfirm: e.target.value})}
-                           type={'password'}
-                           placeholder={'QWERTY00'}/>
-                </div>
-                <div>
                     <button className={'w-full bg-stone-500 p-2 rounded-lg'}
                             onClick={e => registrationHandler(e)}>
-                        Зарегистрироваться
+                        Войти
                     </button>
                 </div>
             </div>

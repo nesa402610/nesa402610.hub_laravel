@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rules\Password;
 
 class AuthController extends Controller
@@ -30,7 +32,23 @@ class AuthController extends Controller
 
     }
 
-    public function login() {
+    /**
+     * @throws ValidationException
+     */
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
 
+        if (Auth::attempt($request->only('email', 'password'))) {
+//            $request->session()->regenerate();
+            $token = $request->user()->createToken('token-name');
+            return response()->json(['token' => $token->plainTextToken, 'user' => Auth::user()], 200);
+        }
+        throw ValidationException::withMessages([
+            'login' => ['Invalid data']
+        ]);
     }
 }
