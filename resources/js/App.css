@@ -15,3 +15,13 @@ html, body {
 .siteOverview {
     @apply flex items-center text-xl w-full absolute bg-stone-500 p-1 transition-all opacity-0
 }
+
+.completed, .planned {
+    @apply bg-stone-600
+}
+.in.work {
+    @apply bg-indigo-700
+}
+.dropped {
+    @apply bg-gray-700
+}

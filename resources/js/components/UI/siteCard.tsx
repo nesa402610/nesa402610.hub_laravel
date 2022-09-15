@@ -10,7 +10,7 @@ const SiteCard: FC<ISiteProps> = ({site}) => {
         <a href={site.url}
            target={site.url ? "_blank" : ''}
            className={'siteCard relative flex flex-col rounded-xl overflow-hidden border-2 border-stone-500'
-               + (site.state.toLowerCase() === 'planned' ? ' opacity-70 cursor-default' : '')
+               + (site.state.toLowerCase() === 'planned' ? ' opacity-70 cursor-default planned' : ` ${site.state.toLowerCase()}`)
            }
            rel="noreferrer">
             <SiteOverview site={site}/>
