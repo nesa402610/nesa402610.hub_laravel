@@ -45,6 +45,7 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Минимальная длинна 2 символа</span> : ''}*/}
                     <Input onChange={e => setUser({...user, name: e.target.value})}
                            type={'text'}
+                           bg={'bg-stone-700'}
                            placeholder={'Элеонор'}/>
                 </div>
                 <div>
@@ -52,6 +53,7 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Проверьте правильность Email</span> : ''}*/}
                     <Input onChange={e => setUser({...user, email: e.target.value})}
                            type={'email'}
+                           bg={'bg-stone-700'}
                            placeholder={'yamero0923@nesa.xyz'}/>
                 </div>
                 <div>
@@ -59,6 +61,7 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Минимальная длинна 8 символов</span> : ''}*/}
                     <Input onChange={e => setUser({...user, password: e.target.value})}
                            type={'password'}
+                           bg={'bg-stone-700'}
                            placeholder={'QWERTY00'}/>
                 </div>
                 <div>
@@ -66,6 +69,7 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Пароль должен совпадать</span> : ''}*/}
                     <Input onChange={e => setUser({...user, passwordConfirm: e.target.value})}
                            type={'password'}
+                           bg={'bg-stone-700'}
                            placeholder={'QWERTY00'}/>
                 </div>
                 <div>

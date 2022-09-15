@@ -10,11 +10,11 @@ interface userProps {
     email: string
 }
 
-interface loginProps {
-    token: string
-    r: any
-    user: userProps
-}
+// interface loginProps {
+//     token: string
+//     r: any
+//     user: userProps
+// }
 
 const RegistrationPage: FC = () => {
     const [user, setUser] = useState<userProps>({password: '', email: ''})
@@ -50,6 +50,7 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Проверьте правильность Email</span> : ''}*/}
                     <Input onChange={e => setUser({...user, email: e.target.value})}
                            type={'email'}
+                           bg={'bg-stone-700'}
                            placeholder={'yamero0923@nesa.xyz'}/>
                 </div>
                 <div>
@@ -57,6 +58,7 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Минимальная длинна 8 символов</span> : ''}*/}
                     <Input onChange={e => setUser({...user, password: e.target.value})}
                            type={'password'}
+                           bg={'bg-stone-700'}
                            placeholder={'QWERTY00'}/>
                 </div>
                 <div>
