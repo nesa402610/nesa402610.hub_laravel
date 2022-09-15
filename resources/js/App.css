@@ -25,3 +25,6 @@ html, body {
 .dropped {
     @apply bg-gray-700
 }
+nav .active {
+    @apply text-white hover:text-white cursor-default
+}
