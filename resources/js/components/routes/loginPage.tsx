@@ -2,30 +2,42 @@ import React, {FC, useState} from 'react';
 import Input from "../UI/input";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {loginAction} from "../../store/authReducer";
 
 interface userProps {
-    password: string;
-    email: string;
+    password: string
+    email: string
+}
+
+interface loginProps {
+    token: string
+    r: any
+    user: userProps
 }
 
 const RegistrationPage: FC = () => {
     const [user, setUser] = useState<userProps>({password: '', email: ''})
     const [errors, setErrors] = useState<boolean>(false)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const registrationHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        axios.post<userProps>('/login',
+        axios.post('/login',
             {
                 password: user.password,
                 email: user.email
-            }).then((r) => {
-            console.log(r)
-            navigate('/');
-        }).catch(err => {
-            setErrors(err.response.data.errors)//TODO
-
-        })
+            })
+            .then((r) => {
+                console.log(r.data);
+                dispatch(loginAction(r.data.user))
+                localStorage.setItem('login', 'authed');
+                navigate('/');
+            })
+            .catch(err => {
+                setErrors(err.response.data.errors)//TODO
+            })
     }
     return (
         <div className={'flex flex-col items-center justify-center'}>

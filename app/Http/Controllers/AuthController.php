@@ -51,4 +51,10 @@ class AuthController extends Controller
             'login' => ['Invalid data']
         ]);
     }
+
+    public function checkLogin() {
+        $user = Auth::user();
+
+        return response($user, 200);
+    }
 }
