@@ -1,5 +1,5 @@
 const defaultState = {
-    user: {}
+    user: null
 }
 
 interface authState {
@@ -19,10 +19,11 @@ export const authReducer = (state = defaultState, action: authAction): authState
             return {...state, user: action.payload}
         case LOGOUT:
             localStorage.clear()
-            return {...state, user: {}}
+            return {...state, user: action.payload}
         default:
             return state
     }
 }
 
 export const loginAction = (payload) => ({type: LOGIN, payload})
+export const logoutAction = (payload) => ({type: LOGOUT, payload})

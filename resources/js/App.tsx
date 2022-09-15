@@ -5,7 +5,7 @@ import './App.css'
 import './API/axios'
 import axios from "axios";
 import {useDispatch} from "react-redux";
-import {loginAction} from "./store/authReducer";
+import {loginAction, logoutAction} from "./store/authReducer";
 
 const App = () => {
     const dispatch = useDispatch()
@@ -14,7 +14,7 @@ const App = () => {
             .then(r => {
                 dispatch(loginAction(r.data))
             }).catch(err => {
-                localStorage.removeItem('auth')
+                dispatch(logoutAction(null))
         })
     }, [])
     return (
