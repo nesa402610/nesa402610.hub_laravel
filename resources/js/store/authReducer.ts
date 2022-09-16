@@ -1,9 +1,11 @@
-const defaultState = {
+import {IUser} from "../types/types";
+
+const defaultState: authState = {
     user: {}
 }
 
 interface authState {
-    user: object
+    user: IUser | {}
 }
 interface authAction {
     type: string
@@ -12,6 +14,8 @@ interface authAction {
 
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
+const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT'
+const UPDATE_PROFILE = 'UPDATE_PROFILE'
 
 export const authReducer = (state = defaultState, action: authAction): authState => {
     switch (action.type) {
@@ -19,10 +23,17 @@ export const authReducer = (state = defaultState, action: authAction): authState
             return {...state, user: action.payload}
         case LOGOUT:
             localStorage.clear()
-            return {...state, user: {}}
+            return {...state, user: action.payload}
+        case UPDATE_ACCOUNT:
+            return {...state, user: action.payload}
+        case UPDATE_PROFILE:
+            return {...state, user: action.payload}
         default:
             return state
     }
 }
 
 export const loginAction = (payload) => ({type: LOGIN, payload})
+export const logoutAction = (payload) => ({type: LOGOUT, payload})
+export const updateAccountAction = (payload) => ({type: UPDATE_ACCOUNT, payload})
+export const updateProfileAction = (payload) => ({type: UPDATE_PROFILE, payload})

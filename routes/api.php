@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,5 +27,7 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/checkLogin', [AuthController::class, 'checkLogin'] );
+    Route::post('edit/updateAccount', [userController::class, 'updateAccount']);
+    Route::post('edit/updateProfile', [UserController::class, 'updateProfile']);
 
 });
