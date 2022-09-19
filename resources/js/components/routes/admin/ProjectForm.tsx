@@ -1,27 +1,30 @@
 import React, {FC} from 'react';
-import FgCard from "./fgCard";
-import Input from "./UI/input";
+import FgCard from "../../fgCard";
+import Input from "../../UI/input";
+
 
 interface createProjectFormProps {
     project: projectProps,
     setProject: any
-    createProjectHandler: any
+    projectHandler: any
 }
 
 interface projectProps {
     name: string
     source: string
-    sourceUrl: string
-    previewUrl: string
+    sourceURL: string
+    previewURL: string
     host: string
+    status: string
     image: string
+    level: number
 }
 
-const CreateProjectForm: FC<createProjectFormProps> = ({
-                                                           createProjectHandler,
-                                                           project,
-                                                           setProject
-                                                       }: createProjectFormProps) => {
+const ProjectForm: FC<createProjectFormProps> = ({
+                                                     projectHandler,
+                                                     project,
+                                                     setProject
+                                                 }: createProjectFormProps) => {
     return (
         <form className={'flex flex-col gap-4 w-full'}>
             <FgCard>
@@ -37,13 +40,13 @@ const CreateProjectForm: FC<createProjectFormProps> = ({
             </FgCard>
             <FgCard>
                 <label> Ссылка на источник </label>
-                <Input type={'text'} value={project.sourceUrl}
-                       onChange={e => setProject({...project, sourceUrl: e.target.value})}/>
+                <Input type={'text'} value={project.sourceURL}
+                       onChange={e => setProject({...project, sourceURL: e.target.value})}/>
             </FgCard>
             <FgCard>
                 <label> Ссылка на превью </label>
-                <Input type={'text'} value={project.previewUrl}
-                       onChange={e => setProject({...project, previewUrl: e.target.value})}/>
+                <Input type={'text'} value={project.previewURL}
+                       onChange={e => setProject({...project, previewURL: e.target.value})}/>
             </FgCard>
             <FgCard>
                 <label> Ссылка на изображение </label>
@@ -52,9 +55,9 @@ const CreateProjectForm: FC<createProjectFormProps> = ({
             </FgCard>
             <FgCard>
                 <label> Статус </label>
-                <select
-                    onChange={e => setProject({...project, state: e.target.value})}>
-                    <option value="Planned" selected>Запланированно</option>
+                <select value={project.status}
+                    onChange={e => setProject({...project, status: e.target.value})}>
+                    <option value="Planned">Запланированно</option>
                     <option value="Completed">Завершено</option>
                     <option value="In work">В работе</option>
                     <option value="Dropped">Брошено</option>
@@ -62,9 +65,9 @@ const CreateProjectForm: FC<createProjectFormProps> = ({
             </FgCard>
             <FgCard>
                 <label> Уровень </label>
-                <select
+                <select value={project.level}
                     onChange={e => setProject({...project, level: e.target.value})}>
-                    <option value="1" selected>1</option>
+                    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -77,10 +80,11 @@ const CreateProjectForm: FC<createProjectFormProps> = ({
                        onChange={e => setProject({...project, host: e.target.value})}/>
             </FgCard>
             <FgCard>
-                <button onClick={createProjectHandler}>Создать</button>
+                {project ? <button onClick={projectHandler}>Обновить</button> :
+                    <button onClick={projectHandler}>Создать</button>}
             </FgCard>
         </form>
     );
 };
 
-export default CreateProjectForm;
+export default ProjectForm;

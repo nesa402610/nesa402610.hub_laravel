@@ -1,15 +1,15 @@
 import React, {FC, useState} from 'react';
 import BgCard from "../../bgCard";
-import CreateProjectForm from "../../createProjectForm";
 import axios from "axios";
+import ProjectForm from "./ProjectForm";
 
 const CreateProjectPage: FC = () => {
     const [project, setProject] = useState({
         name: '',
         source: '',
-        sourceUrl: '',
-        previewUrl: '',
-        state: 'Planned',
+        sourceURL: '',
+        previewURL: '',
+        status: 'Planned',
         level: 1,
         host: '',
         image: null
@@ -24,9 +24,9 @@ const CreateProjectPage: FC = () => {
     return (
         <div className={'p-4 flex flex-col items-center'}>
             <BgCard>
-                <CreateProjectForm project={project}
-                                   setProject={setProject}
-                                   createProjectHandler={createProjectHandler}/>
+                <ProjectForm project={project}
+                             setProject={setProject}
+                             projectHandler={createProjectHandler}/>
             </BgCard>
         </div>
     );
