@@ -3,7 +3,7 @@ import React, {FC} from 'react';
 interface inputProps {
     type: string;
     placeholder?: string
-    value?: string
+    value?: any
     bg?: string
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
