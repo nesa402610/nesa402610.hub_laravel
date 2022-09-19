@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('source')->nullable();
             $table->string('sourceURL')->nullable();
             $table->string('previewURL')->nullable();
+            $table->string('image')->nullable();
             $table->string('status');
             $table->integer('level');
             $table->string('framework')->nullable();
