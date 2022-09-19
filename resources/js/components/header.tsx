@@ -50,12 +50,12 @@ const Header: FC = () => {
     ];
     return (
         <header>
-            <div className={'grid grid-cols-3 justify-between p-4 items-center'}>
-                <nav className="flex gap-4">
+            <div className={'flex flex-col gap-2 md:flex-row justify-between p-4 items-center'}>
+                <nav className="flex gap-4 lg:basis-1/3">
                     <NavLink className={'flex hover:text-stone-400 transition-colors'} to='/'>Overview</NavLink>
                     <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/roadmap'}>Roadmap</NavLink>
                 </nav>
-                <div className={'flex flex-1 gap-4 justify-center'}>
+                <div className={'flex flex-1 gap-4 lg:basis-1/3 justify-center'}>
                     {!user ?
                         <>
                             <NavLink className={'flex hover:text-stone-400 transition-colors'}
@@ -70,9 +70,12 @@ const Header: FC = () => {
                         </>
 
                     }
-                    {user?.id === 1 && <NavLink to={'admin/createProject'}>CreateProject</NavLink>}
+                    {user?.id === 1 && <>
+                        <NavLink to={'/admin/createProject'}>CreateProject</NavLink>
+                        <NavLink to={'/admin/projects'}>Projects</NavLink>
+                    </>}
                 </div>
-                <div className={'flex gap-2 justify-end'}>
+                <div className={'flex gap-2 lg:basis-1/3 justify-end'}>
                     {links.map(link =>
                         <MyLinkItem key={link.name} link={link}/>
                     )}

@@ -6,7 +6,7 @@ interface bgCardProps {
 
 const BgCard: FC<bgCardProps> = ({children}) => {
     return (
-        <div className={'flex gap-4 justify-between bg-stone-600 p-4 rounded-lg'}>
+        <div className={'flex gap-4 xs:flex-col sm:flex-row justify-between bg-stone-600 p-4 rounded-lg'}>
             {children}
         </div>
     );

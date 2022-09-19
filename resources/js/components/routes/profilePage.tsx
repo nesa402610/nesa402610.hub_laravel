@@ -10,7 +10,7 @@ import {updateAccountAction, updateProfileAction} from "../../store/authReducer"
 
 const ProfilePage: FC = () => {
     //TODO
-    const user: IUser = useTypedSelector(state => state.auth.user)
+    const user = useTypedSelector(state => state.auth.user) as IUser
     console.log(user)
     const dispatch = useDispatch()
     const updateAccount = () => {

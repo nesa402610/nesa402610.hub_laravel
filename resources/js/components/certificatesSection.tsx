@@ -18,7 +18,7 @@ const CertificatesSection: FC = () => {
         <section>
             <Modal isModal={isModal} modalInput={modalInput} closeModal={closeModal}/>
             <h2 className={'text-2xl text-center my-8'}>Сертификаты</h2>
-            <div className={'grid grid-cols-3 gap-4 p-4'}>
+            <div className={'grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-4'}>
                 <CertCard handler={openImageFC}/>
             </div>
         </section>
