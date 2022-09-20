@@ -10,6 +10,7 @@ interface createProjectFormProps {
 }
 
 interface projectProps {
+    id?: number
     name: string
     source: string
     sourceURL: string
@@ -80,7 +81,7 @@ const ProjectForm: FC<createProjectFormProps> = ({
                        onChange={e => setProject({...project, host: e.target.value})}/>
             </FgCard>
             <FgCard>
-                {project ? <button onClick={projectHandler}>Обновить</button> :
+                {project.id ? <button onClick={projectHandler}>Обновить</button> :
                     <button onClick={projectHandler}>Создать</button>}
             </FgCard>
         </form>

@@ -127,7 +127,7 @@ export const sites: siteProps[] = [
     {
         name: 'Flexbox',
         source: 'Тестовое',
-        sourceUrl: 'https://app.netlify.com/sites/venerable-bavarois-e829e5',
+        sourceUrl: '',
         url: 'https://venerable-bavarois-e829e5.netlify.app/',
         state: 'completed',
         level: levels.newbie,
