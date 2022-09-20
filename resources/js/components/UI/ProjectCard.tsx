@@ -13,7 +13,7 @@ const ProjectCard = ({site}) => {
                 {site.image ? <img className={'w-full'} src={site.image} alt=""/> :
                     <div className={'h-full bg-cover bg-center'} style={{backgroundImage: `url(${noImage})`}}/>}
             </div>
-            <SiteInfo site={site}/>
+            <SiteInfo project={site}/>
         </Link>
     );
 };

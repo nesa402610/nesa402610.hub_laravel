@@ -3,14 +3,14 @@ import {GiFlowerTwirl, GiHalfHeart, GiMoebiusTrefoil} from "react-icons/gi";
 import {FaCalendarAlt} from "react-icons/fa";
 import {ISiteProps} from "../../types/types";
 
-const SiteOverviewState: FC<ISiteProps> = ({site}) => {
+const SiteOverviewState: FC<ISiteProps> = ({project}) => {
     return (
         <div className="flex">
-            {site.state === 'dropped'
+            {project.status === 'dropped'
                 ? <GiFlowerTwirl/>
-                : site.state === 'completed'
+                : project.status === 'completed'
                     ? <GiMoebiusTrefoil/>
-                    : site.state === 'planned'
+                    : project.status === 'planned'
                         ? <FaCalendarAlt/>
                         : <GiHalfHeart/>
             }

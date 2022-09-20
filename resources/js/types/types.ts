@@ -10,23 +10,24 @@ export interface IUser {
     created_at?: string
     updated_at?: string
 }
-export interface ILevel {
-    ico: any,
-    grade: number,
-    name: string
-}
+// export interface ILevel {
+//     ico: any,
+//     grade: number,
+//     name: string
+// }
 export interface ISiteProps {
-    site: ISite
+    project: ISite
 }
 export interface ISite {
+    id: number
     name: string,
+    sourceURL?: string,
     source?: string,
-    sourceUrl?: string,
-    img?: string | null,
-    url?: string,
-    state: string,
-    level: ILevel,
+    previewURL?: string,
+    image?: string | null,
+    status: string,
+    level: number,
     framework?: string,
-    stack: string[],
-    host: any
+    stack?: string,
+    host: string
 }

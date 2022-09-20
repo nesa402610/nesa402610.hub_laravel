@@ -5,20 +5,20 @@ import {ISiteProps} from "../../types/types";
 // @ts-ignore
 import noImage from '../../img/noimage.png';
 
-const SiteCard: FC<ISiteProps> = ({site}) => {
+const SiteCard: FC<ISiteProps> = ({project}) => {
     return (
-        <a href={site.url}
-           target={site.url ? "_blank" : ''}
+        <a href={project.previewURL}
+           target={project.previewURL ? "_blank" : ''}
            className={'siteCard xs:min-h-[75vw] sm:min-h-[0px] relative flex flex-col rounded-xl overflow-hidden border-2 border-stone-500'
-               + (site.state.toLowerCase() === 'planned' ? ' opacity-70 cursor-default planned' : ` ${site.state.toLowerCase()}`)
+               + (project.status.toLowerCase() === 'planned' ? ' opacity-70 cursor-default planned' : ` ${project.status.toLowerCase()}`)
            }
            rel="noreferrer">
-            <SiteOverview site={site}/>
+            <SiteOverview project={project}/>
             <div className={'h-full'}>
-                {site.img ? <img className={'w-full'} src={site.img} alt=""/> :
+                {project.image ? <img className={'w-full'} src={project.image} alt=""/> :
                     <div className={'h-full bg-cover bg-center'} style={{backgroundImage: `url(${noImage})`}}/>}
             </div>
-            <SiteInfo site={site}/>
+            <SiteInfo project={project}/>
         </a>
     );
 };

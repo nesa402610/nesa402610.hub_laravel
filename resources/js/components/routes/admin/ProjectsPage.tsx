@@ -5,7 +5,7 @@ import ProjectCard from "../../UI/ProjectCard";
 const ProjectsPage = () => {
     const [projects, setProjects] = useState([])
     useEffect(()=>{
-        axios.get('/admin/projects').then(r => setProjects(r.data)).catch(err => console.log(err))
+        axios.get('projects').then(r => setProjects(r.data)).catch(err => console.log(err))
     }, [])
     return (
         <div className={'p-4'}>
