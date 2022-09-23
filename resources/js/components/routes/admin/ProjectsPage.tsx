@@ -1,12 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
+import React from 'react';
 import ProjectCard from "../../UI/ProjectCard";
+import {useTypedSelector} from "../../../hooks/useTypedSelector";
 
 const ProjectsPage = () => {
-    const [projects, setProjects] = useState([])
-    useEffect(()=>{
-        axios.get('projects').then(r => setProjects(r.data)).catch(err => console.log(err))
-    }, [])
+    const projects = useTypedSelector(state => state.homePage.projects)
     return (
         <div className={'p-4'}>
             <div className={'grid lg:grid-cols-4 md:grid-cols-2 2xl:grid-cols-5 sm:grid-cols-1 gap-4 px-4'}>
