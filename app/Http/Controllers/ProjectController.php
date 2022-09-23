@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Rating;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
     public function getAllProjects() {
         $projects = Project::all();
-
+//        foreach ($projects as $project){
+//            $ratings = $project->rates;
+//            $avRate = 0;
+//            foreach ($ratings as $rating) {
+//                $avRate = $avRate + $rating->rating;
+//            }
+//            $project->rate = $avRate;
+//        }
         return response($projects);
 
     }
