@@ -6,14 +6,9 @@ import SBER__DEVOPS_GIT from './img/sertificates/SBER-DevOps-git.png';
 import BG_JS_BASIC from './img/sertificates/GB_JS-basic.png';
 // @ts-ignore
 import SBER_JS_BASIC from './img/sertificates/SBER-JS-base.png';
-interface certProps {
-  name: string,
-  author: string,
-  date: string,
-  sign: string,
-  img: string,
-}
-export const certificates: certProps[] = [
+import {ICertProps} from "./types/types";
+
+export const certificates: ICertProps[] = [
   {
     name: 'Основы HTML и CSS',
     author: 'Корпоративный университет СберБанка',

@@ -1,4 +1,4 @@
-import {IUser} from "../types/types";
+import {IActionProps, IUser} from "../types/types";
 
 const defaultState: authState = {
     user: {}
@@ -7,17 +7,13 @@ const defaultState: authState = {
 interface authState {
     user: IUser | {}
 }
-interface authAction {
-    type: string
-    payload?: any
-}
 
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const UPDATE_ACCOUNT = 'UPDATE_ACCOUNT'
 const UPDATE_PROFILE = 'UPDATE_PROFILE'
 
-export const authReducer = (state = defaultState, action: authAction): authState => {
+export const authReducer = (state = defaultState, action: IActionProps): authState => {
     switch (action.type) {
         case LOGIN:
             return {...state, user: action.payload}

@@ -31,3 +31,14 @@ export interface ISite {
     stack?: string,
     host: string
 }
+export interface IActionProps {
+    type: string
+    payload?: any
+}
+export interface ICertProps {
+    name: string,
+    author: string,
+    date: string,
+    sign: string,
+    img: string,
+}
