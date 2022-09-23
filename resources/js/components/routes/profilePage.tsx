@@ -44,6 +44,17 @@ const ProfilePage: FC = () => {
     return (
         <div className={'p-4'}>
             <h1 className={'text-center text-2xl mb-4 font-bold'}>Профиль</h1>
+            {/*<BgCard className={'mb-4 flex sm:flex-col text-center'}>*/}
+            {/*    <h4>Добавлено будет в будущем</h4>*/}
+            {/*    <div className={'flex gap-4'}>*/}
+            {/*        <FgCard className={'text-center'}>*/}
+            {/*            Аккаунт*/}
+            {/*        </FgCard>*/}
+            {/*        <FgCard className={'text-center'}>*/}
+            {/*            Профиль*/}
+            {/*        </FgCard>*/}
+            {/*    </div>*/}
+            {/*</BgCard>*/}
             <BgCard>
                 <FgCard>
                     <h2 className={'text-center text-lg'}>Аккаунт</h2>
