@@ -1,13 +1,17 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import SiteCard from './UI/siteCard';
 import axios from "axios";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useDispatch} from "react-redux";
+import {getProjectsAction} from "../store/homePageReducer";
 
 
 const ProjectSection: FC = () => {
-    const [projects, setProjects] = useState([])
+    const projects = useTypedSelector(state => state.homePage.projects)
+    const dispatch = useDispatch()
 
     useEffect(()=> {
-        axios.get('/projects').then(r => setProjects(r.data))
+        axios.get('/projects').then(r => dispatch(getProjectsAction(r.data)))
     }, [])
     return (
         <section>
