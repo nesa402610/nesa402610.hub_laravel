@@ -9,6 +9,13 @@ export interface IUser {
     email: string
     created_at?: string
     updated_at?: string
+    rates: IRate[]
+}
+interface IRate {
+    id: number
+    project_id: number
+    user_id:number
+    rating: number
 }
 // export interface ILevel {
 //     ico: any,
