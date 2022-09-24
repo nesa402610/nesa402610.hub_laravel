@@ -5,19 +5,39 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\Rating;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
+    public function setRating(Request $request) {
+        $rating = new Rating();
+        $rating->project_id = $request->project_id;
+        $rating->user_id = Auth::user()->id;
+        $rating->rating = $request->rating;
+        $rating->save();
+
+        $rates = Rating::where('project_id', $request->project_id)->get();
+        $avRate = 0;
+        foreach ($rates as $rate) {
+            $avRate = $avRate + $rate->rating;
+        }
+        $avRate = $avRate / count($rates);
+
+        return response(round($avRate, 2));
+    }
+
     public function getAllProjects() {
         $projects = Project::all();
-//        foreach ($projects as $project){
-//            $ratings = $project->rates;
-//            $avRate = 0;
-//            foreach ($ratings as $rating) {
-//                $avRate = $avRate + $rating->rating;
-//            }
-//            $project->rate = $avRate;
-//        }
+        foreach ($projects as $project){
+            $ratings = Rating::where('project_id', $project->id)->get();
+            $avRate = 0;
+            foreach ($ratings as $rating) {
+                $avRate = $avRate + $rating->rating;
+            }
+            if ($avRate) {
+                $project->rate = round($avRate / count($ratings), 2);
+            }
+        }
         return response($projects);
 
     }

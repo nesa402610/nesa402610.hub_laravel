@@ -30,6 +30,7 @@ export interface ISite {
     framework?: string,
     stack?: string,
     host: string
+    rate?: number
 }
 export interface IActionProps {
     type: string

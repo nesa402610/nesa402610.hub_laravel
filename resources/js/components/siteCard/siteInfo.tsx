@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {ISiteProps} from "../../types/types";
+import Rating from "../UI/Rating";
 
 const SiteInfo: FC<ISiteProps> = ({project}) => {
     return (
@@ -17,8 +18,9 @@ const SiteInfo: FC<ISiteProps> = ({project}) => {
                     </a> : project.source
                 }
             </div>
-            <div className={'capitalize'}>
-                {project.status}
+            <div className={'capitalize flex justify-between'}>
+                <div>{project.status}</div>
+                <Rating project={project }/>
             </div>
         </div>
     );
