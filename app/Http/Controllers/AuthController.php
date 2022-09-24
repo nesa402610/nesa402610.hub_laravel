@@ -54,6 +54,7 @@ class AuthController extends Controller
 
     public function checkLogin() {
         $user = Auth::user();
+        $user->rates;
 
         return response($user, 200);
     }
