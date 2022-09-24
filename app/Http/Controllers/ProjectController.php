@@ -7,12 +7,15 @@ use App\Models\Rating;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class ProjectController extends Controller
-{
+class ProjectController extends Controller {
     public function setRating(Request $request) {
         $rating = new Rating();
         $rating->project_id = $request->project_id;
-        $rating->user_id = Auth::user()->id;
+        if (!empty(Auth::user()->id)) {
+            $rating->user_id = Auth::user()->id;
+        } else {
+            $rating->user_id = null;
+        }
         $rating->rating = $request->rating;
         $rating->save();
 
@@ -23,12 +26,12 @@ class ProjectController extends Controller
         }
         $avRate = $avRate / count($rates);
 
-        return response(round($avRate, 2));
+        return response(round($avRate, 2), 201);
     }
 
     public function getAllProjects() {
         $projects = Project::all();
-        foreach ($projects as $project){
+        foreach ($projects as $project) {
             $ratings = Rating::where('project_id', $project->id)->get();
             $avRate = 0;
             foreach ($ratings as $rating) {
@@ -41,6 +44,7 @@ class ProjectController extends Controller
         return response($projects);
 
     }
+
     public function createProject(Request $request) {
         $project = new Project;
         $this->extracted($request, $project);
