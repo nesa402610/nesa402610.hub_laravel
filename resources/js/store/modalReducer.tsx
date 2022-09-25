@@ -18,7 +18,7 @@ const CLOSE_MODAL = 'CLOSE_MODAL'
 export const modalReducer = (state = defaultState, action: IActionProps): modalReducerProps => {
     switch (action.type) {
         case SET_MODAL:
-            return action.payload
+            return {title: action.payload.title, isModal: true, children: action.payload.children}
         case CLOSE_MODAL:
             return {...state, title: '', isModal: false, children: null}
         default:

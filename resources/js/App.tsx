@@ -22,11 +22,7 @@ const App = () => {
     }, [])
     return (
         <>
-            {modal.isModal &&
-                <Modal>
-                    {modal.children}
-                </Modal>
-            }
+            {modal.isModal && <Modal/>}
             <Header/>
             <Index/>
         </>

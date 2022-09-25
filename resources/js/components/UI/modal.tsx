@@ -3,25 +3,22 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
 import {closeModalAction} from "../../store/modalReducer";
 
-interface modalProps {
-    children?: React.ReactNode
-}
 
-const Modal: FC<modalProps> = ({children}) => {
+const Modal: FC = () => {
     const modal = useTypedSelector(state => state.modal)
     const dispatch = useDispatch()
     const closeModal = () => {
         dispatch(closeModalAction())
     };
     return (
-        <div className={'fixed z-40 h-full top-0 left-0 bg-stone-700/75 w-full flex justify-center'}
+        <div className={'fixed backdrop-blur-md z-40 overflow-auto h-full top-0 left-0 bg-stone-700/75 w-full flex justify-center'}
              onClick={closeModal}
         >
-            <div>
-                {modal.title}
-            </div>
-            <div className={'relative'} onClick={e => e.stopPropagation()}>
-                {children}
+            <div className={'relative flex flex-col'} onClick={e => e.stopPropagation()}>
+                {modal.title && <h2 className={'text-2xl mb-4 text-center font-bold'}>
+                    {modal.title}
+                </h2>}
+                {modal.children}
             </div>
         </div>
     );
