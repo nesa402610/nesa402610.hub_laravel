@@ -1,10 +1,13 @@
 import React, {FC} from 'react';
 import {NavLink} from 'react-router-dom';
-import {FaGithub, FaTelegram, FaVk, FaTwitch, FaSteam} from "react-icons/fa";
+import {FaGithub, FaTelegram, FaVk, FaTwitch, FaSteam, FaTwitter} from "react-icons/fa";
 import {SiOsu, SiShikimori} from "react-icons/si";
 import MyLinkItem from "./UI/myLinkItem";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {IUser} from "../types/types";
+import {useDispatch} from "react-redux";
+import {setModalAction} from "../store/modalReducer";
+import CreateProjectPage from "./routes/admin/createProjectPage";
 
 interface linksProps {
     name: string;
@@ -14,6 +17,7 @@ interface linksProps {
 
 const Header: FC = () => {
     const user = useTypedSelector(state => state.auth.user) as IUser
+    const dispatch = useDispatch()
 
     const links: linksProps[] = [
         {
@@ -46,8 +50,17 @@ const Header: FC = () => {
             url: 'https://osu.gatari.pw/u/11971',
             ico: <SiOsu/>,
         },
-
+        {
+            name: 'twitter',
+            url: 'https://twitter.com/nesa402610',
+            ico: <FaTwitter/>
+        }
     ];
+    const createProjectHandler = () => {
+        dispatch(setModalAction({title: 'Добавление проекта',
+            children: <CreateProjectPage/>
+        }))
+    }
     return (
         <header>
             <div className={'flex flex-col gap-2 md:flex-row justify-between p-4 items-center'}>
@@ -71,7 +84,7 @@ const Header: FC = () => {
 
                     }
                     {user?.id === 1 && <>
-                        <NavLink to={'/admin/createProject'}>CreateProject</NavLink>
+                        <span onClick={createProjectHandler}>CreateProject</span>
                         <NavLink to={'/admin/projects'}>Projects</NavLink>
                     </>}
                 </div>
