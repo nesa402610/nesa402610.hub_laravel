@@ -1,22 +1,29 @@
 import React, {FC} from 'react';
+import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useDispatch} from "react-redux";
+import {closeModalAction} from "../../store/modalReducer";
+
 interface modalProps {
-    isModal: boolean,
-    modalInput: string,
-    closeModal: any
+    children?: React.ReactNode
 }
-const Modal: FC<modalProps> = ({isModal, modalInput, closeModal}) => {
+
+const Modal: FC<modalProps> = ({children}) => {
+    const modal = useTypedSelector(state => state.modal)
+    const dispatch = useDispatch()
+    const closeModal = () => {
+        dispatch(closeModalAction())
+    };
     return (
-        <>
-            {
-                isModal ?
-                    <div className={'fixed top-0 left-0 bg-stone-700/75 w-full flex justify-center' + (isModal ? ' active' : '')}
-                         onClick={closeModal}>
-                        <div className={'relative'} onClick={e => e.stopPropagation()}>
-                            <img className='h-screen p-4' src={modalInput} alt=""/>
-                        </div>
-                    </div>
-                    : ''
-            }</>
+        <div className={'fixed z-40 h-full top-0 left-0 bg-stone-700/75 w-full flex justify-center'}
+             onClick={closeModal}
+        >
+            <div>
+                {modal.title}
+            </div>
+            <div className={'relative'} onClick={e => e.stopPropagation()}>
+                {children}
+            </div>
+        </div>
     );
 };
 

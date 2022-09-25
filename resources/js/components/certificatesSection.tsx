@@ -1,22 +1,20 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import CertCard from './UI/certCard';
-import Modal from "./UI/modal";
+import {useDispatch} from "react-redux";
+import {setModalAction} from "../store/modalReducer";
 
 const CertificatesSection: FC = () => {
-    const [isModal, setModal] = useState<boolean>(false);
-    const [modalInput, setModalInput] = useState<string>('');
+    const dispatch = useDispatch()
 
     const openImageFC = (img: string) => {
-        setModal(true);
-        setModalInput(img);
-    };
-    const closeModal = () => {
-        setModal(false);
-        setModalInput('');
+        dispatch(setModalAction({
+            title: '',
+            isModal: true,
+            children: <img className='h-screen p-4' src={img} alt=""/>
+        }))
     };
     return (
         <section>
-            <Modal isModal={isModal} modalInput={modalInput} closeModal={closeModal}/>
             <h2 className={'text-2xl text-center my-8'}>Сертификаты</h2>
             <div className={'grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-4'}>
                 <CertCard handler={openImageFC}/>
