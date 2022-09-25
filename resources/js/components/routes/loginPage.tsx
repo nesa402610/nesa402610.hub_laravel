@@ -30,7 +30,6 @@ const RegistrationPage: FC = () => {
                 email: user.email
             })
             .then((r) => {
-                console.log(r.data);
                 dispatch(loginAction(r.data.user))
                 localStorage.setItem('login', 'authed');
                 navigate('/');
