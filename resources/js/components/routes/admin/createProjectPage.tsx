@@ -22,13 +22,11 @@ const CreateProjectPage: FC = () => {
 
 
     return (
-        <div className={'p-4 flex flex-col items-center'}>
-            <BgCard>
-                <ProjectForm project={project}
-                             setProject={setProject}
-                             projectHandler={createProjectHandler}/>
-            </BgCard>
-        </div>
+        <BgCard>
+            <ProjectForm project={project}
+                         setProject={setProject}
+                         projectHandler={createProjectHandler}/>
+        </BgCard>
     );
 };
 
