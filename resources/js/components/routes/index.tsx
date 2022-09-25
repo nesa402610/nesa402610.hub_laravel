@@ -6,7 +6,6 @@ import LoginPage from "./loginPage";
 import RoadmapPage from "./roadmapPage";
 import ProfilePage from "./profilePage";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import CreateProjectPage from "./admin/createProjectPage";
 import AccessDenied from "./errors/accessDenied";
 import {IUser} from "../../types/types";
 import EditProjectPage from "./admin/editProjectPage";
@@ -22,7 +21,6 @@ const Index: FC = () => {
                 <Route path={'/registration'} element={<RegistrationPage/>}/>
                 <Route path={'/login'} element={<LoginPage/>}/>
                 <Route path={'/profile'} element={<ProfilePage/>}/>
-                <Route path={'/admin/createProject'} element={user?.id === 1 ? <CreateProjectPage/> : <AccessDenied/>}/>
                 <Route path={'/admin/editProject/:id'} element={user?.id === 1 ? <EditProjectPage/> : <AccessDenied/>}/>
                 <Route path={'/admin/projects'} element={user?.id === 1 ? <ProjectsPage/> : <AccessDenied/>}/>
             </Routes>
