@@ -11,17 +11,18 @@ const Rating = ({project}) => {
     const dispatch = useDispatch()
     const user = useTypedSelector(state => state.auth.user) as IUser
     const setRatingHandle = (e, value) => {
-        console.log(user.rates)
         if (project.status !== 'Planned' &&
-            user.rates.filter(item => item.project_id === project.id).length <= 0) {
+            user &&
+            user.rates.filter(item => item.project_id === project.id).length <= 0
+        ) {
             axios.post('/setRating', {
                 project_id: project.id,
                 rating: value
             }).then(r => {
                 dispatch(setRatingAction({id: project.id, rate: r.data}))
+                dispatch(ratedAction({id: project.id, rating: value}))
             })
         }
-                dispatch(ratedAction({id: project.id, rating: value}))
     }
 
     return (

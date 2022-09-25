@@ -11,11 +11,7 @@ class ProjectController extends Controller {
     public function setRating(Request $request) {
         $rating = new Rating();
         $rating->project_id = $request->project_id;
-        if (!empty(Auth::user()->id)) {
-            $rating->user_id = Auth::user()->id;
-        } else {
-            $rating->user_id = null;
-        }
+        $rating->user_id = Auth::user()->id;
         $rating->rating = $request->rating;
         $rating->save();
 
