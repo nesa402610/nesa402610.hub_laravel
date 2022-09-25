@@ -2,19 +2,27 @@ import React from 'react';
 // @ts-ignore
 import noImage from "../../img/noimage.png";
 import SiteInfo from "../siteCard/siteInfo";
-import {Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setModalAction} from "../../store/modalReducer";
+import EditProjectPage from "../routes/admin/editProjectPage";
 
-const ProjectCard = ({site}) => {
+const ProjectCard = ({project}) => {
+    const dispatch = useDispatch()
+    const editProjectHandler = () => {
+        dispatch(setModalAction({title: 'Изменение проекта',
+            children: <EditProjectPage id={project.id}/>
+        }))
+    }
     return (
-        <Link to={`/admin/editProject/${site.id}`}
+        <div onClick={editProjectHandler}
               className={'siteCard relative flex flex-col rounded-xl overflow-hidden border-2 border-stone-500'
-                  + (site.status.toLowerCase() === 'planned' ? ' opacity-70 cursor-default planned' : ` ${site.status.toLowerCase()}`)}>
+                  + (project.status.toLowerCase() === 'planned' ? ' opacity-70 cursor-default planned' : ` ${project.status.toLowerCase()}`)}>
             <div className={'h-full'}>
-                {site.image ? <img className={'w-full'} src={site.image} alt=""/> :
+                {project.image ? <img className={'w-full'} src={project.image} alt=""/> :
                     <div className={'h-full bg-cover bg-center'} style={{backgroundImage: `url(${noImage})`}}/>}
             </div>
-            <SiteInfo project={site}/>
-        </Link>
+            <SiteInfo project={project}/>
+        </div>
     );
 };
 
