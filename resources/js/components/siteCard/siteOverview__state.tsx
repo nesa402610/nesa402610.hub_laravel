@@ -4,13 +4,14 @@ import {FaCalendarAlt} from "react-icons/fa";
 import {ISiteProps} from "../../types/types";
 
 const SiteOverviewState: FC<ISiteProps> = ({project}) => {
+    console.log(project.status)
     return (
         <div className="flex">
-            {project.status === 'dropped'
+            {project.status === 'Dropped'
                 ? <GiFlowerTwirl/>
-                : project.status === 'completed'
+                : project.status === 'Completed'
                     ? <GiMoebiusTrefoil/>
-                    : project.status === 'planned'
+                    : project.status === 'Planned'
                         ? <FaCalendarAlt/>
                         : <GiHalfHeart/>
             }
