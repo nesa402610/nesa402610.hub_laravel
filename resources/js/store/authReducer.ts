@@ -1,7 +1,7 @@
 import {IActionProps, IUser} from "../types/types";
 
 const defaultState = {
-    user: {}
+    user: null
 } as authState
 
 interface authState {
