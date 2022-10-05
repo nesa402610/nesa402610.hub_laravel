@@ -14,7 +14,7 @@ const Modal: FC = () => {
         <div className={'fixed backdrop-blur-md z-40 overflow-auto h-full top-0 left-0 bg-stone-700/75 w-full flex justify-center'}
              onClick={closeModal}
         >
-            <div className={'relative flex flex-col'} onClick={e => e.stopPropagation()}>
+            <div className={'relative'} onClick={e => e.stopPropagation()}>
                 {modal.title && <h2 className={'text-2xl mb-4 text-center font-bold'}>
                     {modal.title}
                 </h2>}
