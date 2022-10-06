@@ -5,14 +5,19 @@ interface inputProps {
     placeholder?: string
     value?: any
     bg?: string
+    required?: boolean
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const Input: FC<inputProps> = ({type, onChange, placeholder, bg, value}) => {
+const Input: FC<inputProps> = (props) => {
     return (
         <input className={'w-full p-2 focus-visible:outline-stone-400 focus-visible:outline focus-visible:outline-2 autofill:bg-stone-600 rounded-lg mt-1 ' +
-            (bg ? bg : 'bg-stone-600')}
-               type={type} onChange={onChange} value={value} placeholder={placeholder}/>
+            (props.bg ? props.bg : 'bg-stone-600')}
+               type={props.type}
+               onChange={props.onChange}
+               value={props.value}
+               placeholder={props.placeholder}
+               required={props.required}/>
     );
 };
 
