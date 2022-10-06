@@ -10,7 +10,7 @@ const CertificatesSection: FC = () => {
         dispatch(setModalAction({
             title: '',
             isModal: true,
-            children: <img className='h-screen p-4' src={img} alt=""/>
+            children: <img className='p-4 max-h-screen' src={img} alt=""/>
         }))
     };
     return (
