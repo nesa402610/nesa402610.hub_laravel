@@ -6,32 +6,40 @@ import SBER__DEVOPS_GIT from './img/sertificates/SBER-DevOps-git.png';
 import BG_JS_BASIC from './img/sertificates/GB_JS-basic.png';
 // @ts-ignore
 import SBER_JS_BASIC from './img/sertificates/SBER-JS-base.png';
+// @ts-ignore
+import SBER_JS_BASIC2 from './img/sertificates/SBER-JS-base-2.png';
 import {ICertProps} from "./types/types";
 
 export const certificates: ICertProps[] = [
-  {
-    name: 'Основы HTML и CSS',
-    author: 'Корпоративный университет СберБанка',
-    date: '08.08.2022',
-    sign: 'Шаталов А. И.',
-    img: SBER_HTMLCSS,
-  }, {
-    name: 'Инструменты DevOps: Git',
-    author: 'Корпоративный университет СберБанка',
-    date: '09.08.2022',
-    sign: 'Шаталов А. И.',
-    img: SBER__DEVOPS_GIT
-  }, {
-    name: 'JavaScript. Начальный уровень',
-    author: 'GeekBrains',
-    date: '25.05.2022',
-    sign: 'Волчек А. И.',
-    img: BG_JS_BASIC
-  },{
-    name: 'Основые программирования на JavaScript I',
-    author: 'Корпоративный университет СберБанка',
-    date: '28.08.2022',
-    sign: 'Шаталов А. И.',
-    img: SBER_JS_BASIC
-  },
+    {
+        name: 'Основы HTML и CSS',
+        author: 'Корпоративный университет СберБанка',
+        date: '08.08.2022',
+        sign: 'Шаталов А. И.',
+        img: SBER_HTMLCSS,
+    }, {
+        name: 'Инструменты DevOps: Git',
+        author: 'Корпоративный университет СберБанка',
+        date: '09.08.2022',
+        sign: 'Шаталов А. И.',
+        img: SBER__DEVOPS_GIT
+    }, {
+        name: 'JavaScript. Начальный уровень',
+        author: 'GeekBrains',
+        date: '25.05.2022',
+        sign: 'Волчек А. И.',
+        img: BG_JS_BASIC
+    }, {
+        name: 'Основы программирования на JavaScript I',
+        author: 'Корпоративный университет СберБанка',
+        date: '28.08.2022',
+        sign: 'Шаталов А. И.',
+        img: SBER_JS_BASIC
+    },{
+        name: 'Основы программирования на JavaScript II',
+        author: 'Корпоративный университет СберБанка',
+        date: '09.10.2022',
+        sign: 'Шаталов А. И.',
+        img: SBER_JS_BASIC2
+    },
 ];
