@@ -8,6 +8,8 @@ import BG_JS_BASIC from './img/sertificates/GB_JS-basic.png';
 import SBER_JS_BASIC from './img/sertificates/SBER-JS-base.png';
 // @ts-ignore
 import SBER_JS_BASIC2 from './img/sertificates/SBER-JS-base-2.png';
+// @ts-ignore
+import SBER_JS_DOM from './img/sertificates/SBER-JS_DOM.png';
 import {ICertProps} from "./types/types";
 
 export const certificates: ICertProps[] = [
@@ -41,5 +43,11 @@ export const certificates: ICertProps[] = [
         date: '09.10.2022',
         sign: 'Шаталов А. И.',
         img: SBER_JS_BASIC2
+    },{
+        name: 'Управление веб-страницей с помощью JavaScript\n',
+        author: 'Корпоративный университет СберБанка',
+        date: '10.10.2022',
+        sign: 'Шаталов А. И.',
+        img: SBER_JS_DOM
     },
 ];
