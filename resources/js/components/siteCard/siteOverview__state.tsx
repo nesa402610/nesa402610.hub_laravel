@@ -4,7 +4,6 @@ import {FaCalendarAlt} from "react-icons/fa";
 import {ISiteProps} from "../../types/types";
 
 const SiteOverviewState: FC<ISiteProps> = ({project}) => {
-    console.log(project.status)
     return (
         <div className="flex">
             {project.status === 'Dropped'
