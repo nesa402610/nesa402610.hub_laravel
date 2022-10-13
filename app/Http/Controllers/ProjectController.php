@@ -78,6 +78,7 @@ class ProjectController extends Controller {
         $project->level = $request->level;
         $project->framework = $request->framework;
         $project->host = $request->host;
+        $project->github = $request->github;
         $project->save();
     }
 }

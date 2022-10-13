@@ -3,6 +3,8 @@ import SiteOverviewState from './siteOverview__state';
 import {ISiteProps} from "../../types/types";
 import SiteOverviewHost from './siteOverview__host';
 import SiteOverviewLevel from './siteOverview__level';
+import ProjectOverviewGithub from "./projectOverview__github";
+
 
 const SiteOverview: FC<ISiteProps> = ({project}) => {
     return (
@@ -10,6 +12,7 @@ const SiteOverview: FC<ISiteProps> = ({project}) => {
             <SiteOverviewState project={project}/>
             <SiteOverviewLevel project={project}/>
             <SiteOverviewHost project={project}/>
+            <ProjectOverviewGithub project={project}/>
         </div>
     );
 };

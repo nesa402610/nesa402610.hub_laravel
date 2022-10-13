@@ -38,6 +38,7 @@ export interface ISite {
     stack?: string,
     host: string
     rate?: number
+    github?: string
 }
 export interface IActionProps {
     type: string

@@ -1,25 +1,15 @@
 import React, {FC} from 'react';
 import FgCard from "../../fgCard";
 import Input from "../../UI/input";
+import {ISite} from "../../../types/types";
 
 
 interface createProjectFormProps {
-    project: projectProps,
+    project: ISite,
     setProject: any
     projectHandler: any
 }
 
-interface projectProps {
-    id?: number
-    name: string
-    source: string
-    sourceURL: string
-    previewURL: string
-    host: string
-    status: string
-    image: string
-    level: number
-}
 
 const ProjectForm: FC<createProjectFormProps> = ({projectHandler, project, setProject}) => {
     return (
@@ -75,9 +65,15 @@ const ProjectForm: FC<createProjectFormProps> = ({projectHandler, project, setPr
                     </select>
                 </FgCard>
                 <FgCard>
-                    <label htmlFor="">Хостинг</label>
+                    <label>Хостинг</label>
                     <Input type={'text'} value={project.host}
                            onChange={e => setProject({...project, host: e.target.value})}/>
+                </FgCard>
+                <FgCard>
+                    <label>Github</label>
+                    <Input type={'text'}
+                           value={project.github}
+                           onChange={e => setProject({...project, github: e.target.value})}/>
                 </FgCard>
             </div>
 
