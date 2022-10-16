@@ -8,11 +8,14 @@ import {loginAction, logoutAction} from "./store/authReducer";
 import {useTypedSelector} from "./hooks/useTypedSelector";
 import Modal from "./components/UI/modal";
 import Index from "./routes";
+import {getProjectsAction} from "./store/homePageReducer";
 
 const App = () => {
     const dispatch = useDispatch()
     const modal = useTypedSelector(state => state.modal)
+
     useEffect(() => {
+        axios.get('/projects').then(r => dispatch(getProjectsAction(r.data)))
         axios.post('/checkLogin')
             .then(r => {
                 dispatch(loginAction(r.data))
