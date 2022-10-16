@@ -1,9 +1,10 @@
 import React, {FC, useState} from 'react';
-import Input from "../UI/input";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {loginAction} from "../../store/authReducer";
+import Input from "../components/UI/input";
+import {loginAction} from "../store/authReducer";
+
 
 interface userProps {
     password: string
@@ -24,7 +25,7 @@ const RegistrationPage: FC = () => {
 
     const registrationHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-            console.log(user.email, user.password, errors)
+        console.log(user.email, user.password, errors)
         if (!user.email || !user.password) {
             return setErrors({email: user.email, password: user.password});
         }
@@ -67,10 +68,10 @@ const RegistrationPage: FC = () => {
                            placeholder={'QWERTY00'}/>
                 </div>
 
-                    <button className={'w-full bg-stone-500 p-2 rounded-lg'}
-                            onClick={e => registrationHandler(e)}>
-                        Войти
-                    </button>
+                <button className={'w-full bg-stone-500 p-2 rounded-lg'}
+                        onClick={e => registrationHandler(e)}>
+                    Войти
+                </button>
 
             </form>
         </div>

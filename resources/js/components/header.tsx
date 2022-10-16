@@ -7,7 +7,7 @@ import {useTypedSelector} from "../hooks/useTypedSelector";
 import {IUser} from "../types/types";
 import {useDispatch} from "react-redux";
 import {setModalAction} from "../store/modalReducer";
-import CreateProjectPage from "./routes/admin/createProjectPage";
+import CreateProjectPage from "../routes/admin/createProjectPage";
 
 interface linksProps {
     name: string;

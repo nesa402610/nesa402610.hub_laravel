@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
-import ProjectSection from "../projectSection";
-import CertificatesSection from "../certificatesSection";
+import ProjectSection from "../components/projectSection";
+import CertificatesSection from "../components/certificatesSection";
 
 const HomePage: FC = () => {
     return (

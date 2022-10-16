@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
-import SiteOverviewState from './siteOverview__state';
+import SiteOverviewState from './projectOverview__state';
 import {IProjectProps} from "../../types/types";
-import SiteOverviewHost from './siteOverview__host';
-import SiteOverviewLevel from './siteOverview__level';
+import SiteOverviewHost from './projectOverview__host';
+import SiteOverviewLevel from './projectOverview__level';
 import ProjectOverviewGithub from "./projectOverview__github";
 
 
-const SiteOverview: FC<IProjectProps> = ({project}) => {
+const ProjectOverview: FC<IProjectProps> = ({project}) => {
     return (
         <div className={'siteOverview'}>
             <SiteOverviewState project={project}/>
@@ -17,4 +17,4 @@ const SiteOverview: FC<IProjectProps> = ({project}) => {
     );
 };
 
-export default SiteOverview;
+export default ProjectOverview;

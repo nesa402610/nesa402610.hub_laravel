@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
-import BgCard from "../bgCard";
-import FgCard from "../fgCard";
-import Input from "../UI/input";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {IUser} from "../../types/types";
+import {IUser} from "../types/types";
 import {useDispatch} from "react-redux";
 import axios from "axios";
-import {updateAccountAction, updateProfileAction} from "../../store/authReducer";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {updateAccountAction, updateProfileAction} from "../store/authReducer";
+import BgCard from "../components/bgCard";
+import FgCard from "../components/fgCard";
+import Input from "../components/UI/input";
 
 const ProfilePage: FC = () => {
     //TODO

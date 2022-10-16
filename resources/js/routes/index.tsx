@@ -5,9 +5,9 @@ import RegistrationPage from "./registrationPage";
 import LoginPage from "./loginPage";
 import RoadmapPage from "./roadmapPage";
 import ProfilePage from "./profilePage";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useTypedSelector} from "../hooks/useTypedSelector";
 import AccessDenied from "./errors/accessDenied";
-import {IUser} from "../../types/types";
+import {IUser} from "../types/types";
 import ProjectsPage from "./admin/ProjectsPage";
 
 const Index: FC = () => {

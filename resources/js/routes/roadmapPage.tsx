@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
-import BgCard from "../bgCard";
-import FgCard from "../fgCard";
+import BgCard from "../components/bgCard";
+import FgCard from "../components/fgCard";
 
 const RoadmapPage: FC = () => {
     return (

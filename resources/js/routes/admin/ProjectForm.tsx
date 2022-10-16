@@ -1,15 +1,13 @@
 import React, {FC} from 'react';
-import FgCard from "../../fgCard";
-import Input from "../../UI/input";
-import {IProject} from "../../../types/types";
-
+import FgCard from "../../components/fgCard";
+import Input from "../../components/UI/input";
+import {IProject} from "../../types/types";
 
 interface createProjectFormProps {
     project: IProject,
     setProject: any
     projectHandler: any
 }
-
 
 const ProjectForm: FC<createProjectFormProps> = ({projectHandler, project, setProject}) => {
     return (

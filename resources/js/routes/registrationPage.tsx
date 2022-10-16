@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
-import Input from "../UI/input";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import Input from "../components/UI/input";
 
 interface userProps {
     name: string;

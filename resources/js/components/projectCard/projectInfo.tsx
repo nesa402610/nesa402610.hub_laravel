@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {IProjectProps} from "../../types/types";
 import Rating from "../UI/Rating";
 
-const SiteInfo: FC<IProjectProps> = ({project}) => {
+const ProjectInfo: FC<IProjectProps> = ({project}) => {
     return (
         <div className="flex flex-col p-2">
             <div className="flex justify-between gap-4">
@@ -26,4 +26,4 @@ const SiteInfo: FC<IProjectProps> = ({project}) => {
     );
 };
 
-export default SiteInfo;
+export default ProjectInfo;
