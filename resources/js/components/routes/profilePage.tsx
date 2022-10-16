@@ -11,7 +11,6 @@ import {updateAccountAction, updateProfileAction} from "../../store/authReducer"
 const ProfilePage: FC = () => {
     //TODO
     const user = useTypedSelector(state => state.auth.user) as IUser
-    console.log(user)
     const dispatch = useDispatch()
     const updateAccount = () => {
         axios.post('edit/updateAccount',
@@ -40,7 +39,7 @@ const ProfilePage: FC = () => {
             .catch(err =>
                 console.log(err))
     }
-
+    if (!user) return null
     return (
         <div className={'p-4'}>
             <h1 className={'text-center text-2xl mb-4 font-bold'}>Профиль</h1>
@@ -108,10 +107,10 @@ const ProfilePage: FC = () => {
                                    value={user.birthday}
                                    type={'date'}/>
                         </label>
-                        <label htmlFor="">
-                            Изображение профиля
-                            <Input bg={'bg-stone-600'} type={'file'}/>
-                        </label>
+                        {/*<label htmlFor="">*/}
+                        {/*    Изображение профиля*/}
+                        {/*    <Input bg={'bg-stone-600'} type={'file'}/>*/}
+                        {/*</label>*/}
                         <button onClick={updateProfile} className={'bg-stone-600 p-2 rounded-lg'}>Обновить данные
                         </button>
                     </div>
