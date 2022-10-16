@@ -4,13 +4,13 @@ import noImage from "../../img/noimage.png";
 import ProjectInfo from "../projectCard/projectInfo";
 import {useDispatch} from "react-redux";
 import {setModalAction} from "../../store/modalReducer";
-import EditProjectPage from "../../routes/admin/editProjectPage";
+import EditProjectModal from './editProjectModal';
 
 const ProjectCard = ({project}) => {
     const dispatch = useDispatch()
     const editProjectHandler = () => {
         dispatch(setModalAction({title: 'Изменение проекта',
-            children: <EditProjectPage id={project.id}/>
+            children: <EditProjectModal id={project.id}/>
         }))
     }
     return (

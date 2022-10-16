@@ -10,7 +10,7 @@ interface editProjectPageProps {
     id: number
 }
 
-const EditProjectPage: FC<editProjectPageProps> = ({id}) => {
+const EditProjectModal: FC<editProjectPageProps> = ({id}) => {
     const [project, setProject] = useState(
         useTypedSelector(state => state.homePage.projects.filter(item => item.id === id)[0])
     )
@@ -27,4 +27,4 @@ const EditProjectPage: FC<editProjectPageProps> = ({id}) => {
     );
 };
 
-export default EditProjectPage;
+export default EditProjectModal;

@@ -4,7 +4,7 @@ import Input from "../../components/UI/input";
 import {IProject} from "../../types/types";
 
 interface createProjectFormProps {
-    project: IProject,
+    project?: IProject,
     setProject: any
     projectHandler: any
 }

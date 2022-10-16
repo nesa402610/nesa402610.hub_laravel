@@ -1,6 +1,6 @@
 import React from 'react';
-import ProjectCard from '../../components/UI/ProjectCard';
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import ProjectCard from "../../components/admin/ProjectCard";
 
 const ProjectsPage = () => {
     const projects = useTypedSelector(state => state.homePage.projects)
