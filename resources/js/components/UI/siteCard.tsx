@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import SiteOverview from '../siteCard/siteOverview';
 import SiteInfo from '../siteCard/siteInfo';
-import {ISiteProps} from "../../types/types";
+import {IProjectProps} from "../../types/types";
 // @ts-ignore
 import noImage from '../../img/noimage.png';
 
-const SiteCard: FC<ISiteProps> = ({project}) => {
+const SiteCard: FC<IProjectProps> = ({project}) => {
     return (
         <div onClick={() => window.open(project.previewURL, '_blank')}
            className={'siteCard xs:min-h-[75vw] sm:min-h-[0px] relative flex flex-col rounded-xl overflow-hidden border-2 border-stone-500 cursor-pointer'

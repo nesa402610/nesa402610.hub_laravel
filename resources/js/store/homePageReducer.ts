@@ -1,4 +1,4 @@
-import {IActionProps, ICertProps, ISite} from "../types/types";
+import {IActionProps, ICertProps, IProject} from "../types/types";
 
 const defaultState = {
     projects: [],
@@ -6,7 +6,7 @@ const defaultState = {
 }
 
 interface homePageProps {
-    projects: ISite[]
+    projects: IProject[]
     certificates: ICertProps[] | null
 }
 

@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
-import {ISiteProps} from "../../types/types";
+import {IProjectProps} from "../../types/types";
 import {GiLevelFourAdvanced, GiLevelThree, GiLevelThreeAdvanced, GiLevelTwo, GiLevelTwoAdvanced} from "react-icons/gi";
 
-const SiteOverviewLevel: FC<ISiteProps> = ({project}) => {
+const SiteOverviewLevel: FC<IProjectProps> = ({project}) => {
     const [level, setLevel] = useState({name: '', ico: null})
     useEffect(() => {
         if (project.level === 1) {

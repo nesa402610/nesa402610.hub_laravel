@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {GiFlowerTwirl, GiHalfHeart, GiMoebiusTrefoil} from "react-icons/gi";
 import {FaCalendarAlt} from "react-icons/fa";
-import {ISiteProps} from "../../types/types";
+import {IProjectProps} from "../../types/types";
 
-const SiteOverviewState: FC<ISiteProps> = ({project}) => {
+const SiteOverviewState: FC<IProjectProps> = ({project}) => {
     return (
         <div className="flex">
             {project.status === 'Dropped'

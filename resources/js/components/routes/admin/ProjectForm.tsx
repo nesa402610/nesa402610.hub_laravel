@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import FgCard from "../../fgCard";
 import Input from "../../UI/input";
-import {ISite} from "../../../types/types";
+import {IProject} from "../../../types/types";
 
 
 interface createProjectFormProps {
-    project: ISite,
+    project: IProject,
     setProject: any
     projectHandler: any
 }

@@ -22,10 +22,10 @@ interface IRate {
 //     grade: number,
 //     name: string
 // }
-export interface ISiteProps {
-    project: ISite
+export interface IProjectProps {
+    project: IProject
 }
-export interface ISite {
+export interface IProject {
     id: number
     name: string,
     sourceURL?: string,
