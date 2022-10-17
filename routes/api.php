@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/checkLogin', [AuthController::class, 'checkLogin']);
     Route::post('/edit/updateAccount', [userController::class, 'updateAccount']);
     Route::post('/edit/updateProfile', [UserController::class, 'updateProfile']);
+    Route::post('/edit/updatePassword', [UserController::class, 'updatePassword']);
+    Route::post('/edit/updateEmail', [UserController::class, 'updateEmail']);
     Route::post('/admin/createProject', [ProjectController::class, 'createProject']);
     Route::get('/admin/editProject/{id}', [ProjectController::class, 'editProject']);
     Route::put('/admin/updateProject/{id}', [ProjectController::class, 'updateProject']);
