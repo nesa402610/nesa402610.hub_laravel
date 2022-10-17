@@ -27,7 +27,7 @@ const AccountTab: FC<accountTabProps> = ({user}) => {
     }
     return (
         <FgCard>
-            <h2 className={'text-center text-lg'}>Аккаунт</h2>
+            <h2 className={'text-center text-xl'}>Аккаунт</h2>
             <div className={'flex flex-col gap-4'}>
                 <label htmlFor="">
                     Email

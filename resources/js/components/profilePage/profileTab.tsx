@@ -30,7 +30,7 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
     }
     return (
         <FgCard>
-            <h2 className={'text-center text-lg'}>Профиль</h2>
+            <h2 className={'text-center text-xl'}>Профиль</h2>
             <div className={'flex flex-col gap-4'}>
                 <label htmlFor="">
                     Имя
