@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
     public function updateAccount(Request $request) {
         $user = Auth::user();
 
@@ -28,5 +28,25 @@ class UserController extends Controller
         $user->save();
 
         return response($user, 201);
+    }
+
+    public function updatePassword(Request $request) {
+        $user = Auth::user();
+        if (Hash::check($request->currentPassword, $user->password)) {
+            $user->password = Hash::make($request->newPassword);
+            $user->save();
+            return response(['msg' => 'Пароль успешно обновлен'], 201);
+        }
+        return response(['error' => 'Пароль не совпадает'], 400);
+    }
+
+    public function updateEmail(Request $request) {
+        $user = Auth::user();
+        if (Hash::check($request->currentPassword, $user->password) && $user->email === $request->currentEmail) {
+            $user->email = $request->newEmail;
+            $user->save();
+            return response(['msg' => 'Email успешно обновлен'], 201);
+        }
+        return response(['error' => 'Пароль или email не совпадает'], 400);
     }
 }
