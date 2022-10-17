@@ -5,6 +5,7 @@ import FgCard from "../fgCard";
 import {useDispatch} from "react-redux";
 import axios from "axios";
 import {IUser} from "../../types/types";
+import SubmitButton from "../UI/submitButton";
 
 interface profileTabProps {
     user: IUser
@@ -63,8 +64,7 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
                 {/*    Изображение профиля*/}
                 {/*    <Input bg={'bg-stone-600'} type={'file'}/>*/}
                 {/*</label>*/}
-                <button onClick={updateProfile} className={'bg-stone-600 p-2 rounded-lg'}>Обновить данные
-                </button>
+                <SubmitButton onClick={updateProfile}>Обновить данные </SubmitButton>
             </div>
         </FgCard>
     );

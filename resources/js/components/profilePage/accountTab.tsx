@@ -5,6 +5,7 @@ import FgCard from "../fgCard";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {IUser} from "../../types/types";
+import SubmitButton from "../UI/submitButton";
 
 interface accountTabProps {
     user: IUser
@@ -42,8 +43,7 @@ const AccountTab: FC<accountTabProps> = ({user}) => {
                            value={user.phone}
                            type={'text'}/>
                 </label>
-                <button onClick={updateAccount} className={'bg-stone-600 p-2 rounded-lg'}>Обновить данные
-                </button>
+                <SubmitButton onClick={updateAccount}>Обновить данные </SubmitButton>
             </div>
         </FgCard>
     );
