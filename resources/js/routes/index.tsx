@@ -4,11 +4,12 @@ import HomePage from "./homePage";
 import RegistrationPage from "./registrationPage";
 import LoginPage from "./loginPage";
 import RoadmapPage from "./roadmapPage";
-import ProfilePage from "./profilePage";
+import ProfileEditPage from "./profileEditPage";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import AccessDenied from "./errors/accessDenied";
 import {IUser} from "../types/types";
 import ProjectsPage from "./admin/ProjectsPage";
+import ProfilePage from "./profilePage";
 
 const Index: FC = () => {
     const user = useTypedSelector(state => state.auth.user) as IUser
@@ -20,6 +21,7 @@ const Index: FC = () => {
                 <Route path={'/registration'} element={<RegistrationPage/>}/>
                 <Route path={'/login'} element={<LoginPage/>}/>
                 <Route path={'/profile'} element={<ProfilePage/>}/>
+                <Route path={'/profile/edit'} element={<ProfileEditPage/>}/>
                 <Route path={'/admin/projects'} element={user?.id === 1 ? <ProjectsPage/> : <AccessDenied/>}/>
             </Routes>
         </>
