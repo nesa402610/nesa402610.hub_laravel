@@ -1,25 +1,45 @@
-import React, {FC, useState} from 'react';
-import {IUser} from "../types/types";
-import {useTypedSelector} from "../hooks/useTypedSelector";
+import React from 'react';
 import BgCard from "../components/bgCard";
-import Tabs from "../components/profilePage/tabs";
-import AccountTab from "../components/profilePage/accountTab";
-import ProfileTab from "../components/profilePage/profileTab";
-import SecurityTab from "../components/profilePage/securityTab";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {Link} from "react-router-dom";
+import {IoSettingsSharp} from "react-icons/io5";
+import {IUser} from "../types/types";
+import FgCard from "../components/fgCard";
 
-const ProfilePage: FC = () => {
-    //TODO
+const ProfilePage = () => {
     const user = useTypedSelector(state => state.auth.user) as IUser
-    const [isActive, setActive] = useState(0)
-    if (!user) return null
-    return (
+    if (user) return (
         <div className={'p-4'}>
-            <h1 className={'text-center text-2xl mb-4 font-bold'}>Профиль</h1>
-            <Tabs setActive={setActive} isActive={isActive}/>
             <BgCard>
-                {isActive === 0 && <AccountTab user={user}/>}
-                {isActive === 1 && < ProfileTab user={user}/>}
-                {isActive === 2 && < SecurityTab/>}
+                <div className={'flex gap-4 w-full'}>
+                    <div className={'flex flex-col gap-2 items-end'}>
+                        <img className={'rounded-lg'}
+                             width={'200px'}
+                             height={'200px'}
+                             src={user.avatar}
+                             alt="user profile picture"/>
+                        <Link to={'edit'} className={'hover:text-stone-400 transition-colors flex gap-2 text-2xl items-center'}>
+                            <span className={'text-lg'}>Настройки</span>
+                            <IoSettingsSharp/>
+                        </Link>
+                    </div>
+                    <div className={'flex flex-col gap-8 flex-1'}>
+                       <div>
+                           <div>
+                               {user.name} {user.lastName} {user.middleName}
+                           </div>
+                           <div>
+                               {user.birthday} {user.status && '/ ' + user.status} / {user.created_at}
+                           </div>
+                       </div>
+                        <div className={'flex flex-col flex-1'}>
+                            <h2 className={'font-bold mb-2 italic text-end mr-2'}>Информация обо мне</h2>
+                            <FgCard className={'shadow-md'}>
+                                {user.about}
+                            </FgCard>
+                        </div>
+                    </div>
+                </div>
             </BgCard>
         </div>
     );
