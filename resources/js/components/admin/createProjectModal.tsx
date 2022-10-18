@@ -14,8 +14,9 @@ const CreateProjectModal: FC = () => {
         previewURL: '',
         status: 'Planned',
         level: 1,
-        host: '',
-        image: null
+        host: 'Netlify',
+        image: '',
+        github: 'https://github.com/'
     })
 
     const createProjectHandler = (e) => {
@@ -26,6 +27,7 @@ const CreateProjectModal: FC = () => {
     return (
         <BgCard>
             <ProjectForm setProject={setProject}
+                         project={project}
                          projectHandler={createProjectHandler}/>
         </BgCard>
     );
