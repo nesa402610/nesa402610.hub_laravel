@@ -25,6 +25,9 @@ class UserController extends Controller {
         $user->middleName = $request->middleName;
         $user->lastName = $request->lastName;
         $user->birthday = $request->birthday;
+        $user->avatar = $request->avatar;
+        $user->status = $request->status;
+        $user->about = $request->about;
         $user->save();
 
         return response($user, 201);
