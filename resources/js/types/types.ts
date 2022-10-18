@@ -28,7 +28,7 @@ export interface IProjectProps {
     project: IProject
 }
 export interface IProject {
-    id: number
+    id?: number
     name: string,
     sourceURL?: string,
     source?: string,
