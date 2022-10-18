@@ -7,6 +7,8 @@ export interface IUser {
     avatar?: string
     birthday?: string
     email: string
+    status?: string
+    about?: string
     created_at?: string
     updated_at?: string
     rates: IRate[]
