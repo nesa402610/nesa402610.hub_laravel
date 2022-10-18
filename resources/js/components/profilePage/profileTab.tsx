@@ -78,7 +78,7 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
                            type={'date'}/>
                 </label>
                 <label>
-                    Изображение профиля
+                    Изображение профиля <span className={'text-sm italic text-stone-400'}>Изображение должно быть квадратным</span>
                     <Input onChange={e=>dispatch(updateProfileAction({...user, avatar: e.target.value}))} bg={'bg-stone-600'} value={user.avatar} type={'text'}/>
                 </label>
                 <SubmitButton onClick={updateProfile}>Обновить данные </SubmitButton>
