@@ -19,7 +19,10 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
                 name: user.name,
                 middleName: user.middleName,
                 lastName: user.lastName,
-                birthday: user.birthday
+                birthday: user.birthday,
+                avatar: user.avatar,
+                status: user.status,
+                about: user.about,
 
             })
             .then(r => {
@@ -32,38 +35,52 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
         <FgCard>
             <h2 className={'text-center text-xl'}>Профиль</h2>
             <div className={'flex flex-col gap-4'}>
-                <label htmlFor="">
+                <label>
                     Имя
                     <Input bg={'bg-stone-600'}
                            onChange={e => dispatch(updateProfileAction({...user, name: e.target.value}))}
                            value={user.name}
                            type={'text'}/>
                 </label>
-                <label htmlFor="">
+                <label>
                     Фамилия
                     <Input bg={'bg-stone-600'}
                            onChange={e => dispatch(updateProfileAction({...user, lastName: e.target.value}))}
                            value={user.lastName}
                            type={'text'}/>
                 </label>
-                <label htmlFor="">
+                <label>
                     Отчество
                     <Input bg={'bg-stone-600'}
                            onChange={e => dispatch(updateProfileAction({...user, middleName: e.target.value}))}
                            value={user.middleName}
                            type={'text'}/>
                 </label>
-                <label htmlFor="">
+                <label>
+                    Статус
+                    <Input bg={'bg-stone-600'}
+                           onChange={e => dispatch(updateProfileAction({...user, status: e.target.value}))}
+                           value={user.status}
+                           type={'text'}/>
+                </label>
+                <label>
+                    Обо мне
+                    <Input bg={'bg-stone-600'}
+                           onChange={e => dispatch(updateProfileAction({...user, about: e.target.value}))}
+                           value={user.about}
+                           type={'text'}/>
+                </label>
+                <label>
                     День рождения
                     <Input bg={'bg-stone-600'}
                            onChange={e => dispatch(updateProfileAction({...user, birthday: e.target.value}))}
                            value={user.birthday}
                            type={'date'}/>
                 </label>
-                {/*<label htmlFor="">*/}
-                {/*    Изображение профиля*/}
-                {/*    <Input bg={'bg-stone-600'} type={'file'}/>*/}
-                {/*</label>*/}
+                <label>
+                    Изображение профиля
+                    <Input onChange={e=>dispatch(updateProfileAction({...user, avatar: e.target.value}))} bg={'bg-stone-600'} value={user.avatar} type={'text'}/>
+                </label>
                 <SubmitButton onClick={updateProfile}>Обновить данные </SubmitButton>
             </div>
         </FgCard>
