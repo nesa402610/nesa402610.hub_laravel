@@ -68,7 +68,7 @@ const Header: FC = () => {
                 <nav className="flex gap-4 lg:basis-1/3">
                     <NavLink className={'flex hover:text-stone-400 transition-colors'} to='/'>Overview</NavLink>
                     <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/roadmap'}>Roadmap</NavLink>
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/about'}>About</NavLink>
+                    {/*<NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/about'}>About</NavLink>*/}
                 </nav>
                 <div className={'flex flex-1 gap-4 lg:basis-1/3 justify-center items-center'}>
                     {!user ?
