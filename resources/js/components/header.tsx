@@ -81,7 +81,7 @@ const Header: FC = () => {
                         :
                         <>
                             <NavLink className={'flex items-center hover:text-stone-400 transition-colors'}
-                                     to={'/profile'}>
+                                     to={'/profile/'+user.id}>
                                 <span>Profile</span>
                                 <img className={'rounded-lg ml-1'} width={'30px'} height={'30px'} src={user.avatar} alt=""/>
                             </NavLink>

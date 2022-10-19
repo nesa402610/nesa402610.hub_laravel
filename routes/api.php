@@ -27,6 +27,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 Route::get('/projects', [ProjectController::class, 'getAllProjects']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
+Route::get('/profile/{username}', [UserController::class, 'getUser']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/checkLogin', [AuthController::class, 'checkLogin']);
