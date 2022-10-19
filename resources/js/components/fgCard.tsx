@@ -8,7 +8,7 @@ interface fgCardProps {
 
 const FgCard: FC<fgCardProps> = ({children, className, onClick}) => {
     return (
-        <div className={'flex-1 bg-stone-700 shadow-md rounded-lg p-4 ' + className}
+        <div className={'flex-1 bg-stone-700 shadow-md rounded-lg sm:p-4 ' + className}
         onClick={onClick}
         >
             {children}
