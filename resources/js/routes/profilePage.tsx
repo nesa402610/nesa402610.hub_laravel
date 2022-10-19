@@ -13,7 +13,7 @@ const ProfilePage = () => {
         <div className={'p-4'}>
             <BgCard>
                 <div className={'flex sm:flex-row xs:flex-col gap-4 w-full'}>
-                    <div className={'flex xs:items-center flex-col gap-2 items-end'}>
+                    <div className={'flex xs:items-center flex-col gap-2 sm:items-end'}>
                         <img className={'rounded-lg'}
                              width={'200px'}
                              height={'200px'}
