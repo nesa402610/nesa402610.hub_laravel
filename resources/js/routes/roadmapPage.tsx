@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import BgCard from "../components/bgCard";
 import FgCard from "../components/fgCard";
+import ListItem from "../components/UI/listItem";
 
 const RoadmapPage: FC = () => {
     return (
@@ -9,16 +10,20 @@ const RoadmapPage: FC = () => {
             <BgCard>
                 <FgCard>
                     <h2 className={'text-xl font-bold text-center'}>TODO</h2>
-                    <ul className={'list-disc list-inside'}>
-                        <li className={'font-bold'}>Рейтинг карточек</li>
-                        <li className={'font-bold'}>Поиск по проектам</li>
-                        <li className={'font-bold'}>Профиль</li>
+                    <ul>
+                        <ListItem bold={true}>Рейтинг карточек</ListItem>
+                        <ListItem bold={true}>Поиск по проектам</ListItem>
+                        <ListItem bold={true}>Профиль</ListItem>
                         <ol className={'list-disc list-inside ml-6'}>
-                            <li>Смена данных</li>
-                            <li>Логин через соц сети</li>
-                            <li>Куда ставил рейтинги</li>
+                            <ListItem completed={true}>Смена данных</ListItem>
+                            <ListItem completed={true}>Кастомизация профиля</ListItem>
+                            <ListItem>Просмотр других профилей</ListItem>
+                            <ListItem>Логин через соц сети</ListItem>
+                            <ListItem>Куда ставил рейтинги</ListItem>
                         </ol>
-                        <li className={'font-bold'}>Подтверждение почты</li>
+                        <ListItem bold={true}>Подтверждение почты</ListItem>
+                        <ListItem bold={true}>Личный блог</ListItem>
+                        <ListItem bold={true}>Страницу обо мне</ListItem>
                     </ul>
                 </FgCard>
                 <FgCard>
