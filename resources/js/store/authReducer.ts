@@ -1,11 +1,13 @@
 import {IActionProps, IUser} from "../types/types";
 
-const defaultState = {
-    user: null
-} as authState
+const defaultState: authState = {
+    isAuth: false,
+    user: null,
+}
 
 interface authState {
     user: IUser
+    isAuth: boolean
 }
 
 const LOGIN = 'LOGIN'
@@ -17,10 +19,10 @@ const RATED = 'RATED'
 export const authReducer = (state = defaultState, action: IActionProps): authState => {
     switch (action.type) {
         case LOGIN:
-            return {...state, user: action.payload}
+            return {...state, user: action.payload, isAuth: true}
         case LOGOUT:
             localStorage.clear()
-            return {...state, user: action.payload}
+            return {...state, user: action.payload, isAuth: false}
         case UPDATE_ACCOUNT:
             return {...state, user: action.payload}
         case UPDATE_PROFILE:
