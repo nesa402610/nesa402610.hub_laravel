@@ -16,13 +16,13 @@ const ProfilePage = () => {
 
     useEffect(() => {
         // @ts-ignore
-        if (authedUser?.id !== userName.username) {
+        if (authedUser?.id != userName.username) {
             axios.get('/profile/' + userName.username)
                 .then(r => {
                     setUser(r.data)
                 })
         } else {
-            setUser(user)
+            setUser(authedUser)
         }
     }, [userName])
 
@@ -49,9 +49,11 @@ const ProfilePage = () => {
                                 {user.name} {user.lastName} {user.middleName}
                             </div>
                             <div>
-                                {moment(user.birthday).format('DD.MM.YYYY')}&nbsp;
-                                {user.status && '/ ' + user.status} / Впервые
-                                                                    с {moment(user.created_at).format('YYYY')} года
+                                {user.birthday &&
+                                    (moment().format('YYYY') - moment(user.birthday)
+                                        .format('YYYY')) + ' года / '}
+                                {user.status && user.status + ' / '} Здесь
+                                                                     с {moment(user.created_at).format('YYYY')} года
                             </div>
                         </div>
                         <div className={'flex flex-col flex-1'}>
