@@ -10,6 +10,7 @@ import AccessDenied from "./errors/accessDenied";
 import {IUser} from "../types/types";
 import ProjectsPage from "./admin/ProjectsPage";
 import ProfilePage from "./profilePage";
+import BlogPage from "./BlogPage";
 
 const Index: FC = () => {
     const user = useTypedSelector(state => state.auth.user) as IUser
@@ -25,6 +26,7 @@ const Index: FC = () => {
                     <Route path={':username'} element={<ProfilePage/>}/>
                 </Route>
                 <Route path={'/profile/edit'} element={<ProfileEditPage/>}/>
+                <Route path={'/blog'} element={<BlogPage/>}/>
             </Routes>
 
         </>
