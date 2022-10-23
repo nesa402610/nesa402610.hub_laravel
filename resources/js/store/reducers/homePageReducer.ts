@@ -1,4 +1,4 @@
-import {IActionProps, ICertProps, IProject} from "../types/types";
+import {IActionProps, ICertProps, IProject} from "../../types/types";
 
 const defaultState = {
     projects: [],

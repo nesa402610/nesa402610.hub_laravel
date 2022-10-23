@@ -6,8 +6,8 @@ import MyLinkItem from "./UI/myLinkItem";
 import {useTypedSelector} from "../hooks/useTypedSelector";
 import {IUser} from "../types/types";
 import {useDispatch} from "react-redux";
-import {setModalAction} from "../store/modalReducer";
 import CreateProjectModal from './admin/createProjectModal';
+import {setModalAction} from "../store/reducers/modalReducer";
 
 interface linksProps {
     name: string;
@@ -68,6 +68,7 @@ const Header: FC = () => {
                 <nav className="flex gap-4 lg:basis-1/3">
                     <NavLink className={'flex hover:text-stone-400 transition-colors'} to='/'>Overview</NavLink>
                     <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/roadmap'}>Roadmap</NavLink>
+                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/blog'}>Blog</NavLink>
                     {/*<NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/about'}>About</NavLink>*/}
                 </nav>
                 <div className={'flex flex-1 gap-4 lg:basis-1/3 justify-center items-center'}>

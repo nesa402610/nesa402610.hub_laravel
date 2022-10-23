@@ -4,7 +4,7 @@ import axios from "axios";
 import {useDispatch} from "react-redux";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import BgCard from "../../components/bgCard";
-import {closeModalAction} from "../../store/modalReducer";
+import {closeModalAction} from "../../store/reducers/modalReducer";
 
 interface editProjectPageProps {
     id: number

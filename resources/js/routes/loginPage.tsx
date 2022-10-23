@@ -3,7 +3,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import Input from "../components/UI/input";
-import {loginAction} from "../store/authReducer";
+import {loginAction} from "../store/reducers/authReducer";
 
 
 interface userProps {

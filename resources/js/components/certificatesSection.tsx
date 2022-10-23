@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useDispatch} from "react-redux";
-import {setModalAction} from "../store/modalReducer";
 import CertCard from "./certificateCard/certCard";
+import {setModalAction} from "../store/reducers/modalReducer";
 
 const CertificatesSection: FC = () => {
     const dispatch = useDispatch()

@@ -1,11 +1,11 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {setRatingAction} from "../../store/homePageReducer";
 import axios from "axios";
 import {GiCheerful} from 'react-icons/gi';
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {IUser} from "../../types/types";
-import {ratedAction} from "../../store/authReducer";
+import { setRatingAction } from '../../store/reducers/homePageReducer';
+import { ratedAction } from '../../store/reducers/authReducer';
 
 const Rating = ({project}) => {
     const dispatch = useDispatch()

@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useDispatch} from "react-redux";
-import {closeModalAction} from "../../store/modalReducer";
+import {closeModalAction} from "../../store/reducers/modalReducer";
 
 
 const Modal: FC = () => {

@@ -1,9 +1,9 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {authReducer} from "./authReducer";
-import {homePageReducer} from "./homePageReducer";
-import {modalReducer} from "./modalReducer";
 import {composeWithDevTools} from "@redux-devtools/extension";
 import thunk from "redux-thunk";
+import {authReducer} from "./reducers/authReducer";
+import {homePageReducer} from "./reducers/homePageReducer";
+import {modalReducer} from "./reducers/modalReducer";
 
 const rootReducer = combineReducers({
     auth: authReducer,

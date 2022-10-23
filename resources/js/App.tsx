@@ -4,11 +4,11 @@ import './App.css'
 import './API/axios'
 import axios from "axios";
 import {useDispatch} from "react-redux";
-import {loginAction, logoutAction} from "./store/authReducer";
 import {useTypedSelector} from "./hooks/useTypedSelector";
 import Modal from "./components/UI/modal";
 import Index from "./routes";
-import {getProjectsAction} from "./store/homePageReducer";
+import { getProjectsAction } from './store/reducers/homePageReducer';
+import {loginAction, logoutAction} from "./store/reducers/authReducer";
 
 const App = () => {
     const dispatch = useDispatch()

@@ -1,4 +1,4 @@
-import {IActionProps, IUser} from "../types/types";
+import {IActionProps, IUser} from "../../types/types";
 
 const defaultState: authState = {
     isAuth: false,

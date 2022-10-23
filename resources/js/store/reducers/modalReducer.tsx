@@ -1,4 +1,4 @@
-import {IActionProps} from "../types/types";
+import {IActionProps} from "../../types/types";
 import React from "react";
 
 const defaultState = {

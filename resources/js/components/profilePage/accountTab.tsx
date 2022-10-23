@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import Input from "../UI/input";
-import {updateAccountAction} from "../../store/authReducer";
 import FgCard from "../fgCard";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import {IUser} from "../../types/types";
 import SubmitButton from "../UI/submitButton";
+import {updateAccountAction} from "../../store/reducers/authReducer";
 
 interface accountTabProps {
     user: IUser

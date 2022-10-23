@@ -3,8 +3,8 @@ import React from 'react';
 import noImage from "../../img/noimage.png";
 import ProjectInfo from "../projectCard/projectInfo";
 import {useDispatch} from "react-redux";
-import {setModalAction} from "../../store/modalReducer";
 import EditProjectModal from './editProjectModal';
+import {setModalAction} from "../../store/reducers/modalReducer";
 
 const ProjectCard = ({project}) => {
     const dispatch = useDispatch()

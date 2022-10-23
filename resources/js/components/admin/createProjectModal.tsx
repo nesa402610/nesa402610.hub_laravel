@@ -2,8 +2,8 @@ import React, {FC, useState} from 'react';
 import axios from "axios";
 import ProjectForm from "./ProjectForm";
 import {useDispatch} from "react-redux";
-import {closeModalAction} from "../../store/modalReducer";
 import BgCard from "../../components/bgCard";
+import {closeModalAction} from "../../store/reducers/modalReducer";
 
 const CreateProjectModal: FC = () => {
     const dispatch = useDispatch()
