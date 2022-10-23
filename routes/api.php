@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -28,6 +29,8 @@ Route::controller(AuthController::class)->group(function () {
 Route::get('/projects', [ProjectController::class, 'getAllProjects']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
 Route::get('/profile/{username}', [UserController::class, 'getUser']);
+Route::get('/blog', [BlogPostController::class, 'getAllPosts']);
+
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/checkLogin', [AuthController::class, 'checkLogin']);
@@ -38,4 +41,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/admin/createProject', [ProjectController::class, 'createProject']);
     Route::get('/admin/editProject/{id}', [ProjectController::class, 'editProject']);
     Route::put('/admin/updateProject/{id}', [ProjectController::class, 'updateProject']);
+    Route::post('/admin/createBlogPost', [BlogPostController::class, 'createPost']);
 });
