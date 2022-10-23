@@ -23,8 +23,8 @@ const Index: FC = () => {
                 <Route path={'/admin/projects'} element={user?.id === 1 ? <ProjectsPage/> : <AccessDenied/>}/>
                 <Route path={'/profile'} element={<ProfilePage/>}>
                     <Route path={':username'} element={<ProfilePage/>}/>
-                    <Route path={'edit'} element={<ProfileEditPage/>}/>
                 </Route>
+                <Route path={'/profile/edit'} element={<ProfileEditPage/>}/>
             </Routes>
 
         </>
