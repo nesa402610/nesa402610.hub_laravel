@@ -53,3 +53,13 @@ export interface ICertProps {
     sign: string,
     img: string,
 }
+
+export interface IPost {
+    id?: number
+    userId?: number
+    title: string
+    body: string
+    image: string
+    created_at: string
+    updated_at: string
+}
