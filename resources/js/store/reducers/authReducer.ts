@@ -28,7 +28,10 @@ export const authReducer = (state = defaultState, action: IActionProps): authSta
         case UPDATE_PROFILE:
             return {...state, user: action.payload}
         case RATED:
-            const newState = state.user.rates.map(item => item.project_id === action.payload.id ? {...item, rating: action.payload.rating} : item)
+            const newState = state.user.rates.map(item => item.project_id === action.payload.id ? {
+                ...item,
+                rating: action.payload.rating
+            } : item)
             return {...state, user: {...state.user, rates: newState}}
         default:
             return state

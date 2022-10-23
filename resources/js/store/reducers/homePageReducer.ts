@@ -20,7 +20,10 @@ export const homePageReducer = (state = defaultState, action: IActionProps): hom
         case GET_CERT:
             return {...state, certificates: action.payload}
         case SET_RATING:
-                const newState = state.projects.map(obj => obj.id === action.payload.id ? {...obj, rate: action.payload.rate} : obj)
+            const newState = state.projects.map(obj => obj.id === action.payload.id ? {
+                ...obj,
+                rate: action.payload.rate
+            } : obj)
             return {...state, projects: newState}
         default:
             return state
