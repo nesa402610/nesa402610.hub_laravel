@@ -3,7 +3,7 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import Input from "../components/UI/input";
-import {loginAction} from "../store/reducers/authReducer";
+import {login} from "../store/reducers/authSlice";
 
 
 interface userProps {
@@ -25,7 +25,6 @@ const RegistrationPage: FC = () => {
 
     const registrationHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log(user.email, user.password, errors)
         if (!user.email || !user.password) {
             return setErrors({email: user.email, password: user.password});
         }
@@ -35,7 +34,7 @@ const RegistrationPage: FC = () => {
                 email: user.email
             })
             .then((r) => {
-                dispatch(loginAction(r.data.user))
+                dispatch(login(r.data.user))
                 localStorage.setItem('login', 'authed');
                 navigate('/');
             })

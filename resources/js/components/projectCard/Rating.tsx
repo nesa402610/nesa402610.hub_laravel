@@ -2,14 +2,14 @@ import React from 'react';
 import {useDispatch} from "react-redux";
 import axios from "axios";
 import {GiCheerful} from 'react-icons/gi';
-import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {IUser} from "../../types/types";
 import { setRatingAction } from '../../store/reducers/homePageReducer';
-import { ratedAction } from '../../store/reducers/authReducer';
+import {rated} from "../../store/reducers/authSlice";
+import {useAppSelector} from "../../hooks/redux";
 
 const Rating = ({project}) => {
     const dispatch = useDispatch()
-    const user = useTypedSelector(state => state.auth.user) as IUser
+    const user = useAppSelector(state => state.auth.user) as IUser
     const setRatingHandle = (e, value) => {
         if (project.status !== 'Planned' &&
             user &&
@@ -20,7 +20,7 @@ const Rating = ({project}) => {
                 rating: value
             }).then(r => {
                 dispatch(setRatingAction({id: project.id, rate: r.data}))
-                dispatch(ratedAction({id: project.id, rating: value}))
+                dispatch(rated({id: project.id, rating: value}))
             })
         }
     }

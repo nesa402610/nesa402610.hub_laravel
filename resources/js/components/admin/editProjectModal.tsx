@@ -2,9 +2,9 @@ import React, {FC, useState} from 'react';
 import ProjectForm from "./ProjectForm";
 import axios from "axios";
 import {useDispatch} from "react-redux";
-import {useTypedSelector} from "../../hooks/useTypedSelector";
 import BgCard from "../../components/bgCard";
 import {closeModalAction} from "../../store/reducers/modalReducer";
+import {useAppSelector} from "../../hooks/redux";
 
 interface editProjectPageProps {
     id: number
@@ -12,7 +12,7 @@ interface editProjectPageProps {
 
 const EditProjectModal: FC<editProjectPageProps> = ({id}) => {
     const [project, setProject] = useState(
-        useTypedSelector(state => state.homePage.projects.filter(item => item.id === id)[0])
+        useAppSelector(state => state.homePage.projects.filter(item => item.id === id)[0])
     )
     const dispatch = useDispatch()
 

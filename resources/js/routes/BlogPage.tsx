@@ -1,5 +1,4 @@
 import React, {FC, useEffect} from 'react';
-import {useTypedSelector} from "../hooks/useTypedSelector";
 import BgCard from "../components/bgCard";
 import axios from "axios";
 import {setPostsActions} from "../store/reducers/blogReducer";
@@ -7,11 +6,12 @@ import {useDispatch} from "react-redux";
 import {setModalAction} from "../store/reducers/modalReducer";
 import PostForm from "../components/admin/PostForm";
 import PostCard from "../components/blog/PostCard";
+import {useAppSelector} from "../hooks/redux";
 
 const BlogPage: FC = () => {
     const dispatch = useDispatch()
-    const {user} = useTypedSelector(state => state.auth)
-    const {posts} = useTypedSelector(state => state.posts)
+    const {user} = useAppSelector(state => state.auth)
+    const {posts} = useAppSelector(state => state.posts)
     useEffect(() => {
         axios.get('/blog')
             .then(r => dispatch(setPostsActions(r.data)))

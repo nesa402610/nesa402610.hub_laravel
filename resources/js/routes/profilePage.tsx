@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import BgCard from "../components/bgCard";
-import {useTypedSelector} from "../hooks/useTypedSelector";
 import {Link} from "react-router-dom";
 import {IoSettingsSharp} from "react-icons/io5";
 import {IUser} from "../types/types";
@@ -8,9 +7,10 @@ import FgCard from "../components/fgCard";
 import moment from "moment";
 import {useParams} from "react-router";
 import axios from "axios";
+import {useAppSelector} from "../hooks/redux";
 
 const ProfilePage = () => {
-    const authedUser = useTypedSelector(state => state.auth.user) as IUser
+    const authedUser = useAppSelector(state => state.auth.user) as IUser
     const [user, setUser] = useState<IUser>(null)
     const userName = useParams()
 

@@ -5,15 +5,15 @@ import RegistrationPage from "./registrationPage";
 import LoginPage from "./loginPage";
 import RoadmapPage from "./roadmapPage";
 import ProfileEditPage from "./profileEditPage";
-import {useTypedSelector} from "../hooks/useTypedSelector";
 import AccessDenied from "./errors/accessDenied";
 import {IUser} from "../types/types";
 import ProjectsPage from "./admin/ProjectsPage";
 import ProfilePage from "./profilePage";
 import BlogPage from "./BlogPage";
+import {useAppSelector} from "../hooks/redux";
 
 const Index: FC = () => {
-    const user = useTypedSelector(state => state.auth.user) as IUser
+    const user = useAppSelector(state => state.auth.user) as IUser
     return (
         <>
             <Routes>

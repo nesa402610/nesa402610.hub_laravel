@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import SiteCard from './UI/siteCard';
-import {useTypedSelector} from "../hooks/useTypedSelector";
+import {useAppSelector} from "../hooks/redux";
 
 
 const ProjectSection: FC = () => {
-    const projects = useTypedSelector(state => state.homePage.projects)
+    const projects = useAppSelector(state => state.homePage.projects)
 
     return (
         <section>

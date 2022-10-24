@@ -1,14 +1,14 @@
 import React, {FC, useState} from 'react';
 import {IUser} from "../types/types";
-import {useTypedSelector} from "../hooks/useTypedSelector";
 import BgCard from "../components/bgCard";
 import Tabs from "../components/profilePage/tabs";
 import AccountTab from "../components/profilePage/accountTab";
 import ProfileTab from "../components/profilePage/profileTab";
 import SecurityTab from "../components/profilePage/securityTab";
+import {useAppSelector} from "../hooks/redux";
 
 const ProfileEditPage: FC = () => {
-    const user = useTypedSelector(state => state.auth.user) as IUser
+    const user = useAppSelector(state => state.auth.user) as IUser
     const [isActive, setActive] = useState(0)
     if (!user) return null
     return (
