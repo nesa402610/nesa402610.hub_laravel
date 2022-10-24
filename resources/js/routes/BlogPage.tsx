@@ -6,7 +6,7 @@ import {setPostsActions} from "../store/reducers/blogReducer";
 import {useDispatch} from "react-redux";
 import {setModalAction} from "../store/reducers/modalReducer";
 import PostForm from "../components/admin/PostForm";
-import moment from "moment";
+import PostCard from "../components/blog/PostCard";
 
 const BlogPage: FC = () => {
     const dispatch = useDispatch()
@@ -17,7 +17,7 @@ const BlogPage: FC = () => {
             .then(r => dispatch(setPostsActions(r.data)))
     }, [])
     const createPost = () => {
-        dispatch(setModalAction({title: 'asd', children: <PostForm/>}))
+        dispatch(setModalAction({title: 'Создание поста', children: <PostForm/>}))
     }
     return (
         <section>
@@ -32,18 +32,7 @@ const BlogPage: FC = () => {
                                 Новый пост
                             </BgCard>
                         }
-                        {posts?.map(post =>
-                            <BgCard key={post.id}
-                                    className={'min-h-[250px] drop-shadow-xl sm:flex-col xs:justify-start'}>
-                                <div className={'flex justify-between gap-2'}>
-                                    <span className={'font-bold overflow-hidden overflow-ellipsis whitespace-nowrap'}>{post.title}</span>
-                                    {moment(post.created_at).format('DD.MM.YYYY')}
-                                </div>
-                                <div>
-                                    {post.body}
-                                </div>
-                            </BgCard>
-                        )}
+                        <PostCard posts={posts} user={user}/>
                     </div>
                 </>
 
