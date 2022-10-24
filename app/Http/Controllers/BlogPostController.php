@@ -22,4 +22,17 @@ class BlogPostController extends Controller
         $post->save();
         return response($post);
     }
+
+    public function updatePost(Request $request) {
+        $post = BlogPost::find($request->id);
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->save();
+        return response($post, 201);
+    }
+
+    public function deletePost(Request $request) {
+        $post = BlogPost::find($request->id);
+        $post->delete();
+    }
 }
