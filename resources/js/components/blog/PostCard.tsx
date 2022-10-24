@@ -3,12 +3,12 @@ import BgCard from "../bgCard";
 import moment from "moment/moment";
 import {IPost, IUser} from "../../types/types";
 import {RiDeleteBin6Fill, RiEditFill} from "react-icons/ri";
-import {MdVisibilityOff} from "react-icons/md";
+import {MdVisibility, MdVisibilityOff} from "react-icons/md";
 import {useDispatch} from "react-redux";
 import {setModalAction} from "../../store/reducers/modalReducer";
 import PostForm from "../admin/PostForm";
 import axios from "axios";
-import {deletePostActions} from "../../store/reducers/blogReducer";
+import {deletePostActions, editPostActions} from "../../store/reducers/blogReducer";
 
 
 interface PostCardProps {
@@ -24,7 +24,13 @@ const PostCard: FC<PostCardProps> = ({posts, user}) => {
             children: <PostForm post={post}/>
         }))
     }
-
+    const visibilityChange = (id) => {
+        axios.post('/admin/visibilityBlogPost', {id})
+            .then((r) => {
+                dispatch(editPostActions(r.data))
+            })
+            .catch(err => alert(err))
+    };
     const deletePost = (id) => {
         axios.post('/admin/deleteBlogPost', {id})
             .then(() => {
@@ -44,9 +50,15 @@ const PostCard: FC<PostCardProps> = ({posts, user}) => {
                                   onClick={() => editPostHandler(post)}>
                                 <RiEditFill/>
                             </span>
-                            <span className={'flex hover:scale-125 cursor-pointer'}>
-                                <MdVisibilityOff/>
-                            </span>
+                            <span className={'flex hover:scale-125 cursor-pointer'}
+                                  onClick={() => visibilityChange(post.id)}
+                            >
+                                {!post.visibility ?
+                                    <MdVisibilityOff/>
+                                    :
+                                    <MdVisibility/>
+                                }
+                                </span>
                             <span className={'flex hover:scale-125 cursor-pointer text-rose-500'}
                                   onClick={() => deletePost(post.id)}
                             >
@@ -56,7 +68,7 @@ const PostCard: FC<PostCardProps> = ({posts, user}) => {
                     <div className={'flex justify-between gap-2'}>
                         <span
                             className={'font-bold overflow-hidden overflow-ellipsis whitespace-nowrap'}>
-                            {post.title}
+                    {post.title}
                         </span>
                     </div>
                     <div className={'flex-1'}>

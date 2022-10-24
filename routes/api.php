@@ -43,5 +43,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::put('/admin/updateProject/{id}', [ProjectController::class, 'updateProject']);
     Route::post('/admin/createBlogPost', [BlogPostController::class, 'createPost']);
     Route::post('/admin/updateBlogPost', [BlogPostController::class, 'updatePost']);
+    Route::post('/admin/visibilityBlogPost', [BlogPostController::class, 'visibility']);
     Route::post('/admin/deleteBlogPost', [BlogPostController::class, 'deletePost']);
 });

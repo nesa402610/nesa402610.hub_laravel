@@ -6,8 +6,7 @@ use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BlogPostController extends Controller
-{
+class BlogPostController extends Controller {
     public function getAllPosts() {
         $posts = BlogPost::orderBy('id', 'desc')->get();
         return response($posts, 200);
@@ -34,5 +33,16 @@ class BlogPostController extends Controller
     public function deletePost(Request $request) {
         $post = BlogPost::find($request->id);
         $post->delete();
+    }
+
+    public function visibility(Request $request) {
+        $post = BlogPost::find($request->id);
+        if ($post->visibility == 0) {
+            $post->visibility = 1;
+        } else {
+            $post->visibility = 0;
+        }
+        $post->save();
+        return response($post, 201);
     }
 }
