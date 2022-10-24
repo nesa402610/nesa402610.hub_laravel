@@ -42,7 +42,7 @@ const PostCard: FC<PostCardProps> = ({posts, user}) => {
 
     if (posts) return (
         <>
-            {posts?.map(post =>
+            {posts?.map(post => (post.visibility === 0 || user?.id === 1) &&
                 <BgCard key={post.id}
                         className={'min-h-[250px] group drop-shadow-xl sm:flex-col xs:justify-start'}>
                     {user?.id == 1 &&
