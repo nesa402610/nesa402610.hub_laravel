@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('body');
             $table->string('image')->nullable();
+            $table->tinyInteger('visibility')->default(0);
             $table->timestamps();
         });
     }
