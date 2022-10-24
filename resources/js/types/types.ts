@@ -60,6 +60,7 @@ export interface IPost {
     title: string
     body: string
     image: string
-    created_at: string
-    updated_at: string
+    visibility?: number
+    created_at?: string
+    updated_at?: string
 }

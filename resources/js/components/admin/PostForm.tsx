@@ -16,8 +16,6 @@ interface PostFormProps {
 const PostForm: FC<PostFormProps> = ({post}) => {
     const dispatch = useDispatch()
     const [data, setData] = useState<IPost>({
-        created_at: "",
-        updated_at: "",
         title: '', body: '', image: ''
     });
     useEffect(() => {
