@@ -9,6 +9,7 @@ import {setModalAction} from "../../store/reducers/modalReducer";
 import PostForm from "../admin/PostForm";
 import axios from "axios";
 import {deletePostActions, editPostActions} from "../../store/reducers/blogReducer";
+import {BiTime} from "react-icons/bi";
 
 
 interface PostCardProps {
@@ -75,7 +76,10 @@ const PostCard: FC<PostCardProps> = ({posts, user}) => {
                         {post.body}
                     </div>
                     <div className={'flex justify-end'}>
-                        <span>{moment(post.created_at).format('DD.MM.YYYY')}</span>
+                        <span className={'flex items-center gap-1'}>
+                            {moment(post.created_at).format('DD.MM.YYYY')}
+                            <BiTime className={'text-lg'}/>
+                        </span>
                     </div>
                 </BgCard>
             )}
