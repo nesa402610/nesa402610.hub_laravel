@@ -1,28 +1,46 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import BgCard from "../bgCard";
 import Input from "../UI/input";
 import {IPost} from "../../types/types";
 import FgCard from "../fgCard";
 import SubmitButton from "../UI/submitButton";
 import axios from "axios";
-import {addPostActions} from "../../store/reducers/blogReducer";
+import {addPostActions, editPostActions} from "../../store/reducers/blogReducer";
 import {useDispatch} from "react-redux";
+import {closeModalAction} from "../../store/reducers/modalReducer";
 
-const PostForm: FC = () => {
+interface PostFormProps {
+    post?: IPost
+}
+
+const PostForm: FC<PostFormProps> = ({post}) => {
     const dispatch = useDispatch()
-    const [post, setPost] = useState<IPost>({
+    const [data, setData] = useState<IPost>({
         created_at: "",
         updated_at: "",
         title: '', body: '', image: ''
     });
+    useEffect(() => {
+        if (post) setData(post)
+    }, [])
     const createPost = (e) => {
         e.preventDefault()
-        axios.post('/admin/createBlogPost', post)
+        axios.post('/admin/createBlogPost', data)
             .then(r => {
                 dispatch(addPostActions(r.data))
-                console.log(r.data)
             })
+            .then(() => dispatch(closeModalAction()))
     }
+
+    const updatePost = (e) => {
+        e.preventDefault()
+        axios.post('/admin/updateBlogPost', data)
+            .then(r => {
+                dispatch(editPostActions(r.data))
+            })
+            .then(() => dispatch(closeModalAction()))
+    };
+
     return (
         <BgCard>
             <FgCard className={'flex flex-col gap-4'}>
@@ -30,17 +48,21 @@ const PostForm: FC = () => {
                     <label>
                         Название поста
                         <Input type={'text'}
-                               value={post.title}
-                               onChange={e => setPost({...post, title: e.target.value})}/>
+                               value={data.title}
+                               onChange={e => setData({...data, title: e.target.value})}/>
                     </label>
                     <label>
                         Тело поста
                         <Input type={'text'}
-                               value={post.body}
-                               onChange={e => setPost({...post, body: e.target.value})}/>
+                               value={data.body}
+                               onChange={e => setData({...data, body: e.target.value})}/>
                     </label>
                 </div>
-                <SubmitButton onClick={createPost}>Создать пост</SubmitButton>
+                {!post ?
+                    <SubmitButton onClick={createPost}>Создать пост</SubmitButton>
+                    :
+                    <SubmitButton onClick={updatePost}>Обновить пост</SubmitButton>
+                }
             </FgCard>
         </BgCard>
     );
