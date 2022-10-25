@@ -3,9 +3,9 @@ import {useDispatch} from "react-redux";
 import axios from "axios";
 import {GiCheerful} from 'react-icons/gi';
 import {IUser} from "../../types/types";
-import { setRatingAction } from '../../store/reducers/homePageReducer';
 import {rated} from "../../store/reducers/authSlice";
 import {useAppSelector} from "../../hooks/redux";
+import {setRating} from "../../store/reducers/homePageSlice";
 
 const Rating = ({project}) => {
     const dispatch = useDispatch()
@@ -19,7 +19,7 @@ const Rating = ({project}) => {
                 project_id: project.id,
                 rating: value
             }).then(r => {
-                dispatch(setRatingAction({id: project.id, rate: r.data}))
+                dispatch(setRating({id: project.id, rate: r.data}))
                 dispatch(rated({id: project.id, rating: value}))
             })
         }

@@ -5,17 +5,17 @@ import './API/axios'
 import axios from "axios";
 import Modal from "./components/UI/modal";
 import Index from "./routes";
-import { getProjectsAction } from './store/reducers/homePageReducer';
 import {useDispatch} from "react-redux";
 import {login} from "./store/reducers/authSlice";
 import {useAppSelector} from "./hooks/redux";
+import {setProjects} from "./store/reducers/homePageSlice";
 
 const App = () => {
     const dispatch = useDispatch()
     const modal = useAppSelector(state => state.modal)
 
     useEffect(() => {
-        axios.get('/projects').then(r => dispatch(getProjectsAction(r.data)))
+        axios.get('/projects').then(r => dispatch(setProjects(r.data)))
         axios.post('/checkLogin')
             .then(r => {
                 dispatch(login(r.data))
