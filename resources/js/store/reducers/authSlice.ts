@@ -7,12 +7,14 @@ const initialState: authState = {
     isLoading: false,
     error: null
 }
+
 interface authState {
     user: IUser
     isAuth: boolean
     isLoading: boolean
     error: any
 }
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -32,7 +34,14 @@ const authSlice = createSlice({
             state.user = action.payload
         },
         rated(state, action) {
-            console.log(1)
+            // const newState = state.user.rates.map(item => item.project_id === action.payload.id ? {
+            //     ...item,
+            //     rating: action.payload.rating
+            // } : item)
+            // return {...state, user: {...state.user, rates: newState}}
+            state.user.rates = state.user.rates.map(item => item.project_id === action.payload.id ?
+                item.rating = action.payload.rating
+             : item)
         }
     }
 })

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {NavLink} from 'react-router-dom';
-import {FaGithub, FaTelegram, FaVk, FaTwitch, FaSteam, FaTwitter} from "react-icons/fa";
+import {FaGithub, FaSteam, FaTelegram, FaTwitch, FaTwitter, FaVk} from "react-icons/fa";
 import {SiOsu, SiShikimori} from "react-icons/si";
 import MyLinkItem from "./UI/myLinkItem";
 import {IUser} from "../types/types";
