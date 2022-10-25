@@ -46,7 +46,7 @@ export interface IActionProps {
     type: string
     payload?: any
 }
-export interface ICertProps {
+export interface ICert {
     name: string,
     author: string,
     date: string,
