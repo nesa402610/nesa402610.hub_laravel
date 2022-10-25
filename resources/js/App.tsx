@@ -5,13 +5,12 @@ import './API/axios'
 import axios from "axios";
 import Modal from "./components/UI/modal";
 import Index from "./routes";
-import {useDispatch} from "react-redux";
 import {login} from "./store/reducers/authSlice";
-import {useAppSelector} from "./hooks/redux";
+import {useAppDispatch, useAppSelector} from "./hooks/redux";
 import {setProjects} from "./store/reducers/homePageSlice";
 
 const App = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const modal = useAppSelector(state => state.modal)
 
     useEffect(() => {

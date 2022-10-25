@@ -5,16 +5,16 @@ import {IPost} from "../../types/types";
 import FgCard from "../fgCard";
 import SubmitButton from "../UI/submitButton";
 import axios from "axios";
-import {useDispatch} from "react-redux";
 import {addPost, editPost} from "../../store/reducers/blogSlice";
 import {closeModal} from "../../store/reducers/modalSlice";
+import {useAppDispatch} from "../../hooks/redux";
 
 interface PostFormProps {
     post?: IPost
 }
 
 const PostForm: FC<PostFormProps> = ({post}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [data, setData] = useState<IPost>({
         title: '', body: '', image: ''
     });

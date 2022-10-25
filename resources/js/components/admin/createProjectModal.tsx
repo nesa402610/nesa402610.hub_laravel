@@ -1,12 +1,12 @@
 import React, {FC, useState} from 'react';
 import axios from "axios";
 import ProjectForm from "./ProjectForm";
-import {useDispatch} from "react-redux";
 import BgCard from "../../components/bgCard";
 import {closeModal} from "../../store/reducers/modalSlice";
+import {useAppDispatch} from "../../hooks/redux";
 
 const CreateProjectModal: FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [project, setProject] = useState({
         name: '',
         source: '',

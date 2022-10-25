@@ -1,9 +1,9 @@
 import React, {FC, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import Input from "../components/UI/input";
 import {login} from "../store/reducers/authSlice";
+import {useAppDispatch} from "../hooks/redux";
 
 
 interface userProps {
@@ -21,7 +21,7 @@ const RegistrationPage: FC = () => {
     const [user, setUser] = useState<userProps>({password: '', email: ''})
     const [errors, setErrors] = useState(null)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const registrationHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();

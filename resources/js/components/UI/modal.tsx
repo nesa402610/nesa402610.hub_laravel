@@ -1,12 +1,11 @@
 import React, {FC} from 'react';
-import {useDispatch} from "react-redux";
-import {useAppSelector} from "../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {closeModal} from "../../store/reducers/modalSlice";
 
 
 const Modal: FC = () => {
     const modal = useAppSelector(state => state.modal)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const closeModalHandler = () => {
         dispatch(closeModal())
     };

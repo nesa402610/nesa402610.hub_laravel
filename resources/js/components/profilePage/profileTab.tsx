@@ -1,18 +1,18 @@
 import React, {FC} from 'react';
 import Input from "../UI/input";
 import FgCard from "../fgCard";
-import {useDispatch} from "react-redux";
 import axios from "axios";
 import {IUser} from "../../types/types";
 import SubmitButton from "../UI/submitButton";
 import {updateProfile} from "../../store/reducers/authSlice";
+import {useAppDispatch} from "../../hooks/redux";
 
 interface profileTabProps {
     user: IUser
 }
 
 const ProfileTab: FC<profileTabProps> = ({user}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const updateProfileHandler = () => {
         axios.post('edit/updateProfile',
             {

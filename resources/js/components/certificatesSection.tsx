@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
-import {useDispatch} from "react-redux";
 import CertCard from "./certificateCard/certCard";
 import {setModal} from "../store/reducers/modalSlice";
+import {useAppDispatch} from "../hooks/redux";
 
 const CertificatesSection: FC = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const openImageFC = (img: string) => {
         dispatch(setModal({

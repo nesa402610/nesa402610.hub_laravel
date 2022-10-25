@@ -4,12 +4,12 @@ import moment from "moment/moment";
 import {IPost, IUser} from "../../types/types";
 import {RiDeleteBin6Fill, RiEditFill} from "react-icons/ri";
 import {MdVisibility, MdVisibilityOff} from "react-icons/md";
-import {useDispatch} from "react-redux";
 import PostForm from "../admin/PostForm";
 import axios from "axios";
 import {BiTime} from "react-icons/bi";
 import {deletePost, editPost} from "../../store/reducers/blogSlice";
 import {setModal} from "../../store/reducers/modalSlice";
+import {useAppDispatch} from "../../hooks/redux";
 
 
 interface PostCardProps {
@@ -18,7 +18,7 @@ interface PostCardProps {
 }
 
 const PostCard: FC<PostCardProps> = ({posts, user}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const editPostHandler = (post) => {
         dispatch(setModal({
             title: 'Редактирование',
