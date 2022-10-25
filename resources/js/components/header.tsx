@@ -4,10 +4,9 @@ import {FaGithub, FaSteam, FaTelegram, FaTwitch, FaTwitter, FaVk} from "react-ic
 import {SiOsu, SiShikimori} from "react-icons/si";
 import MyLinkItem from "./UI/myLinkItem";
 import {IUser} from "../types/types";
-import {useDispatch} from "react-redux";
 import CreateProjectModal from './admin/createProjectModal';
-import {setModalAction} from "../store/reducers/modalReducer";
-import {useAppSelector} from "../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../hooks/redux";
+import {setModal} from "../store/reducers/modalSlice";
 
 interface linksProps {
     name: string;
@@ -17,7 +16,7 @@ interface linksProps {
 
 const Header: FC = () => {
     const user = useAppSelector(state => state.auth.user) as IUser
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const links: linksProps[] = [
         {
@@ -57,7 +56,7 @@ const Header: FC = () => {
         }
     ];
     const createProjectHandler = () => {
-        dispatch(setModalAction({
+        dispatch(setModal({
             title: 'Добавление проекта',
             children: <CreateProjectModal/>
         }))

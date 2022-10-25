@@ -1,15 +1,15 @@
 import {combineReducers} from "redux";
 import thunk from "redux-thunk";
-import {modalReducer} from "./reducers/modalReducer";
 import {configureStore} from "@reduxjs/toolkit";
 import authSlice from "./reducers/authSlice";
 import blogSlice from "./reducers/blogSlice";
 import HomePageSlice from "./reducers/homePageSlice";
+import modalSlice from "./reducers/modalSlice";
 
 const rootReducer = combineReducers({
     auth: authSlice,
     homePage: HomePageSlice,
-    modal: modalReducer,
+    modal: modalSlice,
     posts: blogSlice,
 })
 export const store = configureStore({reducer: rootReducer, middleware: [thunk]})

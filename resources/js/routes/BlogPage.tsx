@@ -1,11 +1,11 @@
 import React, {FC, useEffect} from 'react';
 import BgCard from "../components/bgCard";
 import axios from "axios";
-import {setModalAction} from "../store/reducers/modalReducer";
 import PostForm from "../components/admin/PostForm";
 import PostCard from "../components/blog/PostCard";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {setPosts} from "../store/reducers/blogSlice";
+import {setModal} from "../store/reducers/modalSlice";
 
 const BlogPage: FC = () => {
     const dispatch = useAppDispatch()
@@ -16,7 +16,7 @@ const BlogPage: FC = () => {
             .then(r => dispatch(setPosts(r.data)))
     }, [])
     const createPost = () => {
-        dispatch(setModalAction({title: 'Создание поста', children: <PostForm/>}))
+        dispatch(setModal({title: 'Создание поста', children: <PostForm/>}))
     }
     return (
         <section>

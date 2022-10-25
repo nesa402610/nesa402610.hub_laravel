@@ -3,8 +3,8 @@ import ProjectForm from "./ProjectForm";
 import axios from "axios";
 import {useDispatch} from "react-redux";
 import BgCard from "../../components/bgCard";
-import {closeModalAction} from "../../store/reducers/modalReducer";
 import {useAppSelector} from "../../hooks/redux";
+import {closeModal} from "../../store/reducers/modalSlice";
 
 interface editProjectPageProps {
     id: number
@@ -18,7 +18,7 @@ const EditProjectModal: FC<editProjectPageProps> = ({id}) => {
 
     const updateHandler = (e) => {
         e.preventDefault()
-        axios.put('/admin/updateProject/' + project.id, project).then(() => dispatch(closeModalAction()))
+        axios.put('/admin/updateProject/' + project.id, project).then(() => dispatch(closeModal()))
     }
     return (
         <BgCard>

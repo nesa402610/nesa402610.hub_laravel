@@ -3,7 +3,7 @@ import axios from "axios";
 import ProjectForm from "./ProjectForm";
 import {useDispatch} from "react-redux";
 import BgCard from "../../components/bgCard";
-import {closeModalAction} from "../../store/reducers/modalReducer";
+import {closeModal} from "../../store/reducers/modalSlice";
 
 const CreateProjectModal: FC = () => {
     const dispatch = useDispatch()
@@ -22,7 +22,7 @@ const CreateProjectModal: FC = () => {
     const createProjectHandler = (e) => {
         e.preventDefault()
         axios.post('admin/createProject', project)
-            .then(() => dispatch(closeModalAction()))
+            .then(() => dispatch(closeModal()))
     }
     return (
         <BgCard>

@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
 import {useDispatch} from "react-redux";
 import CertCard from "./certificateCard/certCard";
-import {setModalAction} from "../store/reducers/modalReducer";
+import {setModal} from "../store/reducers/modalSlice";
 
 const CertificatesSection: FC = () => {
     const dispatch = useDispatch()
 
     const openImageFC = (img: string) => {
-        dispatch(setModalAction({
+        dispatch(setModal({
             title: '',
             isModal: true,
             children: <img className='p-4 max-h-screen' src={img} alt=""/>

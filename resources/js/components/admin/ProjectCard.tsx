@@ -4,12 +4,12 @@ import noImage from "../../img/noimage.png";
 import ProjectInfo from "../projectCard/projectInfo";
 import {useDispatch} from "react-redux";
 import EditProjectModal from './editProjectModal';
-import {setModalAction} from "../../store/reducers/modalReducer";
+import {setModal} from "../../store/reducers/modalSlice";
 
 const ProjectCard = ({project}) => {
     const dispatch = useDispatch()
     const editProjectHandler = () => {
-        dispatch(setModalAction({title: 'Изменение проекта',
+        dispatch(setModal({title: 'Изменение проекта',
             children: <EditProjectModal id={project.id}/>
         }))
     }
