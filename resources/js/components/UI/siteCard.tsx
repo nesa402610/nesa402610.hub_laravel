@@ -6,12 +6,15 @@ import {IProjectProps} from "../../types/types";
 import noImage from '../../img/noimage.png';
 
 const SiteCard: FC<IProjectProps> = ({project}) => {
+    const openPageHandler = () => {
+        if (project.previewURL) window.open(project.previewURL, '_blank')
+    }
     return (
-        <div onClick={() => window.open(project.previewURL, '_blank')}
-           className={'projectCard xs:min-h-[75vw] sm:min-h-[0px] relative flex flex-col rounded-xl overflow-hidden border-2 border-stone-500 cursor-pointer'
-               + (project.status.toLowerCase() === 'planned' ? ' opacity-70 cursor-default planned' : ` ${project.status.toLowerCase()}`)
-           }
-           >
+        <div onClick={openPageHandler}
+             className={'projectCard xs:min-h-[75vw] sm:min-h-[0px] relative flex flex-col rounded-xl overflow-hidden border-2 border-stone-500 cursor-pointer'
+                 + (project.status.toLowerCase() === 'planned' ? ' opacity-70 cursor-default planned' : ` ${project.status.toLowerCase()}`)
+             }
+        >
             <ProjectOverview project={project}/>
             <div className={'h-full'}>
                 {project.image ? <img className={'w-full'} src={project.image} alt=""/> :
