@@ -3,11 +3,15 @@ import {IUser} from "../../types/types";
 
 const initialState: authState = {
     user: null,
-    isAuth: false
+    isAuth: false,
+    isLoading: false,
+    error: null
 }
 interface authState {
     user: IUser
     isAuth: boolean
+    isLoading: boolean
+    error: any
 }
 const authSlice = createSlice({
     name: 'auth',
