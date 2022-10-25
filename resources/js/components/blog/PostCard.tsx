@@ -8,8 +8,8 @@ import {useDispatch} from "react-redux";
 import {setModalAction} from "../../store/reducers/modalReducer";
 import PostForm from "../admin/PostForm";
 import axios from "axios";
-import {deletePostActions, editPostActions} from "../../store/reducers/blogReducer";
 import {BiTime} from "react-icons/bi";
+import {deletePost, editPost} from "../../store/reducers/blogSlice";
 
 
 interface PostCardProps {
@@ -28,14 +28,14 @@ const PostCard: FC<PostCardProps> = ({posts, user}) => {
     const visibilityChange = (id) => {
         axios.post('/admin/visibilityBlogPost', {id})
             .then((r) => {
-                dispatch(editPostActions(r.data))
+                dispatch(editPost(r.data))
             })
             .catch(err => alert(err))
     };
-    const deletePost = (id) => {
-        axios.post('/admin/deleteBlogPost', {id})
+    const deletePostHandler = (post) => {
+        axios.post('/admin/deleteBlogPost', {id: post.id})
             .then(() => {
-                dispatch(deletePostActions(id))
+                dispatch(deletePost(post))
             })
             .catch(err => alert(err))
     };
@@ -61,7 +61,7 @@ const PostCard: FC<PostCardProps> = ({posts, user}) => {
                                 }
                                 </span>
                             <span className={'flex hover:scale-125 cursor-pointer text-rose-500'}
-                                  onClick={() => deletePost(post.id)}
+                                  onClick={() => deletePostHandler(post)}
                             >
                                 <RiDeleteBin6Fill/>
                             </span>

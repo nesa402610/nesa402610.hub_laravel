@@ -5,9 +5,9 @@ import {IPost} from "../../types/types";
 import FgCard from "../fgCard";
 import SubmitButton from "../UI/submitButton";
 import axios from "axios";
-import {addPostActions, editPostActions} from "../../store/reducers/blogReducer";
 import {useDispatch} from "react-redux";
 import {closeModalAction} from "../../store/reducers/modalReducer";
+import {addPost, editPost} from "../../store/reducers/blogSlice";
 
 interface PostFormProps {
     post?: IPost
@@ -25,7 +25,7 @@ const PostForm: FC<PostFormProps> = ({post}) => {
         e.preventDefault()
         axios.post('/admin/createBlogPost', data)
             .then(r => {
-                dispatch(addPostActions(r.data))
+                dispatch(addPost(r.data))
             })
             .then(() => dispatch(closeModalAction()))
     }
@@ -34,7 +34,7 @@ const PostForm: FC<PostFormProps> = ({post}) => {
         e.preventDefault()
         axios.post('/admin/updateBlogPost', data)
             .then(r => {
-                dispatch(editPostActions(r.data))
+                dispatch(editPost(r.data))
             })
             .then(() => dispatch(closeModalAction()))
     };
