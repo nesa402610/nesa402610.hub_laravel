@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../types/types";
+import {fetchUser} from "../asyncActions/userActionsCreators";
 
 const initialState: authState = {
     user: null,
@@ -21,6 +22,7 @@ const authSlice = createSlice({
     reducers: {
         login(state, action: PayloadAction<IUser>) {
             state.isAuth = true
+            state.isLoading = false
             state.user = action.payload
         },
         logout(state) {
@@ -34,14 +36,23 @@ const authSlice = createSlice({
             state.user = action.payload
         },
         rated(state, action) {
-            // const newState = state.user.rates.map(item => item.project_id === action.payload.id ? {
-            //     ...item,
-            //     rating: action.payload.rating
-            // } : item)
-            // return {...state, user: {...state.user, rates: newState}}
             state.user.rates = state.user.rates.map(item => item.project_id === action.payload.id ?
                 item.rating = action.payload.rating
-             : item)
+                : item)
+        }
+    },
+    extraReducers: {
+        [fetchUser.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+            state.isAuth = true
+            state.isLoading = false
+            state.user = action.payload
+        },
+        [fetchUser.pending.type]: (state) => {
+            state.isLoading = true
+        },
+        [fetchUser.rejected.type]: (state, action: PayloadAction<string>) => {
+            state.isLoading = false
+            state.error = action.payload
         }
     }
 })

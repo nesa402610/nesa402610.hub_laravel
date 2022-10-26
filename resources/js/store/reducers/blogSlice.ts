@@ -1,8 +1,9 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IPost} from "../../types/types";
+import {fetchPosts} from "../asyncActions/blogPostActionCreateors";
 
 const initialState: postsState = {
-    posts: null,
+    posts: [],
     isLoading: false,
     error: null
 }
@@ -32,8 +33,19 @@ const blogSlice = createSlice({
         deletePost(state, action: PayloadAction<IPost>) {
             state.posts = state.posts.filter(post => post.id !== action.payload.id)
         },
-
-
+    },
+    extraReducers: {
+        [fetchPosts.fulfilled.type]: (state, action: PayloadAction<IPost[]>) => {
+            state.isLoading = false
+            state.posts = action.payload
+        },
+        [fetchPosts.pending.type]: (state) => {
+            state.isLoading = true
+        },
+        [fetchPosts.rejected.type]: (state, action: PayloadAction<string>) => {
+            state.error = action.payload
+            state.isLoading = false
+        }
     }
 
 })
