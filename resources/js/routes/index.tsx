@@ -9,8 +9,10 @@ import AccessDenied from "./errors/accessDenied";
 import {IUser} from "../types/types";
 import ProjectsPage from "./admin/ProjectsPage";
 import ProfilePage from "./profilePage";
-import BlogPage from "./BlogPage";
 import {useAppSelector} from "../hooks/redux";
+import BlogPage from "./Blog/BlogPage";
+import BlogPostPage from "./Blog/blogPostPage";
+import BlogPostsPage from "./Blog/BlogPostsPage";
 
 const Index: FC = () => {
     const user = useAppSelector(state => state.auth.user) as IUser
@@ -26,7 +28,10 @@ const Index: FC = () => {
                     <Route path={':username'} element={<ProfilePage/>}/>
                 </Route>
                 <Route path={'/profile/edit'} element={<ProfileEditPage/>}/>
-                <Route path={'/blog'} element={<BlogPage/>}/>
+                <Route path={'/blog'} element={<BlogPage/>}>
+                    <Route path={''} element={<BlogPostsPage/>}/>
+                    <Route path={':id'} element={<BlogPostPage/>}/>
+                </Route>
             </Routes>
 
         </>
