@@ -4,8 +4,7 @@ import {useAppSelector} from "../hooks/redux";
 
 
 const ProjectSection: FC = () => {
-    const projects = useAppSelector(state => state.homePage.projects)
-
+    const {projects} = useAppSelector(state => state.homePage)
     return (
         <section>
             <h2 className={'text-3xl font-bold text-center mb-8'}>Проекты</h2>
