@@ -4,6 +4,7 @@ import moment from "moment/moment";
 import {IPost, IUser} from "../../types/types";
 import {BiTime} from "react-icons/bi";
 import PostCardAdmin from "./PostCard__admin";
+import {Link} from "react-router-dom";
 
 
 interface PostCardProps {
@@ -12,12 +13,12 @@ interface PostCardProps {
 }
 
 const PostCard: FC<PostCardProps> = ({posts, user}) => {
-
-    if (posts) return (
+    return (
         <>
-            {posts?.map(post => (post.visibility === 0 || user?.id === 1) &&
-                <BgCard key={post.id}
-                        className={'h-[250px] group drop-shadow-xl sm:flex-col xs:justify-start'}>
+            {posts.map(post => (post.visibility === 0 || user?.id === 1) &&
+                <Link to={`${post.id}`} key={post.id}>
+                    <BgCard
+                           className={'h-[250px] transition-all cursor-pointer hover:-translate-y-2 group drop-shadow-xl sm:flex-col xs:justify-start'}>
                     {user?.id == 1 &&
                         <PostCardAdmin post={post}/>
                     }
@@ -36,7 +37,7 @@ const PostCard: FC<PostCardProps> = ({posts, user}) => {
                             <BiTime className={'text-lg'}/>
                         </span>
                     </div>
-                </BgCard>
+                </BgCard></Link>
             )}
         </>
     );
