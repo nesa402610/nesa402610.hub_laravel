@@ -18,8 +18,7 @@ const blogSlice = createSlice({
     name: 'blog',
     initialState,
     reducers: {
-        setPosts(state, action: PayloadAction<IPost>) {
-            // @ts-ignore
+        setPosts(state, action: PayloadAction<IPost[]>) {
             state.posts = action.payload
         },
         addPost(state, action: PayloadAction<IPost>) {
