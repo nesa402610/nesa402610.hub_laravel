@@ -3,7 +3,6 @@ import {NavLink} from 'react-router-dom';
 import {FaGithub, FaSteam, FaTelegram, FaTwitch, FaTwitter, FaVk} from "react-icons/fa";
 import {SiOsu, SiShikimori} from "react-icons/si";
 import MyLinkItem from "./UI/myLinkItem";
-import {IUser} from "../types/types";
 import CreateProjectModal from './admin/createProjectModal';
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {setModal} from "../store/reducers/modalSlice";
@@ -15,7 +14,7 @@ interface linksProps {
 }
 
 const Header: FC = () => {
-    const user = useAppSelector(state => state.auth.user) as IUser
+    const {user} = useAppSelector(state => state.auth)
     const dispatch = useAppDispatch()
 
     const links: linksProps[] = [
