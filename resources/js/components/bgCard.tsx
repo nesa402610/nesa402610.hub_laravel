@@ -6,7 +6,7 @@ interface bgCardProps {
     onClick?: any
 }
 
-const BgCard: FC<bgCardProps> = ({children, className, onClick}) => {
+const BgCard: FC<bgCardProps> = ({children, className = '', onClick}) => {
     return (
         <div onClick={onClick} className={'flex gap-4 xs:flex-col sm:flex-row justify-between bg-stone-600 p-4 rounded-lg ' + className}>
             {children}
