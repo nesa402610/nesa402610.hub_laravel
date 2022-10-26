@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import thunk from "redux-thunk";
+import thunkMiddleware from 'redux-thunk';
 import {configureStore} from "@reduxjs/toolkit";
 import authSlice from "./reducers/authSlice";
 import blogSlice from "./reducers/blogSlice";
@@ -12,7 +12,10 @@ const rootReducer = combineReducers({
     modal: modalSlice,
     posts: blogSlice,
 })
-export const store = configureStore({reducer: rootReducer, middleware: [thunk]})
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: [thunkMiddleware],
+})
 
 export type RootState = ReturnType<typeof rootReducer>
-export type AppDispatch = typeof store.dispatch
+
