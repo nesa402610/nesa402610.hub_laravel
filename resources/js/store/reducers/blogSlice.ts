@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IPost} from "../../types/types";
+import {IComment, IPost} from "../../types/types";
 import {fetchPosts} from "../asyncActions/blogPostActionCreateors";
 
 const initialState: postsState = {
@@ -32,6 +32,12 @@ const blogSlice = createSlice({
         deletePost(state, action: PayloadAction<IPost>) {
             state.posts = state.posts.filter(post => post.id !== action.payload.id)
         },
+        addComment(state, action: PayloadAction<IComment>) {
+            state.posts.map(post => {
+                post.id === action.payload.post_id ?
+                    post.comments.push(action.payload) : post.comments
+            })
+        }
     },
     extraReducers: {
         [fetchPosts.fulfilled.type]: (state, action: PayloadAction<IPost[]>) => {
@@ -50,4 +56,4 @@ const blogSlice = createSlice({
 })
 
 export default blogSlice.reducer
-export const {addPost, editPost, setPosts, deletePost} = blogSlice.actions
+export const {addPost, editPost, setPosts, addComment, deletePost} = blogSlice.actions
