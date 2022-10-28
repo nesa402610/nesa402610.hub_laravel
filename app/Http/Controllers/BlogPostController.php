@@ -3,13 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
+use App\Models\comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BlogPostController extends Controller {
     public function getAllPosts() {
         $posts = BlogPost::orderBy('id', 'desc')->get();
+        foreach ($posts as $post) {
+            $post->comments;
+            foreach ($post->comments as $comment) {
+                $comment->user;
+            }
+        }
         return response($posts, 200);
+    }
+
+    public function createСomment(Request $request) {
+        $comment = new Comment;
+
+        $comment->user_id = Auth::user()->id;
+        $comment->post_id = $request->post_id;
+        $comment->body = $request->body;
+        $comment->user;
+        $comment->save();
+        return response($comment, 201);
     }
 
     public function createPost(Request $request) {
