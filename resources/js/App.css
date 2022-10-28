@@ -5,9 +5,11 @@
 html, body {
     @apply bg-stone-700 text-stone-300 h-full
 }
+
 #senpai {
     @apply h-full
 }
+
 .siteCard:hover > .siteOverview {
     @apply opacity-100
 }
@@ -19,12 +21,15 @@ html, body {
 .completed, .planned {
     @apply bg-stone-600
 }
+
 .in.work {
     @apply bg-indigo-700
 }
+
 .dropped {
     @apply bg-gray-700
 }
+
 nav .active {
     @apply text-white hover:text-white cursor-default
 }
