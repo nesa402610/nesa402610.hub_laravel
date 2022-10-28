@@ -13,12 +13,14 @@ export interface IUser {
     updated_at?: string
     rates: IRate[]
 }
+
 interface IRate {
     id: number
     project_id: number
-    user_id:number
+    user_id: number
     rating: number
 }
+
 // export interface ILevel {
 //     ico: any,
 //     grade: number,
@@ -27,6 +29,7 @@ interface IRate {
 export interface IProjectProps {
     project: IProject
 }
+
 export interface IProject {
     id?: number
     name: string,
@@ -42,10 +45,12 @@ export interface IProject {
     rate?: number
     github?: string
 }
+
 export interface IActionProps {
     type: string
     payload?: any
 }
+
 export interface ICert {
     name: string,
     author: string,
@@ -60,7 +65,18 @@ export interface IPost {
     title: string
     body: string
     image: string
+    comments: IComment[]
     visibility?: number
     created_at?: string
     updated_at?: string
+}
+
+export interface IComment {
+    id: number
+    post_id: number
+    body: string
+    created_at?: string
+    updated_at?: string
+    user_id: number
+    user: IUser
 }
