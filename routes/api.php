@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ Route::get('/projects', [ProjectController::class, 'getAllProjects']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
 Route::get('/profile/{username}', [UserController::class, 'getUser']);
 Route::get('/blog', [BlogPostController::class, 'getAllPosts']);
+Route::get('/chat', [ChatController::class, 'getMessages']);
+Route::post('/chatSend', [ChatController::class, 'sendMessage']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
@@ -45,5 +48,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/admin/updateBlogPost', [BlogPostController::class, 'updatePost']);
     Route::post('/admin/visibilityBlogPost', [BlogPostController::class, 'visibility']);
     Route::post('/admin/deleteBlogPost', [BlogPostController::class, 'deletePost']);
-    Route::post('/blog/commentCreate', [BlogPostController::class, 'createСomment']);
+    Route::post('/blog/commentCreate', [BlogPostController::class, 'createComment']);
 });

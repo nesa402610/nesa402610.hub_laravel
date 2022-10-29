@@ -67,7 +67,7 @@ const Header: FC = () => {
                     <NavLink className={'flex hover:text-stone-400 transition-colors'} to='/'>Overview</NavLink>
                     <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/roadmap'}>Roadmap</NavLink>
                     <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/blog'}>Blog</NavLink>
-                    {/*<NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/about'}>About</NavLink>*/}
+                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/chat'}>Chat</NavLink>
                 </nav>
                 <div className={'flex flex-1 gap-4 lg:basis-1/3 justify-center items-center'}>
                     {!user ?
@@ -80,16 +80,22 @@ const Header: FC = () => {
                         :
                         <>
                             <NavLink className={'flex items-center hover:text-stone-400 transition-colors'}
-                                     to={'/profile/'+user.id}>
+                                     to={'/profile/' + user.id}>
                                 <span>Profile</span>
-                                <img className={'rounded-lg ml-1'} width={'30px'} height={'30px'} src={user.avatar} alt=""/>
+                                <img className={'rounded-lg ml-1'}
+                                     width={'30px'}
+                                     height={'30px'}
+                                     src={user.avatar}
+                                     alt=""/>
                             </NavLink>
                         </>
 
                     }
                     {user?.id === 1 && <>
-                        <span className={'cursor-pointer flex items-center hover:text-stone-400 transition-colors'} onClick={createProjectHandler}>CreateProject</span>
-                        <NavLink className={'flex items-center hover:text-stone-400 transition-colors'} to={'/admin/projects'}>Projects</NavLink>
+                        <span className={'cursor-pointer flex items-center hover:text-stone-400 transition-colors'}
+                              onClick={createProjectHandler}>CreateProject</span>
+                        <NavLink className={'flex items-center hover:text-stone-400 transition-colors'}
+                                 to={'/admin/projects'}>Projects</NavLink>
                     </>}
                 </div>
                 <div className={'flex gap-2 lg:basis-1/3 justify-end'}>
