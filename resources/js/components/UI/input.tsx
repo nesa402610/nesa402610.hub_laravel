@@ -6,6 +6,7 @@ interface inputProps {
     value?: any
     bg?: string
     required?: boolean
+    onKeyPress?: (e) => void
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -17,6 +18,7 @@ const Input: FC<inputProps> = (props) => {
                onChange={props.onChange}
                value={props.value}
                placeholder={props.placeholder}
+               onKeyPress={props.onKeyPress}
                required={props.required}/>
     );
 };
