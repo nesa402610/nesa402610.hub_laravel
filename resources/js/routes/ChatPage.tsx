@@ -1,16 +1,28 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import axios from "axios";
 import BgCard from "../components/bgCard";
 import FgCard from "../components/fgCard";
 import Input from "../components/UI/input";
+import {IUser} from "../types/types";
 
-const ChatPage = () => {
+interface IMessage {
+    id: number
+    user_id: number
+    user: IUser
+    message: string
+}
+
+interface IChat {
+    message: IMessage
+}
+
+const ChatPage: FC<IChat> = () => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [timer, setTimer] = useState(false);
 
     useEffect(() => {
-        axios.get('/chat')
+        axios.get<IChat[]>('/chat')
             .then(r => setMessages(r.data))
     }, []);
 
@@ -33,8 +45,19 @@ const ChatPage = () => {
         <BgCard className={'justify-between min-h-[750px] sm:flex-col'}>
             <FgCard>
                 {messages.map(msg =>
-                    <div>
-                        {msg.id} {msg.user.name}: {msg.message}
+                    <div key={msg.id} className={'flex items-center'}>
+                        {/*<div className={'w-[40px]'}>*/}
+                        {/*    {msg.id}*/}
+                        {/*</div>*/}
+                        <div className={'w-[40px] mr-4 rounded-full overflow-hidden'}>
+                            <img src={msg.user.avatar} alt=""/>
+                        </div>
+                        <div>
+                            {msg.user.name}: &nbsp;
+                        </div>
+                        <div>
+                            {msg.message}
+                        </div>
                     </div>
                 )}
             </FgCard>
@@ -43,7 +66,8 @@ const ChatPage = () => {
                    onKeyPress={e => sendMessage(e)}
                    onChange={e => setMessage(e.target.value)}
                    placeholder={'Сообщение...'}
-                   value={message}/>
+                   value={message}
+            />
         </BgCard>
     );
 };
