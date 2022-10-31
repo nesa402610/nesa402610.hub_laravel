@@ -49,4 +49,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/admin/visibilityBlogPost', [BlogPostController::class, 'visibility']);
     Route::post('/admin/deleteBlogPost', [BlogPostController::class, 'deletePost']);
     Route::post('/blog/commentCreate', [BlogPostController::class, 'createComment']);
+    Route::post('/blog/comments/edit', [BlogPostController::class, 'editComment']);
+    Route::post('/blog/comments/delete', [BlogPostController::class, 'deleteComment']);
 });
