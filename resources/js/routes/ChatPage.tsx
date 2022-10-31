@@ -4,6 +4,8 @@ import BgCard from "../components/bgCard";
 import FgCard from "../components/fgCard";
 import Input from "../components/UI/input";
 import {IUser} from "../types/types";
+import {useAppSelector} from "../hooks/redux";
+import {Link} from "react-router-dom";
 
 interface IMessage {
     id: number
@@ -20,11 +22,16 @@ const ChatPage: FC<IChat> = () => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [timer, setTimer] = useState(false);
+    const {isAuth} = useAppSelector(state => state.auth)
 
     useEffect(() => {
-        setInterval(() => {
+        fetchChat()
+        const timer = setInterval(() => {
             fetchChat()
         }, 5000)
+        return () => {
+            window.clearInterval(timer)
+        }
     }, []);
 
     const fetchChat = () => {
@@ -64,13 +71,17 @@ const ChatPage: FC<IChat> = () => {
                     </div>
                 )}
             </FgCard>
-            <Input type="text"
-                   bg={'bg-stone-500'}
-                   onKeyPress={e => sendMessage(e)}
-                   onChange={e => setMessage(e.target.value)}
-                   placeholder={'Сообщение...'}
-                   value={message}
-            />
+            {isAuth ? <Input type="text"
+                             bg={'bg-stone-500'}
+                             onKeyPress={e => sendMessage(e)}
+                             onChange={e => setMessage(e.target.value)}
+                             placeholder={'Сообщение...'}
+                             value={message}
+                /> :
+                <h2 className={'text-center font-bold'}>Для общения в чате требуется <Link to={'/login'}
+                                                                                           className={'text-blue-500 hover:text-blue-300'}>авторизация</Link>
+                </h2>
+            }
         </BgCard>
     );
 };
