@@ -11,7 +11,7 @@ const SiteCard: FC<IProjectProps> = ({project}) => {
     }
     return (
         <div onClick={openPageHandler}
-             className={'projectCard xs:min-h-[75vw] sm:min-h-[0px] relative flex flex-col rounded-xl overflow-hidden border-2 border-stone-500 cursor-pointer'
+             className={'projectCard '
                  + (project.status.toLowerCase() === 'planned' ? ' opacity-70 cursor-default planned' : ` ${project.status.toLowerCase()}`)
              }
         >

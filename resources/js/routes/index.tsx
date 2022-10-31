@@ -13,6 +13,7 @@ import {useAppSelector} from "../hooks/redux";
 import BlogPage from "./Blog/BlogPage";
 import BlogPostPage from "./Blog/blogPostPage";
 import BlogPostsPage from "./Blog/BlogPostsPage";
+import ChatPage from "./ChatPage";
 
 const Index: FC = () => {
     const user = useAppSelector(state => state.auth.user) as IUser
@@ -28,6 +29,7 @@ const Index: FC = () => {
                     <Route path={':username'} element={<ProfilePage/>}/>
                 </Route>
                 <Route path={'/profile/edit'} element={<ProfileEditPage/>}/>
+                <Route path={'/chat'} element={<ChatPage/>}/>
                 <Route path={'/blog'} element={<BlogPage/>}>
                     <Route path={''} element={<BlogPostsPage/>}/>
                     <Route path={':id'} element={<BlogPostPage/>}/>

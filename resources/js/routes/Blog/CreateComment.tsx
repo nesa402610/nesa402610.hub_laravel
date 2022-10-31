@@ -22,7 +22,7 @@ const CreateComment: FC<CreateCommentProps> = ({post}) => {
         axios.post('blog/commentCreate', {post_id: post.id, body: comment})
             .then(r => {
                 dispatch(addComment(r.data))
-                console.log(post.comments)
+                setComment('')
             })
             .catch(err=>alert(err))
     }

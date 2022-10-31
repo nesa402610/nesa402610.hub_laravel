@@ -9,7 +9,8 @@ import {useAppDispatch} from "../../hooks/redux";
 
 const PostCardAdmin = ({post}) => {
     const dispatch = useAppDispatch()
-    const editPostHandler = (post) => {
+    const editPostHandler = (e, post) => {
+        e.preventDefault()
         dispatch(setModal({
             title: 'Редактирование',
             children: <PostForm post={post}/>
@@ -32,7 +33,7 @@ const PostCardAdmin = ({post}) => {
     return (
         <div className={'flex group-hover:opacity-100 opacity-0 transition-all flex-col absolute gap-2 right-0 mr-4 text-xl'}>
                             <span className={'flex hover:scale-125 cursor-pointer'}
-                                  onClick={() => editPostHandler(post)}>
+                                  onClick={(e) => editPostHandler(e, post)}>
                                 <RiEditFill/>
                             </span>
             <span className={'flex hover:scale-125 cursor-pointer'}

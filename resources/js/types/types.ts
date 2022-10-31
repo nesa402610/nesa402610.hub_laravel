@@ -65,7 +65,7 @@ export interface IPost {
     title: string
     body: string
     image: string
-    comments: IComment[]
+    comments?: IComment[]
     visibility?: number
     created_at?: string
     updated_at?: string

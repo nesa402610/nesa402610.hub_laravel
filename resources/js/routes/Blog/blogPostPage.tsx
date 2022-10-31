@@ -7,6 +7,7 @@ import moment from "moment";
 import {BiTime} from "react-icons/bi";
 import CreateComment from "./CreateComment";
 import {Link} from "react-router-dom";
+import CommentEdit from "../../components/Comment__edit";
 
 const BlogPostPage = () => {
     const params = useParams()
@@ -33,7 +34,8 @@ const BlogPostPage = () => {
             </BgCard>
             <h2 className={'text-xl font-bold text-center'}>Комментарии</h2>
             {post?.comments.map(c =>
-                <BgCard key={c.id} className={'sm:flex-col'}>
+                <BgCard key={c.id} className={'sm:flex-col relative'}>
+                <CommentEdit id={c.id}/>
                     <div className={'flex'}>
                         <Link to={'/profile/' + c.user_id}
                               className={'hover:text-stone-400 transition-colors'}

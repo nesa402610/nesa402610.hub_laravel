@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
-use App\Models\comment;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +19,7 @@ class BlogPostController extends Controller {
         return response($posts, 200);
     }
 
-    public function createСomment(Request $request) {
+    public function createComment(Request $request) {
         $comment = new Comment;
 
         $comment->user_id = Auth::user()->id;
@@ -28,6 +28,22 @@ class BlogPostController extends Controller {
         $comment->user;
         $comment->save();
         return response($comment, 201);
+    }
+
+    public function editComment(Request $request) {
+        $comment = Comment::find($request->id);
+        $comment->message = $request->message;
+
+
+        return response($comment, 201);
+
+    }
+
+    public function deleteComment(Request $request) {
+        $comment = Comment::find($request->id);
+        $comment->delete();
+//        return response()->status(201);
+
     }
 
     public function createPost(Request $request) {
@@ -45,6 +61,10 @@ class BlogPostController extends Controller {
         $post->title = $request->title;
         $post->body = $request->body;
         $post->save();
+        $post->comments;
+        foreach ($post->comments as $comment) {
+            $comment->user;
+        }
         return response($post, 201);
     }
 
