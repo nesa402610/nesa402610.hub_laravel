@@ -1,22 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import {IPost} from "../../types/types";
-import {useAppSelector} from "../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import BgCard from "../../components/bgCard";
 import moment from "moment";
 import {BiTime} from "react-icons/bi";
 import CreateComment from "./CreateComment";
 import {Link} from "react-router-dom";
 import CommentEdit from "../../components/Comment__edit";
+import Input from "../../components/UI/input";
+import SubmitButton from "../../components/UI/submitButton";
+import axios from "axios";
+import {updateComment} from "../../store/reducers/blogSlice";
 
 const BlogPostPage = () => {
     const params = useParams()
     const [post, setPost] = useState<IPost>(null);
     const {posts} = useAppSelector(state => state.posts)
+    const [comment, setComment] = useState('');
+    const [isEdit, setIsEdit] = useState<number>(0);
     useEffect(() => {
         // @ts-ignore
         setPost(posts.filter(p => p.id == params.id)[0])
     }, [posts])
+
+    const dispatch = useAppDispatch()
+
+    function saveComment(id) {
+        axios.post('/blog/comments/edit', {id: id, message: comment})
+            .then(r => {
+                dispatch(updateComment(r.data))
+                setIsEdit(0)
+            })
+    }
 
     return (
         <div className={'mx-4 flex flex-col gap-4'}>
@@ -35,8 +51,8 @@ const BlogPostPage = () => {
             <h2 className={'text-xl font-bold text-center'}>Комментарии</h2>
             {post?.comments.map(c =>
                 <BgCard key={c.id} className={'sm:flex-col relative'}>
-                <CommentEdit id={c.id}/>
-                    <div className={'flex'}>
+                    <CommentEdit id={c.id} body={c.body} setComment={setComment} setIsEdit={setIsEdit}/>
+                    <div className={'flex gap-4 items-center'}>
                         <Link to={'/profile/' + c.user_id}
                               className={'hover:text-stone-400 transition-colors'}
                         >
@@ -44,9 +60,24 @@ const BlogPostPage = () => {
                             <span>{c.user.name}&nbsp;</span>
                             <span>{c.user.lastName}</span>
                         </Link>
+                        {
+                            c.created_at != c.updated_at && <span className={'italic text-stone-500'}>изменен</span>
+                        }
                     </div>
                     <div>
-                        {c.body}
+                        {isEdit !== c.id ?
+                            <div>
+                                {c.body}
+                            </div>
+                            :
+                            <div className={'flex flex-col gap-4'}>
+                                <Input bg={'bg-stone-500'}
+                                       type={'text'}
+                                       value={comment}
+                                       onChange={e => setComment(e.target.value)}/>
+                                <SubmitButton onClick={() => saveComment(c.id)}>Сохранить</SubmitButton>
+                            </div>
+                        }
                     </div>
                 </BgCard>
             )}

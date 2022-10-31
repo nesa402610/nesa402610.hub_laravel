@@ -32,8 +32,8 @@ class BlogPostController extends Controller {
 
     public function editComment(Request $request) {
         $comment = Comment::find($request->id);
-        $comment->message = $request->message;
-
+        $comment->body = $request->message;
+        $comment->save();
 
         return response($comment, 201);
 
