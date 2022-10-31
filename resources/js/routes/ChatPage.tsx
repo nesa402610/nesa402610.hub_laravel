@@ -22,10 +22,15 @@ const ChatPage: FC<IChat> = () => {
     const [timer, setTimer] = useState(false);
 
     useEffect(() => {
-        axios.get<IChat[]>('/chat')
-            .then(r => setMessages(r.data))
+        setInterval(() => {
+            fetchChat()
+        }, 5000)
     }, []);
 
+    const fetchChat = () => {
+        axios.get<IChat[]>('/chat')
+            .then(r => setMessages(r.data))
+    }
     const sendMessage = (e) => {
         if (message.length > 0 && e.key === 'Enter' && !timer) {
             setTimer(true)
