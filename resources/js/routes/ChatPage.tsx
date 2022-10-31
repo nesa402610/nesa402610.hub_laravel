@@ -18,7 +18,7 @@ interface IChat {
     message: IMessage
 }
 
-const ChatPage: FC<IChat> = () => {
+const ChatPage: FC = () => {
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState([]);
     const [timer, setTimer] = useState(false);
