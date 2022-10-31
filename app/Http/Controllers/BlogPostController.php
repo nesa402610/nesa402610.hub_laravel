@@ -30,6 +30,22 @@ class BlogPostController extends Controller {
         return response($comment, 201);
     }
 
+    public function editComment(Request $request) {
+        $comment = Comment::find($request->id);
+        $comment->message = $request->message;
+
+
+        return response($comment, 201);
+
+    }
+
+    public function deleteComment(Request $request) {
+        $comment = Comment::find($request->id);
+        $comment->delete();
+//        return response()->status(201);
+
+    }
+
     public function createPost(Request $request) {
         $post = new BlogPost;
 
