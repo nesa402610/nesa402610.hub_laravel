@@ -10,10 +10,10 @@ class ChatController extends Controller
 {
     public function getMessages() {
         $messages = Chat::all();
-        foreach ($$messages as $message) {
+        foreach ($messages as $message) {
             $message->user;
         }
-        return response($$messages, 200);
+        return response($messages, 200);
     }
 
     public function sendMessage(Request $request) {
