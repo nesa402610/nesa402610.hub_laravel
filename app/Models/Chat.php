@@ -10,6 +10,6 @@ class Chat extends Model
     use HasFactory;
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->select('name', 'avatar');
     }
 }
