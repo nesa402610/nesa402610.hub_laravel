@@ -37,6 +37,18 @@ const blogSlice = createSlice({
                 post.id === action.payload.post_id ?
                     post.comments.push(action.payload) : post.comments
             })
+        },
+        updateComment(state, action: PayloadAction<IComment>) {
+            state.posts.map(post => {
+                post.id == action.payload.post_id ?
+                    post.comments.map(c => {
+                        c.id === action.payload.id ?
+                            c.body = action.payload.body
+                            : c.body
+                    })
+                    : post
+            })
+
         }
     },
     extraReducers: {
@@ -56,4 +68,4 @@ const blogSlice = createSlice({
 })
 
 export default blogSlice.reducer
-export const {addPost, editPost, setPosts, addComment, deletePost} = blogSlice.actions
+export const {addPost, editPost, setPosts, addComment, deletePost, updateComment} = blogSlice.actions
