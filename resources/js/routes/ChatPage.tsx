@@ -38,18 +38,16 @@ const ChatPage: FC<IChat> = () => {
                 setTimer(false)
             }, 2000)
         }
-        console.log(timer)
-
     }
     return (
         <BgCard className={'justify-between min-h-[750px] sm:flex-col'}>
             <FgCard>
                 {messages.map(msg =>
-                    <div key={msg.id} className={'flex items-center'}>
+                    <div key={msg.id} className={'flex mb-2 items-center'}>
                         {/*<div className={'w-[40px]'}>*/}
                         {/*    {msg.id}*/}
                         {/*</div>*/}
-                        <div className={'w-[40px] mr-4 rounded-full overflow-hidden'}>
+                        <div className={'w-[40px] mr-2 rounded-full overflow-hidden'}>
                             <img src={msg.user.avatar} alt=""/>
                         </div>
                         <div>
