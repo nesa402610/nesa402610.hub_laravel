@@ -5,14 +5,15 @@ import FgCard from "../fgCard";
 interface TabsProps {
     titles: string[]
     setTab: any
+    tab: number
 }
 
-const Tabs: FC<TabsProps> = ({titles, setTab}) => {
+const Tabs: FC<TabsProps> = ({titles, setTab, tab}) => {
     return (
         <>
             <BgCard>
                 {titles.map((t, index) =>
-                    <FgCard className={'text-center hover:bg-stone-400 transition-colors cursor-pointer'}
+                    <FgCard className={(index == tab ? 'bg-stone-500 ' : '') + 'text-center hover:bg-stone-500 transition-colors cursor-pointer'}
                             onClick={() => setTab(index)}
                     >
                         {t}
