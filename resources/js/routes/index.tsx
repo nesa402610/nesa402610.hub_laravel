@@ -14,6 +14,7 @@ import BlogPage from "./Blog/BlogPage";
 import BlogPostPage from "./Blog/blogPostPage";
 import BlogPostsPage from "./Blog/BlogPostsPage";
 import ChatPage from "./ChatPage";
+import AboutPage from "./AboutPage";
 
 const Index: FC = () => {
     const user = useAppSelector(state => state.auth.user) as IUser
@@ -24,7 +25,6 @@ const Index: FC = () => {
                 <Route path={'/roadmap'} element={<RoadmapPage/>}/>
                 <Route path={'/registration'} element={<RegistrationPage/>}/>
                 <Route path={'/login'} element={<LoginPage/>}/>
-                <Route path={'/admin/projects'} element={user?.id === 1 ? <ProjectsPage/> : <AccessDenied/>}/>
                 <Route path={'/profile'} element={<ProfilePage/>}>
                     <Route path={':username'} element={<ProfilePage/>}/>
                 </Route>
@@ -34,6 +34,9 @@ const Index: FC = () => {
                     <Route path={''} element={<BlogPostsPage/>}/>
                     <Route path={':id'} element={<BlogPostPage/>}/>
                 </Route>
+                <Route path={'/about'} element={<AboutPage/>} />
+                <Route path={'/admin/projects'} element={user?.id === 1 ? <ProjectsPage/> : <AccessDenied/>}/>
+
             </Routes>
 
         </>
