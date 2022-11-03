@@ -52,18 +52,20 @@ const ChatPage: FC = () => {
         }
     }
     return (
-        <BgCard className={'justify-between min-h-[750px] sm:flex-col'}>
-            <FgCard>
+        <BgCard className={'justify-between h-[90vh] sm:flex-col'}>
+            <FgCard className={'overflow-auto'}>
                 {messages.map(msg =>
-                    <div key={msg.id} className={'flex mb-2 items-center'}>
+                    <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center xs:flex-col xs:items-start'}>
                         {/*<div className={'w-[40px]'}>*/}
                         {/*    {msg.id}*/}
                         {/*</div>*/}
-                        <div className={'w-[40px] mr-2 rounded-full overflow-hidden'}>
-                            <img src={msg.user.avatar} alt=""/>
-                        </div>
-                        <div>
-                            {msg.user.name}: &nbsp;
+                        <div className={'flex items-center'}>
+                            <div className={'w-[40px] mr-2 rounded-full overflow-hidden'}>
+                                <img src={msg.user.avatar} alt=""/>
+                            </div>
+                            <div>
+                                {msg.user.name}: &nbsp;
+                            </div>
                         </div>
                         <div>
                             {msg.message}

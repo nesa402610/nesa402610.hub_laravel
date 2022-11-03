@@ -54,7 +54,7 @@ const AboutSkills: FC = () => {
         }
     ]
     return (
-        <div className={'flex gap-4'}>
+        <div className={'flex gap-4 flex-col'}>
             <FgCard>
                 <h2 className={'text-center font-bold text-2xl'}>Нативные знания</h2>
                 <div className={'flex gap-4 mt-4 justify-center'}>
