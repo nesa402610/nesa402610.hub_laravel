@@ -22,7 +22,7 @@ const AboutStudy: FC = () => {
     ]
     return (
         <>
-            <div className={'flex gap-4 sm:flex-col md:flex-row'}>
+            <div className={'flex gap-4 xs:flex-col md:flex-row'}>
                 {education.map(item =>
                     <FgCard>
                         <div className={'flex justify-between'}>

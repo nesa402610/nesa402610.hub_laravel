@@ -57,12 +57,12 @@ const AboutSkills: FC = () => {
         <div className={'flex gap-4 flex-col'}>
             <FgCard>
                 <h2 className={'text-center font-bold text-2xl'}>Нативные знания</h2>
-                <div className={'flex gap-4 mt-4 justify-center'}>
+                <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
                     {nativeSkills.map(skill =>
-                        <div className={'flex flex-col items-center flex-1'}>
+                        <div key={skill.name} className={'flex flex-col items-center flex-1'}>
                             {skill.logo}
                             <span className={'font-bold'}>{skill.name}</span>
-                            <div className={'w-full bg-zinc-400 min-h-[8px] rounded-full overflow-hidden'}>
+                            <div className={'w-full bg-zinc-400 h-[8px] rounded-full overflow-hidden'}>
                                 <div className={`bg-rose-400 h-full ${skill.progress}`}/>
                             </div>
                             {skill.progress.substring(3, 6)}
@@ -72,12 +72,12 @@ const AboutSkills: FC = () => {
             </FgCard>
             <FgCard>
                 <h2 className={'text-center font-bold text-2xl'}>Знания фреймворков</h2>
-                <div className={'flex gap-4 mt-4 justify-center'}>
+                <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
                     {frameworks.map(skill =>
-                        <div className={'flex flex-col items-center flex-1'}>
+                        <div key={skill.name} className={'flex flex-col items-center flex-1'}>
                             {skill.logo}
                             <span className={'font-bold'}>{skill.name}</span>
-                            <div className={'w-full bg-zinc-400 min-h-[8px] rounded-full overflow-hidden'}>
+                            <div className={'w-full bg-zinc-400 h-[8px] rounded-full overflow-hidden'}>
                                 <div className={`bg-rose-400 h-full ${skill.progress}`}/>
                             </div>
                             {skill.progress.substring(3, 6)}
