@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::get('/profile/{username}', [UserController::class, 'getUser']);
 Route::get('/blog', [BlogPostController::class, 'getAllPosts']);
 Route::get('/chat', [ChatController::class, 'getMessages']);
 Route::post('/chatSend', [ChatController::class, 'sendMessage']);
+Route::get('/suggestions', [SuggestionController::class, 'getAll']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
@@ -51,4 +53,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('/blog/commentCreate', [BlogPostController::class, 'createComment']);
     Route::post('/blog/comments/edit', [BlogPostController::class, 'editComment']);
     Route::post('/blog/comments/delete', [BlogPostController::class, 'deleteComment']);
+    Route::post('/suggestions/add', [SuggestionController::class, 'createSuggestion']);
+    Route::post('/suggestions/update', [SuggestionController::class, 'updateSuggestion']);
+    Route::post('/suggestions/setStatus', [SuggestionController::class, 'setStatus']);
 });

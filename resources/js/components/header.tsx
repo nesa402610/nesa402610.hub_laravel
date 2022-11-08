@@ -64,11 +64,11 @@ const Header: FC = () => {
         <header>
             <div className={'flex flex-col gap-2 md:flex-row justify-between p-4 items-center'}>
                 <nav className="flex gap-4 lg:basis-1/3">
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to='/'>Overview</NavLink>
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/roadmap'}>Roadmap</NavLink>
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/blog'}>Blog</NavLink>
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/chat'}>Chat</NavLink>
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/about'}>About Me</NavLink>
+                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to='/'>Главная</NavLink>
+                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/suggestions'}>Задачи</NavLink>
+                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/blog'}>Блог</NavLink>
+                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/chat'}>Чат</NavLink>
+                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/about'}>Про меня</NavLink>
                 </nav>
                 <div className={'flex flex-1 gap-4 lg:basis-1/3 justify-center items-center'}>
                     {!user ?

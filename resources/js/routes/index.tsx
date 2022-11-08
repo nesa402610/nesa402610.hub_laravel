@@ -3,7 +3,6 @@ import {Route, Routes} from 'react-router-dom';
 import HomePage from "./homePage";
 import RegistrationPage from "./registrationPage";
 import LoginPage from "./loginPage";
-import RoadmapPage from "./roadmapPage";
 import ProfileEditPage from "./profileEditPage";
 import AccessDenied from "./errors/accessDenied";
 import {IUser} from "../types/types";
@@ -15,6 +14,7 @@ import BlogPostPage from "./Blog/blogPostPage";
 import BlogPostsPage from "./Blog/BlogPostsPage";
 import ChatPage from "./ChatPage";
 import AboutPage from "./AboutPage";
+import SuggestionsPage from "./SuggestionsPage";
 
 const Index: FC = () => {
     const user = useAppSelector(state => state.auth.user) as IUser
@@ -22,7 +22,7 @@ const Index: FC = () => {
         <>
             <Routes>
                 <Route path={'/'} element={<HomePage/>}/>
-                <Route path={'/roadmap'} element={<RoadmapPage/>}/>
+                <Route path={'/suggestions'} element={<SuggestionsPage/>}/>
                 <Route path={'/registration'} element={<RegistrationPage/>}/>
                 <Route path={'/login'} element={<LoginPage/>}/>
                 <Route path={'/profile'} element={<ProfilePage/>}>
