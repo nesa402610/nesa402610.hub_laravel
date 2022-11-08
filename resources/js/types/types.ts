@@ -80,3 +80,11 @@ export interface IComment {
     user_id: number
     user: IUser
 }
+export interface ITask {
+    id?: number
+    title: string
+    body: string
+    status?: number
+    created_at?: string
+    updated_at?: string
+}
