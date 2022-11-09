@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import BgCard from "../components/bgCard";
 import axios from "axios";
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {setModal} from "../store/reducers/modalSlice";
@@ -42,13 +41,13 @@ const SuggestionsPage: FC = () => {
     return (
         <div className={'flex flex-col mx-4 gap-4'}>
             {isAuth &&
-                <BgCard onClick={addNewIdea}>
+                <div className={'block--darker'} onClick={addNewIdea}>
                     <h2>Предложить идею...</h2>
-                </BgCard>
+                </div>
             }
             {tasks.map(task =>
-                <BgCard key={task.id}
-                        className={'relative border-2 ' + (task.status === 1 ? 'border-green-600 border-2' : task.status === 2 ? 'opacity-60 border-red-700 ' : task.status === 3 ? 'border-amber-700 border-2' : 'border-0')}>
+                <div key={task.id}
+                        className={'block--darker relative border-2 ' + (task.status === 1 ? 'border-green-600 border-2' : task.status === 2 ? 'opacity-60 border-red-700 ' : task.status === 3 ? 'border-amber-700 border-2' : 'border-0')}>
                     <div>
                         <div className={'flex justify-between'}>
                             <span>{task.title}</span>
@@ -67,7 +66,7 @@ const SuggestionsPage: FC = () => {
                         </span>
                         <Task__actions hover={hover} task={task} tasks={tasks}/>
                     </div>
-                </BgCard>
+                </div>
             )}
         </div>
     );

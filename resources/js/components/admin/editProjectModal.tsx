@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
 import ProjectForm from "./ProjectForm";
 import axios from "axios";
-import BgCard from "../../components/bgCard";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {closeModal} from "../../store/reducers/modalSlice";
 
@@ -20,9 +19,9 @@ const EditProjectModal: FC<editProjectPageProps> = ({id}) => {
         axios.put('/admin/updateProject/' + project.id, project).then(() => dispatch(closeModal()))
     }
     return (
-        <BgCard>
+        <div className={'block--darker'}>
             {project && <ProjectForm setProject={setProject} project={project} projectHandler={updateHandler}/>}
-        </BgCard>
+        </div>
     );
 };
 

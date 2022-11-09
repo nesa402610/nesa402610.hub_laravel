@@ -5,7 +5,6 @@ import {IUser} from "../../types/types";
 import SubmitButton from "../UI/submitButton";
 import {login, updateAccount} from "../../store/reducers/authSlice";
 import {useAppDispatch} from "../../hooks/redux";
-import BgCard from "../bgCard";
 
 
 interface accountTabProps {
@@ -27,7 +26,7 @@ const AccountTab: FC<accountTabProps> = ({user}) => {
                 console.log(err))
     }
     return (
-        <BgCard className={'sm:flex-col'}>
+        <div className={'block--darker sm:flex-col'}>
             <h2 className={'text-center text-xl'}>Аккаунт</h2>
             <div className={'flex flex-col gap-4'}>
                 <label>
@@ -46,7 +45,7 @@ const AccountTab: FC<accountTabProps> = ({user}) => {
                 </label>
                 <SubmitButton className={'bg-stone-700'} onClick={updateAccountHandler}>Обновить данные </SubmitButton>
             </div>
-        </BgCard>
+        </div>
     );
 };
 

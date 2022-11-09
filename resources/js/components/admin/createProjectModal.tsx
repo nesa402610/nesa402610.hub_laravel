@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
 import axios from "axios";
 import ProjectForm from "./ProjectForm";
-import BgCard from "../../components/bgCard";
 import {closeModal} from "../../store/reducers/modalSlice";
 import {useAppDispatch} from "../../hooks/redux";
 
@@ -25,11 +24,11 @@ const CreateProjectModal: FC = () => {
             .then(() => dispatch(closeModal()))
     }
     return (
-        <BgCard>
+        <div className={'block--darker'}>
             <ProjectForm setProject={setProject}
                          project={project}
                          projectHandler={createProjectHandler}/>
-        </BgCard>
+        </div>
     );
 };
 

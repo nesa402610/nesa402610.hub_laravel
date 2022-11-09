@@ -32,24 +32,24 @@ const PostCardAdmin = ({post}) => {
     };
     return (
         <div className={'flex group-hover:opacity-100 opacity-0 transition-all flex-col absolute gap-2 right-0 mr-4 text-xl'}>
-                            <span className={'flex hover:scale-125 cursor-pointer'}
-                                  onClick={(e) => editPostHandler(e, post)}>
-                                <RiEditFill/>
-                            </span>
+            <span className={'flex hover:scale-125 cursor-pointer'}
+                  onClick={(e) => editPostHandler(e, post)}>
+                <RiEditFill/>
+            </span>
             <span className={'flex hover:scale-125 cursor-pointer'}
                   onClick={() => visibilityChange(post.id)}
             >
-                                {!post.visibility ?
-                                    <MdVisibilityOff/>
-                                    :
-                                    <MdVisibility/>
-                                }
-                                </span>
+                {!post.visibility ?
+                    <MdVisibilityOff/>
+                    :
+                    <MdVisibility/>
+                }
+            </span>
             <span className={'flex hover:scale-125 cursor-pointer text-rose-500'}
                   onClick={() => deletePostHandler(post)}
             >
-                                <RiDeleteBin6Fill/>
-                            </span>
+                <RiDeleteBin6Fill/>
+            </span>
         </div>
     );
 };

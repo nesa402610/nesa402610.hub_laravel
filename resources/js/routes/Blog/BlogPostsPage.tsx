@@ -1,5 +1,4 @@
 import React from 'react';
-import BgCard from "../../components/bgCard";
 import PostCard from "../../components/blog/PostCard";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {setModal} from "../../store/reducers/modalSlice";
@@ -19,9 +18,9 @@ const BlogPostsPage = () => {
             <h1 className={'text-center text-3xl mb-8 font-bold'}>Посты</h1>
             <div className={'px-4 gap-4 grid sm:grid-cols-4 xs:grid-cols-1'}>
                 {user?.id === 1 &&
-                    <BgCard onClick={createPost}>
+                    <div className={'block--darker'} onClick={createPost}>
                         Новый пост
-                    </BgCard>
+                    </div>
                 }
                 <PostCard posts={posts} user={user}/>
             </div>

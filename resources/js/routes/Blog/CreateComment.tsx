@@ -1,5 +1,4 @@
 import React, {FC, useState} from 'react';
-import BgCard from "../../components/bgCard";
 import SubmitButton from "../../components/UI/submitButton";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {IPost} from "../../types/types";
@@ -30,7 +29,7 @@ const CreateComment: FC<CreateCommentProps> = ({post}) => {
     return (
         <>
             {isAuth && post &&
-                <BgCard className={'sm:flex-col'}>
+                <div className={'block--darker sm:flex-col'}>
                    <textarea className={'invalid:border-red-700 invalid:border p-4 bg-stone-500 rounded-lg w-full outline-none'} minLength={10}
                              placeholder={'Оставить комментарий'}
                              onChange={e => setComment(e.target.value)}
@@ -39,7 +38,7 @@ const CreateComment: FC<CreateCommentProps> = ({post}) => {
                     <SubmitButton className={'self-end bg-stone-500 hover:bg-stone-700 px-6'}
                                   onClick={e => createCommentHandler(e)}
                     >Отправить</SubmitButton>
-                </BgCard>
+                </div>
             }
         </>
     );

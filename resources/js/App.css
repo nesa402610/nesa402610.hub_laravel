@@ -5,7 +5,12 @@
 html, body {
     @apply bg-stone-700 text-stone-300 h-full
 }
-
+.block--darker{
+    @apply flex gap-4 xs:flex-col sm:flex-row justify-between bg-stone-600 p-4 rounded-lg
+}
+.block--lighter {
+    @apply flex-1 bg-stone-700 rounded-lg xs:p-2 sm:p-4
+}
 #senpai {
     @apply h-full
 }

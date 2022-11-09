@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import BgCard from "../components/bgCard";
 import {Link} from "react-router-dom";
 import {IoSettingsSharp} from "react-icons/io5";
 import {IUser} from "../types/types";
-import FgCard from "../components/fgCard";
 import moment from "moment";
 import {useParams} from "react-router";
 import axios from "axios";
@@ -30,7 +28,7 @@ const ProfilePage = () => {
 
     if (user) return (
         <div className={'p-4'}>
-            <BgCard>
+            <div className={'block--darker'}>
                 <div className={'flex sm:flex-row xs:flex-col gap-4 w-full'}>
                     <div className={'flex xs:items-center flex-col gap-2 sm:items-end'}>
                         <img className={'rounded-lg'}
@@ -58,13 +56,13 @@ const ProfilePage = () => {
                         </div>
                         <div className={'flex flex-col flex-1'}>
                             <h2 className={'font-bold mb-2 italic text-end mr-2'}>Информация обо мне</h2>
-                            <FgCard className={'shadow-md'}>
+                            <div className={'block--lighter'}>
                                 {user.about}
-                            </FgCard>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </BgCard>
+            </div>
         </div>
     );
 };

@@ -1,6 +1,4 @@
 import React, {FC} from 'react';
-import BgCard from "../bgCard";
-import FgCard from "../fgCard";
 
 interface TabsProps {
     titles: string[]
@@ -11,15 +9,15 @@ interface TabsProps {
 const Tabs: FC<TabsProps> = ({titles, setTab, tab}) => {
     return (
         <>
-            <BgCard>
+            <div className={'block--darker'}>
                 {titles.map((t, index) =>
-                    <FgCard className={(index == tab ? 'bg-stone-500 ' : '') + 'text-center hover:bg-stone-500 transition-colors cursor-pointer'}
+                    <div className={(index == tab ? 'bg-stone-500 ' : '') + 'block--lighter text-center hover:bg-stone-500 transition-colors cursor-pointer'}
                             onClick={() => setTab(index)}
                     >
                         {t}
-                    </FgCard>
+                    </div>
                 )}
-            </BgCard>
+            </div>
         </>
     );
 };

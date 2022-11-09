@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {IoLogoCss3, IoLogoHtml5, IoLogoJavascript, IoLogoLaravel, IoLogoReact} from "react-icons/io5";
 import {SiPhp, SiRedux, SiTailwindcss, SiTypescript} from "react-icons/si";
-import FgCard from "../fgCard";
 
 const AboutSkills: FC = () => {
     const nativeSkills = [
@@ -55,7 +54,7 @@ const AboutSkills: FC = () => {
     ]
     return (
         <div className={'flex gap-4 flex-col'}>
-            <FgCard>
+            <div className={'block--lighter'}>
                 <h2 className={'text-center font-bold text-2xl'}>Нативные знания</h2>
                 <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
                     {nativeSkills.map(skill =>
@@ -69,8 +68,8 @@ const AboutSkills: FC = () => {
                         </div>
                     )}
                 </div>
-            </FgCard>
-            <FgCard>
+            </div>
+            <div className={'block--lighter'}>
                 <h2 className={'text-center font-bold text-2xl'}>Знания фреймворков</h2>
                 <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
                     {frameworks.map(skill =>
@@ -84,7 +83,7 @@ const AboutSkills: FC = () => {
                         </div>
                     )}
                 </div>
-            </FgCard>
+            </div>
         </div>
     );
 };

@@ -1,7 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import axios from "axios";
-import BgCard from "../components/bgCard";
-import FgCard from "../components/fgCard";
 import Input from "../components/UI/input";
 import {IUser} from "../types/types";
 import {useAppSelector} from "../hooks/redux";
@@ -52,8 +50,8 @@ const ChatPage: FC = () => {
         }
     }
     return (
-        <BgCard className={'justify-between h-[90vh] sm:flex-col'}>
-            <FgCard className={'overflow-auto'}>
+        <div className={'block--darker justify-between h-[90vh] sm:flex-col'}>
+            <div className={'block--lighter overflow-auto'}>
                 {messages.map(msg =>
                     <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center xs:flex-col xs:items-start'}>
                         {/*<div className={'w-[40px]'}>*/}
@@ -72,7 +70,7 @@ const ChatPage: FC = () => {
                         </div>
                     </div>
                 )}
-            </FgCard>
+            </div>
             {isAuth ? <Input type="text"
                              bg={'bg-stone-500'}
                              onKeyPress={e => sendMessage(e)}
@@ -84,7 +82,7 @@ const ChatPage: FC = () => {
                                                                                            className={'text-blue-500 hover:text-blue-300'}>авторизация</Link>
                 </h2>
             }
-        </BgCard>
+        </div>
     );
 };
 

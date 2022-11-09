@@ -1,8 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
-import BgCard from "../bgCard";
 import Input from "../UI/input";
 import {IPost} from "../../types/types";
-import FgCard from "../fgCard";
 import SubmitButton from "../UI/submitButton";
 import axios from "axios";
 import {addPost, editPost} from "../../store/reducers/blogSlice";
@@ -40,8 +38,8 @@ const PostForm: FC<PostFormProps> = ({post}) => {
     };
 
     return (
-        <BgCard>
-            <FgCard className={'flex flex-col gap-4'}>
+        <div className={'block--darker'}>
+            <div className={'block--lighter flex flex-col gap-4'}>
                 <div className={'flex flex-col gap-4'}>
                     <label>
                         Название поста
@@ -61,8 +59,8 @@ const PostForm: FC<PostFormProps> = ({post}) => {
                     :
                     <SubmitButton onClick={updatePost}>Обновить пост</SubmitButton>
                 }
-            </FgCard>
-        </BgCard>
+            </div>
+        </div>
     );
 };
 

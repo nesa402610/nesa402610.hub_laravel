@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import FgCard from "../fgCard";
 
 const AboutStudy: FC = () => {
     const education = [
@@ -24,7 +23,7 @@ const AboutStudy: FC = () => {
         <>
             <div className={'flex gap-4 xs:flex-col md:flex-row'}>
                 {education.map(item =>
-                    <FgCard>
+                    <div className={'block--lighter'}>
                         <div className={'flex justify-between'}>
                             <div>{item.name}</div>
                             <span>{item.start}-{item.end}</span>
@@ -36,7 +35,7 @@ const AboutStudy: FC = () => {
                             >Перейти на сайт</a>
                             <span className={'italic'}>{item.educ}</span>
                         </div>
-                    </FgCard>
+                    </div>
                 )}
             </div>
         </>

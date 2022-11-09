@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
-import FgCard from "../fgCard";
 import Input from "../UI/input";
 import SubmitButton from "../UI/submitButton";
 import {ITask} from "../../types/types";
@@ -8,7 +7,7 @@ import {useAppDispatch} from "../../hooks/redux";
 import {closeModal} from "../../store/reducers/modalSlice";
 import {addTask} from "../../store/reducers/suggestionSlice";
 
-const Suggestion = ({task}) => {
+const Suggestion = () => {
     const [newTask, setNewTask] = useState<ITask>({
         title: '',
         body: ''
@@ -35,7 +34,7 @@ const Suggestion = ({task}) => {
     };
 
     return (
-        <FgCard className={'mx-8 flex flex-col gap-4'}>
+        <div className={'block--lighter mx-8 flex flex-col gap-4'}>
             <label>
                 Название
                 <Input type={'text'}
@@ -50,7 +49,7 @@ const Suggestion = ({task}) => {
             </label>
             {1 ? <SubmitButton onClick={sendIdea} className={'self-end px-6'}>Предложить</SubmitButton> :
                 <SubmitButton onClick={(e) => updateIdea(e)} className={'self-end px-6'}>Обновить</SubmitButton>}
-        </FgCard>
+        </div>
     )
 };
 

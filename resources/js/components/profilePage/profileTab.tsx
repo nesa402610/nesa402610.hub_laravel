@@ -5,7 +5,6 @@ import {IUser} from "../../types/types";
 import SubmitButton from "../UI/submitButton";
 import {updateProfile} from "../../store/reducers/authSlice";
 import {useAppDispatch} from "../../hooks/redux";
-import BgCard from "../bgCard";
 
 interface profileTabProps {
     user: IUser
@@ -32,7 +31,7 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
                 console.log(err))
     }
     return (
-        <BgCard className={'sm:flex-col'}>
+        <div className={'block--darker sm:flex-col'}>
             <h2 className={'text-center text-xl'}>Профиль</h2>
             <div className={'flex flex-col gap-4'}>
                 <label>
@@ -83,7 +82,7 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
                 </label>
                 <SubmitButton className={'bg-stone-700'} onClick={updateProfileHandler}>Обновить данные </SubmitButton>
             </div>
-        </BgCard>
+        </div>
     );
 };
 

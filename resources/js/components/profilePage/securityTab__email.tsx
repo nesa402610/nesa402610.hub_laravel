@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Input from "../UI/input";
 import SubmitButton from "../UI/submitButton";
 import axios from "axios";
-import BgCard from "../bgCard";
 
 interface dataProps {
     currentEmail: string
@@ -28,7 +27,7 @@ const SecurityTabEmail = () => {
     }
 
     return (
-        <BgCard className={'sm:flex-col'}>
+        <div className={'block--darker sm:flex-col'}>
             <h2 className={'text-2xl text-center'}>Смена почты</h2>
             {errors && <h3 className={'text-center text-xl text-red-400'}>{errors}</h3>}
             <div className={'flex flex-col gap-4'}>
@@ -63,7 +62,7 @@ const SecurityTabEmail = () => {
                     Обновить Email
                 </SubmitButton>
             </div>
-        </BgCard>
+        </div>
     );
 };
 

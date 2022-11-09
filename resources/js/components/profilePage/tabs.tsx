@@ -1,31 +1,29 @@
 import React from 'react';
-import BgCard from "../bgCard";
-import FgCard from "../fgCard";
 
 const Tabs = ({setActive, isActive}) => {
     return (
-        <BgCard className={'mb-4 flex sm:flex-col text-center'}>
+        <div className={'block--darker mb-4 flex sm:flex-col text-center'}>
             <div className={'flex gap-4'}>
-                <FgCard onClick={() => setActive(0)}
-                        className={'text-center xs:p-3 transition-all cursor-pointer'
+                <div onClick={() => setActive(0)}
+                        className={'block-lighter text-center xs:p-3 transition-all cursor-pointer'
                             + (isActive === 0 ? ' bg-stone-500' : ' hover:bg-stone-500')}
                 >
                     Аккаунт
-                </FgCard>
-                <FgCard onClick={() => setActive(1)}
-                        className={'text-center xs:p-3 transition-all cursor-pointer'
+                </div>
+                <div onClick={() => setActive(1)}
+                        className={'block-lighter text-center xs:p-3 transition-all cursor-pointer'
                             + (isActive === 1 ? ' bg-stone-500' : ' hover:bg-stone-500')}
                 >
                     Профиль
-                </FgCard>
-                <FgCard onClick={() => setActive(2)}
-                        className={'text-center xs:p-3 transition-all cursor-pointer'
+                </div>
+                <div onClick={() => setActive(2)}
+                        className={'block-lighter text-center xs:p-3 transition-all cursor-pointer'
                             + (isActive === 2 ? ' bg-stone-500' : ' hover:bg-stone-500')}
                 >
                     Безопасность
-                </FgCard>
+                </div>
             </div>
-        </BgCard>
+        </div>
     );
 };
 

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router";
 import {IPost} from "../../types/types";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import BgCard from "../../components/bgCard";
 import moment from "moment";
 import {BiTime} from "react-icons/bi";
 import CreateComment from "./CreateComment";
@@ -36,7 +35,7 @@ const BlogPostPage = () => {
 
     return (
         <div className={'mx-4 flex flex-col gap-4'}>
-            <BgCard className={'sm:flex-col'}>
+            <div className={'block--darker sm:flex-col'}>
                 <div>{post?.title}</div>
                 <div>
                     {post?.body}
@@ -47,10 +46,10 @@ const BlogPostPage = () => {
                             <BiTime className={'text-lg'}/>
                         </span>
                 </div>
-            </BgCard>
+            </div>
             <h2 className={'text-xl font-bold text-center'}>Комментарии</h2>
             {post?.comments.map(c =>
-                <BgCard key={c.id} className={'sm:flex-col relative'}>
+                <div key={c.id} className={'block--darker sm:flex-col relative'}>
                     <CommentEdit id={c.id} body={c.body} setComment={setComment} setIsEdit={setIsEdit}/>
                     <div className={'flex gap-4 items-center'}>
                         <Link to={'/profile/' + c.user_id}
@@ -79,7 +78,7 @@ const BlogPostPage = () => {
                             </div>
                         }
                     </div>
-                </BgCard>
+                </div>
             )}
             <CreateComment
                 post={post}
