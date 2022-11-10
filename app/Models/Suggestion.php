@@ -10,6 +10,6 @@ class Suggestion extends Model
     use HasFactory;
 
     public function user() {
-        return $this->belongsTo(User::class)->select('name', 'lastName');
+        return $this->belongsTo(User::class, 'author')->select('name', 'lastName');
     }
 }

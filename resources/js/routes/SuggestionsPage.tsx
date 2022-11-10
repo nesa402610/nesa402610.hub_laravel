@@ -47,10 +47,10 @@ const SuggestionsPage: FC = () => {
             }
             {tasks.map(task =>
                 <div key={task.id}
-                     className={'block--darker relative border-2 ' + (task.status === 1 ? 'border-green-600 border-2' : task.status === 2 ? 'opacity-60 border-red-700 ' : task.status === 3 ? 'border-amber-700 border-2' : 'border-0')}>
+                     className={'block--light flex justify-between relative border-2 ' + (task.status === 1 ? 'border-green-600 border-2' : task.status === 2 ? 'opacity-60 border-red-700 ' : task.status === 3 ? 'border-amber-700 border-2' : 'border-0')}>
                     <div>
-                        <div className={'flex justify-between'}>
-                            <span>{task.title}</span>
+                        <div>
+                            <span className={'italic font-bold'}>{task.title}</span>
                         </div>
                         <div className={'overflow-hidden overflow-ellipsis'}>
                             <span>{task.body}</span>
@@ -61,10 +61,13 @@ const SuggestionsPage: FC = () => {
                          onMouseLeave={() => setHover(0)}
                     >
                         <span>{moment(task.created_at).format('DD.MM.YYYY HH:MM:ss')}</span>
-                        <span>
+                        <div className={'flex gap-4'}>
+                            <span>
                                 {task.status === 1 ? 'К реализации' : task.status === 2 ? 'Отсеяно' : task.status === 3 ? 'Возможно' : 'Не рассмотрено'}
                         </span>
-                        <Task__actions hover={hover} task={task} tasks={tasks}/>
+                            <span>{task.user.name} {task.user.lastName}</span>
+                        </div>
+                        <Task__actions hover={hover} task={task}/>
                     </div>
                 </div>
             )}

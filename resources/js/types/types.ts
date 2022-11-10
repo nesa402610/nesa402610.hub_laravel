@@ -85,6 +85,7 @@ export interface ITask {
     title: string
     body: string
     status?: number
+    user: IUser
     created_at?: string
     updated_at?: string
 }
