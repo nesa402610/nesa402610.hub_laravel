@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import SubmitButton from "../UI/submitButton";
 import axios from "axios";
 
 interface dataProps {
@@ -57,9 +56,9 @@ const SecurityTabEmail = () => {
                            onChange={e => setData({...data, newEmail: e.target.value})}
                            placeholder={'Новый email'}/>
                 </label>
-                <SubmitButton className={'bg-stone-700'} onClick={updateEmail}>
+                <button className={'bg-stone-700'} onClick={updateEmail}>
                     Обновить Email
-                </SubmitButton>
+                </button>
             </div>
         </div>
     );

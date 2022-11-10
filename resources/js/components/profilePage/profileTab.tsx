@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import axios from "axios";
 import {IUser} from "../../types/types";
-import SubmitButton from "../UI/submitButton";
 import {updateProfile} from "../../store/reducers/authSlice";
 import {useAppDispatch} from "../../hooks/redux";
 
@@ -82,7 +81,7 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
                            value={user.avatar}
                            type={'text'}/>
                 </label>
-                <SubmitButton className={'bg-stone-700'} onClick={updateProfileHandler}>Обновить данные </SubmitButton>
+                <button className={'bg-stone-700'} onClick={updateProfileHandler}>Обновить данные </button>
             </div>
         </div>
     );

@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import SubmitButton from "../UI/submitButton";
 import axios from "axios";
 
 
@@ -41,7 +40,7 @@ const SecurityTabPassword = () => {
                            onChange={e => setData({...data, newPassword: e.target.value})}
                            placeholder={'Новый пароль'}/>
                 </label>
-                <SubmitButton className={'bg-stone-700'} onClick={updatePassword}>Обновить пароль</SubmitButton>
+                <button className={'bg-stone-700'} onClick={updatePassword}>Обновить пароль</button>
             </div>
         </div>
     );

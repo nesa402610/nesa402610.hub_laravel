@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import axios from "axios";
 import {IUser} from "../../types/types";
-import SubmitButton from "../UI/submitButton";
 import {login, updateAccount} from "../../store/reducers/authSlice";
 import {useAppDispatch} from "../../hooks/redux";
 
@@ -42,7 +41,7 @@ const AccountTab: FC<accountTabProps> = ({user}) => {
                            value={user.phone}
                            type={'text'}/>
                 </label>
-                <SubmitButton className={'bg-stone-700'} onClick={updateAccountHandler}>Обновить данные </SubmitButton>
+                <button className={'bg-stone-700'} onClick={updateAccountHandler}>Обновить данные </button>
             </div>
         </div>
     );

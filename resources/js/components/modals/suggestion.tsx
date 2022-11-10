@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import SubmitButton from "../UI/submitButton";
 import {ITask} from "../../types/types";
 import {useAppDispatch} from "../../hooks/redux";
 import {closeModal} from "../../store/reducers/modalSlice";
@@ -48,8 +47,8 @@ const Suggestion = () => {
                        value={newTask?.body}
                        onChange={e => setNewTask({...newTask, body: e.target.value})}/>
             </label>
-            {1 ? <SubmitButton onClick={sendIdea} className={'self-end px-6 bg-stone-700'}>Предложить</SubmitButton> :
-                <SubmitButton onClick={(e) => updateIdea(e)} className={'self-end px-6'}>Обновить</SubmitButton>}
+            {1 ? <button onClick={sendIdea} className={'self-end px-6 bg-stone-700'}>Предложить</button> :
+                <button onClick={(e) => updateIdea(e)} className={'self-end px-6'}>Обновить</button>}
         </div>
     )
 };

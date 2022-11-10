@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import {IPost} from "../../types/types";
-import SubmitButton from "../UI/submitButton";
 import axios from "axios";
 import {addPost, editPost} from "../../store/reducers/blogSlice";
 import {closeModal} from "../../store/reducers/modalSlice";
@@ -54,9 +53,9 @@ const PostForm: FC<PostFormProps> = ({post}) => {
                     </label>
                 </div>
                 {!post ?
-                    <SubmitButton onClick={createPost}>Создать пост</SubmitButton>
+                    <button onClick={createPost}>Создать пост</button>
                     :
-                    <SubmitButton onClick={updatePost}>Обновить пост</SubmitButton>
+                    <button onClick={updatePost}>Обновить пост</button>
                 }
             </div>
         </div>

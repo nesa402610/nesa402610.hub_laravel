@@ -9,6 +9,9 @@ html, body {
 input {
     @apply w-full p-2 bg-stone-600 focus-visible:outline-stone-400 focus-visible:outline focus-visible:outline-2 autofill:bg-stone-600 rounded-lg mt-1
 }
+button {
+    @apply bg-stone-600 p-2 rounded-lg hover:bg-stone-500 transition-all
+}
 
 .block--light {
     @apply bg-stone-600 sm:p-4 xs:p-2 rounded-lg

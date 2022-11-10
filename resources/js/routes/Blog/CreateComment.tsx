@@ -1,5 +1,4 @@
 import React, {FC, useState} from 'react';
-import SubmitButton from "../../components/UI/submitButton";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {IPost} from "../../types/types";
 import axios from "axios";
@@ -29,15 +28,15 @@ const CreateComment: FC<CreateCommentProps> = ({post}) => {
     return (
         <>
             {isAuth && post &&
-                <div className={'block--light sm:flex-col'}>
+                <div className={'block--light flex gap-4 sm:flex-col'}>
                    <textarea className={'invalid:border-red-700 invalid:border p-4 bg-stone-500 rounded-lg w-full outline-none'} minLength={10}
                              placeholder={'Оставить комментарий'}
                              onChange={e => setComment(e.target.value)}
                              value={comment}
                    />
-                    <SubmitButton className={'self-end bg-stone-500 hover:bg-stone-700 px-6'}
+                    <button className={'self-end bg-stone-500 hover:bg-stone-700 px-6'}
                                   onClick={e => createCommentHandler(e)}
-                    >Отправить</SubmitButton>
+                    >Отправить</button>
                 </div>
             }
         </>

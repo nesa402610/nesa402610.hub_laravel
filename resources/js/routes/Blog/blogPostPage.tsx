@@ -7,7 +7,6 @@ import {BiTime} from "react-icons/bi";
 import CreateComment from "./CreateComment";
 import {Link} from "react-router-dom";
 import CommentEdit from "../../components/Comment__edit";
-import SubmitButton from "../../components/UI/submitButton";
 import axios from "axios";
 import {updateComment} from "../../store/reducers/blogSlice";
 
@@ -73,7 +72,7 @@ const BlogPostPage = () => {
                                        type={'text'}
                                        value={comment}
                                        onChange={e => setComment(e.target.value)}/>
-                                <SubmitButton onClick={() => saveComment(c.id)}>Сохранить</SubmitButton>
+                                <button onClick={() => saveComment(c.id)}>Сохранить</button>
                             </div>
                         }
                     </div>
