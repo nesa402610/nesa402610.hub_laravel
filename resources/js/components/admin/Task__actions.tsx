@@ -35,7 +35,7 @@ const TaskActions: FC<TaskActionsProps> = ({task, hover}) => {
     //     }))
     //};
     return (
-        <div className={'flex-wrap absolute gap-1 right-0 top-0 p-2 h-full items-start ' + (hover == task.id ? 'flex' : 'hidden')}>
+        <div className={'flex-wrap absolute gap-1 right-0 top-0 p-2 ' + (hover == task.id ? 'flex' : 'hidden')}>
             {user?.id === 1 &&
                 <>
                     <span className={'bg-stone-700 p-2 rounded-lg cursor-pointer transition-all hover:bg-green-600'}

@@ -7,6 +7,7 @@ import {ITask} from "../types/types";
 import moment from "moment";
 import Task__actions from "../components/admin/Task__actions";
 import {setTasks} from "../store/reducers/suggestionSlice";
+import {Link} from "react-router-dom";
 
 
 const SuggestionsPage: FC = () => {
@@ -65,7 +66,7 @@ const SuggestionsPage: FC = () => {
                             <span>
                                 {task.status === 1 ? 'К реализации' : task.status === 2 ? 'Отсеяно' : task.status === 3 ? 'Возможно' : 'Не рассмотрено'}
                         </span>
-                            <span>{task.user.name} {task.user.lastName}</span>
+                            <Link to={'/profile/' + task.author}>{task.user.name} {task.user.lastName}</Link>
                         </div>
                         <Task__actions hover={hover} task={task}/>
                     </div>
