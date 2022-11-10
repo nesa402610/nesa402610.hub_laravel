@@ -13,7 +13,7 @@ const Modal: FC = () => {
         <div className={'fixed backdrop-blur-md z-40 overflow-auto h-full top-0 left-0 bg-stone-700/75 w-full flex justify-center items-center'}
              onClick={closeModalHandler}
         >
-            <div className={'absolute mx-8 w-full flex flex-col'} onClick={e => e.stopPropagation()}>
+            <div className={'absolute mx-8 flex flex-col'} onClick={e => e.stopPropagation()}>
                 {modal.title && <h2 className={'text-2xl mb-4 text-center font-bold'}>
                     {modal.title}
                 </h2>}

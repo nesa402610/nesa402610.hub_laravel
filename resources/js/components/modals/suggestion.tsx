@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import Input from "../UI/input";
 import SubmitButton from "../UI/submitButton";
 import {ITask} from "../../types/types";
 import {useAppDispatch} from "../../hooks/redux";
@@ -34,20 +33,22 @@ const Suggestion = () => {
     };
 
     return (
-        <div className={'block--lighter mx-8 flex flex-col gap-4'}>
+        <div className={'block--light shadow-2xl mx-8 flex flex-col gap-4'}>
             <label>
                 Название
-                <Input type={'text'}
+                <input type={'text'}
+                       className={'bg-stone-700'}
                        value={newTask?.title}
                        onChange={e => setNewTask({...newTask, title: e.target.value})}/>
             </label>
             <label>
                 Описание
-                <Input type={'text'}
+                <input type={'text'}
+                       className={'bg-stone-700'}
                        value={newTask?.body}
                        onChange={e => setNewTask({...newTask, body: e.target.value})}/>
             </label>
-            {1 ? <SubmitButton onClick={sendIdea} className={'self-end px-6'}>Предложить</SubmitButton> :
+            {1 ? <SubmitButton onClick={sendIdea} className={'self-end px-6 bg-stone-700'}>Предложить</SubmitButton> :
                 <SubmitButton onClick={(e) => updateIdea(e)} className={'self-end px-6'}>Обновить</SubmitButton>}
         </div>
     )

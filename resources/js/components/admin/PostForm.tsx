@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import Input from "../UI/input";
 import {IPost} from "../../types/types";
 import SubmitButton from "../UI/submitButton";
 import axios from "axios";
@@ -38,18 +37,18 @@ const PostForm: FC<PostFormProps> = ({post}) => {
     };
 
     return (
-        <div className={'block--darker'}>
-            <div className={'block--lighter flex flex-col gap-4'}>
+        <div className={'block--light'}>
+            <div className={'block--dark flex flex-col gap-4'}>
                 <div className={'flex flex-col gap-4'}>
                     <label>
                         Название поста
-                        <Input type={'text'}
+                        <input type={'text'}
                                value={data.title}
                                onChange={e => setData({...data, title: e.target.value})}/>
                     </label>
                     <label>
                         Тело поста
-                        <Input type={'text'}
+                        <input type={'text'}
                                value={data.body}
                                onChange={e => setData({...data, body: e.target.value})}/>
                     </label>

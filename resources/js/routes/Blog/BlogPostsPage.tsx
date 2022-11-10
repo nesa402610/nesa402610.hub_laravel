@@ -18,7 +18,7 @@ const BlogPostsPage = () => {
             <h1 className={'text-center text-3xl mb-8 font-bold'}>Посты</h1>
             <div className={'px-4 gap-4 grid sm:grid-cols-4 xs:grid-cols-1'}>
                 {user?.id === 1 &&
-                    <div className={'block--darker'} onClick={createPost}>
+                    <div className={'block--light'} onClick={createPost}>
                         Новый пост
                     </div>
                 }

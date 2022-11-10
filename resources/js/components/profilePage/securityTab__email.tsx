@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import Input from "../UI/input";
 import SubmitButton from "../UI/submitButton";
 import axios from "axios";
 
@@ -27,14 +26,14 @@ const SecurityTabEmail = () => {
     }
 
     return (
-        <div className={'block--darker sm:flex-col'}>
+        <div className={'block--light sm:flex-col'}>
             <h2 className={'text-2xl text-center'}>Смена почты</h2>
             {errors && <h3 className={'text-center text-xl text-red-400'}>{errors}</h3>}
             <div className={'flex flex-col gap-4'}>
                 <label>
                     Текущий пароль
-                    <Input type={'password'}
-                           bg={'bg-stone-700'}
+                    <input type={'password'}
+                           className={'bg-stone-700'}
                            required={true}
                            value={data.currentPassword}
                            onChange={e => setData({...data, currentPassword: e.target.value})}
@@ -42,8 +41,8 @@ const SecurityTabEmail = () => {
                 </label>
                 <label>
                     Текущий Email
-                    <Input type={'email'}
-                           bg={'bg-stone-700'}
+                    <input type={'email'}
+                           className={'bg-stone-700'}
                            required={true}
                            value={data.currentEmail}
                            onChange={e => setData({...data, currentEmail: e.target.value})}
@@ -51,8 +50,8 @@ const SecurityTabEmail = () => {
                 </label>
                 <label>
                     Новый Email
-                    <Input type={'email'}
-                           bg={'bg-stone-700'}
+                    <input type={'email'}
+                           className={'bg-stone-700'}
                            required={true}
                            value={data.newEmail}
                            onChange={e => setData({...data, newEmail: e.target.value})}

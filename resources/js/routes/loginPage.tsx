@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import Input from "../components/UI/input";
 import {login} from "../store/reducers/authSlice";
 import {useAppDispatch} from "../hooks/redux";
 
@@ -46,23 +45,25 @@ const RegistrationPage: FC = () => {
         <div className={'flex flex-col items-center justify-center'}>
             <form className={'flex flex-col gap-4 bg-stone-600 p-4 rounded-lg'}>
                 <h3 className={'text-center text-2xl'}>Вход в аккаунт</h3>
-                {errors ? <h4 className={'text-center text-rose-400 text-lg'}>Проверьте данные. с ними все
-                                                                              впорядке?</h4> : ''}
+                {errors ? <h4 className={'text-center text-rose-400 text-lg'}>
+                        Проверьте данные. с ними все впорядке?</h4>
+                    : ''
+                }
                 <div>
                     <label>Email</label>
                     {errors?.email === '' ? <span>Проверьте правильность Email</span> : ''}
-                    <Input onChange={e => setUser({...user, email: e.target.value})}
+                    <input className={'bg-stone-700'}
+                           onChange={e => setUser({...user, email: e.target.value})}
                            type={'email'}
-                           bg={'bg-stone-700'}
                            required={true}
                            placeholder={'yamero0923@nesa.xyz'}/>
                 </div>
                 <div>
                     <label>Пароль</label>
                     {errors?.password === '' ? <span>Поле должно быть заполнено</span> : ''}
-                    <Input onChange={e => setUser({...user, password: e.target.value})}
+                    <input className={'bg-stone-700'}
+                           onChange={e => setUser({...user, password: e.target.value})}
                            type={'password'}
-                           bg={'bg-stone-700'}
                            required={true}
                            placeholder={'QWERTY00'}/>
                 </div>

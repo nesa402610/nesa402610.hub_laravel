@@ -8,7 +8,7 @@ const AboutPage: FC = () => {
     return (
         <div className={'px-4 flex flex-col gap-4'}>
             <Tabs titles={['Навыки', 'Образование',]} tab={tab} setTab={setTab}/>
-            <div className={'block--darker sm:flex-col'}>
+            <div className={'block--light sm:flex-col'}>
                 {tab === 0 && <AboutSkills/>}
                 {tab === 1 && <AboutStudy/>}
             </div>

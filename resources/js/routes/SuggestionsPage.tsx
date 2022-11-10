@@ -31,7 +31,7 @@ const SuggestionsPage: FC = () => {
     const addNewIdea = () => {
         dispatch(setModal({
             title: 'Предложить идею',
-            children: <Suggestion task={null}/>
+            children: <Suggestion/>
         }))
     }
     const adminMenu = (id) => {
@@ -41,13 +41,13 @@ const SuggestionsPage: FC = () => {
     return (
         <div className={'flex flex-col mx-4 gap-4'}>
             {isAuth &&
-                <div className={'block--darker'} onClick={addNewIdea}>
+                <div className={'block--light'} onClick={addNewIdea}>
                     <h2>Предложить идею...</h2>
                 </div>
             }
             {tasks.map(task =>
                 <div key={task.id}
-                        className={'block--darker relative border-2 ' + (task.status === 1 ? 'border-green-600 border-2' : task.status === 2 ? 'opacity-60 border-red-700 ' : task.status === 3 ? 'border-amber-700 border-2' : 'border-0')}>
+                     className={'block--darker relative border-2 ' + (task.status === 1 ? 'border-green-600 border-2' : task.status === 2 ? 'opacity-60 border-red-700 ' : task.status === 3 ? 'border-amber-700 border-2' : 'border-0')}>
                     <div>
                         <div className={'flex justify-between'}>
                             <span>{task.title}</span>

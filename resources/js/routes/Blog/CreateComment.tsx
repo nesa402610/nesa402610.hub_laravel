@@ -29,7 +29,7 @@ const CreateComment: FC<CreateCommentProps> = ({post}) => {
     return (
         <>
             {isAuth && post &&
-                <div className={'block--darker sm:flex-col'}>
+                <div className={'block--light sm:flex-col'}>
                    <textarea className={'invalid:border-red-700 invalid:border p-4 bg-stone-500 rounded-lg w-full outline-none'} minLength={10}
                              placeholder={'Оставить комментарий'}
                              onChange={e => setComment(e.target.value)}

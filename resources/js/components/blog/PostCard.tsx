@@ -17,7 +17,7 @@ const PostCard: FC<PostCardProps> = ({posts, user}) => {
             {posts.map(post => (post.visibility === 0 || user?.id === 1) &&
                 <Link to={`${post.id}`} key={post.id}>
                     <div
-                        className={'block--darker h-[250px] transition-all cursor-pointer hover:-translate-y-2 group drop-shadow-xl sm:flex-col xs:justify-start'}>
+                        className={'block--light h-[250px] transition-all cursor-pointer hover:-translate-y-2 group drop-shadow-xl sm:flex-col xs:justify-start'}>
                         {user?.id == 1 &&
                             <PostCardAdmin post={post}/>
                         }

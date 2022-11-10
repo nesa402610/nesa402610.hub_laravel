@@ -54,7 +54,7 @@ const AboutSkills: FC = () => {
     ]
     return (
         <div className={'flex gap-4 flex-col'}>
-            <div className={'block--lighter'}>
+            <div className={'block--dark'}>
                 <h2 className={'text-center font-bold text-2xl'}>Нативные знания</h2>
                 <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
                     {nativeSkills.map(skill =>
@@ -69,7 +69,7 @@ const AboutSkills: FC = () => {
                     )}
                 </div>
             </div>
-            <div className={'block--lighter'}>
+            <div className={'block--dark'}>
                 <h2 className={'text-center font-bold text-2xl'}>Знания фреймворков</h2>
                 <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
                     {frameworks.map(skill =>

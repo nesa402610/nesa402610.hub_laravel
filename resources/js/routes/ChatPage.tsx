@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import axios from "axios";
-import Input from "../components/UI/input";
 import {IUser} from "../types/types";
 import {useAppSelector} from "../hooks/redux";
 import {Link} from "react-router-dom";
@@ -50,8 +49,8 @@ const ChatPage: FC = () => {
         }
     }
     return (
-        <div className={'block--darker justify-between h-[90vh] sm:flex-col'}>
-            <div className={'block--lighter overflow-auto'}>
+        <div className={'block--light flex gap-4 justify-between h-[90vh] sm:flex-col'}>
+            <div className={'block--dark h-full overflow-auto'}>
                 {messages.map(msg =>
                     <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center xs:flex-col xs:items-start'}>
                         {/*<div className={'w-[40px]'}>*/}
@@ -71,8 +70,8 @@ const ChatPage: FC = () => {
                     </div>
                 )}
             </div>
-            {isAuth ? <Input type="text"
-                             bg={'bg-stone-500'}
+            {isAuth ? <input type="text"
+                             className={'bg-stone-500'}
                              onKeyPress={e => sendMessage(e)}
                              onChange={e => setMessage(e.target.value)}
                              placeholder={'Сообщение...'}

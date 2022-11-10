@@ -24,7 +24,7 @@ const CreateProjectModal: FC = () => {
             .then(() => dispatch(closeModal()))
     }
     return (
-        <div className={'block--darker'}>
+        <div className={'block--light'}>
             <ProjectForm setProject={setProject}
                          project={project}
                          projectHandler={createProjectHandler}/>

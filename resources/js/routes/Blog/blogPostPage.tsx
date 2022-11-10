@@ -7,7 +7,6 @@ import {BiTime} from "react-icons/bi";
 import CreateComment from "./CreateComment";
 import {Link} from "react-router-dom";
 import CommentEdit from "../../components/Comment__edit";
-import Input from "../../components/UI/input";
 import SubmitButton from "../../components/UI/submitButton";
 import axios from "axios";
 import {updateComment} from "../../store/reducers/blogSlice";
@@ -35,7 +34,7 @@ const BlogPostPage = () => {
 
     return (
         <div className={'mx-4 flex flex-col gap-4'}>
-            <div className={'block--darker sm:flex-col'}>
+            <div className={'block--light sm:flex-col'}>
                 <div>{post?.title}</div>
                 <div>
                     {post?.body}
@@ -49,7 +48,7 @@ const BlogPostPage = () => {
             </div>
             <h2 className={'text-xl font-bold text-center'}>Комментарии</h2>
             {post?.comments.map(c =>
-                <div key={c.id} className={'block--darker sm:flex-col relative'}>
+                <div key={c.id} className={'block--light sm:flex-col relative'}>
                     <CommentEdit id={c.id} body={c.body} setComment={setComment} setIsEdit={setIsEdit}/>
                     <div className={'flex gap-4 items-center'}>
                         <Link to={'/profile/' + c.user_id}
@@ -70,7 +69,7 @@ const BlogPostPage = () => {
                             </div>
                             :
                             <div className={'flex flex-col gap-4'}>
-                                <Input bg={'bg-stone-500'}
+                                <input className={'bg-stone-500'}
                                        type={'text'}
                                        value={comment}
                                        onChange={e => setComment(e.target.value)}/>

@@ -19,7 +19,7 @@ const EditProjectModal: FC<editProjectPageProps> = ({id}) => {
         axios.put('/admin/updateProject/' + project.id, project).then(() => dispatch(closeModal()))
     }
     return (
-        <div className={'block--darker'}>
+        <div className={'block--light'}>
             {project && <ProjectForm setProject={setProject} project={project} projectHandler={updateHandler}/>}
         </div>
     );

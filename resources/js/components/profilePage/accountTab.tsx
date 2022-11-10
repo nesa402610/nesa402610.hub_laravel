@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import Input from "../UI/input";
 import axios from "axios";
 import {IUser} from "../../types/types";
 import SubmitButton from "../UI/submitButton";
@@ -26,20 +25,20 @@ const AccountTab: FC<accountTabProps> = ({user}) => {
                 console.log(err))
     }
     return (
-        <div className={'block--darker sm:flex-col'}>
+        <div className={'block--light sm:flex-col'}>
             <h2 className={'text-center text-xl'}>Аккаунт</h2>
             <div className={'flex flex-col gap-4'}>
                 <label>
                     Email
-                    <Input onChange={e => dispatch(updateAccount({...user, email: e.target.value}))}
-                           bg={'bg-stone-700'}
+                    <input className={'bg-stone-700'}
+                           onChange={e => dispatch(updateAccount({...user, email: e.target.value}))}
                            value={user.email}
                            type={'text'}/>
                 </label>
                 <label htmlFor="">
                     Телефон
-                    <Input onChange={e => dispatch(updateAccount({...user, phone: e.target.value}))}
-                           bg={'bg-stone-700'}
+                    <input onChange={e => dispatch(updateAccount({...user, phone: e.target.value}))}
+                           className={'bg-stone-700'}
                            value={user.phone}
                            type={'text'}/>
                 </label>

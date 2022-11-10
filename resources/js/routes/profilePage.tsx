@@ -28,7 +28,7 @@ const ProfilePage = () => {
 
     if (user) return (
         <div className={'p-4'}>
-            <div className={'block--darker'}>
+            <div className={'block--light'}>
                 <div className={'flex sm:flex-row xs:flex-col gap-4 w-full'}>
                     <div className={'flex xs:items-center flex-col gap-2 sm:items-end'}>
                         <img className={'rounded-lg'}
@@ -56,7 +56,7 @@ const ProfilePage = () => {
                         </div>
                         <div className={'flex flex-col flex-1'}>
                             <h2 className={'font-bold mb-2 italic text-end mr-2'}>Информация обо мне</h2>
-                            <div className={'block--lighter'}>
+                            <div className={'block--dark flex-1'}>
                                 {user.about}
                             </div>
                         </div>

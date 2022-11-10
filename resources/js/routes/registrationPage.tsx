@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import Input from "../components/UI/input";
 
 interface userProps {
     name: string;
@@ -43,33 +42,33 @@ const RegistrationPage: FC = () => {
                 <div>
                     <label>Имя</label>
                     {/*{errors.name ? <span>Минимальная длинна 2 символа</span> : ''}*/}
-                    <Input onChange={e => setUser({...user, name: e.target.value})}
+                    <input onChange={e => setUser({...user, name: e.target.value})}
                            type={'text'}
-                           bg={'bg-stone-700'}
+                           className={'bg-stone-700'}
                            placeholder={'Элеонор'}/>
                 </div>
                 <div>
                     <label>Email</label>
                     {/*{errors.name ? <span>Проверьте правильность Email</span> : ''}*/}
-                    <Input onChange={e => setUser({...user, email: e.target.value})}
+                    <input onChange={e => setUser({...user, email: e.target.value})}
                            type={'email'}
-                           bg={'bg-stone-700'}
+                           className={'bg-stone-700'}
                            placeholder={'yamero0923@nesa.xyz'}/>
                 </div>
                 <div>
                     <label>Пароль</label>
                     {/*{errors.name ? <span>Минимальная длинна 8 символов</span> : ''}*/}
-                    <Input onChange={e => setUser({...user, password: e.target.value})}
+                    <input onChange={e => setUser({...user, password: e.target.value})}
                            type={'password'}
-                           bg={'bg-stone-700'}
+                           className={'bg-stone-700'}
                            placeholder={'QWERTY00'}/>
                 </div>
                 <div>
                     <label>Подтверждение пароля</label>
                     {/*{errors.name ? <span>Пароль должен совпадать</span> : ''}*/}
-                    <Input onChange={e => setUser({...user, passwordConfirm: e.target.value})}
+                    <input onChange={e => setUser({...user, passwordConfirm: e.target.value})}
                            type={'password'}
-                           bg={'bg-stone-700'}
+                           className={'bg-stone-700'}
                            placeholder={'QWERTY00'}/>
                 </div>
                 <div>
