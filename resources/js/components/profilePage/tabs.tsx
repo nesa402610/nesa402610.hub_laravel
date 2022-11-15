@@ -2,7 +2,7 @@ import React from 'react';
 
 const Tabs = ({setActive, isActive}) => {
     return (
-        <div className={'block--light mb-4 flex sm:flex-col text-center'}>
+        <div className={'block--light mb-4'}>
             <div className={'flex gap-4'}>
                 <div onClick={() => setActive(0)}
                         className={'block--lighter text-center flex-1 transition-all cursor-pointer'
