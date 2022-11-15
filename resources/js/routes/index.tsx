@@ -15,6 +15,8 @@ import BlogPostsPage from "./Blog/BlogPostsPage";
 import ChatPage from "./ChatPage";
 import AboutPage from "./AboutPage";
 import SuggestionsPage from "./SuggestionsPage";
+import MiniApps from "./miniApps/index";
+import TimerApp from "./miniApps/Timer/App";
 
 const Index: FC = () => {
     const user = useAppSelector(state => state.auth.user) as IUser
@@ -34,9 +36,11 @@ const Index: FC = () => {
                     <Route path={''} element={<BlogPostsPage/>}/>
                     <Route path={':id'} element={<BlogPostPage/>}/>
                 </Route>
-                <Route path={'/about'} element={<AboutPage/>} />
+                <Route path={'/about'} element={<AboutPage/>}/>
                 <Route path={'/admin/projects'} element={user?.id === 1 ? <ProjectsPage/> : <AccessDenied/>}/>
-
+                <Route path={'/mini-apps'} element={<MiniApps/>}>
+                    <Route path={'timer'} element={<TimerApp/>}/>
+                </Route>
             </Routes>
 
         </>
