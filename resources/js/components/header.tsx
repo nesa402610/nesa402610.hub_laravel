@@ -6,6 +6,7 @@ import MyLinkItem from "./UI/myLinkItem";
 import CreateProjectModal from './admin/createProjectModal';
 import {useAppDispatch, useAppSelector} from "../hooks/redux";
 import {setModal} from "../store/reducers/modalSlice";
+import {IoBookmarks, IoChatbox, IoGrid, IoHome, IoNewspaper, IoPerson} from "react-icons/io5";
 
 interface linksProps {
     name: string;
@@ -63,27 +64,46 @@ const Header: FC = () => {
     return (
         <header>
             <div className={'flex flex-col gap-2 md:flex-row justify-between p-4 items-center'}>
-                <nav className="flex gap-4 lg:basis-1/3">
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to='/'>Главная</NavLink>
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/suggestions'}>Задачи</NavLink>
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/blog'}>Блог</NavLink>
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/chat'}>Чат</NavLink>
-                    <NavLink className={'flex hover:text-stone-400 transition-colors'} to={'/about'}>Про меня</NavLink>
+                <nav className="flex gap-4 lg:basis-auto">
+                    <NavLink className={'nav-link'} to='/'>
+                        <IoHome/>
+                        Главная
+                    </NavLink>
+                    <NavLink className={'nav-link'} to={'/suggestions'}>
+                        <IoBookmarks/>
+                        Задачи
+                    </NavLink>
+                    <NavLink className={'nav-link'} to={'/blog'}>
+                        <IoNewspaper/>
+                        Блог
+                    </NavLink>
+                    <NavLink className={'nav-link'} to={'/chat'}>
+                        <IoChatbox/>
+                        Чат
+                    </NavLink>
+                    <NavLink className={'nav-link whitespace-nowrap'} to={'/about'}>
+                        <IoPerson/>
+                        <span>Обо мне</span>
+                    </NavLink>
+                    <NavLink className={'nav-link'} to={'/mini-apps'}>
+                        <IoGrid/>
+                        Apps
+                    </NavLink>
                 </nav>
                 <div className={'flex flex-1 gap-4 lg:basis-1/3 justify-center items-center'}>
                     {!user ?
                         <>
-                            <NavLink className={'flex hover:text-stone-400 transition-colors'}
+                            <NavLink className={'nav-link'}
                                      to={'/login'}>Login</NavLink>
-                            <NavLink className={'flex hover:text-stone-400 transition-colors'}
+                            <NavLink className={'nav-link'}
                                      to={'/registration'}>Registration</NavLink>
                         </>
                         :
                         <>
-                            <NavLink className={'flex items-center hover:text-stone-400 transition-colors'}
+                            <NavLink className={'nav-link'}
                                      to={'/profile/' + user.id}>
-                                <span>Profile</span>
-                                <img className={'rounded-lg ml-1'}
+                                <span>Профиль</span>
+                                <img className={'rounded-lg'}
                                      width={'30px'}
                                      height={'30px'}
                                      src={user.avatar}
