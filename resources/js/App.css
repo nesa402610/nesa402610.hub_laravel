@@ -12,7 +12,9 @@ input {
 button {
     @apply bg-stone-600 p-2 rounded-lg hover:bg-stone-500 transition-all
 }
-
+.nav-link {
+    @apply flex items-center gap-1 hover:text-stone-400 transition-colors
+}
 .block--light {
     @apply bg-stone-600 sm:p-4 xs:p-2 rounded-lg
 }
