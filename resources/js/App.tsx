@@ -4,13 +4,12 @@ import './App.css'
 import './API/axios'
 import Modal from "./components/UI/modal";
 import Index from "./routes";
-import {AppDispatch, useAppSelector} from "./hooks/redux";
+import {useAppDispatch, useAppSelector} from "./hooks/redux";
 import {fetchUser} from "./store/asyncActions/userActionsCreators";
 import {fetchProjects} from "./store/asyncActions/projectActionCreators";
-import {useDispatch} from "react-redux";
 
 const App = () => {
-    const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useAppDispatch()
     const modal = useAppSelector(state => state.modal)
 
     useEffect(() => {
