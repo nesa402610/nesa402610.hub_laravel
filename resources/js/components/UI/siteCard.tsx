@@ -18,7 +18,8 @@ const SiteCard: FC<IProjectProps> = ({project}) => {
             <ProjectOverview project={project}/>
             <div className={'h-full'}>
                 {project.image ? <img className={'w-full'} src={project.image} alt=""/> :
-                    <div className={'h-full bg-cover bg-center'} style={{backgroundImage: `url(${noImage})`}}/>}
+                    <div className={'h-full bg-cover bg-center'} style={{backgroundImage: `url(${noImage})`}}/>
+                }
             </div>
             <ProjectInfo project={project}/>
         </div>

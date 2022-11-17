@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
     <meta name="yandex-verification" content="5d64da24dba353a3"/>
     <meta name="keywords" content="nesa, n/esa, nesa402610, Ferris Argyle. hub, неса, нэса">
     <meta name="description" content="Здесь собраны все мои проекты и сертификаты на данный момент">
