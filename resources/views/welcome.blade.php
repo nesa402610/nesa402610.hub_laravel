@@ -13,6 +13,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#44403c">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>n/esa | hub</title>
     @viteReactRefresh
     @vite('resources/js/index.tsx')
