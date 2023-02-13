@@ -19,6 +19,15 @@ class BlogPostController extends Controller {
         return response($posts, 200);
     }
 
+    public function getPostById($id) {
+        $post = BlogPost::find($id);
+        $post->comments;
+        foreach ($post->comments as $comment) {
+            $comment->user;
+        }
+        return response($post, 200);
+    }
+
     public function createComment(Request $request) {
         $comment = new Comment;
 
