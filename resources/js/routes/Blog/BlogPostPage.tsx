@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useParams} from "react-router";
-import {IPost} from "../../types/types";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {useAppDispatch} from "../../hooks/redux";
 import moment from "moment";
 import {BiTime} from "react-icons/bi";
 import CreateComment from "./CreateComment";
@@ -9,18 +8,13 @@ import {Link} from "react-router-dom";
 import CommentEdit from "../../components/Comment__edit";
 import axios from "axios";
 import {updateComment} from "../../store/reducers/blogSlice";
+import {useGetPostByIdQuery} from "../../services/postService";
 
 const BlogPostPage = () => {
     const params = useParams()
-    const [post, setPost] = useState<IPost>(null);
-    const {posts} = useAppSelector(state => state.posts)
+    const {data: post} = useGetPostByIdQuery(params.id)
     const [comment, setComment] = useState('');
     const [isEdit, setIsEdit] = useState<number>(0);
-    useEffect(() => {
-        // @ts-ignore
-        setPost(posts.filter(p => p.id == params.id)[0])
-    }, [posts])
-
     const dispatch = useAppDispatch()
 
     function saveComment(id) {

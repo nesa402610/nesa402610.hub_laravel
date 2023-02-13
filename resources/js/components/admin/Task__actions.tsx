@@ -2,10 +2,11 @@ import React, {FC} from 'react';
 import {IoIosHeart, IoIosHeartDislike} from "react-icons/io";
 import {BsQuestionCircleFill} from "react-icons/bs";
 import {IoTrashBin} from "react-icons/io5";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {useAppDispatch} from "../../hooks/redux";
 import axios from "axios";
 import {ITask} from "../../types/types";
 import {deleteTask, setStatus} from "../../store/reducers/suggestionSlice";
+import {useGetUserQuery} from "../../services/userService";
 
 interface TaskActionsProps {
     task: ITask
@@ -13,7 +14,7 @@ interface TaskActionsProps {
 }
 
 const TaskActions: FC<TaskActionsProps> = ({task, hover}) => {
-    const {user} = useAppSelector(state => state.auth)
+    const {data: user} = useGetUserQuery('')
     const dispatch = useAppDispatch()
     const setStatusHandler = (e: React.MouseEvent<HTMLSpanElement>, id: number, status: number) => {
         e.preventDefault()

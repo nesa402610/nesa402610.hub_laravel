@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../types/types";
-import {fetchUser} from "../asyncActions/userActionsCreators";
 
 const initialState: authState = {
     user: null,
@@ -41,20 +40,20 @@ const authSlice = createSlice({
                 : item)
         }
     },
-    extraReducers: {
-        [fetchUser.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
-            state.isAuth = true
-            state.isLoading = false
-            state.user = action.payload
-        },
-        [fetchUser.pending.type]: (state) => {
-            state.isLoading = true
-        },
-        [fetchUser.rejected.type]: (state, action: PayloadAction<string>) => {
-            state.isLoading = false
-            state.error = action.payload
-        }
-    }
+    // extraReducers: {
+    //     [fetchUser.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+    //         state.isAuth = true
+    //         state.isLoading = false
+    //         state.user = action.payload
+    //     },
+    //     [fetchUser.pending.type]: (state) => {
+    //         state.isLoading = true
+    //     },
+    //     [fetchUser.rejected.type]: (state, action: PayloadAction<string>) => {
+    //         state.isLoading = false
+    //         state.error = action.payload
+    //     }
+    // }
 })
 
 export default authSlice.reducer

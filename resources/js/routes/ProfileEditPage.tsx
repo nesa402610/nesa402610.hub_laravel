@@ -1,13 +1,12 @@
 import React, {FC, useState} from 'react';
-import {IUser} from "../types/types";
 import AccountTab from "../components/profilePage/accountTab";
 import ProfileTab from "../components/profilePage/profileTab";
 import SecurityTab from "../components/profilePage/securityTab";
-import {useAppSelector} from "../hooks/redux";
 import Tabs from "../components/UI/Tabs";
+import {useGetUserQuery} from "../services/userService";
 
 const ProfileEditPage: FC = () => {
-    const user = useAppSelector(state => state.auth.user) as IUser
+    const {data: user} = useGetUserQuery('')
     const [isActive, setActive] = useState(0)
     if (!user) return null
     return (

@@ -1,33 +1,19 @@
-import React, {FC, useEffect, useState} from 'react';
-import axios from "axios";
-import {useAppDispatch, useAppSelector} from "../hooks/redux";
+import React, {FC, useState} from 'react';
+import {useAppDispatch} from "../hooks/redux";
 import {setModal} from "../store/reducers/modalSlice";
 import Suggestion from "../components/modals/suggestion";
-import {ITask} from "../types/types";
 import moment from "moment";
 import Task__actions from "../components/admin/Task__actions";
-import {setTasks} from "../store/reducers/suggestionSlice";
 import {Link} from "react-router-dom";
+import {useGetUserQuery} from "../services/userService";
+import {useGetTasksQuery} from "../services/tasksService";
 
 
 const SuggestionsPage: FC = () => {
-    const {isAuth} = useAppSelector(state => state.auth)
-    const {tasks} = useAppSelector(state => state.tasks)
+    const {data: isAuth} = useGetUserQuery('')
+    const {data: tasks, isFetching} = useGetTasksQuery('')
     const [hover, setHover] = useState(0);
     const dispatch = useAppDispatch()
-    useEffect(() => {
-        axios.get<ITask[]>('/suggestions')
-            .then(r => {
-                dispatch(setTasks(r.data))
-                // const sort = r.data.sort(a => {
-                //     if (a.status === 1) return -1
-                //     if (a.status === 2) return 1
-                //     // if (a.status === 0) return 0
-                //     if (a.status === 3) return 1
-                // })
-                // setTasks(sort)
-            })
-    }, []);
 
     const addNewIdea = () => {
         dispatch(setModal({
@@ -38,7 +24,7 @@ const SuggestionsPage: FC = () => {
     const adminMenu = (id) => {
         setHover(id)
     }
-
+if (isFetching) return <h1 className={'text-center font-bold text-2xl'}>Загрузка</h1>
     return (
         <div className={'flex flex-col mx-4 gap-4'}>
             {isAuth &&

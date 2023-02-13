@@ -1,25 +1,24 @@
 import React, {FC} from 'react';
 import {Route, Routes} from 'react-router-dom';
-import HomePage from "./homePage";
-import RegistrationPage from "./registrationPage";
-import LoginPage from "./loginPage";
-import ProfileEditPage from "./profileEditPage";
+import HomePage from "./HomePage";
+import RegistrationPage from "./RegistrationPage";
+import LoginPage from "./LoginPage";
+import ProfileEditPage from "./ProfileEditPage";
 import AccessDenied from "./errors/accessDenied";
-import {IUser} from "../types/types";
 import ProjectsPage from "./admin/ProjectsPage";
-import ProfilePage from "./profilePage";
-import {useAppSelector} from "../hooks/redux";
+import ProfilePage from "./ProfilePage";
 import BlogPage from "./Blog/BlogPage";
-import BlogPostPage from "./Blog/blogPostPage";
+import BlogPostPage from "./Blog/BlogPostPage";
 import BlogPostsPage from "./Blog/BlogPostsPage";
 import ChatPage from "./ChatPage";
 import AboutPage from "./AboutPage";
 import SuggestionsPage from "./SuggestionsPage";
 import MiniApps from "./miniApps/index";
 import TimerApp from "./miniApps/Timer/App";
+import {useGetUserQuery} from "../services/userService";
 
 const Index: FC = () => {
-    const user = useAppSelector(state => state.auth.user) as IUser
+    const {data: user, error, isLoading} = useGetUserQuery('');
     return (
         <>
             <Routes>

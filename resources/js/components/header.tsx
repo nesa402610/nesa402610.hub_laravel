@@ -4,9 +4,10 @@ import {FaGithub, FaSteam, FaTelegram, FaTwitch, FaTwitter, FaVk} from "react-ic
 import {SiOsu, SiShikimori} from "react-icons/si";
 import MyLinkItem from "./UI/myLinkItem";
 import CreateProjectModal from './admin/createProjectModal';
-import {useAppDispatch, useAppSelector} from "../hooks/redux";
+import {useAppDispatch} from "../hooks/redux";
 import {setModal} from "../store/reducers/modalSlice";
 import {IoBookmarks, IoChatbox, IoGrid, IoHome, IoNewspaper, IoPerson} from "react-icons/io5";
+import {useGetUserQuery} from "../services/userService";
 
 interface linksProps {
     name: string;
@@ -15,7 +16,7 @@ interface linksProps {
 }
 
 const Header: FC = () => {
-    const {user} = useAppSelector(state => state.auth)
+    const {data, error, isLoading} = useGetUserQuery('');
     const dispatch = useAppDispatch()
 
     const links: linksProps[] = [
@@ -91,7 +92,7 @@ const Header: FC = () => {
                     </NavLink>
                 </nav>
                 <div className={'flex flex-1 gap-4 lg:basis-1/3 justify-center items-center'}>
-                    {!user ?
+                    {!data ?
                         <>
                             <NavLink className={'nav-link'}
                                      to={'/login'}>Login</NavLink>
@@ -101,18 +102,18 @@ const Header: FC = () => {
                         :
                         <>
                             <NavLink className={'nav-link'}
-                                     to={'/profile/' + user.id}>
+                                     to={'/profile/' + data.id}>
                                 <span>Профиль</span>
                                 <img className={'rounded-lg'}
                                      width={'30px'}
                                      height={'30px'}
-                                     src={user.avatar}
+                                     src={data.avatar}
                                      alt=""/>
                             </NavLink>
                         </>
 
                     }
-                    {user?.id === 1 && <>
+                    {data?.id === 1 && <>
                         <span className={'cursor-pointer flex items-center hover:text-stone-400 transition-colors'}
                               onClick={createProjectHandler}>CreateProject</span>
                         <NavLink className={'flex items-center hover:text-stone-400 transition-colors'}

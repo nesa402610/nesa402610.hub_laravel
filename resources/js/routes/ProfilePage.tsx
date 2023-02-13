@@ -5,10 +5,10 @@ import {IUser} from "../types/types";
 import moment from "moment";
 import {useParams} from "react-router";
 import axios from "axios";
-import {useAppSelector} from "../hooks/redux";
+import {useGetUserQuery} from "../services/userService";
 
 const ProfilePage = () => {
-    const authedUser = useAppSelector(state => state.auth.user) as IUser
+    const {data:authedUser} = useGetUserQuery('')
     const [user, setUser] = useState<IUser>(null)
     const userName = useParams()
 

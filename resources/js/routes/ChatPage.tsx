@@ -1,8 +1,8 @@
-import React, {FC, useEffect, useState} from 'react';
-import axios from "axios";
+import React, {FC, useState} from 'react';
 import {IUser} from "../types/types";
-import {useAppSelector} from "../hooks/redux";
 import {Link} from "react-router-dom";
+import {useGetUserQuery} from "../services/userService";
+import {useGetMessagesQuery, useSendMessageMutation} from "../services/chatService";
 
 interface IMessage {
     id: number
@@ -17,32 +17,18 @@ interface IChat {
 
 const ChatPage: FC = () => {
     const [message, setMessage] = useState('');
-    const [messages, setMessages] = useState([]);
+    const {data: messages} = useGetMessagesQuery('',
+        {pollingInterval: 15000}
+    )
+    const [sendMessage, {}] = useSendMessageMutation()
     const [timer, setTimer] = useState(false);
-    const {isAuth} = useAppSelector(state => state.auth)
+    const {data: isAuth} = useGetUserQuery('')
 
-    useEffect(() => {
-        fetchChat()
-        const timer = setInterval(() => {
-            fetchChat()
-        }, 5000)
-        return () => {
-            window.clearInterval(timer)
-        }
-    }, []);
-
-    const fetchChat = () => {
-        axios.get<IChat[]>('/chat')
-            .then(r => setMessages(r.data))
-    }
-    const sendMessage = (e) => {
+    const sendMessageHandler = (e) => {
         if (message.length > 0 && e.key === 'Enter' && !timer) {
             setTimer(true)
             setMessage('')
-            axios.post('/chatSend', {message})
-                .then(r => {
-                    setMessages([...messages, r.data])
-                })
+            sendMessage({message})
             setTimeout(() => {
                 setTimer(false)
             }, 2000)
@@ -51,7 +37,7 @@ const ChatPage: FC = () => {
     return (
         <div className={'block--light flex gap-4 justify-between h-[90vh] sm:flex-col'}>
             <div className={'block--dark h-full overflow-auto'}>
-                {messages.map(msg =>
+                {messages?.map(msg =>
                     <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center xs:flex-col xs:items-start'}>
                         {/*<div className={'w-[40px]'}>*/}
                         {/*    {msg.id}*/}
@@ -72,13 +58,15 @@ const ChatPage: FC = () => {
             </div>
             {isAuth ? <input type="text"
                              className={'bg-stone-500'}
-                             onKeyPress={e => sendMessage(e)}
+                             onKeyPress={e => sendMessageHandler(e)}
                              onChange={e => setMessage(e.target.value)}
                              placeholder={'Сообщение...'}
                              value={message}
+                             disabled={timer}
                 /> :
-                <h2 className={'text-center font-bold'}>Для общения в чате требуется <Link to={'/login'}
-                                                                                           className={'text-blue-500 hover:text-blue-300'}>авторизация</Link>
+                <h2 className={'text-center font-bold'}>
+                    <span>Для общения в чате требуется &nbsp;</span>
+                    <Link to={'/login'} className={'text-blue-500 hover:text-blue-300'}>авторизация</Link>
                 </h2>
             }
         </div>

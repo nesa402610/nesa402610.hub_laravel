@@ -1,10 +1,11 @@
 import React, {FC} from 'react';
 import SiteCard from './UI/siteCard';
-import {useAppSelector} from "../hooks/redux";
+import {useGetProjectsQuery} from "../services/projectService";
 
 
 const ProjectSection: FC = () => {
-    const {projects} = useAppSelector(state => state.homePage)
+    const {data:projects, error, isLoading} = useGetProjectsQuery('')
+    if (isLoading) return <h1>is Loading</h1>
     return (
         <section>
             <h2 className={'text-3xl font-bold text-center mb-8'}>Проекты</h2>
