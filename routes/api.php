@@ -32,28 +32,38 @@ Route::get('/projects', [ProjectController::class, 'getAllProjects']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
 Route::get('/profile/{username}', [UserController::class, 'getUser']);
 Route::get('/blog', [BlogPostController::class, 'getAllPosts']);
-Route::get('/chat', [ChatController::class, 'getMessages']);
-Route::post('/chatSend', [ChatController::class, 'sendMessage']);
+Route::get('/blog/{id}', [BlogPostController::class, 'getPostById']);
 Route::get('/suggestions', [SuggestionController::class, 'getAll']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::post('/checkLogin', [AuthController::class, 'checkLogin']);
+    Route::prefix('chat')->group(function () {
+        Route::get('/', [ChatController::class, 'getMessages']);
+        Route::post('/send', [ChatController::class, 'sendMessage']);
+    });
+    Route::get('/checkLogin', [AuthController::class, 'checkLogin']);
     Route::post('/edit/updateAccount', [userController::class, 'updateAccount']);
     Route::post('/edit/updateProfile', [UserController::class, 'updateProfile']);
     Route::post('/edit/updatePassword', [UserController::class, 'updatePassword']);
     Route::post('/edit/updateEmail', [UserController::class, 'updateEmail']);
-    Route::post('/admin/createProject', [ProjectController::class, 'createProject']);
-    Route::get('/admin/editProject/{id}', [ProjectController::class, 'editProject']);
-    Route::put('/admin/updateProject/{id}', [ProjectController::class, 'updateProject']);
-    Route::post('/admin/createBlogPost', [BlogPostController::class, 'createPost']);
-    Route::post('/admin/updateBlogPost', [BlogPostController::class, 'updatePost']);
-    Route::post('/admin/visibilityBlogPost', [BlogPostController::class, 'visibility']);
-    Route::post('/admin/deleteBlogPost', [BlogPostController::class, 'deletePost']);
-    Route::post('/blog/commentCreate', [BlogPostController::class, 'createComment']);
-    Route::post('/blog/comments/edit', [BlogPostController::class, 'editComment']);
-    Route::post('/blog/comments/delete', [BlogPostController::class, 'deleteComment']);
-    Route::post('/suggestions/add', [SuggestionController::class, 'createSuggestion']);
-    Route::post('/suggestions/update', [SuggestionController::class, 'updateSuggestion']);
-    Route::post('/suggestions/setStatus', [SuggestionController::class, 'setStatus']);
+    Route::prefix('admin')->group(function () {
+        Route::post('/createProject', [ProjectController::class, 'createProject']);
+        Route::get('/editProject/{id}', [ProjectController::class, 'editProject']);
+        Route::put('/updateProject/{id}', [ProjectController::class, 'updateProject']);
+        Route::post('/createBlogPost', [BlogPostController::class, 'createPost']);
+        Route::post('/updateBlogPost', [BlogPostController::class, 'updatePost']);
+        Route::post('/visibilityBlogPost', [BlogPostController::class, 'visibility']);
+        Route::post('/deleteBlogPost', [BlogPostController::class, 'deletePost']);
+    });
+    Route::prefix('blog')->group(function () {
+        Route::post('/commentCreate', [BlogPostController::class, 'createComment']);
+        Route::post('/comments/edit', [BlogPostController::class, 'editComment']);
+        Route::post('/comments/delete', [BlogPostController::class, 'deleteComment']);
+    });
+    Route::prefix('suggestions')->group(function () {
+        Route::post('/add', [SuggestionController::class, 'createSuggestion']);
+        Route::post('/update', [SuggestionController::class, 'updateSuggestion']);
+        Route::post('/setStatus', [SuggestionController::class, 'setStatus']);
+    });
+
 });
