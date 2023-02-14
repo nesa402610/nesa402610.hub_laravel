@@ -1,33 +1,14 @@
-import React, {FC} from 'react';
-import axios from "axios";
+import React, {FC, useState} from 'react';
 import {IUser} from "../../types/types";
-import {updateProfile} from "../../store/reducers/authSlice";
-import {useAppDispatch} from "../../hooks/redux";
+import {useUpdateProfileMutation} from "../../services/userService";
 
 interface profileTabProps {
     user: IUser
 }
 
 const ProfileTab: FC<profileTabProps> = ({user}) => {
-    const dispatch = useAppDispatch()
-    const updateProfileHandler = () => {
-        axios.post('edit/updateProfile',
-            {
-                name: user.name,
-                middleName: user.middleName,
-                lastName: user.lastName,
-                birthday: user.birthday,
-                avatar: user.avatar,
-                status: user.status,
-                about: user.about,
-
-            })
-            .then(r => {
-                dispatch(updateProfile(r.data))
-            })
-            .catch(err =>
-                console.log(err))
-    }
+    const [updateProfile, {}] = useUpdateProfileMutation()
+    const [userData, setUserData] = useState<IUser>(user);
     return (
         <div className={'block--light sm:flex-col'}>
             <h2 className={'text-center text-xl'}>Профиль</h2>
@@ -35,53 +16,53 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
                 <label>
                     Имя
                     <input className={'bg-stone-700'}
-                           onChange={e => dispatch(updateProfile({...user, name: e.target.value}))}
-                           value={user.name}
+                           onChange={e => setUserData({...userData, name: e.target.value})}
+                           value={userData.name}
                            type={'text'}/>
                 </label>
                 <label>
                     Фамилия
                     <input className={'bg-stone-700'}
-                           onChange={e => dispatch(updateProfile({...user, lastName: e.target.value}))}
-                           value={user.lastName}
+                           onChange={e => setUserData({...userData, lastName: e.target.value})}
+                           value={userData.lastName}
                            type={'text'}/>
                 </label>
                 <label>
                     Отчество
                     <input className={'bg-stone-700'}
-                           onChange={e => dispatch(updateProfile({...user, middleName: e.target.value}))}
-                           value={user.middleName}
+                           onChange={e => setUserData({...userData, middleName: e.target.value})}
+                           value={userData.middleName}
                            type={'text'}/>
                 </label>
                 <label>
                     Статус
                     <input className={'bg-stone-700'}
-                           onChange={e => dispatch(updateProfile({...user, status: e.target.value}))}
-                           value={user.status}
+                           onChange={e => setUserData({...userData, status: e.target.value})}
+                           value={userData.status}
                            type={'text'}/>
                 </label>
                 <label>
                     Обо мне
                     <input className={'bg-stone-700'}
-                           onChange={e => dispatch(updateProfile({...user, about: e.target.value}))}
-                           value={user.about}
+                           onChange={e => setUserData({...userData, about: e.target.value})}
+                           value={userData.about}
                            type={'text'}/>
                 </label>
                 <label>
                     День рождения
                     <input className={'bg-stone-700'}
-                           onChange={e => dispatch(updateProfile({...user, birthday: e.target.value}))}
-                           value={user.birthday}
+                           onChange={e => setUserData({...userData, birthday: e.target.value})}
+                           value={userData.birthday}
                            type={'date'}/>
                 </label>
                 <label>
                     Изображение профиля <span className={'text-sm italic text-stone-400'}>Изображение должно быть квадратным</span>
-                    <input onChange={e => dispatch(updateProfile({...user, avatar: e.target.value}))}
-                           className={'bg-stone-700'}
-                           value={user.avatar}
+                    <input className={'bg-stone-700'}
+                           onChange={e => setUserData({...userData, avatar: e.target.value})}
+                           value={userData.avatar}
                            type={'text'}/>
                 </label>
-                <button className={'bg-stone-700'} onClick={updateProfileHandler}>Обновить данные </button>
+                <button className={'bg-stone-700'} onClick={() => updateProfile(userData)}>Обновить данные</button>
             </div>
         </div>
     );

@@ -1,8 +1,6 @@
-import React, {FC} from 'react';
-import axios from "axios";
+import React, {FC, useState} from 'react';
 import {IUser} from "../../types/types";
-import {login, updateAccount} from "../../store/reducers/authSlice";
-import {useAppDispatch} from "../../hooks/redux";
+import {useUpdateAccountMutation} from "../../services/userService";
 
 
 interface accountTabProps {
@@ -10,19 +8,8 @@ interface accountTabProps {
 }
 
 const AccountTab: FC<accountTabProps> = ({user}) => {
-    const dispatch = useAppDispatch()
-    const updateAccountHandler = () => {
-        axios.post('edit/updateAccount',
-            {
-                email: user.email,
-                phone: user.phone
-            })
-            .then(r => {
-                dispatch(login(r.data))
-            })
-            .catch(err =>
-                console.log(err))
-    }
+    const [userData, setUserData] = useState<IUser>(user);
+    const [updateAccount, {}] = useUpdateAccountMutation()
     return (
         <div className={'block--light sm:flex-col'}>
             <h2 className={'text-center text-xl'}>Аккаунт</h2>
@@ -30,18 +17,18 @@ const AccountTab: FC<accountTabProps> = ({user}) => {
                 <label>
                     Email
                     <input className={'bg-stone-700'}
-                           onChange={e => dispatch(updateAccount({...user, email: e.target.value}))}
+                           onChange={e => setUserData({...userData, email: e.target.value})}
                            value={user.email}
                            type={'text'}/>
                 </label>
                 <label htmlFor="">
                     Телефон
-                    <input onChange={e => dispatch(updateAccount({...user, phone: e.target.value}))}
-                           className={'bg-stone-700'}
+                    <input className={'bg-stone-700'}
+                           onChange={e => setUserData({...userData, phone: e.target.value})}
                            value={user.phone}
                            type={'text'}/>
                 </label>
-                <button className={'bg-stone-700'} onClick={updateAccountHandler}>Обновить данные </button>
+                <button className={'bg-stone-700'} onClick={() => updateAccount(userData)}>Обновить данные</button>
             </div>
         </div>
     );
