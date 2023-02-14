@@ -1,7 +1,4 @@
-import blogSlice from "./reducers/blogSlice";
-import HomePageSlice from "./reducers/homePageSlice";
 import modalSlice from "./reducers/modalSlice";
-import suggestionSlice from "./reducers/suggestionSlice";
 import {userAPI} from "../services/userService";
 import {configureStore} from "@reduxjs/toolkit";
 import {projectAPI} from "../services/projectService";
@@ -11,10 +8,7 @@ import {chatAPI} from "../services/chatService";
 
 export const store = configureStore({
     reducer: {
-        homePage: HomePageSlice,
         modal: modalSlice,
-        posts: blogSlice,
-        tasks: suggestionSlice,
         [userAPI.reducerPath]: userAPI.reducer,
         [projectAPI.reducerPath]: projectAPI.reducer,
         [postAPI.reducerPath]: postAPI.reducer,
