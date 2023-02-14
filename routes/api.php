@@ -41,11 +41,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/', [ChatController::class, 'getMessages']);
         Route::post('/send', [ChatController::class, 'sendMessage']);
     });
-    Route::get('/checkLogin', [AuthController::class, 'checkLogin']);
-    Route::post('/edit/updateAccount', [userController::class, 'updateAccount']);
-    Route::post('/edit/updateProfile', [UserController::class, 'updateProfile']);
-    Route::post('/edit/updatePassword', [UserController::class, 'updatePassword']);
-    Route::post('/edit/updateEmail', [UserController::class, 'updateEmail']);
+    Route::prefix('user')->group(function () {
+        Route::get('/', [AuthController::class, 'checkLogin']);
+        Route::post('/edit/account', [userController::class, 'updateAccount']);
+        Route::post('/edit/profile', [UserController::class, 'updateProfile']);
+        Route::post('/edit/password', [UserController::class, 'updatePassword']);
+        Route::post('/edit/email', [UserController::class, 'updateEmail']);
+    });
     Route::prefix('admin')->group(function () {
         Route::post('/createProject', [ProjectController::class, 'createProject']);
         Route::get('/editProject/{id}', [ProjectController::class, 'editProject']);
@@ -65,5 +67,4 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/update', [SuggestionController::class, 'updateSuggestion']);
         Route::post('/setStatus', [SuggestionController::class, 'setStatus']);
     });
-
 });
