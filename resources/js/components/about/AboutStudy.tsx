@@ -23,7 +23,7 @@ const AboutStudy: FC = () => {
         <>
             <div className={'flex gap-4 xs:flex-col md:flex-row'}>
                 {education.map(item =>
-                    <div className={'block--dark flex-1'}>
+                    <div key={item.name} className={'block--dark flex-1'}>
                         <div className={'flex justify-between'}>
                             <div>{item.name}</div>
                             <span>{item.start}-{item.end}</span>
