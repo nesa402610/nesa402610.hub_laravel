@@ -1,14 +1,13 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
-const csrf = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-
+const csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
 export const chatAPI = createApi({
     reducerPath: 'chatAPI',
     baseQuery: fetchBaseQuery({
         baseUrl: 'api/chat',
         prepareHeaders: (headers) => {
-            headers.set('X-CSRF-TOKEN', csrf)
+            headers.set('X-CSRF-TOKEN', csrf_token)
             return headers
         },
     }),

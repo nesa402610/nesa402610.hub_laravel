@@ -1,13 +1,47 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
+const csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+
 export const taskAPI = createApi({
     reducerPath: 'taskApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'api'}),
+    tagTypes: ['Task'],
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'api/suggestions',
+        prepareHeaders: (headers) => {
+            headers.set('X-CSRF-TOKEN', csrf_token)
+            return headers
+        },
+    }),
     endpoints: (builder) => ({
         getTasks: builder.query({
-            query: () => '/suggestions'
+            query: () => '/',
+            providesTags: ['Task']
+        }),
+        addTask: builder.mutation({
+            query: (suggestion) => ({
+                url: 'add',
+                method: 'POST',
+                body: suggestion
+            }),
+            invalidatesTags: ['Task']
+        }),
+        updateTask: builder.mutation({
+            query: (suggestion) => ({
+                url: 'update',
+                method: 'POST',
+                body: suggestion
+            }),
+            invalidatesTags: ['Task']
+        }),
+        setTaskStatus: builder.mutation({
+            query: (status) => ({
+                url: 'setStatus',
+                method: 'POST',
+                body: status
+            }),
+            invalidatesTags: ['Task']
         })
     })
 })
 
-export const {useGetTasksQuery} = taskAPI
+export const {useGetTasksQuery, useAddTaskMutation, useUpdateTaskMutation, useSetTaskStatusMutation} = taskAPI
