@@ -12,7 +12,6 @@ const ProfileEditPage: FC = () => {
     return (
         <div className={'p-4 flex flex-col gap-4'}>
             <h1 className={'text-center text-2xl mb-4 font-bold'}>Профиль</h1>
-            {/*<Tabs setActive={setActive} isActive={isActive}/>*/}
             <Tabs titles={['Аккаунт', 'Профиль', 'Безопасность']} setTab={setActive} tab={isActive}/>
             {isActive === 0 && <AccountTab user={user}/>}
             {isActive === 1 && < ProfileTab user={user}/>}

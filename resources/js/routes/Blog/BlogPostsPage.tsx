@@ -25,7 +25,7 @@ const BlogPostsPage = () => {
                     </div>
                 }
                 {posts?.map(post => (post.visibility === 0 || user?.id === 1) &&
-                    <PostCard post={post} user={user}/>
+                    <PostCard key={post.id} post={post} user={user}/>
                 )}
             </div>
         </>
