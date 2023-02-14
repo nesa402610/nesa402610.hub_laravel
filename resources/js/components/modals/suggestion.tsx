@@ -1,34 +1,23 @@
 import React, {useState} from 'react';
-import axios from "axios";
-import {ITask} from "../../types/types";
-import {useAppDispatch} from "../../hooks/redux";
-import {closeModal} from "../../store/reducers/modalSlice";
-import {addTask} from "../../store/reducers/suggestionSlice";
+import {useAddTaskMutation, useUpdateTaskMutation} from "../../services/tasksService";
 
-const Suggestion = () => {
-    const [newTask, setNewTask] = useState<ITask>({
+const Suggestion = ({closeHandler}) => {
+    const [newTask, setNewTask] = useState({
         title: '',
         body: ''
     })
-    // useEffect(() => {
-    //     setNewTask(task[0])
-    // }, [task])
-    // console.log(newTask, task)
-    const dispatch = useAppDispatch()
+    const [addTask, {}] = useAddTaskMutation()
+    const [updateTask, {}] = useUpdateTaskMutation()
 
     const sendIdea = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        axios.post('/suggestions/add', newTask)
-            .then(r => {
-                dispatch(addTask(r.data))
-                dispatch(closeModal())
-            })
-            .catch(err => alert(err))
+        addTask(newTask)
+        closeHandler()
     }
 
     const updateIdea = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        axios.post('/suggestions/update', newTask)
+        updateTask(newTask)
     };
 
     return (
