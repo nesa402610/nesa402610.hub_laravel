@@ -2,11 +2,9 @@ import React, {FC} from 'react';
 import {IoIosHeart, IoIosHeartDislike} from "react-icons/io";
 import {BsQuestionCircleFill} from "react-icons/bs";
 import {IoTrashBin} from "react-icons/io5";
-import {useAppDispatch} from "../../hooks/redux";
-import axios from "axios";
 import {ITask} from "../../types/types";
-import {deleteTask, setStatus} from "../../store/reducers/suggestionSlice";
 import {useGetUserQuery} from "../../services/userService";
+import {useSetTaskStatusMutation} from "../../services/tasksService";
 
 interface TaskActionsProps {
     task: ITask
@@ -15,16 +13,10 @@ interface TaskActionsProps {
 
 const TaskActions: FC<TaskActionsProps> = ({task, hover}) => {
     const {data: user} = useGetUserQuery('')
-    const dispatch = useAppDispatch()
+    const [setStatus, {}] = useSetTaskStatusMutation()
     const setStatusHandler = (e: React.MouseEvent<HTMLSpanElement>, id: number, status: number) => {
         e.preventDefault()
-        if (status === 666) {
-            dispatch(deleteTask(id))
-        }
-        axios.post('/suggestions/setStatus', {id: id, status: status})
-            .then(r => {
-                dispatch(setStatus(r.data))
-            })
+        setStatus({id, status})
     };
     // const [taskEdit, setTask] = useState(null);
     // const editTask = (e: React.MouseEvent<HTMLSpanElement>, id: number) => {
