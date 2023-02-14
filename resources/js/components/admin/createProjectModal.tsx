@@ -1,11 +1,13 @@
 import React, {FC, useState} from 'react';
-import axios from "axios";
 import ProjectForm from "./ProjectForm";
-import {closeModal} from "../../store/reducers/modalSlice";
-import {useAppDispatch} from "../../hooks/redux";
+import {useCreateProjectMutation} from "../../services/projectService";
 
-const CreateProjectModal: FC = () => {
-    const dispatch = useAppDispatch()
+interface CreateProjectModalProps {
+    closeModalHandler: () => void
+}
+
+const CreateProjectModal: FC<CreateProjectModalProps> = ({closeModalHandler}) => {
+    const [createProject, {error}] = useCreateProjectMutation()
     const [project, setProject] = useState({
         name: '',
         source: '',
@@ -20,8 +22,9 @@ const CreateProjectModal: FC = () => {
 
     const createProjectHandler = (e) => {
         e.preventDefault()
-        axios.post('admin/createProject', project)
-            .then(() => dispatch(closeModal()))
+        createProject(project)
+        closeModalHandler()
+
     }
     return (
         <div className={'block--light'}>

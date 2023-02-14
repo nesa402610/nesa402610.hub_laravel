@@ -15,6 +15,7 @@ const ProjectForm: FC<createProjectFormProps> = ({projectHandler, project, setPr
                     <label> Название </label>
                     <input type={'text'}
                            value={project.name}
+                           required
                            onChange={e => setProject({...project, name: e.target.value})}/>
                 </div>
                 <div className={'block--dark'}>
