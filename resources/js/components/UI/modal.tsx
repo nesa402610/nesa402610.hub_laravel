@@ -1,23 +1,24 @@
 import React, {FC} from 'react';
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {closeModal} from "../../store/reducers/modalSlice";
 
+interface ModalProps {
+    title: string,
+    children: React.ReactElement,
+    closeHandler: () => void
+}
 
-const Modal: FC = () => {
-    const modal = useAppSelector(state => state.modal)
-    const dispatch = useAppDispatch()
+const Modal: FC<ModalProps> = ({title, children, closeHandler}) => {
     const closeModalHandler = () => {
-        dispatch(closeModal())
+        closeHandler()
     };
     return (
         <div className={'fixed backdrop-blur-md z-40 overflow-auto h-full top-0 left-0 bg-stone-700/75 w-full flex justify-center items-center'}
              onClick={closeModalHandler}
         >
             <div className={'absolute mx-8 flex flex-col'} onClick={e => e.stopPropagation()}>
-                {modal.title && <h2 className={'text-2xl mb-4 text-center font-bold'}>
-                    {modal.title}
+                {title && <h2 className={'text-2xl mb-4 text-center font-bold'}>
+                    {title}
                 </h2>}
-                {modal.children}
+                {children}
             </div>
         </div>
     );
