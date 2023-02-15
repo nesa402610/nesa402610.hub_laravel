@@ -32,8 +32,8 @@ class BlogPostController extends Controller {
         $comment = new Comment;
 
         $comment->user_id = Auth::user()->id;
-        $comment->post_id = $request->post_id;
-        $comment->body = $request->body;
+        $comment->post_id = $request->postId;
+        $comment->body = $request->comment;
         $comment->user;
         $comment->save();
         return response($comment, 201);
@@ -41,7 +41,7 @@ class BlogPostController extends Controller {
 
     public function editComment(Request $request) {
         $comment = Comment::find($request->id);
-        $comment->body = $request->message;
+        $comment->body = $request->comment;
         $comment->save();
 
         return response($comment, 201);
@@ -68,7 +68,7 @@ class BlogPostController extends Controller {
     public function updatePost(Request $request) {
         $post = BlogPost::find($request->id);
         $post->title = $request->title;
-        $post->body = $request->body;
+        $post->body = $request->comment;
         $post->save();
         $post->comments;
         foreach ($post->comments as $comment) {
