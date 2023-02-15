@@ -52,15 +52,18 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/createProject', [ProjectController::class, 'createProject']);
         Route::get('/editProject/{id}', [ProjectController::class, 'editProject']);
         Route::put('/updateProject/{id}', [ProjectController::class, 'updateProject']);
-        Route::post('/createBlogPost', [BlogPostController::class, 'createPost']);
-        Route::post('/updateBlogPost', [BlogPostController::class, 'updatePost']);
-        Route::post('/visibilityBlogPost', [BlogPostController::class, 'visibility']);
-        Route::post('/deleteBlogPost', [BlogPostController::class, 'deletePost']);
     });
     Route::prefix('blog')->group(function () {
-        Route::post('/commentCreate', [BlogPostController::class, 'createComment']);
-        Route::post('/comments/edit', [BlogPostController::class, 'editComment']);
-        Route::post('/comments/delete', [BlogPostController::class, 'deleteComment']);
+        Route::prefix('comments')->group(function () {
+            Route::put('create', [BlogPostController::class, 'createComment']);
+            Route::patch('update', [BlogPostController::class, 'editComment']);
+            Route::delete('delete', [BlogPostController::class, 'deleteComment']);
+        });
+        Route::put('/create', [BlogPostController::class, 'createPost']);
+        Route::delete('/delete', [BlogPostController::class, 'deletePost']);
+        Route::patch('/visibility', [BlogPostController::class, 'visibility']);
+        Route::patch('/update', [BlogPostController::class, 'updatePost']);
+
     });
     Route::prefix('suggestions')->group(function () {
         Route::post('/add', [SuggestionController::class, 'createSuggestion']);
