@@ -29,11 +29,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
 });
 Route::get('/projects', [ProjectController::class, 'getAllProjects']);
-Route::post('/setRating', [ProjectController::class, 'setRating']);
 Route::get('/profile/{username}', [UserController::class, 'getUser']);
 Route::get('/blog', [BlogPostController::class, 'getAllPosts']);
 Route::get('/blog/{id}', [BlogPostController::class, 'getPostById']);
-Route::get('/suggestions', [SuggestionController::class, 'getAll']);
+Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
+Route::post('/setRating', [ProjectController::class, 'setRating']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
     Route::prefix('user')->group(function () {
         Route::get('/', [AuthController::class, 'checkLogin']);
-        Route::post('/edit/account', [userController::class, 'updateAccount']);
+        Route::post('/edit/account', [UserController::class, 'updateAccount']);
         Route::post('/edit/profile', [UserController::class, 'updateProfile']);
         Route::post('/edit/password', [UserController::class, 'updatePassword']);
         Route::post('/edit/email', [UserController::class, 'updateEmail']);

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SuggestionController extends Controller {
-    public function getAll() {
+    public function getAllTasks() {
         $all = Suggestion::orderBy('id', 'desc')->get();
         foreach ($all as $item) {
             $item->user;
