@@ -1,14 +1,14 @@
-import React, {FC} from 'react';
+import React, {Dispatch, FC, SetStateAction} from 'react';
 
 interface ModalProps {
     title: string,
     children: React.ReactElement,
-    closeHandler: () => void
+    closeHandler: Dispatch<SetStateAction<boolean>>
 }
 
 const Modal: FC<ModalProps> = ({title, children, closeHandler}) => {
     const closeModalHandler = () => {
-        closeHandler()
+        closeHandler(false)
     };
     return (
         <div className={'fixed backdrop-blur-md z-40 overflow-auto h-full top-0 left-0 bg-stone-700/75 w-full flex justify-center items-center'}
