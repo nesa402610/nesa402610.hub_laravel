@@ -15,7 +15,9 @@ const BlogPostPage = () => {
   const [isEdit, setIsEdit] = useState<number>(0);
 
   function saveComment(id) {
-    updateComment({id, comment}).then(()=>setIsEdit(0)).catch(err=> console.log(err))
+    updateComment({id, comment})
+      .then(()=>setIsEdit(0))
+      .catch(err=> console.log(err))
 
   }
 

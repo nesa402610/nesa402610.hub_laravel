@@ -51,7 +51,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::prefix('admin')->group(function () {
         Route::post('/createProject', [ProjectController::class, 'createProject']);
         Route::get('/editProject/{id}', [ProjectController::class, 'editProject']);
-        Route::put('/updateProject/{id}', [ProjectController::class, 'updateProject']);
+        Route::patch('/updateProject/{id}', [ProjectController::class, 'updateProject']);
     });
     Route::prefix('blog')->group(function () {
         Route::prefix('comments')->group(function () {

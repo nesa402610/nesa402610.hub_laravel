@@ -8,6 +8,7 @@ interface createProjectFormProps {
 }
 
 const ProjectForm: FC<createProjectFormProps> = ({projectHandler, project, setProject}) => {
+    if (!project) return null
     return (
         <form className={'w-full flex flex-col items-center'}>
             <div className={'grid mb-4 grid-cols-3 gap-4'}>

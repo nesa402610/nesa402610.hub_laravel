@@ -3,10 +3,10 @@ import {NavLink} from 'react-router-dom';
 import {FaGithub, FaSteam, FaTelegram, FaTwitch, FaTwitter, FaVk} from "react-icons/fa";
 import {SiOsu, SiShikimori} from "react-icons/si";
 import MyLinkItem from "./UI/myLinkItem";
-import CreateProjectModal from './admin/createProjectModal';
 import {IoBookmarks, IoChatbox, IoGrid, IoHome, IoNewspaper, IoPerson} from "react-icons/io5";
 import {useGetUserQuery} from "../services/userService";
 import Modal from "./UI/modal";
+import ProjectModal from "./admin/ProjectModal";
 
 interface linksProps {
     name: string;
@@ -58,7 +58,7 @@ const Header: FC = () => {
     return (
         <>
             {isModal && <Modal title={'Добавление проекта'} closeHandler={() => setIsModal(false)}>
-                <CreateProjectModal closeModalHandler={() => setIsModal(false)}/>
+                <ProjectModal type={'create'} closeModalHandler={() => setIsModal(false)}/>
             </Modal>
 
             }
