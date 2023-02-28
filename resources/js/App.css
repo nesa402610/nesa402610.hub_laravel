@@ -23,7 +23,7 @@ button {
 }
 
 .block--dark {
-    @apply bg-stone-700 rounded-lg xs:p-2 sm:p-4
+    @apply bg-stone-700 sm:p-4 xs:p-2 rounded-lg
 }
 
 #senpai {

@@ -19,7 +19,7 @@ const PostCard: FC<PostCardProps> = ({post, user}) => {
       <PostForm isModal={isModal} setIsModal={setIsModal} post={post}/>
       <Link to={`${post.id}`} key={post.id}>
         <div
-          className={'block--light h-[250px] transition-all cursor-pointer hover:-translate-y-2 group drop-shadow-xl sm:flex-col xs:justify-start'}>
+          className={' h-[250px] transition-all cursor-pointer hover:-translate-y-2 group drop-shadow-xl sm:flex-col xs:justify-start' + (post.visibility ? ' brightness-150 block--dark opacity-30' : ' block--light')}>
           {user?.id == 1 &&
             <PostCardAdmin post={post} setIsModal={setIsModal}/>
           }
