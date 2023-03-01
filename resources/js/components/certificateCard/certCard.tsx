@@ -5,7 +5,7 @@ interface certCardProps {
     handler: any
 }
 const CertCard: FC<certCardProps> = ({handler}) => {
-    const previewImage = (e: any, img: string) => {
+    const previewImage = (e: React.MouseEvent<HTMLImageElement, MouseEvent>, img: string) => {
         e.stopPropagation();
         handler(img);
     };

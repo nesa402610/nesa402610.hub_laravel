@@ -1,15 +1,15 @@
 // @ts-ignore
-import SBER_HTMLCSS from './img/sertificates/SBER_oSBER-JS-BASE-2.webp';
+import SBER_HTMLCSS from './img/sertificates/SBER_osnovy-html-css.webp';
 // @ts-ignore
-import SBER__DEVOPS_GIT from './img/sertificates/SSBER-JS-BASE-2.webp';
+import SBER__DEVOPS_GIT from './img/sertificates/SBER-DevOps-git.webp';
 // @ts-ignore
-import BG_JS_BASIC from './img/sertificatSBER-JS-BASE-2.webp';
+import BG_JS_BASIC from './img/sertificates/GB_JS-basic.webp';
 // @ts-ignore
-import SBER_JS_BASIC from './img/sertificateSBER-JS-BASE-2.webp';
+import SBER_JS_BASIC from './img/sertificates/SBER-JS-base.webp';
 // @ts-ignore
-import SBER_JS_BASIC2 from './img/sertificates/SBER-JS-BASE-2.webp';
+import SBER_JS_BASIC2 from './img/sertificates/SBER-JS-base-2.webp';
 // @ts-ignore
-import SBER_JS_DOM from './img/sertificates/SBER_JS_DOM.png';
+import SBER_JS_DOM from './img/sertificates/SBER_JS_DOM.webp';
 import {ICert} from "./types/types";
 
 export const certificates: ICert[] = [
