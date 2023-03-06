@@ -27,28 +27,26 @@ const PostForm: FC<PostFormProps> = ({post, isModal, setIsModal}) => {
   if (!isModal) return null;
   return (
     <Modal title={'Создание поста'} closeHandler={setIsModal}>
-      <div className={'block--light'}>
-        <div className={'block--dark flex flex-col gap-4'}>
-          <div className={'flex flex-col gap-4'}>
-            <label>
-              Название поста
-              <input type={'text'}
-                     value={data.title}
-                     onChange={e => setData({...data, title: e.target.value})}/>
-            </label>
-            <label>
-              Тело поста
-              <input type={'text'}
-                     value={data.body}
-                     onChange={e => setData({...data, body: e.target.value})}/>
-            </label>
-          </div>
-          {!post ?
-            <button onClick={createPostHandler}>Создать пост</button>
-            :
-            <button onClick={updatePostHandler}>Обновить пост</button>
-          }
+      <div className={'block--light flex flex-col gap-4'}>
+        <div className={'flex flex-col gap-4'}>
+          <label>
+            Название поста
+            <input type={'text'}
+                   value={data.title}
+                   onChange={e => setData({...data, title: e.target.value})}/>
+          </label>
+          <label>
+            Тело поста
+            <input type={'text'}
+                   value={data.body}
+                   onChange={e => setData({...data, body: e.target.value})}/>
+          </label>
         </div>
+        {!post ?
+          <button onClick={createPostHandler}>Создать пост</button>
+          :
+          <button onClick={updatePostHandler}>Обновить пост</button>
+        }
       </div>
     </Modal>
   );

@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {useGetUserQuery} from "../services/userService";
 import {useGetTasksQuery} from "../services/tasksService";
 import Modal from "../components/UI/modal";
+import Loader from "../components/Loader";
 
 
 const SuggestionsPage: FC = () => {
@@ -23,7 +24,7 @@ const SuggestionsPage: FC = () => {
     const adminMenu = (id) => {
         setHover(id)
     }
-    if (isLoading) return <h1 className={'text-center font-bold text-2xl'}>Загрузка</h1>
+    if (isLoading) return <Loader/>
     return (
         <>
             {isModal &&
@@ -31,7 +32,7 @@ const SuggestionsPage: FC = () => {
                     <Suggestion closeHandler={closeHandler}/>
                 </Modal>
             }
-            <div className={'flex flex-col mx-4 gap-4'}>
+            <div className={'flex flex-col m-4 gap-4'}>
                 {isAuth &&
                     <div className={'block--light'} onClick={addNewIdea}>
                         <h2>Предложить идею...</h2>

@@ -12,7 +12,7 @@ interface LinkProps {
 
 const MyLinkItem: FC<LinkProps> = ({link}) => {
     return (
-        <a className={'flex text-3xl hover:text-stone-400 transition-all hover:scale-125'}
+        <a className={'flex text-2xl hover:text-neutral-400 transition-all hover:scale-125'}
               href={link.url}
               target={"_blank"}
               rel="noreferrer">

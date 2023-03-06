@@ -3,6 +3,7 @@ import PostCard from "../../components/blog/PostCard";
 import PostForm from "../../components/admin/PostForm";
 import {useGetUserQuery} from "../../services/userService";
 import {useGetPostsQuery} from "../../services/postService";
+import Loader from "../../components/Loader";
 
 const BlogPostsPage = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
@@ -12,7 +13,7 @@ const BlogPostsPage = () => {
   const createPost = () => {
     setIsModal(true)
   }
-  if (isLoading) return <h2 className={'text-3xl font-bold text-center'}>Загружаем посты</h2>
+  if (isLoading) return <Loader/>
   return (
     <>
       <PostForm isModal={isModal} setIsModal={setIsModal}/>

@@ -25,18 +25,16 @@ const Suggestion = ({closeHandler}) => {
             <label>
                 Название
                 <input type={'text'}
-                       className={'bg-stone-700'}
                        value={newTask?.title}
                        onChange={e => setNewTask({...newTask, title: e.target.value})}/>
             </label>
             <label>
                 Описание
                 <input type={'text'}
-                       className={'bg-stone-700'}
                        value={newTask?.body}
                        onChange={e => setNewTask({...newTask, body: e.target.value})}/>
             </label>
-            {1 ? <button onClick={sendIdea} className={'self-end px-6 bg-stone-700'}>Предложить</button> :
+            {1 ? <button onClick={sendIdea} className={'self-end px-6'}>Предложить</button> :
                 <button onClick={(e) => updateIdea(e)} className={'self-end px-6'}>Обновить</button>}
         </div>
     )

@@ -54,11 +54,11 @@ const AboutSkills: FC = () => {
     ]
     return (
         <div className={'flex gap-4 flex-col'}>
-            <div className={'block--dark'}>
+            <div>
                 <h2 className={'text-center font-bold text-2xl'}>Нативные знания</h2>
                 <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
                     {nativeSkills.map(skill =>
-                        <div key={skill.name} className={'flex flex-col items-center flex-1'}>
+                        <div key={skill.name} className={'flex block--light flex-col items-center flex-1'}>
                             {skill.logo}
                             <span className={'font-bold'}>{skill.name}</span>
                             <div className={'w-full bg-zinc-400 h-[8px] rounded-full overflow-hidden'}>
@@ -69,11 +69,11 @@ const AboutSkills: FC = () => {
                     )}
                 </div>
             </div>
-            <div className={'block--dark'}>
+            <div>
                 <h2 className={'text-center font-bold text-2xl'}>Знания фреймворков</h2>
                 <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
                     {frameworks.map(skill =>
-                        <div key={skill.name} className={'flex flex-col items-center flex-1'}>
+                        <div key={skill.name} className={'flex block--light flex-col items-center flex-1'}>
                             {skill.logo}
                             <span className={'font-bold'}>{skill.name}</span>
                             <div className={'w-full bg-zinc-400 h-[8px] rounded-full overflow-hidden'}>

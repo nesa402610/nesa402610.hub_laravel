@@ -25,14 +25,14 @@ const SecurityTabEmail = () => {
     }
 
     return (
-        <div className={'block--light sm:flex-col'}>
+        <div className={'block--dark sm:flex-col'}>
             <h2 className={'text-2xl text-center'}>Смена почты</h2>
             {errors && <h3 className={'text-center text-xl text-red-400'}>{errors}</h3>}
             <div className={'flex flex-col gap-4'}>
                 <label>
                     Текущий пароль
                     <input type={'password'}
-                           className={'bg-stone-700'}
+                           className={'bg-neutral-700'}
                            required={true}
                            value={data.currentPassword}
                            onChange={e => setData({...data, currentPassword: e.target.value})}
@@ -41,7 +41,7 @@ const SecurityTabEmail = () => {
                 <label>
                     Текущий Email
                     <input type={'email'}
-                           className={'bg-stone-700'}
+                           className={'bg-neutral-700'}
                            required={true}
                            value={data.currentEmail}
                            onChange={e => setData({...data, currentEmail: e.target.value})}
@@ -50,13 +50,13 @@ const SecurityTabEmail = () => {
                 <label>
                     Новый Email
                     <input type={'email'}
-                           className={'bg-stone-700'}
+                           className={'bg-neutral-700'}
                            required={true}
                            value={data.newEmail}
                            onChange={e => setData({...data, newEmail: e.target.value})}
                            placeholder={'Новый email'}/>
                 </label>
-                <button className={'bg-stone-700'} onClick={updateEmail}>
+                <button className={'bg-neutral-700'} onClick={updateEmail}>
                     Обновить Email
                 </button>
             </div>

@@ -1,24 +1,24 @@
 export interface IUser {
-    id: number
-    name: string
-    middleName?: string
-    lastName?: string
-    phone?: string
-    avatar?: string
-    birthday?: string
-    email: string
-    status?: string
-    about?: string
-    created_at?: string
-    updated_at?: string
-    rates: IRate[]
+  id: number
+  name: string
+  middleName?: string
+  lastName?: string
+  phone?: string
+  avatar?: string
+  birthday?: string
+  email: string
+  status?: string
+  about?: string
+  created_at?: string
+  updated_at?: string
+  rates: IRate[]
 }
 
 interface IRate {
-    id: number
-    project_id: number
-    user_id: number
-    rating: number
+  id: number
+  project_id: number
+  user_id: number
+  rating: number
 }
 
 // export interface ILevel {
@@ -27,66 +27,87 @@ interface IRate {
 //     name: string
 // }
 export interface IProjectProps {
-    project: IProject
+  project: IProject
 }
 
 export interface IProject {
-    id?: number
-    name: string,
-    sourceURL?: string,
-    source?: string,
-    previewURL?: string,
-    image?: string | null,
-    status: string,
-    level: number,
-    framework?: string,
-    stack?: string,
-    host: string
-    rate?: number
-    github?: string
+  id?: number
+  name: string,
+  sourceURL?: string,
+  source?: string,
+  previewURL?: string,
+  image?: string | null,
+  status: string,
+  level: number,
+  framework?: string,
+  stack?: string,
+  host: string
+  rate?: number
+  github?: string
 }
 
 export interface IActionProps {
-    type: string
-    payload?: any
+  type: string
+  payload?: any
 }
 
 export interface ICert {
-    name: string,
-    author: string,
-    date: string,
-    sign: string,
-    img: string,
+  name: string,
+  author: string,
+  date: string,
+  sign: string,
+  img: string,
 }
 
 export interface IPost {
-    id?: number
-    userId?: number
-    title: string
-    body: string
-    image: string
-    comments?: IComment[]
-    visibility?: number
-    created_at?: string
-    updated_at?: string
+  id?: number
+  userId?: number
+  title: string
+  body: string
+  image: string
+  comments?: IComment[]
+  visibility?: number
+  created_at?: string
+  updated_at?: string
 }
 
 export interface IComment {
-    id: number
-    post_id: number
-    body: string
-    created_at?: string
-    updated_at?: string
-    user_id: number
-    user: IUser
+  id: number
+  post_id: number
+  body: string
+  created_at?: string
+  updated_at?: string
+  user_id: number
+  user: IUser
 }
+
 export interface ITask {
-    id?: number
-    title: string
-    body: string
-    status?: number
-    author: number
-    user: IUser
-    created_at?: string
-    updated_at?: string
+  id?: number
+  title: string
+  body: string
+  status?: number
+  author: number
+  user: IUser
+  created_at?: string
+  updated_at?: string
+}
+
+export interface ICollection {
+  id: number
+  title_ru: string
+  title_en: string
+  title_original: string
+  description: string
+  description_short: string
+  episode_time: number
+  censure: boolean
+  tags: { name: string }[]
+  image: string
+  announce_date: string
+  release_date: string
+  episodes: number
+  studio: string
+  origins: string
+  author: string
+  created_at: string
 }

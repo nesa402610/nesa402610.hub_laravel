@@ -14,6 +14,7 @@ interface PostCardProps {
 
 const PostCard: FC<PostCardProps> = ({post, user}) => {
   const [isModal, setIsModal] = useState<boolean>(false);
+
   return (
     <>
       <PostForm isModal={isModal} setIsModal={setIsModal} post={post}/>

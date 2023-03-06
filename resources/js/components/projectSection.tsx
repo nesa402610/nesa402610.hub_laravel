@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
 import SiteCard from './UI/siteCard';
 import {useGetProjectsQuery} from "../services/projectService";
+import Loader from "./Loader";
 
 
 const ProjectSection: FC = () => {
-    const {data:projects, error, isLoading} = useGetProjectsQuery('')
-    if (isLoading) return <h1>is Loading</h1>
+    const {data:projects, isLoading} = useGetProjectsQuery('')
+    if (isLoading) return <Loader/>
     return (
         <section>
             <h2 className={'text-3xl font-bold text-center mb-8'}>Проекты</h2>

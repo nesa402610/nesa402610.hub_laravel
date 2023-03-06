@@ -16,34 +16,36 @@ import SuggestionsPage from "./SuggestionsPage";
 import MiniApps from "./miniApps/index";
 import TimerApp from "./miniApps/Timer/App";
 import {useGetUserQuery} from "../services/userService";
+import HCollection from "./HCollection";
 
 const Index: FC = () => {
-    const {data: user, error, isLoading} = useGetUserQuery('');
-    return (
-        <>
-            <Routes>
-                <Route path={'/'} element={<HomePage/>}/>
-                <Route path={'/suggestions'} element={<SuggestionsPage/>}/>
-                <Route path={'/registration'} element={<RegistrationPage/>}/>
-                <Route path={'/login'} element={<LoginPage/>}/>
-                <Route path={'/profile'} element={<ProfilePage/>}>
-                    <Route path={':username'} element={<ProfilePage/>}/>
-                </Route>
-                <Route path={'/profile/edit'} element={<ProfileEditPage/>}/>
-                <Route path={'/chat'} element={<ChatPage/>}/>
-                <Route path={'/blog'} element={<BlogPage/>}>
-                    <Route path={''} element={<BlogPostsPage/>}/>
-                    <Route path={':id'} element={<BlogPostPage/>}/>
-                </Route>
-                <Route path={'/about'} element={<AboutPage/>}/>
-                <Route path={'/admin/projects'} element={user?.id === 1 ? <ProjectsPage/> : <AccessDenied/>}/>
-                <Route path={'/mini-apps'} element={<MiniApps/>}>
-                    <Route path={'timer'} element={<TimerApp/>}/>
-                </Route>
-            </Routes>
+  const {data: user, error, isLoading} = useGetUserQuery('');
+  return (
+    <div className={'ml-[80px]'}>
+      <Routes>
+        <Route path={'/'} element={<HomePage/>}/>
+        <Route path={'/suggestions'} element={<SuggestionsPage/>}/>
+        <Route path={'/registration'} element={<RegistrationPage/>}/>
+        <Route path={'/login'} element={<LoginPage/>}/>
+        <Route path={'/profile'} element={<ProfilePage/>}>
+          <Route path={':username'} element={<ProfilePage/>}/>
+        </Route>
+        <Route path={'/profile/edit'} element={<ProfileEditPage/>}/>
+        <Route path={'/chat'} element={<ChatPage/>}/>
+        <Route path={'/blog'} element={<BlogPage/>}>
+          <Route path={''} element={<BlogPostsPage/>}/>
+          <Route path={':id'} element={<BlogPostPage/>}/>
+        </Route>
+        <Route path={'/about'} element={<AboutPage/>}/>
+        <Route path={'/admin/projects'} element={user?.id === 1 ? <ProjectsPage/> : <AccessDenied/>}/>
+        <Route path={'/mini-apps'} element={<MiniApps/>}>
+          <Route path={'timer'} element={<TimerApp/>}/>
+        </Route>
+        <Route path={'NULL'} element={<HCollection/>}/>
+      </Routes>
 
-        </>
-    );
+    </div>
+  );
 };
 
 export default Index;
