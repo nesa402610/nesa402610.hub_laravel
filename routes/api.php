@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\HCollectionController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\UserController;
@@ -69,5 +70,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/add', [SuggestionController::class, 'createSuggestion']);
         Route::post('/update', [SuggestionController::class, 'updateSuggestion']);
         Route::post('/setStatus', [SuggestionController::class, 'setStatus']);
+    });
+    Route::prefix('NULL')->group(function () {
+        Route::post('/', [HCollectionController::class, 'getAllTitles']);
+        Route::patch('/update', [HCollectionController::class, 'updateTitle']);
+        Route::put('/passkey', [HCollectionController::class, 'generatePasskey']);
+        Route::post('/passkey/validate', [HCollectionController::class, 'validatePasskey']);
+        Route::get('/passkeys', [HCollectionController::class, 'getAllPasskeys']);
     });
 });
