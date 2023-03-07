@@ -51,7 +51,7 @@ class HCollectionController extends Controller {
             $collections = HCollection::all();
             foreach ($collections as $collection) {
                 $collection->tags->makeHidden('pivot');
-
+                $collection->links->makeHidden('pivot');
 //            foreach ($collection->tags as $tag) {
 //            }
             }
@@ -60,13 +60,11 @@ class HCollectionController extends Controller {
         }
     }
 
-    public
-    function addTitle() {
+    public function addTitle() {
 
     }
 
-    public
-    function updateTitle() {
+    public function updateTitle() {
 
     }
 }

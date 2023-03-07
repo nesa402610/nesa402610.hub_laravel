@@ -102,6 +102,7 @@ export interface ICollection {
   episode_time: number
   censure: boolean
   tags: { name: string }[]
+  links: {link: string}[]
   image: string
   announce_date: string
   release_date: string

@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::prefix('NULL')->group(function () {
         Route::post('/', [HCollectionController::class, 'getAllTitles']);
         Route::patch('/update', [HCollectionController::class, 'updateTitle']);
+        Route::patch('/add', [HCollectionController::class, 'addTitle']);
         Route::put('/passkey', [HCollectionController::class, 'generatePasskey']);
         Route::post('/passkey/validate', [HCollectionController::class, 'validatePasskey']);
         Route::get('/passkeys', [HCollectionController::class, 'getAllPasskeys']);

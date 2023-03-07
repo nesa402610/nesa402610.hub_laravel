@@ -12,4 +12,7 @@ class HCollection extends Model
     public function tags() {
         return $this->belongsToMany(Tags::class, 'tag_collection', 'collection_id', 'tag_id')->select(['name']);
     }
+    public function links() {
+        return $this->hasMany(HLinks::class, 'collection_id')->select('link');
+    }
 }
