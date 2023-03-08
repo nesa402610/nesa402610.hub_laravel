@@ -6,16 +6,11 @@ import Loader from "../Loader";
 
 interface CollectionProps {
   passkey: string
+  collection: ICollection[]
 }
 
-const Collection: FC<CollectionProps> = ({passkey}) => {
-  const [trigger, {data: collection, isLoading, error}] = useLazyGetCollectionQuery()
+const Collection: FC<CollectionProps> = ({passkey, collection}) => {
 
-  useEffect(() => {
-    if (passkey.length === 18) {
-      trigger(passkey)
-    }
-  }, [passkey]);
   if (!collection) return <Loader/>
   return (
     <>

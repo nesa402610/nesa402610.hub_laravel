@@ -16,7 +16,11 @@ const HCollection: FC = () => {
       localStorage.setItem('passkey', passkey)
     }
   }, [collection]);
-
+  useEffect(() => {
+    if (passkey.length === 18) {
+      trigger(passkey)
+    }
+  }, [passkey]);
 
   if (!localStorage.getItem('passkey')) {
     return (
@@ -38,7 +42,7 @@ const HCollection: FC = () => {
         <h3 className={'text-sm text-neutral-500 italic text-end mr-2'}>
           Я не при делах если что. Все данные взяты с открытых источников.
         </h3>
-        <Collection passkey={passkey}/>
+        <Collection passkey={passkey} collection={collection}/>
       </div>
     </div>
   );
