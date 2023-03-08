@@ -58,6 +58,7 @@ class HCollectionController extends Controller {
             return response($collections, 200);
 //            return response(['msg' => 'Ключ рабочий, наслаждайся', 'status' => 'valid', '1' => $exist], 200);
         }
+        return response('Какая-то ошибка');
     }
 
     public function addTitle() {
