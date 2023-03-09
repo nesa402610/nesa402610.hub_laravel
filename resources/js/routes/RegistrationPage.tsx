@@ -37,7 +37,7 @@ const RegistrationPage: FC = () => {
         <div className={'flex flex-col items-center justify-center h-screen'}>
             <div className={'flex flex-col gap-4 bg-neutral-800 p-4 rounded-lg'}>
                 <h3 className={'text-center text-2xl'}>Регистрация</h3>
-                {errors ? <h4 className={'text-center text-rose-400 text-lg'}>Проверьте данные. с ними все впорядке?</h4> : ''}
+                {errors ? <h4 className={'text-center text-rose-400 text-lg'}>Проверьте данные. с ними все в порядке?</h4> : ''}
 
                 <div>
                     <label>Имя</label>
