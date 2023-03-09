@@ -15,7 +15,7 @@ export const hcollectionAPI = createApi({
   endpoints: (builder) => ({
     getCollection: builder.query({
       query: (passkey) => ({
-        url: '/',
+        url: '',
         method: 'POST',
         body: {passkey}
       }),

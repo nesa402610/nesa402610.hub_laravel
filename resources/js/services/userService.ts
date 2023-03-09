@@ -13,7 +13,7 @@ export const userAPI = createApi({
     tagTypes: ['User'],
     endpoints: (builder) => ({
         getUser: builder.query({
-            query: () => `/`,
+            query: () => ``,
             providesTags: ['User']
         }),
         updateProfile: builder.mutation({

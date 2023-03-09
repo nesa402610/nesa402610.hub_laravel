@@ -14,7 +14,7 @@ export const taskAPI = createApi({
     }),
     endpoints: (builder) => ({
         getTasks: builder.query({
-            query: () => '/',
+            query: () => '',
             providesTags: ['Task']
         }),
         addTask: builder.mutation({

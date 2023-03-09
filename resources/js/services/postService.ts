@@ -14,7 +14,7 @@ export const postAPI = createApi({
   tagTypes: ['Post', 'Comment'],
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => `/`,
+      query: () => ``,
       providesTags: ['Post']
     }),
     getPostById: builder.query({
