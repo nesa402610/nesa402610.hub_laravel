@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 interface userProps {
     name: string;
@@ -34,8 +34,8 @@ const RegistrationPage: FC = () => {
         })
     }
     return (
-        <div className={'flex flex-col items-center justify-center'}>
-            <div className={'flex flex-col gap-4 bg-stone-600 p-4 rounded-lg'}>
+        <div className={'flex flex-col items-center justify-center h-screen'}>
+            <div className={'flex flex-col gap-4 bg-neutral-800 p-4 rounded-lg'}>
                 <h3 className={'text-center text-2xl'}>Регистрация</h3>
                 {errors ? <h4 className={'text-center text-rose-400 text-lg'}>Проверьте данные. с ними все впорядке?</h4> : ''}
 
@@ -44,7 +44,7 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Минимальная длинна 2 символа</span> : ''}*/}
                     <input onChange={e => setUser({...user, name: e.target.value})}
                            type={'text'}
-                           className={'bg-stone-700'}
+                           className={'bg-neutral-700'}
                            placeholder={'Элеонор'}/>
                 </div>
                 <div>
@@ -52,7 +52,7 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Проверьте правильность Email</span> : ''}*/}
                     <input onChange={e => setUser({...user, email: e.target.value})}
                            type={'email'}
-                           className={'bg-stone-700'}
+                           className={'bg-neutral-700'}
                            placeholder={'yamero0923@nesa.xyz'}/>
                 </div>
                 <div>
@@ -60,7 +60,7 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Минимальная длинна 8 символов</span> : ''}*/}
                     <input onChange={e => setUser({...user, password: e.target.value})}
                            type={'password'}
-                           className={'bg-stone-700'}
+                           className={'bg-neutral-700'}
                            placeholder={'QWERTY00'}/>
                 </div>
                 <div>
@@ -68,11 +68,14 @@ const RegistrationPage: FC = () => {
                     {/*{errors.name ? <span>Пароль должен совпадать</span> : ''}*/}
                     <input onChange={e => setUser({...user, passwordConfirm: e.target.value})}
                            type={'password'}
-                           className={'bg-stone-700'}
+                           className={'bg-neutral-700'}
                            placeholder={'QWERTY00'}/>
                 </div>
+                <div className={'flex justify-end'}>
+                    <Link to={'/login'} className={'text-sm italic text-end text-neutral-300'}>Уже есть аккаунт</Link>
+                </div>
                 <div>
-                    <button className={'w-full bg-stone-500 p-2 rounded-lg'}
+                    <button className={'w-full bg-neutral-700 hover:bg-neutral-900 p-2 rounded-lg'}
                             onClick={e => registrationHandler(e)}>
                         Зарегистрироваться
                     </button>
