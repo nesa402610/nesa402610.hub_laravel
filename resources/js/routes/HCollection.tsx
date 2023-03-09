@@ -1,6 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useLazyGetCollectionQuery} from "../services/HCollectionService";
 import Collection from "../components/collection/Collection";
+import Loader from "../components/Loader";
 
 const HCollection: FC = () => {
   const [trigger, {data: collection, isLoading, error}] = useLazyGetCollectionQuery()
@@ -22,7 +23,7 @@ const HCollection: FC = () => {
     }
   }, [passkey]);
 
-  if (!localStorage.getItem('passkey')) {
+  if (!localStorage.getItem('passkey') && !collection) {
     return (
       <div className={'block--dark flex flex-col m-4'}>
         <h2 className={'text-center font-bold text-lg mb-2'}>Для прохода дальше, требуется ввести ключ доступа</h2>
@@ -35,6 +36,7 @@ const HCollection: FC = () => {
       </div>
     )
   }
+  if (isLoading) return <Loader/>
   return (
     <div className={'m-4'}>
       <div className={'block--dark flex flex-col gap-4 mt-4'}>
@@ -42,7 +44,7 @@ const HCollection: FC = () => {
         <h3 className={'text-sm text-neutral-500 italic text-end mr-2'}>
           Я не при делах если что. Все данные взяты с открытых источников.
         </h3>
-        <Collection passkey={passkey} collection={collection}/>
+        <Collection collection={collection}/>
       </div>
     </div>
   );

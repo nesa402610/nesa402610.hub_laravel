@@ -1,17 +1,14 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {ICollection} from "../../types/types";
-import {useLazyGetCollectionQuery} from "../../services/HCollectionService";
-import Loader from "../Loader";
 
 
 interface CollectionProps {
-  passkey: string
   collection: ICollection[]
 }
 
-const Collection: FC<CollectionProps> = ({passkey, collection}) => {
+const Collection: FC<CollectionProps> = ({ collection}) => {
 
-  if (!collection) return <Loader/>
+  if (!collection) return null
   return (
     <>
       {collection.map((title: ICollection) =>
