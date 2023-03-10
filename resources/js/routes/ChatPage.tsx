@@ -3,6 +3,7 @@ import {IUser} from "../types/types";
 import {Link} from "react-router-dom";
 import {useGetUserQuery} from "../services/userService";
 import {useGetMessagesQuery, useSendMessageMutation} from "../services/chatService";
+import Loader from "../components/Loader";
 
 interface IMessage {
     id: number
@@ -17,7 +18,7 @@ interface IChat {
 
 const ChatPage: FC = () => {
     const [message, setMessage] = useState('');
-    const {data: messages} = useGetMessagesQuery('',
+    const {data: messages, isLoading} = useGetMessagesQuery('',
         {pollingInterval: 15000}
     )
     const [sendMessage, {}] = useSendMessageMutation()
@@ -34,10 +35,11 @@ const ChatPage: FC = () => {
             }, 2000)
         }
     }
+
     return (
         <div className={'ml-4 block--dark flex gap-4 justify-between h-screen sm:flex-col'}>
             <div className={'h-full overflow-auto'}>
-                {messages?.map(msg =>
+                {messages ? messages.map(msg =>
                     <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center xs:flex-col xs:items-start'}>
                         {/*<div className={'w-[40px]'}>*/}
                         {/*    {msg.id}*/}
@@ -54,7 +56,7 @@ const ChatPage: FC = () => {
                             {msg.message}
                         </div>
                     </div>
-                )}
+                ) : <Loader/>}
             </div>
             {isAuth ? <input type="text"
                              onKeyPress={e => sendMessageHandler(e)}
