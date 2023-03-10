@@ -106,7 +106,8 @@ export interface ICollection {
   image: string
   announce_date: string
   release_date: string
-  episodes: number
+  episodes_released: number
+  episodes_total: number
   studio: string
   origins: string
   author: string
