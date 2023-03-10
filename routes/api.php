@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/registration', 'registration');
@@ -35,6 +35,7 @@ Route::get('/blog', [BlogPostController::class, 'getAllPosts']);
 Route::get('/blog/{id}', [BlogPostController::class, 'getPostById']);
 Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
+Route::post('/NULL', [HCollectionController::class, 'getAllTitles']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
@@ -72,7 +73,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/setStatus', [SuggestionController::class, 'setStatus']);
     });
     Route::prefix('NULL')->group(function () {
-        Route::post('/', [HCollectionController::class, 'getAllTitles']);
         Route::patch('/update', [HCollectionController::class, 'updateTitle']);
         Route::patch('/add', [HCollectionController::class, 'addTitle']);
         Route::put('/passkey', [HCollectionController::class, 'generatePasskey']);
