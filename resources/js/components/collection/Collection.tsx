@@ -24,9 +24,9 @@ const Collection: FC<CollectionProps> = ({ collection}) => {
                 <h3 className={'mt-4 font-bold'}>Информация</h3>
                 <div className={'flex flex-col'}>
                   <span>Год выпуска: {title.announce_date}</span>
-                  <span>Жарны: {title.tags.map(tag => tag.name + ' ')}</span>
-                  <span>Эпизоды: {title.episodes}</span>
-                  <span>Длительность серии: {title.episode_time}</span>
+                  <span>Жанры: {title.tags.map(tag => tag.name + ' ')}</span>
+                  <span>Эпизоды: {title.episodes_released}/{title.episodes_total}</span>
+                  <span>Длительность серии: {title.episode_time} мин.</span>
                   <span>Студия: {title.studio}</span>
                   <span>Цензура: {title.censure ? 'С цензурой' : 'Без цензуры'}</span>
                 </div>
