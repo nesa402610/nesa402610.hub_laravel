@@ -12,6 +12,11 @@ export interface IUser {
   created_at?: string
   updated_at?: string
   rates: IRate[]
+  badges: number
+  banner_image: string
+  background_profile_image: string
+  background_site_image: string
+  verified: boolean
 }
 
 interface IRate {
