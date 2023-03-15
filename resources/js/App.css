@@ -5,6 +5,21 @@
 html, body {
   @apply bg-neutral-900 text-neutral-100 h-full
 }
+body:after {
+  left: 0;
+  position: fixed;
+  content: '';
+  background-image: url('img/noiseColor.png');
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background-repeat: repeat;
+  opacity: 0.05;
+  background-size: 10rem;
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
 
 input {
   @apply w-full p-2 bg-neutral-600 focus-visible:outline-neutral-400 focus-visible:outline focus-visible:outline-2 autofill:bg-neutral-600 rounded-lg mt-1
