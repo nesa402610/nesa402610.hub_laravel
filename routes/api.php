@@ -78,5 +78,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::put('/passkey', [HCollectionController::class, 'generatePasskey']);
         Route::post('/passkey/validate', [HCollectionController::class, 'validatePasskey']);
         Route::get('/passkeys', [HCollectionController::class, 'getAllPasskeys']);
+        Route::get('/tags', [HCollectionController::class, 'getAllTags']);
+        Route::put('/tags/add', [HCollectionController::class, 'addTagToCollection']);
+        Route::delete('/tags/delete', [HCollectionController::class, 'deleteTagFromCollection']);
     });
 });
