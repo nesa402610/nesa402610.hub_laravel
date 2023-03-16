@@ -101,7 +101,7 @@ export interface ICollection {
   description_short: string
   episode_time: number
   censure: boolean
-  tags: { name: string }[]
+  tags: ICollectionTag[]
   links: {link: string}[]
   image: string
   announce_date: string
@@ -112,4 +112,8 @@ export interface ICollection {
   origins: string
   author: string
   created_at: string
+}
+export interface ICollectionTag {
+  tag_id?: number
+  name: string
 }
