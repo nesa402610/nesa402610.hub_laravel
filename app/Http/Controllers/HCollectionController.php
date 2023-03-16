@@ -4,12 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\HCollection;
 use App\Models\Passkey;
+use App\Models\Tags;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Mockery\Generator\StringManipulation\Pass\Pass;
-use function PHPUnit\Framework\isEmpty;
-use function PHPUnit\Framework\isNull;
 
 
 class HCollectionController extends Controller {
@@ -21,6 +19,20 @@ class HCollectionController extends Controller {
 //        }
 //        if (count($exist) !== 0) return response(['msg' => 'Ключ рабочий, наслаждайся', 'status' => 'valid', '1' => $exist], 200);
 //    }
+    public function addTagToCollection(Request $request) {
+        $collection = HCollection::find($request->titleId);
+        $collection->tags()->attach($request->tagId);
+    }
+    public function deleteTagFromCollection(Request $request) {
+        $collection = HCollection::find($request->titleId);
+        $collection->tags()->detach($request->tagId);
+    }
+
+    public function getAllTags() {
+        $tags = Tags::all();
+
+        return response($tags, 200);
+    }
 
     public function generatePasskey(Request $request) {
         $model = new Passkey();
