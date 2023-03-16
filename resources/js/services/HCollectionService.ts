@@ -13,6 +13,12 @@ export const hcollectionAPI = createApi({
   }),
   tagTypes: ['Title'],
   endpoints: (builder) => ({
+    getCollectionTags: builder.query({
+      query: () => ({
+        url: '/tags',
+      }),
+      providesTags: ['Title']
+    }),
     getCollection: builder.query({
       query: (passkey) => ({
         url: '',
@@ -20,6 +26,22 @@ export const hcollectionAPI = createApi({
         body: {passkey}
       }),
       providesTags: ['Title']
+    }),
+    addTagToCollection: builder.mutation({
+      query: (data) => ({
+        url: 'tags/add',
+        method: 'PUT',
+        body: data
+      }),
+      invalidatesTags: ['Title']
+    }),
+    removeTag: builder.mutation({
+      query: (data) => ({
+        url: 'tags/delete',
+        method: 'DELETE',
+        body: data
+      }),
+      invalidatesTags: ['Title']
     }),
     addTitle: builder.mutation({
       query: (data) => ({
@@ -50,5 +72,8 @@ export const hcollectionAPI = createApi({
 
 export const {
   useLazyGetCollectionQuery,
-  useGetCollectionQuery
+  useGetCollectionQuery,
+  useGetCollectionTagsQuery,
+  useAddTagToCollectionMutation,
+  useRemoveTagMutation
 } = hcollectionAPI
