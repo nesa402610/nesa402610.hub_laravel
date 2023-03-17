@@ -7,7 +7,7 @@ use App\Http\Controllers\HCollectionController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Middleware\AdminProof;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/edit/password', [UserController::class, 'updatePassword']);
         Route::post('/edit/email', [UserController::class, 'updateEmail']);
     });
-    Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->middleware(AdminProof::class)->group(function () {
         Route::post('/createProject', [ProjectController::class, 'createProject']);
         Route::get('/editProject/{id}', [ProjectController::class, 'editProject']);
         Route::patch('/updateProject/{id}', [ProjectController::class, 'updateProject']);
@@ -61,25 +61,28 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::patch('update', [BlogPostController::class, 'editComment']);
             Route::delete('delete', [BlogPostController::class, 'deleteComment']);
         });
-        Route::put('/create', [BlogPostController::class, 'createPost']);
-        Route::delete('/delete', [BlogPostController::class, 'deletePost']);
-        Route::patch('/visibility', [BlogPostController::class, 'visibility']);
-        Route::patch('/update', [BlogPostController::class, 'updatePost']);
-
+        Route::middleware([AdminProof::class])->group(function () {
+            Route::put('/create', [BlogPostController::class, 'createPost']);
+            Route::delete('/delete', [BlogPostController::class, 'deletePost']);
+            Route::patch('/visibility', [BlogPostController::class, 'visibility']);
+            Route::patch('/update', [BlogPostController::class, 'updatePost']);
+        });
     });
     Route::prefix('suggestions')->group(function () {
         Route::post('/add', [SuggestionController::class, 'createSuggestion']);
         Route::post('/update', [SuggestionController::class, 'updateSuggestion']);
-        Route::post('/setStatus', [SuggestionController::class, 'setStatus']);
+        Route::post('/setStatus', [SuggestionController::class, 'setStatus'])->middleware(AdminProof::class);
     });
     Route::prefix('NULL')->group(function () {
-        Route::patch('/update', [HCollectionController::class, 'updateTitle']);
-        Route::patch('/add', [HCollectionController::class, 'addTitle']);
-        Route::put('/passkey', [HCollectionController::class, 'generatePasskey']);
+        Route::middleware([AdminProof::class])->group(function () {
+            Route::patch('/update', [HCollectionController::class, 'updateTitle']);
+            Route::patch('/add', [HCollectionController::class, 'addTitle']);
+            Route::put('/passkey', [HCollectionController::class, 'generatePasskey']);
+            Route::get('/passkeys', [HCollectionController::class, 'getAllPasskeys']);
+            Route::get('/tags', [HCollectionController::class, 'getAllTags']);
+            Route::put('/tags/add', [HCollectionController::class, 'addTagToCollection']);
+            Route::delete('/tags/delete', [HCollectionController::class, 'deleteTagFromCollection']);
+        });
         Route::post('/passkey/validate', [HCollectionController::class, 'validatePasskey']);
-        Route::get('/passkeys', [HCollectionController::class, 'getAllPasskeys']);
-        Route::get('/tags', [HCollectionController::class, 'getAllTags']);
-        Route::put('/tags/add', [HCollectionController::class, 'addTagToCollection']);
-        Route::delete('/tags/delete', [HCollectionController::class, 'deleteTagFromCollection']);
     });
 });
