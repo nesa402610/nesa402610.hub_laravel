@@ -16,10 +16,10 @@ import SuggestionsPage from "./SuggestionsPage";
 import MiniApps from "./miniApps/index";
 import TimerApp from "./miniApps/Timer/App";
 import {useGetUserQuery} from "../services/userService";
-import HCollection from "./HCollection";
+import HCollectionPage from "./HCollectionPage";
 
 const Index: FC = () => {
-  const {data: user, error, isLoading} = useGetUserQuery('');
+  const {data: user} = useGetUserQuery('');
   return (
     <div className={'ml-[80px]'}>
       <Routes>
@@ -41,7 +41,7 @@ const Index: FC = () => {
         <Route path={'/mini-apps'} element={<MiniApps/>}>
           <Route path={'timer'} element={<TimerApp/>}/>
         </Route>
-        <Route path={'NULL'} element={<HCollection/>}/>
+        <Route path={'NULL'} element={<HCollectionPage/>}/>
       </Routes>
 
     </div>
