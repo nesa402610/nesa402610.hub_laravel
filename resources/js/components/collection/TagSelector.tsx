@@ -8,20 +8,21 @@ interface TagSelectorProps {
 }
 
 const TagSelector: FC<TagSelectorProps> = ({collection}) => {
-  const {data: tags} = useGetCollectionTagsQuery('')
+  const {data: tags, isLoading} = useGetCollectionTagsQuery('')
   const [addTag, {}] = useAddTagToCollectionMutation()
   const [freeTags, setFreeTags] = useState<ICollectionTag[]>([]);
 
   useEffect(() => {
+    if (!tags) return
     const itemTags = collection.tags
-    const freeTags = tags?.filter(tag => !itemTags?.map(itemTag => itemTag.name).includes(tag.name))
+    const freeTags = tags.filter(tag => !itemTags.map(itemTag => itemTag.name).includes(tag.name))
     setFreeTags(freeTags)
   }, [tags, collection]);
 
   const addTagHandler = (titleId, tagId) => {
     addTag({titleId, tagId})
   }
-  if (!freeTags) return <Loader/>
+  if (isLoading) return <Loader/>
   return (
     <>
       {freeTags.map((tag: {id: number, name: string}) =>
