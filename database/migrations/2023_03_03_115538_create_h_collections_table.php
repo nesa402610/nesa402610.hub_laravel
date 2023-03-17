@@ -30,7 +30,6 @@ return new class extends Migration
             $table->date('release_date');
             $table->integer('episodes_released')->default(1);
             $table->integer('episodes_total')->default(2);
-            $table->char('studio');
             $table->string('origins')->nullable();
             $table->string('author')->nullable();
             $table->string('review', 2000)->nullable();
