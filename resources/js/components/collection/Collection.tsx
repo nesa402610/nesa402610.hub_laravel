@@ -30,7 +30,7 @@ const Collection: FC<CollectionProps> = ({collection}) => {
               <span className={'flex gap-1'}>Жанры:
                     <div className={'flex gap-1 flex-wrap'}>
                       <CollectionTags collection={collection}/>
-                      {user.id === 1 &&
+                      {user?.id === 1 &&
                         <div onClick={() => setTagDropDown(prev => !prev)}
                              className={'bg-neutral-800 px-2 rounded-full relative'}>
                           +
