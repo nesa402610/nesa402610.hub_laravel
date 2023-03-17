@@ -7,7 +7,7 @@ import {ICollection} from "../types/types";
 const HCollectionPage: FC = () => {
   const [trigger, {data: collection, isLoading, error}] = useLazyGetCollectionQuery()
   const [passkey, setPasskey] = useState('');
-  const [filteredCollection, setFilteredCollection] = useState<ICollection[]>([]);
+  const [filteredCollection, setFilteredCollection] = useState<ICollection[]>(null);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
@@ -32,8 +32,8 @@ const HCollectionPage: FC = () => {
       trigger(passkey)
     }
   }, [passkey]);
-
-  if (!localStorage.getItem('passkey') && !collection) {
+  if (isLoading) return <Loader/>
+  if (!filteredCollection || !localStorage.getItem('passkey')) {
     return (
       <div className={'block--dark flex flex-col m-4'}>
         <h2 className={'text-center font-bold text-lg mb-2'}>Для прохода дальше, требуется ввести ключ доступа</h2>
@@ -46,7 +46,7 @@ const HCollectionPage: FC = () => {
       </div>
     )
   }
-  if (isLoading) return <Loader/>
+
 
   return (
     <div className={'m-4'}>
