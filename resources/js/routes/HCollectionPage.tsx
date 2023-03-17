@@ -2,10 +2,20 @@ import React, {FC, useEffect, useState} from 'react';
 import {useLazyGetCollectionQuery} from "../services/HCollectionService";
 import Collection from "../components/collection/Collection";
 import Loader from "../components/Loader";
+import {ICollection} from "../types/types";
 
-const HCollection: FC = () => {
+const HCollectionPage: FC = () => {
   const [trigger, {data: collection, isLoading, error}] = useLazyGetCollectionQuery()
   const [passkey, setPasskey] = useState('');
+  const [filteredCollection, setFilteredCollection] = useState<ICollection[]>([]);
+  const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    if (!collection) return;
+    const filtered = collection.filter(c => c.title_ru.toLowerCase().includes(filter.toLowerCase()))
+    setFilteredCollection(filtered)
+  }, [filter, collection]);
+
   useEffect(() => {
     if (localStorage.getItem('passkey')) {
       setPasskey(localStorage.getItem('passkey'))
@@ -32,11 +42,12 @@ const HCollection: FC = () => {
                onChange={e => setPasskey(e.target.value)}
                placeholder={'Ключ доступа...'}
                maxLength={18}/>
-        <span className={'mt-2 text-red-500'}>{error && error.data.msg}</span>
+        <span className={'mt-2 text-red-500'}>{error && 'Кажется.... Ключ не подошел?'}</span>
       </div>
     )
   }
   if (isLoading) return <Loader/>
+
   return (
     <div className={'m-4'}>
       <div className={'block--dark flex flex-col gap-4 mt-4'}>
@@ -44,10 +55,14 @@ const HCollection: FC = () => {
         <h3 className={'text-sm text-neutral-500 italic text-end mr-2'}>
           Я не при делах если что. Все данные взяты с открытых источников.
         </h3>
-        <Collection collection={collection}/>
+        <div>
+          <input type="text" value={filter} onChange={e => setFilter(e.target.value)}/>
+        </div>
+        {filteredCollection.map(collectionItem => <Collection key={collectionItem.id}
+                                                                                    collection={collectionItem}/>)}
       </div>
     </div>
   );
 };
 
-export default HCollection;
+export default HCollectionPage;
