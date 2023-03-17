@@ -29,7 +29,7 @@ class HCollectionController extends Controller {
     }
 
     public function getAllTags() {
-        $tags = Tags::all();
+        $tags = Tags::orderBy('name', 'asc')->get();
 
         return response($tags, 200);
     }
