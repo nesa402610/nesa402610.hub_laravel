@@ -42,7 +42,7 @@ const HCollectionPage: FC = () => {
                onChange={e => setPasskey(e.target.value)}
                placeholder={'Ключ доступа...'}
                maxLength={18}/>
-        <span className={'mt-2 text-red-500'}>{error && 'Кажется.... Ключ не подошел?'}</span>
+        <span className={'mt-2 text-red-500'}>{error && 'Кажется.... Ключ не подошел? А может ошибка сервера?'}</span>
       </div>
     )
   }
