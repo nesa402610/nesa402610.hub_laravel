@@ -108,12 +108,16 @@ export interface ICollection {
   release_date: string
   episodes_released: number
   episodes_total: number
-  studio: string
+  studios: ICollectionStudio[]
   origins: string
   author: string
   created_at: string
 }
 export interface ICollectionTag {
   tag_id?: number
+  name: string
+}
+export interface ICollectionStudio {
+  id: number
   name: string
 }

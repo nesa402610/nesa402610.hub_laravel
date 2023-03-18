@@ -45,7 +45,7 @@ const Collection: FC<CollectionProps> = ({collection}) => {
                   </span>
               <span>Эпизоды: {collection.episodes_released}/{collection.episodes_total}</span>
               <span>Длительность серии: {collection.episode_time} мин.</span>
-              <span>Студия: {collection.studio}</span>
+              <span>Студия: {collection.studios.map(studio => studio.name)}</span>
               <span>Цензура: {collection.censure ? 'С цензурой' : 'Без цензуры'}</span>
             </div>
             <h3 className={'mt-4 font-bold'}>Описание</h3>

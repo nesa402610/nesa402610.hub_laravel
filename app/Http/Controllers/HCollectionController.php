@@ -64,6 +64,7 @@ class HCollectionController extends Controller {
             foreach ($collections as $collection) {
                 $collection->tags->makeHidden('pivot');
                 $collection->links->makeHidden('pivot');
+                $collection->studios->makeHidden('pivot');
 //            foreach ($collection->tags as $tag) {
 //            }
             }

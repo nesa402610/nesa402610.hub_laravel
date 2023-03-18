@@ -58,7 +58,9 @@ use Illuminate\Database\Eloquent\Model;
 class HCollection extends Model
 {
     use HasFactory;
-
+    public function studios() {
+        return $this->belongsToMany(Studios::class, 'studio_collection', 'collection_id', 'studio_id');
+    }
     public function tags() {
         return $this->belongsToMany(Tags::class, 'tag_collection', 'collection_id', 'tag_id')->select(['tag_id', 'name']);
     }
