@@ -1,8 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
-import {useLazyGetCollectionQuery} from "../services/HCollectionService";
-import Collection from "../components/collection/Collection";
-import Loader from "../components/Loader";
-import {ICollection} from "../types/types";
+import React, {FC, useEffect, useState} from "react";
+import {ICollection} from "../../types/types";
+import {useLazyGetCollectionQuery} from "../../services/HCollectionService";
+import Collection from "../../components/collection/Collection";
+import Loader from "../../components/Loader";
+import {Link} from "react-router-dom";
+
 
 const HCollectionPage: FC = () => {
   const [trigger, {data: collection, isLoading, error}] = useLazyGetCollectionQuery()
@@ -58,8 +60,12 @@ const HCollectionPage: FC = () => {
         <div>
           <input type="text" value={filter} onChange={e => setFilter(e.target.value)}/>
         </div>
-        {filteredCollection.map(collectionItem => <Collection key={collectionItem.id}
-                                                                                    collection={collectionItem}/>)}
+        {filteredCollection.map(collectionItem =>
+          <Link to={`${collectionItem.id}`}>
+            <Collection key={collectionItem.id}
+                        collection={collectionItem}/>
+          </Link>
+        )}
       </div>
     </div>
   );

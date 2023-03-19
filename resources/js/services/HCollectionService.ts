@@ -27,6 +27,13 @@ export const hcollectionAPI = createApi({
       }),
       providesTags: ['Title']
     }),
+    getCollectionById: builder.query({
+      query: ({id, passkey}) => ({
+        url: `${id}`,
+        method: 'POST',
+        body: {passkey, id}
+      }),
+    }),
     addTagToCollection: builder.mutation({
       query: (data) => ({
         url: 'tags/add',
@@ -73,7 +80,9 @@ export const hcollectionAPI = createApi({
 export const {
   useLazyGetCollectionQuery,
   useGetCollectionQuery,
+  useGetCollectionByIdQuery,
   useGetCollectionTagsQuery,
   useAddTagToCollectionMutation,
-  useRemoveTagMutation
+  useRemoveTagMutation,
+  useUpdateTitleMutation
 } = hcollectionAPI
