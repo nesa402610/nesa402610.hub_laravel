@@ -4,6 +4,7 @@ import {useGetUserQuery} from "../../services/userService";
 import TagSelector from "./TagSelector";
 import CollectionTags from "./CollectionTags";
 import CollectionLinks from "./CollectionLinks";
+import EditableSpan from "./EditableSpan";
 
 
 interface CollectionProps {
@@ -17,16 +18,21 @@ const Collection: FC<CollectionProps> = ({collection}) => {
   if (!collection) return null
 
   return (
-    <div key={collection.id} className={'bg-neutral-700 p-4 rounded-lg'}>
+    <div className={'bg-neutral-700 p-4 rounded-lg'}>
       <div className={'flex xs:flex-col md:flex-row gap-4'}>
         <img className={'rounded-lg w-[200px] h-fit self-center'} src={collection.image} alt="Изображение тайтла"/>
         <div className={'flex flex-col'}>
-          <span>{collection.title_ru} / {collection.title_original}</span>
+          <div className={'flex items-center'}>
+            <EditableSpan data={collection} datakey={'title_ru'}/>
+            &nbsp;/&nbsp;
+            <EditableSpan data={collection} datakey={'title_original'}/>
+          </div>
+          {/*<span>{collection.title_ru} / {collection.title_original}</span>*/}
           <CollectionLinks collection={collection}/>
           <div className={'text-neutral-300'}>
             <h3 className={'mt-4 font-bold'}>Информация</h3>
             <div className={'flex flex-col'}>
-              <span>Год выпуска: {collection.announce_date}</span>
+              <span>Год выхода: {collection.announce_date.slice(0, 4)}</span>
               <span className={'flex gap-1'}>Жанры:
                     <div className={'flex gap-1 flex-wrap'}>
                       <CollectionTags collection={collection}/>
@@ -43,8 +49,16 @@ const Collection: FC<CollectionProps> = ({collection}) => {
                         </div>}
                     </div>
                   </span>
-              <span>Эпизоды: {collection.episodes_released}/{collection.episodes_total}</span>
-              <span>Длительность серии: {collection.episode_time} мин.</span>
+              <div className={'flex items-center'}>
+                <h4>Эпизоды:&nbsp;</h4>
+                <EditableSpan data={collection} datakey={'episodes_released'}/>
+                /
+                <EditableSpan data={collection} datakey={'episodes_total'}/>
+              </div>
+              <div className={'flex'}>
+                <h4>Длительность серии:&nbsp;</h4>
+                <EditableSpan data={collection} datakey={'episode_time'}/>&nbsp;мин.
+              </div>
               <span>Студия: {collection.studios.map(studio => studio.name)}</span>
               <span>Цензура: {collection.censure ? 'С цензурой' : 'Без цензуры'}</span>
             </div>
