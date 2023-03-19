@@ -18,6 +18,7 @@ import TimerApp from "./miniApps/Timer/App";
 import {useGetUserQuery} from "../services/userService";
 import HCollectionPage from "./HCollection/HCollectionPage";
 import HCollectionDetailedPage from "./HCollection/HCollectionDetailedPage";
+import UsersPage from "./UsersPage";
 
 const Index: FC = () => {
   const {data: user} = useGetUserQuery('');
@@ -46,6 +47,7 @@ const Index: FC = () => {
           <Route path={''} element={<HCollectionPage/>}/>
           <Route path={':id'} element={<HCollectionDetailedPage/>}/>
         </Route>
+          <Route path={'users'} element={<UsersPage/>}/>
       </Routes>
     </div>
   );

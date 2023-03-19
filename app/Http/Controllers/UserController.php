@@ -57,6 +57,11 @@ class UserController extends Controller {
     public function getUser($username) {
         $user = User::find($username);
 
-        return response($user);
+        return response($user, 200);
+    }
+
+    public function getAllUsers() {
+        $users = User::all();
+        return response($users, 200);
     }
 }

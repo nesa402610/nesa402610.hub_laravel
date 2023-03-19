@@ -37,6 +37,7 @@ Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
 Route::post('/NULL', [HCollectionController::class, 'getAllTitles']);
 Route::post('/NULL/{id}', [HCollectionController::class, 'getTitleById']);
+Route::get('/users', [UserController::class, 'getAllUsers']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {

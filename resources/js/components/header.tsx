@@ -44,6 +44,10 @@ const Header: FC = () => {
               <IoPerson/>
               <span>Обо мне</span>
             </NavLink>
+            <NavLink className={'nav-link whitespace-nowrap'} to={'/users'}>
+              <IoPerson/>
+              <span>Юзеры</span>
+            </NavLink>
             {/*<NavLink className={'nav-link'} to={'/mini-apps'}>*/}
             {/*  <IoGrid/>*/}
             {/*  Apps*/}
