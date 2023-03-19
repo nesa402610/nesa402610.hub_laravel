@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('h_links', function (Blueprint $table) {
+        Schema::create('link_collection', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('collection_id');
             $table->foreign('collection_id')->references('id')->on('h_collections');
-            $table->string('link', 300);
+            $table->unsignedBigInteger('link_id');
+            $table->foreign('link_id')->references('id')->on('h_links');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('h_links');
+        //
     }
 };
