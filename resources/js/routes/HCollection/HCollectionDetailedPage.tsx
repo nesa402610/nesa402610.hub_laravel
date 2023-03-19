@@ -6,6 +6,7 @@ import Loader from "../../components/Loader";
 
 const HCollectionDetailedPage = () => {
   const passkey = localStorage.getItem('passkey')
+  const [autoPlay, setAutoPlay] = useState(JSON.parse(localStorage.getItem('autoplay')) ?? true);
   const {id} = useParams()
   const {data} = useGetCollectionQuery(passkey, {
     selectFromResult: ({data}) => ({
@@ -13,7 +14,12 @@ const HCollectionDetailedPage = () => {
     })
   })
   const [episode, setEpisode] = useState(1);
-
+  const autoplayHandler = () => {
+    setAutoPlay(prev => {
+      localStorage.setItem('autoplay', JSON.stringify(!prev))
+      return !prev
+    })
+  }
   if (!data) return <Loader/>
   return (
     <div className={'m-4 flex flex-col gap-4'}>
@@ -29,12 +35,24 @@ const HCollectionDetailedPage = () => {
                 </div>
               )}
             </div>
-            <div className={'bg-neutral-900 p-4 rounded-lg'}>
-              Не работает
+
+            <div className={'flex gap-4'}>
+              <div className={'p-4 rounded-lg ' + (autoPlay ? 'bg-lime-600' : 'bg-red-800')}
+                   onClick={autoplayHandler}
+              >
+                Автоплей видео
+              </div>
+              <div className={'bg-neutral-900 p-4 rounded-lg'}>
+                Не работает
+              </div>
             </div>
           </div>
           <div className={' flex justify-center'}>
-            <video className={'h-[640px] rounded-lg'} controls autoPlay onLoadStart={e=> e.currentTarget.volume = 0.2} src={data.links[episode - 1].link}/>
+            <video className={'h-[640px] rounded-lg'}
+                   controls
+                   autoPlay={autoPlay}
+                   onLoadStart={e => e.currentTarget.volume = 0.2}
+                   src={data.links[episode - 1].link}/>
           </div>
           {/*{data.link*/}
           {/*<iframe src={data.links[episode - 1]}*/}
