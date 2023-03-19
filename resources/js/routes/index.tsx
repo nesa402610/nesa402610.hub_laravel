@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Route, Routes} from 'react-router-dom';
+import {Outlet, Route, Routes} from 'react-router-dom';
 import HomePage from "./HomePage";
 import RegistrationPage from "./RegistrationPage";
 import LoginPage from "./LoginPage";
@@ -16,7 +16,8 @@ import SuggestionsPage from "./SuggestionsPage";
 import MiniApps from "./miniApps/index";
 import TimerApp from "./miniApps/Timer/App";
 import {useGetUserQuery} from "../services/userService";
-import HCollectionPage from "./HCollectionPage";
+import HCollectionPage from "./HCollection/HCollectionPage";
+import HCollectionDetailedPage from "./HCollection/HCollectionDetailedPage";
 
 const Index: FC = () => {
   const {data: user} = useGetUserQuery('');
@@ -41,9 +42,11 @@ const Index: FC = () => {
         <Route path={'/mini-apps'} element={<MiniApps/>}>
           <Route path={'timer'} element={<TimerApp/>}/>
         </Route>
-        <Route path={'NULL'} element={<HCollectionPage/>}/>
+        <Route path={'NULL'} element={<Outlet/>}>
+          <Route path={''} element={<HCollectionPage/>}/>
+          <Route path={':id'} element={<HCollectionDetailedPage/>}/>
+        </Route>
       </Routes>
-
     </div>
   );
 };
