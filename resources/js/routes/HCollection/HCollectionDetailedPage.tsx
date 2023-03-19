@@ -15,11 +15,10 @@ const HCollectionDetailedPage = () => {
   const [episode, setEpisode] = useState(1);
 
   if (!data) return <Loader/>
-
   return (
     <div className={'m-4 flex flex-col gap-4'}>
       <Collection collection={data}/>
-      {data.links &&
+      {data.links.length !== 0 &&
         <div className={'block--light gap-4 flex flex-col'}>
           <div className={'flex justify-between'}>
             <div className={'flex gap-4'}>
