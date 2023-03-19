@@ -3,7 +3,6 @@ import {ICollection} from "../../types/types";
 import {useGetUserQuery} from "../../services/userService";
 import TagSelector from "./TagSelector";
 import CollectionTags from "./CollectionTags";
-import CollectionLinks from "./CollectionLinks";
 import EditableSpan from "./EditableSpan";
 
 
@@ -27,8 +26,6 @@ const Collection: FC<CollectionProps> = ({collection}) => {
             &nbsp;/&nbsp;
             <EditableSpan data={collection} datakey={'title_original'}/>
           </div>
-          {/*<span>{collection.title_ru} / {collection.title_original}</span>*/}
-          <CollectionLinks collection={collection}/>
           <div className={'text-neutral-300'}>
             <h3 className={'mt-4 font-bold'}>Информация</h3>
             <div className={'flex flex-col'}>

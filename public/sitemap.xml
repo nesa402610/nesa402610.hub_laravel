@@ -30,4 +30,16 @@
         <changefreq>monthly</changefreq>
         <priority>0.2</priority>
     </url>
+    <url>
+        <loc>https://nesa402610.lh1.in/NULL</loc>
+        <lastmod>2022-10-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.2</priority>
+    </url>
+    <url>
+        <loc>https://nesa402610.lh1.in/users</loc>
+        <lastmod>2022-10-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.2</priority>
+    </url>
 </urlset>
