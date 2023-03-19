@@ -23,6 +23,7 @@ class HCollectionController extends Controller {
         $collection = HCollection::find($request->titleId);
         $collection->tags()->attach($request->tagId);
     }
+
     public function deleteTagFromCollection(Request $request) {
         $collection = HCollection::find($request->titleId);
         $collection->tags()->detach($request->tagId);
@@ -74,11 +75,34 @@ class HCollectionController extends Controller {
         return response('Какая-то ошибка');
     }
 
+    public function getTitleById(Request $request, $id) {
+        $exist = Passkey::where('passkey', str_replace(' ', '', $request->passkey))->get();
+        if (count($exist) === 0) {
+            return response(['msg' => 'Ключ не рабочий, наслаждайся', 'status' => count($exist), '1' => $exist, 'key' => str_replace(' ', '', $request->passkey)], 403);
+        }
+        if (count($exist) !== 0) {
+            $collection = HCollection::find($id);
+            $collection->tags->makeHidden('pivot');
+            $collection->links->makeHidden('pivot');
+            $collection->studios->makeHidden('pivot');
+            return response($collection, 200);
+//            return response(['msg' => 'Ключ рабочий, наслаждайся', 'status' => 'valid', '1' => $exist], 200);
+        }
+        return response('Какая-то ошибка');
+    }
+
     public function addTitle() {
 
     }
 
-    public function updateTitle() {
-
+    public function updateTitle(Request $request) {
+        $collection = HCollection::find($request->id);
+        $collection->title_ru = $request->title_ru;
+        $collection->title_original = $request->title_original;
+        $collection->episode_time = $request->episode_time;
+        $collection->episodes_released = $request->episodes_released;
+        $collection->episodes_total = $request->episodes_total;
+        $collection->save();
+        return response($collection, 201);
     }
 }
