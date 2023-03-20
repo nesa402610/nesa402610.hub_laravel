@@ -26,18 +26,18 @@ const HCollectionDetailedPage = () => {
       <Collection collection={data}/>
       {data.links.length !== 0 &&
         <div className={'block--light gap-4 flex flex-col'}>
-          <div className={'flex justify-between'}>
-            <div className={'flex gap-4'}>
+          <div className={'flex gap-4 justify-between md:flex-row xs:flex-col'}>
+            <div className={'md:flex md:gap-4 xs:gap-2 gap-2 md:flex-nowrap xs:flex-wrap xs:grid xs:grid-cols-3'}>
               {data.links.map((link, index) =>
-                <div onClick={() => setEpisode(index + 1)}
-                     className={'flex p-4 rounded-lg ' + (episode === index + 1 ? 'bg-neutral-900' : 'bg-neutral-800')}>
+                <div key={link.id} onClick={() => setEpisode(index + 1)}
+                     className={'flex whitespace-nowrap xs:basis-1/4 xs:flex-1 md:p-4 xs:p-2 rounded-lg ' + (episode === index + 1 ? 'bg-neutral-900' : 'bg-neutral-800')}>
                   Серия {index + 1}
                 </div>
               )}
             </div>
 
             <div className={'flex gap-4'}>
-              <div className={'p-4 rounded-lg ' + (autoPlay ? 'bg-lime-600' : 'bg-red-800')}
+              <div className={'md:p-4 p-2 rounded-lg flex items-center ' + (autoPlay ? 'bg-lime-600' : 'bg-red-800')}
                    onClick={autoplayHandler}
               >
                 Автоплей видео
@@ -47,8 +47,8 @@ const HCollectionDetailedPage = () => {
               </div>
             </div>
           </div>
-          <div className={' flex justify-center'}>
-            <video className={'h-[640px] rounded-lg'}
+          <div className={'flex justify-center'}>
+            <video className={'md:h-[640px] rounded-lg h-auto'}
                    controls
                    autoPlay={autoPlay}
                    onLoadStart={e => e.currentTarget.volume = 0.2}

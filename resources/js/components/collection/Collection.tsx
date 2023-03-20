@@ -21,16 +21,16 @@ const Collection: FC<CollectionProps> = ({collection}) => {
       <div className={'flex xs:flex-col md:flex-row gap-4'}>
         <img className={'rounded-lg w-[200px] h-fit self-center'} src={collection.image} alt="Изображение тайтла"/>
         <div className={'flex flex-col'}>
-          <div className={'flex items-center'}>
+          <div className={'flex items-center flex-wrap'}>
             <EditableSpan data={collection} datakey={'title_ru'}/>
-            &nbsp;/&nbsp;
+            <span>&nbsp;/&nbsp;</span>
             <EditableSpan data={collection} datakey={'title_original'}/>
           </div>
           <div className={'text-neutral-300'}>
             <h3 className={'mt-4 font-bold'}>Информация</h3>
             <div className={'flex flex-col'}>
               <span>Год выхода: {collection.announce_date.slice(0, 4)}</span>
-              <span className={'flex gap-1'}>Жанры:
+              <span className={'flex gap-1 md:flex-nowrap xs:flex-wrap'}>Жанры:
                     <div className={'flex gap-1 flex-wrap'}>
                       <CollectionTags collection={collection}/>
                       {user?.id === 1 &&
