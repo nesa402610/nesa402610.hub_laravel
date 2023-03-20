@@ -19,6 +19,7 @@ import {useGetUserQuery} from "../services/userService";
 import HCollectionPage from "./HCollection/HCollectionPage";
 import HCollectionDetailedPage from "./HCollection/HCollectionDetailedPage";
 import UsersPage from "./UsersPage";
+import NotFound from "./errors/NotFound";
 
 const Index: FC = () => {
   const {data: user} = useGetUserQuery('');
@@ -47,7 +48,8 @@ const Index: FC = () => {
           <Route path={''} element={<HCollectionPage/>}/>
           <Route path={':id'} element={<HCollectionDetailedPage/>}/>
         </Route>
-          <Route path={'users'} element={<UsersPage/>}/>
+        <Route path={'users'} element={<UsersPage/>}/>
+        <Route path={'*'} element={<NotFound/>}/>
       </Routes>
     </div>
   );
