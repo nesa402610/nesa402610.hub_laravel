@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import {useParams} from "react-router";
 import {useGetCollectionQuery} from "../../services/HCollectionService";
-import Collection from "../../components/collection/Collection";
+import HCollectionCard from "../../components/HCollection/HCollectionCard";
 import Loader from "../../components/Loader";
 
-const HCollectionDetailedPage = () => {
+const HAnimeDetailedPage = () => {
   const passkey = localStorage.getItem('passkey')
   const [autoPlay, setAutoPlay] = useState(JSON.parse(localStorage.getItem('autoplay')) ?? true);
   const {id} = useParams()
-  const {data} = useGetCollectionQuery(passkey, {
+  const {data} = useGetCollectionQuery({passkey}, {
     selectFromResult: ({data}) => ({
-      data: data?.find(d => d.id == id),
+      data: data?.data.find(d => d.id == id),
     })
   })
   const [episode, setEpisode] = useState(1);
@@ -23,7 +23,7 @@ const HCollectionDetailedPage = () => {
   if (!data) return <Loader/>
   return (
     <div className={'m-4 flex flex-col gap-4'}>
-      <Collection collection={data}/>
+      <HCollectionCard collection={data}/>
       {data.links.length !== 0 &&
         <div className={'block--light gap-4 flex flex-col'}>
           <div className={'flex gap-4 justify-between md:flex-row xs:flex-col'}>
@@ -68,4 +68,4 @@ const HCollectionDetailedPage = () => {
   );
 };
 
-export default HCollectionDetailedPage;
+export default HAnimeDetailedPage;
