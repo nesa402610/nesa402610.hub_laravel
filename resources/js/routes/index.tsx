@@ -16,10 +16,11 @@ import SuggestionsPage from "./SuggestionsPage";
 import MiniApps from "./miniApps/index";
 import TimerApp from "./miniApps/Timer/App";
 import {useGetUserQuery} from "../services/userService";
-import HCollectionPage from "./HCollection/HCollectionPage";
-import HCollectionDetailedPage from "./HCollection/HCollectionDetailedPage";
+import HAnimePage from "./HAnime/HAnimePage";
+import HAnimeDetailedPage from "./HAnime/HAnimeDetailedPage";
 import UsersPage from "./UsersPage";
 import NotFound from "./errors/NotFound";
+import HMangaDetailedPage from "./HManga/HMangaDetailedPage";
 
 const Index: FC = () => {
   const {data: user} = useGetUserQuery('');
@@ -45,8 +46,9 @@ const Index: FC = () => {
           <Route path={'timer'} element={<TimerApp/>}/>
         </Route>
         <Route path={'NULL'} element={<Outlet/>}>
-          <Route path={''} element={<HCollectionPage/>}/>
-          <Route path={':id'} element={<HCollectionDetailedPage/>}/>
+          <Route path={''} element={<HAnimePage/>}/>
+          <Route path={'a/:id'} element={<HAnimeDetailedPage/>}/>
+          <Route path={'m/:id'} element={<HMangaDetailedPage/>}/>
         </Route>
         <Route path={'users'} element={<UsersPage/>}/>
         <Route path={'*'} element={<NotFound/>}/>
