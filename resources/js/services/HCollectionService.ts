@@ -1,81 +1,81 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 
 const csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
 
 export const hcollectionAPI = createApi({
-  reducerPath: 'hcollectionApi',
+  reducerPath: "hcollectionApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api/NULL',
+    baseUrl: "/api/NULL",
     prepareHeaders: (headers) => {
-      headers.set('X-CSRF-TOKEN', csrf_token)
-      return headers
+      headers.set("X-CSRF-TOKEN", csrf_token);
+      return headers;
     },
   }),
-  tagTypes: ['Title'],
+  tagTypes: ["Title"],
   endpoints: (builder) => ({
     getCollectionTags: builder.query({
       query: () => ({
-        url: '/tags',
+        url: "/tags",
       }),
-      providesTags: ['Title']
+      providesTags: ["Title"]
     }),
     getCollection: builder.query({
-      query: (passkey) => ({
-        url: '',
-        method: 'POST',
-        body: {passkey}
+      query: ({passkey, type = "", page = 1}) => ({
+        url: `?page=${page}`,
+        method: "POST",
+        body: {passkey, type}
       }),
-      providesTags: ['Title']
+      providesTags: ['Title'],
     }),
     getCollectionById: builder.query({
       query: ({id, passkey}) => ({
         url: `${id}`,
-        method: 'POST',
+        method: "POST",
         body: {passkey, id}
       }),
     }),
     addTagToCollection: builder.mutation({
       query: (data) => ({
-        url: 'tags/add',
-        method: 'PUT',
+        url: "tags/add",
+        method: "PUT",
         body: data
       }),
-      invalidatesTags: ['Title']
+      invalidatesTags: ["Title"]
     }),
     removeTag: builder.mutation({
       query: (data) => ({
-        url: 'tags/delete',
-        method: 'DELETE',
+        url: "tags/delete",
+        method: "DELETE",
         body: data
       }),
-      invalidatesTags: ['Title']
+      invalidatesTags: ["Title"]
     }),
     addTitle: builder.mutation({
       query: (data) => ({
-        url: 'create',
-        method: 'PUT',
+        url: "create",
+        method: "PUT",
         body: data
       }),
-      invalidatesTags: ['Title']
+      invalidatesTags: ["Title"]
     }),
     updateTitle: builder.mutation({
       query: (data) => ({
-        url: 'update',
-        method: 'PATCH',
+        url: "update",
+        method: "PATCH",
         body: data
       }),
-      invalidatesTags: ['Title']
+      invalidatesTags: ["Title"]
     }),
     deleteTitle: builder.mutation({
       query: (id) => ({
-        url: 'delete',
-        method: 'DELETE',
+        url: "delete",
+        method: "DELETE",
         body: {id}
       }),
-      invalidatesTags: ['Title']
+      invalidatesTags: ["Title"]
     }),
   }),
-})
+});
 
 export const {
   useLazyGetCollectionQuery,
@@ -85,4 +85,4 @@ export const {
   useAddTagToCollectionMutation,
   useRemoveTagMutation,
   useUpdateTitleMutation
-} = hcollectionAPI
+} = hcollectionAPI;
