@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\HCollection;
+use App\Models\HManga;
 use App\Models\Passkey;
 use App\Models\Tags;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -53,33 +55,40 @@ class HCollectionController extends Controller {
         }
     }
 
+    public function getAllMangas(Request $request) {
+        $exist = $this->checkPasskey($request);
+
+    }
 
     public function getAllTitles(Request $request) {
-        $exist = Passkey::where('passkey', str_replace(' ', '', $request->passkey))->get();
-//        return response(['empty' => count($exist) === 0, 'cols'=>$exist]);
-        if (count($exist) === 0) {
-            return response(['msg' => 'Ключ не рабочий, наслаждайся', 'status' => count($exist), '1' => $exist, 'key' => str_replace(' ', '', $request->passkey)], 403);
-        }
+        $exist = $this->checkPasskey($request);
         if (count($exist) !== 0) {
-            $collections = HCollection::all();
-            foreach ($collections as $collection) {
-                $collection->tags->makeHidden('pivot');
-                $collection->links->makeHidden('pivot');
-                $collection->studios->makeHidden('pivot');
-//            foreach ($collection->tags as $tag) {
-//            }
+            if ($request->type === 'manga') {
+                $collections = HManga::paginate(20);
+                foreach ($collections as $collection) {
+//                    $collection->tags->makeHidden('pivot');
+                    $collection->type = 'manga';
+//                    $collection->links->makeHidden('pivot');
+//                    $collection->studios->makeHidden('pivot');
+                }
+            }
+            if ($request->type === 'anime' || !$request->type) {
+                $collections = HCollection::paginate(20);
+                foreach ($collections as $collection) {
+                    $collection->tags->makeHidden('pivot');
+                    $collection->type = 'anime';
+                    $collection->links->makeHidden('pivot');
+                    $collection->studios->makeHidden('pivot');
+                }
             }
             return response($collections, 200);
-//            return response(['msg' => 'Ключ рабочий, наслаждайся', 'status' => 'valid', '1' => $exist], 200);
         }
         return response('Какая-то ошибка');
     }
 
     public function getTitleById(Request $request, $id) {
-        $exist = Passkey::where('passkey', str_replace(' ', '', $request->passkey))->get();
-        if (count($exist) === 0) {
-            return response(['msg' => 'Ключ не рабочий, наслаждайся', 'status' => count($exist), '1' => $exist, 'key' => str_replace(' ', '', $request->passkey)], 403);
-        }
+        $exist = $this->checkPasskey($request);
+
         if (count($exist) !== 0) {
             $collection = HCollection::find($id);
             $collection->tags->makeHidden('pivot');
@@ -104,5 +113,14 @@ class HCollectionController extends Controller {
         $collection->episodes_total = $request->episodes_total;
         $collection->save();
         return response($collection, 201);
+    }
+
+    public function checkPasskey(Request $request) {
+        $exist = Passkey::where('passkey', str_replace(' ', '', $request->passkey))->get();
+
+        if (count($exist) === 0) {
+            return response(['msg' => 'Ключ не рабочий. Ключ можно получить только через меня или спроси у друга, пока я не пофиксил доступ'], 403);
+        }
+        return $exist;
     }
 }
