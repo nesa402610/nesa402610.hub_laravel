@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react';
 import {ICollection} from "../../types/types";
 import {useGetUserQuery} from "../../services/userService";
 import TagSelector from "./TagSelector";
-import CollectionTags from "./CollectionTags";
+import HCollectionTags from "./HCollectionTags";
 import EditableSpan from "./EditableSpan";
 
 
@@ -10,7 +10,7 @@ interface CollectionProps {
   collection: ICollection
 }
 
-const Collection: FC<CollectionProps> = ({collection}) => {
+const HCollectionDetailed: FC<CollectionProps> = ({collection}) => {
   const {data: user} = useGetUserQuery('')
   const [tagDropDown, setTagDropDown] = useState(false);
 
@@ -32,7 +32,7 @@ const Collection: FC<CollectionProps> = ({collection}) => {
               <span>Год выхода: {collection.announce_date.slice(0, 4)}</span>
               <span className={'flex gap-1 md:flex-nowrap xs:flex-wrap'}>Жанры:
                     <div className={'flex gap-1 flex-wrap'}>
-                      <CollectionTags collection={collection}/>
+                      <HCollectionTags collection={collection}/>
                       {user?.id === 1 &&
                         <div onClick={() => setTagDropDown(prev => !prev)}
                              className={'bg-neutral-800 px-2 rounded-full relative'}>
@@ -56,7 +56,7 @@ const Collection: FC<CollectionProps> = ({collection}) => {
                 <h4>Длительность серии:&nbsp;</h4>
                 <EditableSpan data={collection} datakey={'episode_time'}/>&nbsp;мин.
               </div>
-              <span>Студия: {collection.studios.map(studio => studio.name)}</span>
+              {collection.studios && <span>Студия: {collection.studios.map(studio => studio.name)}</span>}
               <span>Цензура: {collection.censure ? 'С цензурой' : 'Без цензуры'}</span>
             </div>
             <h3 className={'mt-4 font-bold'}>Описание</h3>
@@ -68,4 +68,4 @@ const Collection: FC<CollectionProps> = ({collection}) => {
   );
 };
 
-export default Collection;
+export default HCollectionDetailed;
