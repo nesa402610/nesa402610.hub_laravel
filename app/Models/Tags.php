@@ -27,6 +27,6 @@ class Tags extends Model
     use HasFactory;
 
 //    public function collections() {
-//        return $this->belongsToMany(Collection::class, 'tag_collection', 'tag_id');
+//        return $this->belongsToMany(HCollectionCard::class, 'tag_collection', 'tag_id');
 //    }
 }

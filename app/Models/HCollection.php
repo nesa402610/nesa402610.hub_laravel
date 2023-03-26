@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\HCollection
+ * App\Models\HAnime
  *
  * @property int $id
  * @property string|null $title_ru
