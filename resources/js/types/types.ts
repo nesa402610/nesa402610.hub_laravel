@@ -93,6 +93,7 @@ export interface ITask {
 }
 
 export interface ICollection {
+  type: 'anime' | 'manga'
   id: number
   title_ru: string
   title_en: string
