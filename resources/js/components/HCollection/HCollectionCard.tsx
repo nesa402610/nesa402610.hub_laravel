@@ -16,7 +16,6 @@ const HCollectionCard: FC<CollectionProps> = ({collection}) => {
   const [tagDropDown, setTagDropDown] = useState(false);
 
   if (!collection) return null;
-
   return (
     <div className={"bg-neutral-700 p-4 rounded-lg"}>
       <div className={"flex xs:flex-col md:flex-row gap-4"}>
@@ -53,16 +52,16 @@ const HCollectionCard: FC<CollectionProps> = ({collection}) => {
                         </div>}
                     </div>
                   </span>
-              <div className={"flex items-center"}>
+              {collection.episodes_released && <div className={"flex items-center"}>
                 <h4>Эпизоды:&nbsp;</h4>
                 <EditableSpan data={collection} datakey={"episodes_released"}/>
                 /
                 <EditableSpan data={collection} datakey={"episodes_total"}/>
-              </div>
-              <div className={"flex"}>
+              </div>}
+              {collection.episode_time && <div className={"flex"}>
                 <h4>Длительность серии:&nbsp;</h4>
                 <EditableSpan data={collection} datakey={"episode_time"}/>&nbsp;мин.
-              </div>
+              </div>}
               {collection.studios && <span>Студия: {collection.studios.map(studio => studio.name)}</span>}
               <span>Цензура: {collection.censure ? "С цензурой" : "Без цензуры"}</span>
             </div>

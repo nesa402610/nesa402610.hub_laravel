@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from "react";
 import {useGetUserQuery} from "../../services/userService";
 import {useUpdateTitleMutation} from "../../services/HCollectionService";
 import {ICollection} from "../../types/types";
@@ -15,6 +15,9 @@ const EditableSpan: FC<EditableSpanProps> = ({data, datakey}) => {
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState(data[datakey]);
 
+  useEffect(() => {
+    setValue(data[datakey])
+  }, [data]);
   const updateValueHandler = () => {
     updateTitle(data)
   }
