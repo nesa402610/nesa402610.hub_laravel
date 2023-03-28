@@ -14,7 +14,7 @@ const CertificatesSection: FC = () => {
     <>
       {isModal &&
         <Modal title={''} closeHandler={setIsModal}>
-          <img className='p-4 max-h-screen' src={image} alt=""/>
+          <img className="p-4 max-h-screen" src={image} alt=""/>
         </Modal>
       }
       <section>
