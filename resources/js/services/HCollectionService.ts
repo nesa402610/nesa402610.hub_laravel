@@ -11,21 +11,29 @@ export const hcollectionAPI = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Title"],
+  tagTypes: ["anime", 'manga'],
   endpoints: (builder) => ({
     getCollectionTags: builder.query({
       query: () => ({
         url: "/tags",
       }),
-      providesTags: ["Title"]
+      providesTags: ['anime']
     }),
-    getCollection: builder.query({
-      query: ({passkey, type = "", page = 1}) => ({
+    getAllAnime: builder.query({
+      query: ({passkey, type = 'anime', page = 1}) => ({
         url: `?page=${page}`,
         method: "POST",
         body: {passkey, type}
       }),
-      providesTags: ['Title'],
+      providesTags: ['anime']
+    }),
+    getAllManga: builder.query({
+      query: ({passkey, type = 'manga', page = 1}) => ({
+        url: `?page=${page}`,
+        method: "POST",
+        body: {passkey, type}
+      }),
+      providesTags: ['manga']
     }),
     getCollectionById: builder.query({
       query: ({id, passkey}) => ({
@@ -40,7 +48,7 @@ export const hcollectionAPI = createApi({
         method: "PUT",
         body: data
       }),
-      invalidatesTags: ["Title"]
+      invalidatesTags: ['anime']
     }),
     removeTag: builder.mutation({
       query: (data) => ({
@@ -48,7 +56,7 @@ export const hcollectionAPI = createApi({
         method: "DELETE",
         body: data
       }),
-      invalidatesTags: ["Title"]
+      invalidatesTags: ['anime']
     }),
     addTitle: builder.mutation({
       query: (data) => ({
@@ -56,7 +64,7 @@ export const hcollectionAPI = createApi({
         method: "PUT",
         body: data
       }),
-      invalidatesTags: ["Title"]
+      invalidatesTags: ['anime']
     }),
     updateTitle: builder.mutation({
       query: (data) => ({
@@ -64,7 +72,7 @@ export const hcollectionAPI = createApi({
         method: "PATCH",
         body: data
       }),
-      invalidatesTags: ["Title"]
+      invalidatesTags: ['anime']
     }),
     deleteTitle: builder.mutation({
       query: (id) => ({
@@ -72,15 +80,16 @@ export const hcollectionAPI = createApi({
         method: "DELETE",
         body: {id}
       }),
-      invalidatesTags: ["Title"]
+      invalidatesTags: ['anime']
     }),
   }),
 });
 
 export const {
-  useLazyGetCollectionQuery,
-  useGetCollectionQuery,
-  useGetCollectionByIdQuery,
+  useLazyGetAllAnimeQuery,
+  useLazyGetAllMangaQuery,
+  useGetAllAnimeQuery,
+  useGetAllMangaQuery,
   useGetCollectionTagsQuery,
   useAddTagToCollectionMutation,
   useRemoveTagMutation,
