@@ -8,7 +8,6 @@ use App\Models\Passkey;
 use App\Models\Tags;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -68,6 +67,7 @@ class HCollectionController extends Controller {
                 foreach ($collections as $collection) {
 //                    $collection->tags->makeHidden('pivot');
                     $collection->type = 'manga';
+                    $collection->pages;
 //                    $collection->links->makeHidden('pivot');
 //                    $collection->studios->makeHidden('pivot');
                 }
@@ -81,7 +81,7 @@ class HCollectionController extends Controller {
                     $collection->studios->makeHidden('pivot');
                 }
             }
-            return response($collections, 200);
+            return response(['collections' => $collections, 'type' => $request->type], 200);
         }
         return response('Какая-то ошибка');
     }
