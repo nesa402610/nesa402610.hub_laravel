@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useParams} from "react-router";
-import {useGetCollectionQuery} from "../../services/HCollectionService";
+import {useGetAllAnimeQuery} from "../../services/HCollectionService";
 import HCollectionCard from "../../components/HCollection/HCollectionCard";
 import Loader from "../../components/Loader";
 
@@ -8,9 +8,9 @@ const HAnimeDetailedPage = () => {
   const passkey = localStorage.getItem('passkey')
   const [autoPlay, setAutoPlay] = useState(JSON.parse(localStorage.getItem('autoplay')) ?? true);
   const {id} = useParams()
-  const {data} = useGetCollectionQuery({passkey}, {
+  const {data} = useGetAllAnimeQuery({passkey}, {
     selectFromResult: ({data}) => ({
-      data: data?.data.find(d => d.id == id),
+      data: data?.collections.data.find(d => d.id == id),
     })
   })
   const [episode, setEpisode] = useState(1);
