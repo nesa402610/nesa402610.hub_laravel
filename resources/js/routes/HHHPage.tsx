@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import HCollectionFilter from "../components/HCollection/HCollectionFilter";
 import Passkey from "./HAnime/Passkey";
 import {useGetCollectionTagsQuery} from "../services/HCollectionService";
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import {Outlet} from "react-router-dom";
 
 export const filterCollection = (collections, filter) => {
   const filteredByTitle = collections?.collections.data.filter(c => c.title_ru.toLowerCase().includes(filter.title.toLowerCase()));
@@ -14,10 +14,7 @@ export const filterCollection = (collections, filter) => {
 const HHHPage = () => {
   const [passkey, setPasskey] = useState("");
   const [error, setError] = useState(null);
-  const location = useLocation();
   const {data: tags, isLoading: tagsLoad} = useGetCollectionTagsQuery("");
-  const [curPage, setCurPage] = useState(1);
-  const navigate = useNavigate();
   const [filter, setFilter] = useState({
     title: "",
     type: "anime",
@@ -43,13 +40,6 @@ const HHHPage = () => {
         <div className={"block--dark flex flex-col -m-4 gap-4"}>
           <HCollectionFilter filter={filter} setFilter={setFilter} tags={tags}/>
           <Outlet context={filter}/>
-          {/*{filter.type === "anime" ?*/}
-          {/*  <HAnimePage setError={setError} setCollections={setCollections} filteredCollection={filteredCollection}/> :*/}
-          {/*  <HMangaPage setCollections={setCollections} filteredCollection={filteredCollection}/>}*/}
-          {/*<Paginator currentPage={curPage}*/}
-          {/*           setCurrentPage={setCurPage}*/}
-          {/*           totalPages={filter.type === "anime" ? anime?.collections.last_page : manga?.collections.last_page}*/}
-          {/*           handler={filter.type === "anime" ? 1 : 2}/>*/}
         </div>
       </div>
     </div>
