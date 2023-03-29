@@ -14,18 +14,17 @@ interface CollectionProps {
 const HCollectionCard: FC<CollectionProps> = ({collection}) => {
   const {data: user} = useGetUserQuery("");
   const [tagDropDown, setTagDropDown] = useState(false);
-
   if (!collection) return null;
   return (
     <div className={"bg-neutral-700 p-4 rounded-lg"}>
       <div className={"flex xs:flex-col md:flex-row gap-4"}>
         <Link className={"contents"}
-              to={`${collection.type === "anime" ? "a" : "m"}/${collection.id}`}>
+              to={`/NULL/${collection.type === "anime" ? "a" : "m"}/${collection.id}`}>
           <img className={"rounded-lg w-[200px] h-fit self-center"}
                src={collection.image}
                alt="Изображение тайтла"/></Link>
         <div className={"flex flex-col"}>
-          <Link to={`${collection.type === "anime" ? "a" : "m"}/${collection.id}`}>
+          <Link to={`/NULL/${collection.type === "anime" ? "a" : "m"}/${collection.id}`}>
             <div className={"flex items-center flex-wrap"}>
               <EditableSpan data={collection} datakey={"title_ru"}/>
               <span>&nbsp;/&nbsp;</span>
