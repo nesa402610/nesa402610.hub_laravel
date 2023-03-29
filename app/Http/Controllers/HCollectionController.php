@@ -63,7 +63,7 @@ class HCollectionController extends Controller {
         $exist = $this->checkPasskey($request);
         if (count($exist) !== 0) {
             if ($request->type === 'manga') {
-                $collections = HManga::paginate(20);
+                $collections = HManga::paginate(5);
                 foreach ($collections as $collection) {
 //                    $collection->tags->makeHidden('pivot');
                     $collection->type = 'manga';
@@ -73,7 +73,7 @@ class HCollectionController extends Controller {
                 }
             }
             if ($request->type === 'anime' || !$request->type) {
-                $collections = HCollection::paginate(20);
+                $collections = HCollection::paginate(5);
                 foreach ($collections as $collection) {
                     $collection->tags->makeHidden('pivot');
                     $collection->type = 'anime';
