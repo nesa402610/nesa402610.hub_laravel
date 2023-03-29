@@ -26,7 +26,7 @@ const ProfilePage = () => {
   }, [username]);
 
   if (!user) return <Loader/>;
-
+  
   return (
     <div className={"p-4"}>
       <div className={"block--light"}>
