@@ -1,5 +1,5 @@
-import React, {FC, useState} from 'react';
-import {NavLink} from 'react-router-dom';
+import React, {FC, useState} from "react";
+import {NavLink} from "react-router-dom";
 
 import MyLinkItem from "./UI/myLinkItem";
 import {IoBookmarks, IoChatbox, IoHome, IoNewspaper, IoPerson} from "react-icons/io5";
@@ -12,39 +12,37 @@ import {GiCentaurHeart} from "react-icons/gi";
 
 const Header: FC = () => {
   const [isModal, setIsModal] = useState<boolean>(false);
-  const {data, error, isLoading} = useGetUserQuery('');
+  const {data, error, isLoading} = useGetUserQuery("");
 
   return (
     <>
-      {isModal &&
-        <Modal title={'Добавление проекта'} closeHandler={() => setIsModal(false)}>
-          <ProjectModal type={'create'} closeModalHandler={() => setIsModal(false)}/>
-        </Modal>
-      }
-      <header className={'bg-neutral-800 w-[80px] fixed z-50 h-full top-0 left-0'}>
-        <div className={'flex flex-col items-center gap-2 justify-between py-4 px-2'}>
+      <Modal title={"Добавление проекта"} isOpen={isModal} onClose={setIsModal}>
+        <ProjectModal type={"create"} closeModalHandler={() => setIsModal(false)}/>
+      </Modal>
+      <header className={"bg-neutral-800 w-[80px] fixed z-50 h-full top-0 left-0"}>
+        <div className={"flex flex-col items-center gap-2 justify-between py-4 px-2"}>
           <nav className="flex flex-col gap-4 lg:basis-auto">
-            <NavLink className={'nav-link'} to='/'>
+            <NavLink className={"nav-link"} to="/">
               <IoHome/>
               Главная
             </NavLink>
-            <NavLink className={'nav-link'} to={'/suggestions'}>
+            <NavLink className={"nav-link"} to={"/suggestions"}>
               <IoBookmarks/>
               Задачи
             </NavLink>
-            <NavLink className={'nav-link'} to={'/blog'}>
+            <NavLink className={"nav-link"} to={"/blog"}>
               <IoNewspaper/>
               Блог
             </NavLink>
-            <NavLink className={'nav-link'} to={'/chat'}>
+            <NavLink className={"nav-link"} to={"/chat"}>
               <IoChatbox/>
               Чат
             </NavLink>
-            <NavLink className={'nav-link whitespace-nowrap'} to={'/about'}>
+            <NavLink className={"nav-link whitespace-nowrap"} to={"/about"}>
               <IoPerson/>
               <span>Обо мне</span>
             </NavLink>
-            <NavLink className={'nav-link whitespace-nowrap'} to={'/users'}>
+            <NavLink className={"nav-link whitespace-nowrap"} to={"/users"}>
               <IoPerson/>
               <span>Юзеры</span>
             </NavLink>
@@ -52,26 +50,26 @@ const Header: FC = () => {
             {/*  <IoGrid/>*/}
             {/*  Apps*/}
             {/*</NavLink>    */}
-            <NavLink className={'nav-link'} to={'/NULL'}>
-              <GiCentaurHeart size={'2rem'}/>
+            <NavLink className={"nav-link"} to={"/NULL"}>
+              <GiCentaurHeart size={"2rem"}/>
             </NavLink>
           </nav>
-          <hr className={'bg-neutral-400 h-[2px]  w-full'}/>
-          <div className={'flex flex-col gap-4 lg:basis-1/3 justify-center items-center'}>
+          <hr className={"bg-neutral-400 h-[2px]  w-full"}/>
+          <div className={"flex flex-col gap-4 lg:basis-1/3 justify-center items-center"}>
             {!data ?
               <>
-                <NavLink className={'nav-link'}
-                         to={'/login'}>Login</NavLink>
-                <NavLink className={'nav-link'}
-                         to={'/registration'}>Registration</NavLink>
+                <NavLink className={"nav-link"}
+                         to={"/login"}>Login</NavLink>
+                <NavLink className={"nav-link"}
+                         to={"/registration"}>Registration</NavLink>
               </>
               :
               <>
-                <NavLink className={'nav-link'}
-                         to={'/profile/' + data.id}>
-                  <img className={'rounded-lg'}
-                       width={'30px'}
-                       height={'30px'}
+                <NavLink className={"nav-link"}
+                         to={"/profile/" + data.id}>
+                  <img className={"rounded-lg"}
+                       width={"30px"}
+                       height={"30px"}
                        src={data.avatar}
                        alt=""/>
                   <span>{data.name}</span>
@@ -80,15 +78,15 @@ const Header: FC = () => {
 
             }
             {data?.id === 1 && <>
-                        <span className={'cursor-pointer flex items-center hover:text-neutral-400 transition-colors'}
+                        <span className={"cursor-pointer flex items-center hover:text-neutral-400 transition-colors"}
                               onClick={() => setIsModal(true)}>+P</span>
-              <NavLink className={'flex items-center hover:text-neutral-400 transition-colors'}
-                       to={'/admin/projects'}>Projects</NavLink>
+              <NavLink className={"flex items-center hover:text-neutral-400 transition-colors"}
+                       to={"/admin/projects"}>Projects</NavLink>
             </>}
           </div>
-          <hr className={'bg-neutral-400 h-[2px]  w-full'}/>
+          <hr className={"bg-neutral-400 h-[2px]  w-full"}/>
 
-          <div className={'flex flex-wrap gap-2 lg:basis-1/3 justify-end'}>
+          <div className={"flex flex-wrap gap-2 lg:basis-1/3 justify-end"}>
             {links.map(link =>
               <MyLinkItem key={link.name} link={link}/>
             )}

@@ -26,7 +26,7 @@ const ProfilePage = () => {
   }, [username]);
 
   if (!user) return <Loader/>;
-  
+
   return (
     <div className={"p-4"}>
       <div className={"block--light"}>
@@ -37,7 +37,7 @@ const ProfilePage = () => {
                  height={"200px"}
                  src={user.avatar}
                  alt="user profile picture"/>
-            {user.id == username && <Link to={"edit"}
+            {String(user.id) === username && <Link to={"edit"}
                                           className={"hover:text-stone-400 transition-colors flex gap-2 text-2xl items-center"}>
               <span className={"text-lg"}>Настройки</span>
               <IoSettingsSharp/>

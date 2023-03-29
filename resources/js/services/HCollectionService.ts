@@ -11,35 +11,35 @@ export const hcollectionAPI = createApi({
       return headers;
     },
   }),
-  tagTypes: ["anime", 'manga'],
+  tagTypes: ["anime", "manga"],
   endpoints: (builder) => ({
     getCollectionTags: builder.query({
       query: () => ({
         url: "/tags",
       }),
-      providesTags: ['anime']
+      providesTags: ["anime"]
     }),
     getAllAnime: builder.query({
-      query: ({passkey, type = 'anime', page = 1}) => ({
+      query: ({passkey, type = "anime", page = 1}) => ({
         url: `?page=${page}`,
         method: "POST",
         body: {passkey, type}
       }),
-      providesTags: ['anime']
+      providesTags: ["anime"]
     }),
     getAllManga: builder.query({
-      query: ({passkey, type = 'manga', page = 1}) => ({
+      query: ({passkey, type = "manga", page = 1}) => ({
         url: `?page=${page}`,
         method: "POST",
         body: {passkey, type}
       }),
-      providesTags: ['manga']
+      providesTags: ["manga"]
     }),
     getCollectionById: builder.query({
-      query: ({id, passkey}) => ({
+      query: ({id, passkey, type = 'anime'}) => ({
         url: `${id}`,
         method: "POST",
-        body: {passkey, id}
+        body: {passkey, id, type}
       }),
     }),
     addTagToCollection: builder.mutation({
@@ -48,7 +48,7 @@ export const hcollectionAPI = createApi({
         method: "PUT",
         body: data
       }),
-      invalidatesTags: ['anime']
+      invalidatesTags: ["anime"]
     }),
     removeTag: builder.mutation({
       query: (data) => ({
@@ -56,7 +56,7 @@ export const hcollectionAPI = createApi({
         method: "DELETE",
         body: data
       }),
-      invalidatesTags: ['anime']
+      invalidatesTags: ["anime"]
     }),
     addTitle: builder.mutation({
       query: (data) => ({
@@ -64,7 +64,7 @@ export const hcollectionAPI = createApi({
         method: "PUT",
         body: data
       }),
-      invalidatesTags: ['anime']
+      invalidatesTags: ["anime"]
     }),
     updateTitle: builder.mutation({
       query: (data) => ({
@@ -72,7 +72,7 @@ export const hcollectionAPI = createApi({
         method: "PATCH",
         body: data
       }),
-      invalidatesTags: ['anime']
+      invalidatesTags: ["anime"]
     }),
     deleteTitle: builder.mutation({
       query: (id) => ({
@@ -80,14 +80,13 @@ export const hcollectionAPI = createApi({
         method: "DELETE",
         body: {id}
       }),
-      invalidatesTags: ['anime']
+      invalidatesTags: ["anime"]
     }),
   }),
 });
 
 export const {
-  useLazyGetAllAnimeQuery,
-  useLazyGetAllMangaQuery,
+  useGetCollectionByIdQuery,
   useGetAllAnimeQuery,
   useGetAllMangaQuery,
   useGetCollectionTagsQuery,

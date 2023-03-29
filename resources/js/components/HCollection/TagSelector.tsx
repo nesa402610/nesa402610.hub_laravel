@@ -15,7 +15,7 @@ const TagSelector: FC<TagSelectorProps> = ({collection}) => {
   useEffect(() => {
     if (!tags) return
     const itemTags = collection.tags
-    const freeTags = tags.filter(tag => !itemTags.map(itemTag => itemTag.name).includes(tag.name))
+    const freeTags = tags.filter(tag => !itemTags?.map(itemTag => itemTag.name).includes(tag.name))
     setFreeTags(freeTags)
   }, [tags, collection]);
 

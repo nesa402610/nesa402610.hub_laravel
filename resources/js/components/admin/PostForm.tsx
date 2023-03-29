@@ -24,9 +24,8 @@ const PostForm: FC<PostFormProps> = ({post, isModal, setIsModal}) => {
     setIsModal(false)
   }
 
-  if (!isModal) return null;
   return (
-    <Modal title={'Создание поста'} closeHandler={setIsModal}>
+    <Modal title={'Создание поста'} isOpen={isModal} onClose={setIsModal}>
       <div className={'block--light flex flex-col gap-4'}>
         <div className={'flex flex-col gap-4'}>
           <label>

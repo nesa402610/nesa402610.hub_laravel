@@ -88,12 +88,16 @@ class HCollectionController extends Controller {
 
     public function getTitleById(Request $request, $id) {
         $exist = $this->checkPasskey($request);
-
         if (count($exist) !== 0) {
-            $collection = HCollection::find($id);
-            $collection->tags->makeHidden('pivot');
-            $collection->links->makeHidden('pivot');
-            $collection->studios->makeHidden('pivot');
+            if ($request->type === 'anime') {
+                $collection = HCollection::find($id);
+                $collection->tags->makeHidden('pivot');
+                $collection->links->makeHidden('pivot');
+                $collection->studios->makeHidden('pivot');
+            } else {
+                $collection = HManga::find($id);
+                $collection->pages;
+            }
             return response($collection, 200);
 //            return response(['msg' => 'Ключ рабочий, наслаждайся', 'status' => 'valid', '1' => $exist], 200);
         }
