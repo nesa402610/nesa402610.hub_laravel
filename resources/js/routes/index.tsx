@@ -48,10 +48,11 @@ const Index: FC = () => {
           <Route path={"timer"} element={<TimerApp/>}/>
         </Route>
         <Route path={"NULL"} element={<HHHPage/>}>
-          <Route path={'a'} element={<HAnimePage/>} />
-          <Route path={'m'} element={<HMangaPage/>} />
+          <Route path={""} index element={<HAnimePage/>}/>
+          <Route path={'a'} element={<HAnimePage/>}/>
+          <Route path={"m"} element={<HMangaPage/>}/>
         </Route>
-          <Route path={"/NULL/a/:id"} element={<HAnimeDetailedPage/>}/>
+        <Route path={"/NULL/a/:id"} element={<HAnimeDetailedPage/>}/>
         <Route path={"/NULL/m/:id"} element={<HMangaDetailedPage/>}/>
         <Route path={"users"} element={<UsersPage/>}/>
         <Route path={"*"} element={<NotFound/>}/>
