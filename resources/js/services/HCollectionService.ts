@@ -25,7 +25,7 @@ export const hcollectionAPI = createApi({
         method: "POST",
         body: {passkey, type}
       }),
-      providesTags: ["anime"]
+      providesTags: ['anime']
     }),
     getAllManga: builder.query({
       query: ({passkey, type = "manga", page = 1}) => ({

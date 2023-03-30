@@ -12,7 +12,7 @@ const HCollectionFilter = ({filter, setFilter, tags}) => {
     }
   };
   return (
-    <div className={"flex flex-col gap-4"}>
+    <div className={"flex sm:p-4 xs:p-2 flex-col gap-4"}>
       <input type="text"
              value={filter.title}
              onChange={e => setFilter({...filter, title: e.target.value})}/>
@@ -23,7 +23,7 @@ const HCollectionFilter = ({filter, setFilter, tags}) => {
           <option value="anime">Аниме</option>
           <option value="manga">Манга</option>
         </select>
-        <div className={"flex gap-1 flex-wrap items-center bg-neutral-600 min-w-[200px] p-2 rounded-lg"}>
+        <div className={"flex gap-1 flex-wrap items-center bg-neutral-600 w-[200px]  p-2 rounded-lg"}>
           {filter.tags.map(tag =>
             <span key={tag.id}
                   onClick={() => setFilter({...filter, tags: filter.tags.filter(tagArr => tagArr !== tag)})}

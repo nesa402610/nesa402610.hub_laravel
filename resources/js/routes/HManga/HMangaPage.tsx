@@ -14,7 +14,7 @@ const HMangaPage = () => {
   const filteredCollection = filterCollection(data, filter);
   if (isLoading) return <Loader/>;
   return (
-    <div className={"block--dark flex flex-col -mx-4 gap-4"}>
+    <div className={"block--dark flex flex-col gap-4"}>
       {!isFetching ? filteredCollection?.map(collectionItem =>
         <HCollectionCard key={collectionItem.id}
                          collection={collectionItem}/>

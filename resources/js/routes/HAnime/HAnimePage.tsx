@@ -20,13 +20,8 @@ const HAnimePage: FC = () => {
   const {data, isLoading, error, refetch, isFetching} = useGetAllAnimeQuery({passkey, page});
   if (isLoading) return <Loader/>;
   const filteredCollection = filterCollection(data, filter);
-
-  // useEffect(() => {
-  //   setPage(data.current_page ?? 1);
-  // }, [data]);
-  console.log(isLoading);
   return (
-    <div className={"block--dark flex flex-col -mx-4 gap-4 p-0"}>
+    <div className={"block--dark flex flex-col  gap-4"}>
       {!isFetching ? filteredCollection?.map(collectionItem =>
         <HCollectionCard key={collectionItem.id}
                          collection={collectionItem}/>
