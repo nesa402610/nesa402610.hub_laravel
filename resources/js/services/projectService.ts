@@ -1,7 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {IProject} from "../types/types";
-
-const csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+import {csrf_token} from "../mockData";
 
 export const projectAPI = createApi({
   reducerPath: 'projectApi',

@@ -45,3 +45,5 @@ export const links: linksProps[] = [
     ico: <FaTwitter/>
   }
 ];
+
+export const csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
