@@ -3,6 +3,7 @@ import {useParams} from "react-router";
 import {useGetCollectionByIdQuery} from "../../services/HCollectionService";
 import HCollectionCard from "../../components/HCollection/HCollectionCard";
 import Modal from "../../components/UI/modal";
+import {Link} from "react-router-dom";
 
 const HMangaDetailedPage = () => {
   const passkey = localStorage.getItem("passkey");
@@ -23,11 +24,11 @@ const HMangaDetailedPage = () => {
       </Modal>
       <div className={"m-4 flex flex-col gap-4"}>
         <HCollectionCard collection={data}/>
-        <div className={"flex gap-8 bg-neutral-700 rounded-lg p-4"}>
+        <div className={"grid grid-cols-6 gap-4 bg-neutral-700 rounded-lg p-4"}>
           {data?.pages?.map(p =>
-            <div key={p.id} className={"w-[200px]"}>
-              <img src={p.page_link} onClick={() => viewHandler(p.page, p.page_link)} alt=""/>
-            </div>
+            <Link to={`reader?page=${p.pageNumber}`} key={p.id} className={"basis-1/6"}>
+              <img src={p.file_link} onClick={() => viewHandler(1, p.file_link)} alt=""/>
+            </Link>
           )}
         </div>
       </div>
