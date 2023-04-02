@@ -23,6 +23,7 @@ import HHHPage from "./HHHPage";
 import HMangaPage from "./HManga/HMangaPage";
 import App from "../App";
 import Loader from "../components/Loader";
+import HReader from "./HManga/HReader";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,6 +57,7 @@ export const router = createBrowserRouter(
           <Route path={"m"} element={<HMangaPage/>}/>
         </Route>
         <Route path={"m/:id"} element={<HMangaDetailedPage/>}/>
+        <Route path={"m/:id/reader"} element={<HReader/>}/>
         <Route path={"a/:id"} element={<HAnimeDetailedPage/>}/>
       </Route>
       <Route path={"users"} element={<UsersPage/>}/>
