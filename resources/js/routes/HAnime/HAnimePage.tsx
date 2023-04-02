@@ -17,12 +17,12 @@ const HAnimePage: FC = () => {
   const filter = useOutletContext();
   const passkey = localStorage.getItem("passkey");
   const [page, setPage] = useState(1);
-  const {data, isLoading, error, refetch, isFetching} = useGetAllAnimeQuery({passkey, page});
+  const {data, isLoading, refetch} = useGetAllAnimeQuery({passkey, page});
   if (isLoading) return <Loader/>;
   const filteredCollection = filterCollection(data, filter);
   return (
     <div className={"block--dark flex flex-col  gap-4"}>
-      {!isFetching ? filteredCollection?.map(collectionItem =>
+      {!isLoading ? filteredCollection?.map(collectionItem =>
         <HCollectionCard key={collectionItem.id}
                          collection={collectionItem}/>
       ) : <Loader/>}
@@ -33,5 +33,4 @@ const HAnimePage: FC = () => {
     </div>
   );
 };
-
 export default HAnimePage;
