@@ -17,7 +17,6 @@ const HReader: FC = () => {
     if (!data) {
       nav("/NULL/m/" + id);
     }
-    console.log(data);
   }, [data]);
   useEffect(() => {
     setSearchParams({page: "1"});
