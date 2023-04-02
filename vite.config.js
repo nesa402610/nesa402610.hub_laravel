@@ -1,4 +1,4 @@
-import {defineConfig} from 'vite';
+import {defineConfig, splitVendorChunkPlugin} from "vite";
 import laravel from 'laravel-vite-plugin';
 import react from "@vitejs/plugin-react";
 
@@ -10,6 +10,7 @@ export default defineConfig({
             ],
             refresh: true
         }),
-        react()
+        react(),
+        splitVendorChunkPlugin()
     ],
 });
