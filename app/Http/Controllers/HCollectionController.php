@@ -8,6 +8,7 @@ use App\Models\Passkey;
 use App\Models\Tags;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -65,9 +66,8 @@ class HCollectionController extends Controller {
             if ($request->type === 'manga') {
                 $collections = HManga::paginate(5);
                 foreach ($collections as $collection) {
-//                    $collection->tags->makeHidden('pivot');
+                    $collection->tags;
                     $collection->type = 'manga';
-                    $collection->pages;
 //                    $collection->links->makeHidden('pivot');
 //                    $collection->studios->makeHidden('pivot');
                 }
@@ -77,7 +77,6 @@ class HCollectionController extends Controller {
                 foreach ($collections as $collection) {
                     $collection->tags->makeHidden('pivot');
                     $collection->type = 'anime';
-                    $collection->links->makeHidden('pivot');
                     $collection->studios->makeHidden('pivot');
                 }
             }
@@ -96,7 +95,16 @@ class HCollectionController extends Controller {
                 $collection->studios->makeHidden('pivot');
             } else {
                 $collection = HManga::find($id);
-                $collection->pages;
+                $files = Storage::files('m/' . $collection->id);
+                $pages = [];
+                $i = 1;
+                foreach ($files as $file) {
+                    $pages[] = [
+                        'file_link' => Storage::temporaryUrl($file, now()->addMinute(5)),
+                        'pageNumber' => $i++
+                    ];
+                }
+                $collection->pages = $pages;
             }
             return response($collection, 200);
 //            return response(['msg' => 'Ключ рабочий, наслаждайся', 'status' => 'valid', '1' => $exist], 200);
@@ -104,6 +112,9 @@ class HCollectionController extends Controller {
         return response('Какая-то ошибка');
     }
 
+    public function getMangaPages(Request $request) {
+
+    }
     public function addTitle() {
 
     }
