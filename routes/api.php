@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::patch('/add', [HCollectionController::class, 'addTitle']);
             Route::put('/passkey', [HCollectionController::class, 'generatePasskey']);
             Route::get('/passkeys', [HCollectionController::class, 'getAllPasskeys']);
-            Route::get('/tags', [HCollectionController::class, 'getAllTags']);
+            Route::get('/tags', [HCollectionController::class, 'getAllTags'])->withoutMiddleware(['auth:sanctum', AdminProof::class]);
             Route::put('/tags/add', [HCollectionController::class, 'addTagToCollection']);
             Route::delete('/tags/delete', [HCollectionController::class, 'deleteTagFromCollection']);
         });
