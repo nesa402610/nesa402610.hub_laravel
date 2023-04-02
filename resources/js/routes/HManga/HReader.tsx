@@ -37,7 +37,7 @@ const HReader: FC = () => {
         <div className={"back flex-1"} onClick={prevPage}/>
         <div className={"forward flex-1"} onClick={nextPage}/>
       </div>
-      <img className={"h-screen"} src={data?.file_link} alt=""/>
+      <img className={"xs:h-auto sm:h-screen"} src={data?.file_link} alt=""/>
     </div>
   );
 };

@@ -24,7 +24,7 @@ const HMangaDetailedPage = () => {
       </Modal>
       <div className={"m-4 flex flex-col gap-4"}>
         <HCollectionCard collection={data}/>
-        <div className={"grid grid-cols-6 gap-4 bg-neutral-700 rounded-lg p-4"}>
+        <div className={"grid md:grid-cols-6 xs:grid-cols-3 gap-4 bg-neutral-700 rounded-lg p-4"}>
           {data?.pages?.map(p =>
             <Link to={`reader?page=${p.pageNumber}`} key={p.id} className={"basis-1/6"}>
               <img src={p.file_link} onClick={() => viewHandler(1, p.file_link)} alt=""/>
