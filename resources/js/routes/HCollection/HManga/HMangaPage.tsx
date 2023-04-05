@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import HCollectionCard from "../../components/HCollection/HCollectionCard";
-import {useGetAllMangaQuery} from "../../services/HCollectionService";
-import Loader from "../../components/Loader";
 import {useOutletContext} from "react-router-dom";
-import {filterCollection} from "../HHHPage";
-import Paginator from "../../components/UI/Paginator";
+import {filterCollection} from "../../HHHPage";
+import {useGetAllMangaQuery} from "../../../services/HCollectionService";
+import HCollectionCard from "../../../components/HCollection/HCollectionCard";
+import Loader from "../../../components/Loader";
+import Paginator from "../../../components/UI/Paginator";
+
 
 const HMangaPage = () => {
   const filter = useOutletContext();

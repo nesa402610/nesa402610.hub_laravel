@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {useParams} from "react-router";
-import {useGetCollectionByIdQuery} from "../../services/HCollectionService";
-import HCollectionCard from "../../components/HCollection/HCollectionCard";
-import Modal from "../../components/UI/modal";
 import {Link} from "react-router-dom";
+import HCollectionCard from "../../../components/HCollection/HCollectionCard";
+import Modal from "../../../components/UI/modal";
+import {useGetCollectionByIdQuery} from "../../../services/HCollectionService";
 
 const HMangaDetailedPage = () => {
   const passkey = localStorage.getItem("passkey");

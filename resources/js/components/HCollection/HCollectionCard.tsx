@@ -9,9 +9,10 @@ import {Link} from "react-router-dom";
 
 interface CollectionProps {
   collection: ICollection;
+  hover?: boolean;
 }
 
-const HCollectionCard: FC<CollectionProps> = ({collection}) => {
+const HCollectionCard: FC<CollectionProps> = ({collection, hover}) => {
   const {data: user} = useGetUserQuery("");
   const [tagDropDown, setTagDropDown] = useState(false);
   if (!collection) return null;
@@ -20,12 +21,12 @@ const HCollectionCard: FC<CollectionProps> = ({collection}) => {
       <div className={"flex xs:flex-col md:flex-row gap-4"}>
         <Link className={"contents"}
               to={`/NULL/${collection.type === "anime" ? "a" : "m"}/${collection.id}`}>
-          <img className={"rounded-lg w-[200px] h-fit self-center"}
+          <img className={"rounded-lg w-[200px] h-fit self-center" + (hover ? " hover:scale-105 transition-all" : "")}
                src={collection.image}
                alt="Изображение тайтла"/></Link>
         <div className={"flex flex-col"}>
           <Link to={`/NULL/${collection.type === "anime" ? "a" : "m"}/${collection.id}`}>
-            <div className={"flex items-center flex-wrap"}>
+            <div className={"flex items-center flex-wrap" + (hover ? " hover:text-neutral-300 transition-all" : "")}>
               <EditableSpan data={collection} datakey={"title_ru"}/>
               <span>&nbsp;/&nbsp;</span>
               <EditableSpan data={collection} datakey={"title_original"}/>

@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {useParams} from "react-router";
-import {useGetCollectionByIdQuery} from "../../services/HCollectionService";
-import HCollectionCard from "../../components/HCollection/HCollectionCard";
-import Loader from "../../components/Loader";
-import InfoBox from "../../components/UI/InfoBox";
+import {useGetCollectionByIdQuery} from "../../../services/HCollectionService";
+import Loader from "../../../components/Loader";
+import HCollectionCard from "../../../components/HCollection/HCollectionCard";
+import InfoBox from "../../../components/UI/InfoBox";
 
 const HAnimeDetailedPage = () => {
   const passkey = localStorage.getItem("passkey");
@@ -22,6 +22,7 @@ const HAnimeDetailedPage = () => {
       return !prev;
     });
   };
+  console.log(data);
   if (!data) return <Loader/>;
   return (
     <div className={"m-4 flex flex-col gap-4"}>
@@ -49,24 +50,25 @@ const HAnimeDetailedPage = () => {
               </div>
             </div>
           </div>
-          <div className={"flex justify-center"}>
-            <video className={"md:h-[640px] rounded-lg h-auto"}
-                   controls
-                   autoPlay={autoPlay}
-                   onLoadStart={e => e.currentTarget.volume = 0.2}
-                   src={data.links[episode - 1].link}/>
-          </div>
-          {/*{data.link*/}
-          {/*<iframe src={data.links[episode - 1]}*/}
-          {/*        width='100%'*/}
-          {/*        height="480"*/}
-          {/*        allow="autoplay; encrypted-media; fullscreen; picture-in-picture;"*/}
-          {/*        frameBorder="0"*/}
-          {/*        allowFullScreen/>*/}
-          {/*}*/}
+          {!data?.links[episode - 1].iframe ? <div className={"flex justify-center"}>
+              <video className={"md:h-[640px] rounded-lg h-auto"}
+                     controls
+                     autoPlay={autoPlay}
+                     onLoadStart={e => e.currentTarget.volume = 0.2}
+                     src={data.links[episode - 1].link}/>
+            </div>
+            :
+            <iframe src={data.links[episode - 1].link}
+                    width="100%"
+                    height="640"
+                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture;"
+                    frameBorder="0"
+                    className={"rounded-lg"}
+                    allowFullScreen/>
+          }
         </div>
         :
-        <InfoBox title={'Причины отсутствия видео'}>
+        <InfoBox title={"Причины отсутствия видео"}>
           <ul className={"py-2 px-4 list-inside list-disc"}>
             <li>Я не нашел прямых ссылок на видео</li>
             <li>Мне могут дать пизды видео</li>

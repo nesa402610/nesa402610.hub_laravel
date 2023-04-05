@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from "react";
 import {useParams} from "react-router";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {useGetCollectionByIdQuery} from "../../services/HCollectionService";
+import {useGetCollectionByIdQuery} from "../../../services/HCollectionService";
 
 const HReader: FC = () => {
   const passkey = localStorage.getItem("passkey");
