@@ -24,6 +24,7 @@ const HCollectionFilter = ({filter, setFilter, tags}) => {
           <option value="manga">Манга</option>
         </select>
         <div className={"flex gap-1 flex-wrap items-center bg-neutral-600 w-[200px]  p-2 rounded-lg"}>
+          {!filter.tags.length ? <span>Жанры</span> : ''}
           {filter.tags.map(tag =>
             <span key={tag.id}
                   onClick={() => setFilter({...filter, tags: filter.tags.filter(tagArr => tagArr !== tag)})}

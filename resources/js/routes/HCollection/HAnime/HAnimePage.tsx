@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
-import HCollectionCard from "../../components/HCollection/HCollectionCard";
-import {useGetAllAnimeQuery} from "../../services/HCollectionService";
-import Loader from "../../components/Loader";
 import {useOutletContext} from "react-router-dom";
-import {filterCollection} from "../HHHPage";
-import Paginator from "../../components/UI/Paginator";
+import {useGetAllAnimeQuery} from "../../../services/HCollectionService";
+import Loader from "../../../components/Loader";
+import {filterCollection} from "../../HHHPage";
+import Paginator from "../../../components/UI/Paginator";
+import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 
 
 // interface HAnimePageProps {
@@ -24,6 +24,7 @@ const HAnimePage: FC = () => {
     <div className={"block--dark flex flex-col  gap-4"}>
       {!isLoading ? filteredCollection?.map(collectionItem =>
         <HCollectionCard key={collectionItem.id}
+                         hover
                          collection={collectionItem}/>
       ) : <Loader/>}
       <Paginator currentPage={data.collections.current_page}

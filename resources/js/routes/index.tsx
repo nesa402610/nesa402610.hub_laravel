@@ -14,16 +14,17 @@ import AboutPage from "./AboutPage";
 import SuggestionsPage from "./SuggestionsPage";
 import MiniApps from "./miniApps/index";
 import TimerApp from "./miniApps/Timer/App";
-import HAnimePage from "./HAnime/HAnimePage";
-import HAnimeDetailedPage from "./HAnime/HAnimeDetailedPage";
 import UsersPage from "./UsersPage";
 import NotFound from "./errors/NotFound";
-import HMangaDetailedPage from "./HManga/HMangaDetailedPage";
 import HHHPage from "./HHHPage";
-import HMangaPage from "./HManga/HMangaPage";
 import App from "../App";
 import Loader from "../components/Loader";
-import HReader from "./HManga/HReader";
+import HAnimePage from "./HCollection/HAnime/HAnimePage";
+import HMangaPage from "./HCollection/HManga/HMangaPage";
+import HMangaDetailedPage from "./HCollection/HManga/HMangaDetailedPage";
+import HReader from "./HCollection/HManga/HReader";
+import HAnimeDetailedPage from "./HCollection/HAnime/HAnimeDetailedPage";
+import Index from "./HCollection";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,7 +52,7 @@ export const router = createBrowserRouter(
       <Route path={"/mini-apps"} element={<MiniApps/>}>
         <Route path={"timer"} element={<TimerApp/>}/>
       </Route>
-      <Route path={"NULL"}>
+      <Route path={"NULL"} element={<Index/>}>
         <Route path={""} element={<HHHPage/>}>
           <Route path={"a?"} element={<HAnimePage/>}/>
           <Route path={"m"} element={<HMangaPage/>}/>
