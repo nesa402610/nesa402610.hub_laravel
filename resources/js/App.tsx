@@ -9,10 +9,10 @@ const App = () => {
   return (
     <>
       <Header/>
-      <div className={"ml-[80px]"}>
+      <main className={"ml-[80px]"}>
         <Outlet/>
         <ScrollRestoration/>
-      </div>
+      </main>
     </>
   );
 };
