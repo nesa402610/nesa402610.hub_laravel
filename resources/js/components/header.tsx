@@ -50,7 +50,7 @@ const Header: FC = () => {
             {/*  <IoGrid/>*/}
             {/*  Apps*/}
             {/*</NavLink>    */}
-            <NavLink className={"nav-link"} to={"/NULL"}>
+            <NavLink className={"nav-link"} to={"/NULL/a"}>
               <GiCentaurHeart size={"2rem"}/>
             </NavLink>
           </nav>
@@ -82,6 +82,8 @@ const Header: FC = () => {
                               onClick={() => setIsModal(true)}>+P</span>
               <NavLink className={"flex items-center hover:text-neutral-400 transition-colors"}
                        to={"/admin/projects"}>Projects</NavLink>
+              <NavLink className={"flex items-center hover:text-neutral-400 transition-colors"}
+                       to={"/admin/"}>dashboard</NavLink>
             </>}
           </div>
           <hr className={"bg-neutral-400 h-[2px]  w-full"}/>
