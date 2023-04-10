@@ -1,11 +1,9 @@
 import React from 'react';
-import {useRemoveTagMutation} from "../../services/HCollectionService";
+import { useRemoveTagMutation } from '../../services/Collections/HCollectionService';
 import {useGetUserQuery} from "../../services/userService";
 
-const HCollectionTags = ({collection}) => {
-  const [removeTag, {}] = useRemoveTagMutation()
+const HCollectionTags = ({collection, removeTag}) => {
   const {data: user} = useGetUserQuery('')
-
 
   const deleteTagHandler = (titleId, tagId) => {
     removeTag({titleId, tagId})

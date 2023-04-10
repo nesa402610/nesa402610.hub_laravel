@@ -1,15 +1,15 @@
-import React, {FC, useEffect, useState} from 'react';
-import {useAddTagToCollectionMutation, useGetCollectionTagsQuery} from "../../services/HCollectionService";
+import React, {FC, useEffect, useState} from "react";
 import {ICollection, ICollectionTag} from "../../types/types";
 import Loader from "../Loader";
+import {useGetTagsQuery} from "../../services/Collections/TagService";
 
 interface TagSelectorProps {
   collection: ICollection
+  addTag({titleId, tagId}): any
 }
 
-const TagSelector: FC<TagSelectorProps> = ({collection}) => {
-  const {data: tags, isLoading} = useGetCollectionTagsQuery('')
-  const [addTag, {}] = useAddTagToCollectionMutation()
+const TagSelector: FC<TagSelectorProps> = ({collection, addTag}) => {
+  const {data: tags, isLoading} = useGetTagsQuery('')
   const [freeTags, setFreeTags] = useState<ICollectionTag[]>([]);
 
   useEffect(() => {

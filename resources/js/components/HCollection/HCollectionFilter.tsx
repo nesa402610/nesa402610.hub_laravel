@@ -23,7 +23,7 @@ const HCollectionFilter = ({filter, setFilter, tags}) => {
           <option value="anime">Аниме</option>
           <option value="manga">Манга</option>
         </select>
-        <div className={"flex gap-1 flex-wrap items-center bg-neutral-600 w-[200px]  p-2 rounded-lg"}>
+        <div className={"flex gap-1 flex-wrap items-center bg-neutral-600 min-w-[200px]  p-2 rounded-lg"}>
           {!filter.tags.length ? <span>Жанры</span> : ''}
           {filter.tags.map(tag =>
             <span key={tag.id}
@@ -35,6 +35,7 @@ const HCollectionFilter = ({filter, setFilter, tags}) => {
                   value=""
                   placeholder={"Жанры"}
                   onChange={e => setFilter({...filter, tags: [...filter.tags, e.target.value]})}>
+            <option value=""></option>
             {tags?.filter(tag => !filter.tags.includes(tag.name)).map(t =>
               <option key={t.id} value={t.name}>{t.name}</option>
             )}

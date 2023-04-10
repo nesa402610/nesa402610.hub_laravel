@@ -10,9 +10,14 @@ import {Link} from "react-router-dom";
 interface CollectionProps {
   collection: ICollection;
   hover?: boolean;
+  link?: boolean;
+
+  addTag({titleId, tagId}): any;
+
+  removeTag(titleId, tagId): any;
 }
 
-const HCollectionCard: FC<CollectionProps> = ({collection, hover}) => {
+const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, addTag, removeTag}) => {
   const {data: user} = useGetUserQuery("");
   const [tagDropDown, setTagDropDown] = useState(false);
   if (!collection) return null;
@@ -20,13 +25,13 @@ const HCollectionCard: FC<CollectionProps> = ({collection, hover}) => {
     <div className={"bg-neutral-700 p-4 rounded-lg"}>
       <div className={"flex xs:flex-col md:flex-row gap-4"}>
         <Link className={"contents"}
-              to={`/NULL/${collection.type === "anime" ? "a" : "m"}/${collection.id}`}>
+              to={`${link ? collection.id : ""}`}>
           <img className={"rounded-lg w-[200px] h-fit self-center" + (hover ? " hover:scale-105 transition-all" : "")}
                src={collection.image}
                alt="Изображение тайтла"/></Link>
         <div className={"flex flex-col"}>
-          <Link to={`/NULL/${collection.type === "anime" ? "a" : "m"}/${collection.id}`}>
-            <div className={"flex items-center flex-wrap" + (hover ? " hover:text-neutral-300 transition-all" : "")}>
+          <Link to={`${link ? collection.id : ""}`}>
+            <div className={`flex items-center flex-wrap ${hover ? "hover:text-neutral-300 transition-all" : ""}`}>
               <EditableSpan data={collection} datakey={"title_ru"}/>
               <span>&nbsp;/&nbsp;</span>
               <EditableSpan data={collection} datakey={"title_original"}/>
@@ -38,7 +43,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, hover}) => {
               <span>Год выхода: {collection.announce_date.slice(0, 4)}</span>
               <span className={"flex gap-1 md:flex-nowrap xs:flex-wrap"}>Жанры:
                     <div className={"flex gap-1 flex-wrap"}>
-                      <HCollectionTags collection={collection}/>
+                      <HCollectionTags removeTag={removeTag} collection={collection}/>
                       {user?.id === 1 &&
                         <div onClick={() => setTagDropDown(prev => !prev)}
                              className={"bg-neutral-800 px-2 rounded-full relative"}>
@@ -46,7 +51,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, hover}) => {
                           {tagDropDown &&
                             <div onClick={e => e.stopPropagation()}
                                  className={"absolute p-2 rounded-lg h-[200px] overflow-scroll bg-neutral-800 flex flex-col gap-2"}>
-                              <TagSelector collection={collection}/>
+                              <TagSelector addTag={addTag} collection={collection}/>
                             </div>
                           }
                         </div>}
