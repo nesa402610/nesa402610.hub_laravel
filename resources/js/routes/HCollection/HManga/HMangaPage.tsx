@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {useOutletContext} from "react-router-dom";
 import {filterCollection} from "../../HHHPage";
-import {useGetAllMangaQuery} from "../../../services/HCollectionService";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
+import {useGetAllMangaQuery} from "../../../services/Collections/MangaService";
 
 
 const HMangaPage = () => {
@@ -18,10 +18,15 @@ const HMangaPage = () => {
     <div className={"block--dark flex flex-col gap-4"}>
       {!isFetching ? filteredCollection?.map(collectionItem =>
         <HCollectionCard key={collectionItem.id}
+                         addTag={() => {
+                         }}
+                         removeTag={() => {
+                         }}
+                         link
                          collection={collectionItem}/>
       ) : <Loader/>}
-      <Paginator currentPage={data.collections.current_page}
-                 totalPages={data.collections.last_page}
+      <Paginator currentPage={data.current_page}
+                 totalPages={data.last_page}
                  setCurrentPage={setPage}
                  handler={refetch}/>
     </div>

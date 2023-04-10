@@ -1,15 +1,18 @@
 import React, {useState} from "react";
 import {useParams} from "react-router";
-import {useGetCollectionByIdQuery} from "../../../services/HCollectionService";
 import Loader from "../../../components/Loader";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import InfoBox from "../../../components/UI/InfoBox";
+import {useAddTagToAnimeMutation, useGetAnimeByIdQuery} from "../../../services/Collections/AnimeService";
+import {useRemoveTagMutation} from "../../../services/Collections/MangaService";
 
 const HAnimeDetailedPage = () => {
   const passkey = localStorage.getItem("passkey");
   const [autoPlay, setAutoPlay] = useState(JSON.parse(localStorage.getItem("autoplay")) ?? true);
   const {id} = useParams();
-  const {data} = useGetCollectionByIdQuery({passkey, id, type: "anime"});
+  const {data} = useGetAnimeByIdQuery({id, passkey});
+  const [removeTag] = useRemoveTagMutation();
+  const [addTag] = useAddTagToAnimeMutation();
   // const {data} = useGetAllAnimeQuery({passkey}, {
   //   selectFromResult: ({data}) => ({
   //     data: data?.collections.data.find(d => d.id == 7),
@@ -22,11 +25,10 @@ const HAnimeDetailedPage = () => {
       return !prev;
     });
   };
-  console.log(data);
   if (!data) return <Loader/>;
   return (
     <div className={"m-4 flex flex-col gap-4"}>
-      <HCollectionCard collection={data}/>
+      <HCollectionCard addTag={addTag} removeTag={removeTag} collection={data}/>
       {data.links.length !== 0 ?
         <div className={"block--light gap-4 flex flex-col"}>
           <div className={"flex gap-4 justify-between md:flex-row xs:flex-col"}>
