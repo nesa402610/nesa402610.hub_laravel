@@ -3,13 +3,11 @@
 namespace App\Http\Controllers\Collections;
 
 use App\Http\Controllers\Controller;
-use App\Models\HCollection;
+use App\Models\HAnime;
 use App\Models\HManga;
 use App\Models\Passkey;
-use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class MangaController extends Controller {
 //    public function addTagToCollection(Request $request) {
@@ -42,6 +40,16 @@ class MangaController extends Controller {
 //    }
 
     public function getAllManga(Request $request) {
+        $manga = HManga::all();
+        foreach ($manga as $collection) {
+            $collection->tags;
+//                    $collection->links->makeHidden('pivot');
+//                    $collection->studios->makeHidden('pivot');
+        }
+        return response($manga, 200);
+    }
+
+    public function getPaginatedManga(Request $request) {
         $exist = $this->checkPasskey($request);
         if (count($exist) !== 0) {
             $collections = HManga::paginate(5);
@@ -76,7 +84,7 @@ class MangaController extends Controller {
     }
 
     public function addTag(Request $request) {
-        $collection = HCollection::find($request->titleId);
+        $collection = HAnime::find($request->titleId);
         $collection->tags()->attach($request->tagId);
     }
 
