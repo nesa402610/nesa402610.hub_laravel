@@ -1,14 +1,13 @@
 import React, {FC, useState} from "react";
-import {ICollection} from "../../types/types";
 import {useGetUserQuery} from "../../services/userService";
 import TagSelector from "./TagSelector";
 import HCollectionTags from "./HCollectionTags";
-import EditableSpan from "./EditableSpan";
 import {Link} from "react-router-dom";
+import {IAnime} from "../../types/Anime";
 
 
 interface CollectionProps {
-  collection: ICollection;
+  collection: IAnime;
   hover?: boolean;
   link?: boolean;
 
@@ -30,13 +29,16 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
                src={collection.image}
                alt="Изображение тайтла"/></Link>
         <div className={"flex flex-col"}>
-          <Link to={`${link ? collection.id : ""}`}>
-            <div className={`flex items-center flex-wrap ${hover ? "hover:text-neutral-300 transition-all" : ""}`}>
-              <EditableSpan data={collection} datakey={"title_ru"}/>
-              <span>&nbsp;/&nbsp;</span>
-              <EditableSpan data={collection} datakey={"title_original"}/>
-            </div>
-          </Link>
+          <div className={'flex flex-col'}>
+            <Link to={`${link ? collection.id : ""}`}>
+              <div className={`flex items-center flex-wrap ${hover ? "hover:text-neutral-300 transition-all" : ""}`}>
+                <span>{collection.title_ru}</span>
+                <span>&nbsp;/&nbsp;</span>
+                <span>{collection.title_original}</span>
+              </div>
+            </Link>
+            <span className={'text-sm italic text-neutral-400'}>{collection.title_en}</span>
+          </div>
           <div className={"text-neutral-300"}>
             <h3 className={"mt-4 font-bold"}>Информация</h3>
             <div className={"flex flex-col"}>
@@ -59,13 +61,13 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
                   </span>
               {collection.episodes_released && <div className={"flex items-center"}>
                 <h4>Эпизоды:&nbsp;</h4>
-                <EditableSpan data={collection} datakey={"episodes_released"}/>
+                <span>{collection.episodes_released}</span>
                 /
-                <EditableSpan data={collection} datakey={"episodes_total"}/>
+                <span>{collection.episodes_total}</span>
               </div>}
               {collection.episode_time && <div className={"flex"}>
                 <h4>Длительность серии:&nbsp;</h4>
-                <EditableSpan data={collection} datakey={"episode_time"}/>&nbsp;мин.
+                <span>{collection.episode_time} мин.</span>
               </div>}
               {collection.studios && <span>Студия: {collection.studios.map(studio => studio.name)}</span>}
               <span>Цензура: {collection.censure ? "С цензурой" : "Без цензуры"}</span>
