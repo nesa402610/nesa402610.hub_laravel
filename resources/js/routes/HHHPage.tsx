@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import HCollectionFilter from "../components/HCollection/HCollectionFilter";
-import {useGetCollectionTagsQuery} from "../services/Collections/HCollectionService";
 import {useGetTagsQuery} from "../services/Collections/TagService";
 
 export const filterCollection = (collections, filter) => {

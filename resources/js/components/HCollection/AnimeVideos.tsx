@@ -10,7 +10,6 @@ interface AnimeVideosProps {
 }
 
 const AnimeVideos: FC<AnimeVideosProps> = ({anime, videosData}) => {
-  console.log(videosData);
   const {data: videos, isLoading} = videosData ?? useGetAnimeVideosQuery(anime.id);
   const [autoPlay, setAutoPlay] = useState(JSON.parse(localStorage.getItem("autoplay")) ?? true);
   const [episode, setEpisode] = useState(1);
@@ -57,7 +56,7 @@ const AnimeVideos: FC<AnimeVideosProps> = ({anime, videosData}) => {
           </div>
         </div>
       </div>
-      {!videos[episode - 1].iframe ? <div className={"flex justify-center"}>
+      {!videos[episode - 1]?.iframe ? <div className={"flex justify-center"}>
           <video className={"md:h-[640px] rounded-lg h-auto"}
                  controls
                  autoPlay={autoPlay}

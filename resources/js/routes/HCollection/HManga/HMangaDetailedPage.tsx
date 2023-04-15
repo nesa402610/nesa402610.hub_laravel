@@ -19,8 +19,7 @@ const HMangaDetailedPage = () => {
   const [removeTag] = useRemoveTagMutation();
 
   const viewHandler = (page, link) => {
-    setPage({...page, page: page});
-    setPage({...page, link: link});
+    setPage({...page, page: page, link: link});
     setIsModal(true);
   };
   return (

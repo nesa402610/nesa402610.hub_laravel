@@ -118,7 +118,6 @@ export interface ICollectionTag {
   id: number;
   name: string;
 }
-
 export interface ICollectionStudio {
   id: number;
   name: string;

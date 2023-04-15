@@ -14,7 +14,6 @@ export interface IAnime{
   episode_time: number;
   censure: boolean;
   tags: ICollectionTag[];
-  links: ILinks[];
   image: string;
   announce_date: string;
   release_date: string;
