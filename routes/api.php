@@ -41,10 +41,15 @@ Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
 Route::get('/users', [UserController::class, 'getAllUsers']);
 
-Route::post('/anime/list', [AnimeController::class, 'getAllAnime']);
-Route::post('/anime/{id}', [AnimeController::class, 'getAnimeById']);
-Route::post('/manga/list', [MangaController::class, 'getAllManga']);
-Route::post('/manga/{id}', [MangaController::class, 'getMangaById']);
+Route::prefix('/anime')->group(function () {
+    Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
+    Route::post('{id}', [AnimeController::class, 'getAnimeById']);
+    Route::get('{id}/videos', [AnimeController::class, 'getAnimeVideos']);
+});
+Route::prefix('/manga')->group(function () {
+    Route::post('list', [MangaController::class, 'getPaginatedManga']);
+    Route::post('{id}', [MangaController::class, 'getMangaById']);
+});
 Route::get('/tags/list', [TagController::class, 'getAllTags']);
 
 
@@ -84,7 +89,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/setStatus', [SuggestionController::class, 'setStatus'])->middleware(AdminProof::class);
     });
     Route::prefix('anime')->middleware([AdminProof::class])->group(function () {
-        Route::patch('/update', [AnimeController::class, 'updateTitle']);
+        Route::patch('/update', [AnimeController::class, 'updateAnime']);
         Route::patch('/add', [AnimeController::class, 'addTitle']);
         Route::put('/tags/add', [AnimeController::class, 'addTag']);
         Route::delete('/tags/remove', [AnimeController::class, 'removeTag']);
@@ -99,10 +104,24 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::delete('/tags/remove', [MangaController::class, 'deleteTagFromCollection']);
         });
     });
-    Route::prefix('admin')->middleware([AdminProof::class])->group(function () {
+    Route::middleware([AdminProof::class])->group(function () {
         Route::get('models', [adminPanelController::class, 'getAllModels']);
         Route::prefix('anime')->group(function () {
-            Route::get('list', [adminPanelController::class, 'getAllAnime']);
+            Route::get('all', [AnimeController::class, 'getAllAnime']);
+            Route::get('update', [AnimeController::class, 'updateAnime']);
+            Route::delete('videos/delete/{id}', [AnimeController::class, 'deleteAnimeVideo']);
+        });
+        Route::prefix('manga')->group(function () {
+            Route::get('all', [MangaController::class, 'getAllManga']);
+            Route::get('list', [AnimeController::class, 'getAllAnime']);
+            Route::get('list', [AnimeController::class, 'getAllAnime']);
+            Route::get('list', [AnimeController::class, 'getAllAnime']);
+            Route::get('list', [AnimeController::class, 'getAllAnime']);
+        });
+        Route::prefix('tags')->group(function () {
+            Route::post('new', [TagController::class, 'createTag']);
+            Route::patch('update', [TagController::class, 'updateTag']);
+            Route::patch('delete', [TagController::class, 'deleteTag']);
         });
     });
 });
