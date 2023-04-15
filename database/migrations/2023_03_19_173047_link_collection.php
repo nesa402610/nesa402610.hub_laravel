@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('collection_id');
             $table->foreign('collection_id')->references('id')->on('h_collections');
             $table->unsignedBigInteger('link_id');
-            $table->foreign('link_id')->references('id')->on('h_links');
+            $table->foreign('link_id')->references('id')->on('h_links')->onDelete('cascade');
             $table->timestamps();
         });
     }
