@@ -1,8 +1,8 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import { csrf_token } from "../mockData";
+import {csrf_token} from "../../mockData";
 
-export const hcollectionAPI = createApi({
-  reducerPath: "hcollectionApi",
+export const CollectionsAPI = createApi({
+  reducerPath: "CollectionsAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/NULL",
     prepareHeaders: (headers) => {
@@ -92,4 +92,4 @@ export const {
   useAddTagToCollectionMutation,
   useRemoveTagMutation,
   useUpdateTitleMutation
-} = hcollectionAPI;
+} = CollectionsAPI;

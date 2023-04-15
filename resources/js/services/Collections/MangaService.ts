@@ -14,7 +14,7 @@ export const MangaAPI = createApi({
   endpoints: (builder) => ({
     getAllManga: builder.query({
       query: ({page, passkey}) => ({
-        url: "list?page="+page,
+        url: "list?page=" + page,
         method: "POST",
         body: {passkey}
       }),
@@ -25,6 +25,13 @@ export const MangaAPI = createApi({
         url: id,
         method: "POST",
         body: {passkey}
+      }),
+      providesTags: ["manga"]
+    }),
+    getAllMangaNP: builder.query({
+      query: () => ({
+        url: "all",
+        method: "GET",
       }),
       providesTags: ["manga"]
     }),
@@ -74,6 +81,7 @@ export const MangaAPI = createApi({
 export const {
   useGetAllMangaQuery,
   useGetMangaByIdQuery,
+  useGetAllMangaNPQuery,
   useAddTagToMangaMutation,
   useRemoveTagMutation,
   useUpdateMangaMutation,

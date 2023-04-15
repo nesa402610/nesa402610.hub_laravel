@@ -1,5 +1,18 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../../mockData";
+import {IAnime} from "../../types/Anime";
+
+interface getArgs {
+  page?: number;
+  id?: string;
+  passkey?: string;
+}
+
+interface withPaginate {
+  data: IAnime[];
+  current_page: number;
+  last_page: number;
+}
 
 export const AnimeAPI = createApi({
   reducerPath: "AnimeAPI",
@@ -12,7 +25,7 @@ export const AnimeAPI = createApi({
   }),
   tagTypes: ["anime"],
   endpoints: (builder) => ({
-    getAllAnime: builder.query({
+    getAllAnime: builder.query<withPaginate, getArgs>({
       query: ({page, passkey}) => ({
         url: "list?page=" + page,
         method: "POST",
@@ -20,7 +33,7 @@ export const AnimeAPI = createApi({
       }),
       providesTags: ["anime"]
     }),
-    getAnimeById: builder.query({
+    getAnimeById: builder.query<IAnime, getArgs>({
       query: ({id, passkey}) => ({
         url: id,
         method: "POST",
@@ -28,7 +41,7 @@ export const AnimeAPI = createApi({
       }),
       providesTags: ["anime"]
     }),
-    getAllAnimeNP: builder.query({
+    getAllAnimeNP: builder.query<IAnime[], unknown>({
       query: () => ({
         url: "all",
         method: "GET",
@@ -36,7 +49,13 @@ export const AnimeAPI = createApi({
       providesTags: ["anime"]
     }),
     getAnimeVideos: builder.query({
-      query: () => "",
+      query: (id) => id + "/videos",
+    }),
+    deleteAnimeVideo: builder.mutation({
+      query: (id) => ({
+        url: "videos/delete/"+id,
+        method: "delete",
+      }),
     }),
     addTagToAnime: builder.mutation({
       query: (data) => ({
@@ -85,9 +104,11 @@ export const {
   useGetAllAnimeQuery,
   useGetAllAnimeNPQuery,
   useGetAnimeByIdQuery,
+  useGetAnimeVideosQuery,
   useAddTagToAnimeMutation,
   useRemoveTagMutation,
   useAddAnimeMutation,
   useUpdateAnimeMutation,
   useDeleteAnimeMutation,
+  useDeleteAnimeVideoMutation
 } = AnimeAPI;
