@@ -29,7 +29,7 @@ import Anime from "./admin/Anime";
 import Users from "./admin/Users";
 import Tags from "./admin/Tags";
 import Manga from "./admin/Manga";
-import AnimeEdit from "../components/admin/Collections/AnimeEdit";
+import AnimeEdit from "../components/admin/Collections/Anime/AnimeEdit";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(<>
