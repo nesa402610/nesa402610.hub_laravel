@@ -32,7 +32,8 @@ import Manga from "./admin/Manga";
 import AnimeEdit from "../components/admin/Collections/Anime/AnimeEdit";
 
 export const router = createBrowserRouter(
-  createRoutesFromElements(<>
+  createRoutesFromElements(
+    <>
       <Route
         path="/"
         element={<App/>}
