@@ -5,6 +5,7 @@ interface paginate {
   last_page: number
 }
 export interface IAnime{
+  review: string;
   id: number;
   title_ru: string;
   title_en: string;
