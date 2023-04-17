@@ -7,20 +7,20 @@ import {
 import {useParams} from "react-router";
 import Loader from "../../../Loader";
 import HCollectionCard from "../../../HCollection/HCollectionCard";
-import {IAnime, ILinks} from "../../../../types/Anime";
+import {IAnime, IAnimeVideos} from "../../../../types/Anime";
 import AnimeVideos from "../../../HCollection/AnimeVideos";
 import AnimeFields from "../Anime/AnimeFields";
 import AnimeVideoFields from "./AnimeVideoFields";
 
 const AnimeEdit = () => {
   const {id} = useParams();
-  const {data, isLoading} = useGetAnimeByIdQuery({id});
+  const {data} = useGetAnimeByIdQuery({id});
   const videosResponse = useGetAnimeVideosQuery(id);
-  const {data: videosData, isLoading: videosLoading} = videosResponse;
+  const {data: videosData} = videosResponse;
   const [updateAnime] = useUpdateAnimeMutation();
   const [preview, setPreview] = useState(true);
   const [anime, setAnime] = useState<IAnime>(null);
-  const [videos, setVideos] = useState<ILinks[]>(null);
+  const [videos, setVideos] = useState<IAnimeVideos[]>(null);
   useEffect(() => {
     setAnime(data);
   }, [data]);

@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../../mockData";
-import {ICollectionTag} from "../../types/types";
+import {ICollectionTag} from "../../types/Tag";
 
 export const TagAPI = createApi({
   reducerPath: "TagAPI",

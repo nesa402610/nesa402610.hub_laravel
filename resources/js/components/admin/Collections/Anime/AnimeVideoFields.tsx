@@ -1,11 +1,11 @@
 import React, {Dispatch, FC, SetStateAction} from "react";
 import {RxCross2} from "react-icons/rx";
 import {useDeleteAnimeVideoMutation} from "../../../../services/Collections/AnimeService";
-import {ILinks} from "../../../../types/Anime";
+import {IAnimeVideos} from "../../../../types/Anime";
 
 interface AnimeVideoFieldsProps {
-  videos: ILinks[]
-  setVideos: Dispatch<SetStateAction<ILinks[]>>
+  videos: IAnimeVideos[]
+  setVideos: Dispatch<SetStateAction<IAnimeVideos[]>>
 }
 
 const AnimeVideoFields: FC<AnimeVideoFieldsProps> = ({videos, setVideos}) => {

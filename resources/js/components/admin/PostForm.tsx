@@ -1,7 +1,7 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react';
-import {IPost} from "../../types/types";
 import Modal from "../UI/modal";
 import {useCreatePostMutation, useUpdatePostMutation} from "../../services/postService";
+import {IPost} from "../../types/Post";
 
 interface PostFormProps {
   post?: IPost

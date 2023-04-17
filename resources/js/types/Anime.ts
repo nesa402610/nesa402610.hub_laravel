@@ -1,4 +1,5 @@
-import {ICollectionStudio, ICollectionTag} from "./types";
+import {ICollectionTag} from "./Tag";
+
 
 interface paginate {
   current_page: number
@@ -25,8 +26,11 @@ export interface IAnime{
   author: string;
   created_at: string;
 }
-
-export interface ILinks {
+export interface ICollectionStudio {
+  id: number;
+  name: string;
+}
+export interface IAnimeVideos {
   id?: number,
   link: string,
   platform: string,

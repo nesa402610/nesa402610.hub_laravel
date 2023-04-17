@@ -1,8 +1,8 @@
 import React from "react";
-import {IUser} from "../../types/types";
+import {IUser} from "../../types/User";
 
 const Users = () => {
-  const data = []
+  const data = [];
   return (
     <div className={"flex flex-col gap-4"}>
       {data?.map((user: IUser) =>
