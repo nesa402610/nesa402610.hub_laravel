@@ -10,6 +10,13 @@ use Auth;
 use Illuminate\Http\Request;
 
 class AnimeController extends Controller {
+    public function createAnime(Request $request) {
+        $anime = new HAnime();
+        $this->animeFields($request, $anime);
+        $anime->save();
+        return response($anime);
+    }
+
     public function getAllAnime() {
         $anime = HAnime::all();
         foreach ($anime as $collection) {
@@ -49,10 +56,12 @@ class AnimeController extends Controller {
         if ($videos->isEmpty()) return response(null);
         return response($videos);
     }
+
     public function deleteAnimeVideo($id) {
 
         $videos = HLinks::find($id)->delete();
     }
+
     public function addTitle() {
 
     }
@@ -62,20 +71,7 @@ class AnimeController extends Controller {
         $requestVideos = $request->videos;
         $anime = HAnime::find($requestAnime['id']);
 
-        $anime->title_ru = $requestAnime['title_ru'];
-        $anime->title_en = $requestAnime['title_en'];
-        $anime->title_original = $requestAnime['title_original'];
-        $anime->description = $requestAnime['description'];
-        $anime->description_short = $requestAnime['description_short'];
-        $anime->episode_time = $requestAnime['episode_time'];
-        $anime->censure = $requestAnime['censure'];
-        $anime->image = $requestAnime['image'];
-        $anime->announce_date = $requestAnime['announce_date'];
-        $anime->release_date = $requestAnime['release_date'];
-        $anime->episodes_released = $requestAnime['episodes_released'];
-        $anime->episodes_total = $requestAnime['episodes_total'];
-        $anime->author = $requestAnime['author'];
-        $anime->review = $requestAnime['review'];
+        $this->animeFields($request['anime'], $anime);
         $anime->save();
 
         if ($requestVideos) {
@@ -122,5 +118,27 @@ class AnimeController extends Controller {
 //            return response(['msg' => 'Ключ не рабочий. Ключ можно получить только через меня или спроси у друга, пока я не пофиксил доступ'], 403);
 //        }
         return $exist;
+    }
+
+    /**
+     * @param Request $request
+     * @param HAnime $anime
+     * @return void
+     */
+    public function animeFields($request, HAnime $anime): void {
+        $anime->title_ru = $request['title_ru'];
+        $anime->title_en = $request['title_en'];
+        $anime->title_original = $request['title_original'];
+        $anime->description = $request['description'];
+        $anime->description_short = $request['description_short'];
+        $anime->episode_time = $request['episode_time'];
+        $anime->censure = $request['censure'];
+        $anime->image = $request['image'];
+        $anime->announce_date = $request['announce_date'];
+        $anime->release_date = $request['release_date'];
+        $anime->episodes_released = $request['episodes_released'];
+        $anime->episodes_total = $request['episodes_total'];
+        $anime->author = $request['author'];
+        $anime->review = $request['review'];
     }
 }

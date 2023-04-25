@@ -16,7 +16,6 @@ class UserController extends Controller {
         $user->save();
 
         return response($user, 201);
-
     }
 
     public function updateProfile(Request $request) {

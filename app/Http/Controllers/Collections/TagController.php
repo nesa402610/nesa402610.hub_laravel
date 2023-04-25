@@ -15,7 +15,7 @@ class TagController extends Controller {
     }
 
     public function createTag(Request $request) {
-        $rules = ['tagName' => ['required', 'unique:tags,name']];
+        $rules = ['name' => ['required', 'unique:tags,name']];
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -23,19 +23,18 @@ class TagController extends Controller {
         }
 
         $tag = new Tags();
-        $tag->name = $request->tagName;
-//        $tag->save();
-        return response($tag);
+        $tag->name = $request->name;
+        $tag->save();
     }
 
     public function updateTag(Request $request) {
-        $tag = Tags::find($request->tagId);
-        $tag->name = $request->tagName;
+        $tag = Tags::find($request->id);
+        $tag->name = $request->name;
         $tag->save();
     }
 
     public function deleteTag(Request $request) {
-        $tag = Tags::find($request->tagId)->delete();
+        $tag = Tags::find($request->id)->delete();
     }
 
 }
