@@ -2,14 +2,18 @@ import React, {Dispatch, FC, SetStateAction} from "react";
 import {IAnime} from "../../../../types/Anime";
 
 interface AnimeFieldsProps {
-  anime: IAnime
-  setAnime: Dispatch<SetStateAction<IAnime>>
+  anime: IAnime;
+  setAnime: Dispatch<SetStateAction<IAnime>>;
 }
 
 const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
 
   const setHandler = (e, field) => {
-    setAnime({...anime, [field]: e.target.value});
+    if (field === "censure") {
+      setAnime({...anime, censure: e.target.checked});
+    } else {
+      setAnime({...anime, [field]: e.target.value});
+    }
   };
   return (
     <div className={"flex flex-col"}>
@@ -25,21 +29,25 @@ const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
         <span>Оригинальное название</span>
         <input type="text" value={anime.title_original} onChange={e => setHandler(e, "title_original")}/>
       </label>
-      <label className={'flex flex-col'}>
+      <label className={"flex flex-col"}>
         <span>Описание</span>
-        <textarea className={'rounded-lg bg-neutral-600 p-2'} value={anime.description} onChange={e => setHandler(e, "description")}/>
+        <textarea className={"rounded-lg bg-neutral-600 p-2"}
+                  value={anime.description}
+                  onChange={e => setHandler(e, "description")}/>
       </label>
-      <label className={'flex flex-col'}>
+      <label className={"flex flex-col"}>
         <span>Краткое описание</span>
-        <textarea className={'rounded-lg bg-neutral-600 p-2'} value={anime.description_short} onChange={e => setHandler(e, "description_short")}/>
+        <textarea className={"rounded-lg bg-neutral-600 p-2"}
+                  value={anime.description_short}
+                  onChange={e => setHandler(e, "description_short")}/>
       </label>
       <label>
         <span>Время эпизода</span>
         <input type="text" value={anime.episode_time} onChange={e => setHandler(e, "episode_time")}/>
       </label>
-      <label className={'flex gap-2'}>
+      <label className={"flex gap-2"}>
         <span>Цензура</span>
-        <input type="checkbox" className={'w-auto'} checked={anime.censure} onChange={e => setHandler(e, "censure")}/>
+        <input type="checkbox" className={"w-auto"} checked={anime.censure} onChange={e => setHandler(e, "censure")}/>
       </label>
       <label>
         <span>Изображение</span>
@@ -55,7 +63,7 @@ const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
       </label>
       <label>
         <span>Эпизодов вышло</span>
-        <input type="text" value={anime.	episodes_released} onChange={e => setHandler(e, "	episodes_released")}/>
+        <input type="text" value={anime.episodes_released} onChange={e => setHandler(e, "episodes_released")}/>
       </label>
       <label>
         <span>Эпизодов всего</span>

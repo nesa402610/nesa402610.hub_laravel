@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../../mockData";
-import {IAnime} from "../../types/Anime";
+import {IAnime, IAnimeVideos} from "../../types/Anime";
 
 interface getArgs {
   page?: number;
@@ -23,7 +23,7 @@ export const AnimeAPI = createApi({
       return headers;
     },
   }),
-  tagTypes: ["anime"],
+  tagTypes: ["anime", "videos", "animeList"],
   endpoints: (builder) => ({
     getAllAnime: builder.query<withPaginate, getArgs>({
       query: ({page, passkey}) => ({
@@ -31,7 +31,7 @@ export const AnimeAPI = createApi({
         method: "POST",
         body: {passkey}
       }),
-      providesTags: ["anime"]
+      providesTags: ["animeList"]
     }),
     getAnimeById: builder.query<IAnime, getArgs>({
       query: ({id, passkey}) => ({
@@ -41,19 +41,20 @@ export const AnimeAPI = createApi({
       }),
       providesTags: ["anime"]
     }),
-    getAllAnimeNP: builder.query<IAnime[], unknown>({
+    getAllAnimeNP: builder.query<IAnime[], void>({
       query: () => ({
         url: "all",
         method: "GET",
       }),
-      providesTags: ["anime"]
+      providesTags: ["animeList"]
     }),
     getAnimeVideos: builder.query({
       query: (id) => id + "/videos",
+      providesTags: ["videos"]
     }),
     deleteAnimeVideo: builder.mutation({
       query: (id) => ({
-        url: "videos/delete/"+id,
+        url: "videos/delete/" + id,
         method: "delete",
       }),
     }),
@@ -73,21 +74,21 @@ export const AnimeAPI = createApi({
       }),
       invalidatesTags: ["anime"]
     }),
-    addAnime: builder.mutation({
+    addAnime: builder.mutation<IAnime, IAnime>({
       query: (data) => ({
-        url: "create",
+        url: "new",
         method: "PUT",
         body: data
       }),
-      invalidatesTags: ["anime"]
+      invalidatesTags: ["animeList"]
     }),
-    updateAnime: builder.mutation({
+    updateAnime: builder.mutation<IAnime, { anime: IAnime, videos: IAnimeVideos[] }>({
       query: (data) => ({
         url: "update",
         method: "PATCH",
         body: data
       }),
-      invalidatesTags: ["anime"]
+      invalidatesTags: ["animeList"]
     }),
     deleteAnime: builder.mutation({
       query: (id) => ({
@@ -95,7 +96,7 @@ export const AnimeAPI = createApi({
         method: "DELETE",
         body: {id}
       }),
-      invalidatesTags: ["anime"]
+      invalidatesTags: ["animeList"]
     }),
   }),
 });

@@ -24,9 +24,17 @@ const Index = () => {
                    className={"p-2 rounded-lg bg-slate-700 hover:scale-105 hover:bg-slate-600 transition-all"}>
             Anime
           </NavLink>
+          <NavLink to={"anime/studios"}
+                   className={"p-2 rounded-lg bg-slate-700 hover:scale-105 hover:bg-slate-600 transition-all"}>
+            Anime Studios
+          </NavLink>
+          <NavLink to={"projects"}
+                   className={"p-2 rounded-lg bg-slate-700 hover:scale-105 hover:bg-slate-600 transition-all"}>
+            Проекты
+          </NavLink>
         </menu>
       </aside>
-      <main className={"ml-[310px] bg-slate-800 flex-1 p-4 overflow-scroll"}>
+      <main className={"ml-[310px] bg-slate-800 flex-1 min-h-screen p-4 overflow-scroll"}>
         <Outlet/>
       </main>
     </div>

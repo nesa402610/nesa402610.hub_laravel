@@ -30,6 +30,8 @@ import Users from "./admin/Users";
 import Tags from "./admin/Tags";
 import Manga from "./admin/Manga";
 import AnimeEdit from "../components/admin/Collections/Anime/AnimeEdit";
+import Studios from "./admin/Studios";
+import AnimeCreate from "../components/admin/Collections/Anime/AnimeCreate";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,7 +54,6 @@ export const router = createBrowserRouter(
           <Route path={":id"} element={<BlogPostPage/>}/>
         </Route>
         <Route path={"/about"} element={<AboutPage/>}/>
-        <Route path={"/admin/projects"} element={<ProjectsPage/>}/>
         <Route path={"/mini-apps"} element={<MiniApps/>}>
           <Route path={"timer"} element={<TimerApp/>}/>
         </Route>
@@ -71,6 +72,8 @@ export const router = createBrowserRouter(
              element={<IndexAdmin/>}>
         <Route path={"anime"} element={<Outlet/>}>
           <Route path={""} element={<Anime/>}/>
+          <Route path={"studios"} element={<Studios/>}/>
+          <Route path={"new"} element={<AnimeCreate/>}/>
           <Route path={":id"} element={<AnimeEdit/>}/>
         </Route>
         <Route path={"manga"} element={<Outlet/>}>
@@ -79,6 +82,7 @@ export const router = createBrowserRouter(
         </Route>
         <Route path={"users"} element={<Users/>}/>
         <Route path={"tags"} element={<Tags/>}/>
+        <Route path={"projects"} element={<ProjectsPage/>}/>
       </Route>
     </>
   )

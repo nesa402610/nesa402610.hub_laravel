@@ -9,6 +9,7 @@ import {CollectionsAPI} from "../services/Collections/HCollectionService";
 import {TagAPI} from "../services/Collections/TagService";
 import {AnimeAPI} from "../services/Collections/AnimeService";
 import {MangaAPI} from "../services/Collections/MangaService";
+import {StudioAPI} from "../services/Collections/StudioService";
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     [CollectionsAPI.reducerPath]: CollectionsAPI.reducer,
     [TagAPI.reducerPath]: TagAPI.reducer,
     [AnimeAPI.reducerPath]: AnimeAPI.reducer,
+    [StudioAPI.reducerPath]: StudioAPI.reducer,
     [MangaAPI.reducerPath]: MangaAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -32,6 +34,7 @@ export const store = configureStore({
       chatAPI.middleware,
       CollectionsAPI.middleware,
       AnimeAPI.middleware,
+      StudioAPI.middleware,
       MangaAPI.middleware,
       TagAPI.middleware,
     ])

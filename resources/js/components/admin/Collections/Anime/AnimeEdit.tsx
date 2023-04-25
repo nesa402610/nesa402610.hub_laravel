@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {
-  useGetAnimeByIdQuery,
+  useAddTagToAnimeMutation,
+  useGetAllAnimeNPQuery,
   useGetAnimeVideosQuery,
   useUpdateAnimeMutation
 } from "../../../../services/Collections/AnimeService";
@@ -14,16 +15,21 @@ import AnimeVideoFields from "./AnimeVideoFields";
 
 const AnimeEdit = () => {
   const {id} = useParams();
-  const {data} = useGetAnimeByIdQuery({id});
+  const {animeData} = useGetAllAnimeNPQuery(null, {
+    selectFromResult: ({data}) => ({
+      animeData: data?.find((anime) => anime.id === +id),
+    }),
+  });
   const videosResponse = useGetAnimeVideosQuery(id);
   const {data: videosData} = videosResponse;
   const [updateAnime] = useUpdateAnimeMutation();
   const [preview, setPreview] = useState(true);
   const [anime, setAnime] = useState<IAnime>(null);
   const [videos, setVideos] = useState<IAnimeVideos[]>(null);
+  const [addTag] = useAddTagToAnimeMutation();
   useEffect(() => {
-    setAnime(data);
-  }, [data]);
+    setAnime(animeData);
+  }, [animeData]);
   useEffect(() => {
     setVideos(videosData);
   }, [videosData]);
@@ -37,7 +43,7 @@ const AnimeEdit = () => {
           Toggle preview
         </button>
         <button onClick={() => {
-          setAnime(data);
+          setAnime(animeData);
           setVideos(videosData);
         }}
                 className={"bg-slate-600"}>
@@ -50,10 +56,12 @@ const AnimeEdit = () => {
       </div>
       <AnimeFields anime={anime} setAnime={setAnime}/>
       <AnimeVideoFields setVideos={setVideos} videos={videos}/>
-      {preview && <>
-        <HCollectionCard collection={anime} addTag={null} removeTag={null}/>
-        <AnimeVideos anime={anime} videosData={{...videosResponse, data: videos}}/>
-      </>}
+      {preview &&
+        <>
+          <HCollectionCard collection={anime} addTag={addTag} removeTag={null}/>
+          <AnimeVideos anime={anime} videosData={{...videosResponse, data: videos}}/>
+        </>
+      }
     </div>
   );
 };
