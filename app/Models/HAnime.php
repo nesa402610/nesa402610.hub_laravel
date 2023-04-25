@@ -54,6 +54,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereTitleRu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Studios[] $studios
+ * @property-read int|null $studios_count
  */
 class HAnime extends Model
 {
