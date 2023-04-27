@@ -25,13 +25,13 @@ import HReader from "./HCollection/HManga/HReader";
 import HAnimeDetailedPage from "./HCollection/HAnime/HAnimeDetailedPage";
 import Index from "./HCollection";
 import IndexAdmin from "../routes/admin/index";
-import Anime from "./admin/Anime";
 import Users from "./admin/Users";
 import Tags from "./admin/Tags";
 import Manga from "./admin/Manga";
-import AnimeEdit from "../components/admin/Collections/Anime/AnimeEdit";
 import Studios from "./admin/Studios";
-import AnimeCreate from "../components/admin/Collections/Anime/AnimeCreate";
+import AnimeCreate from "./admin/anime/AnimeCreate";
+import AnimeEdit from "./admin/anime/AnimeEdit";
+import Anime from "./admin/anime/Anime";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(

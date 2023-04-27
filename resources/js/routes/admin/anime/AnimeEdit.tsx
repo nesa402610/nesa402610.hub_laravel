@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from "react";
+import {useParams} from "react-router";
 import {
   useAddTagToAnimeMutation,
   useGetAllAnimeNPQuery,
   useGetAnimeVideosQuery,
   useUpdateAnimeMutation
-} from "../../../../services/Collections/AnimeService";
-import {useParams} from "react-router";
-import Loader from "../../../Loader";
-import HCollectionCard from "../../../HCollection/HCollectionCard";
-import {IAnime, IAnimeVideos} from "../../../../types/Anime";
-import AnimeVideos from "../../../HCollection/AnimeVideos";
-import AnimeFields from "../Anime/AnimeFields";
-import AnimeVideoFields from "./AnimeVideoFields";
+} from "../../../services/Collections/AnimeService";
+import {IAnime, IAnimeVideos} from "../../../types/Anime";
+import Loader from "../../../components/Loader";
+import AnimeFields from "../../../components/admin/Collections/Anime/AnimeFields";
+import AnimeVideoFields from "../../../components/admin/Collections/Anime/AnimeVideoFields";
+import HCollectionCard from "../../../components/HCollection/HCollectionCard";
+import AnimeVideos from "../../../components/HCollection/AnimeVideos";
 
 const AnimeEdit = () => {
   const {id} = useParams();

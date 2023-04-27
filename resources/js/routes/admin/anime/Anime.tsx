@@ -1,11 +1,11 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import {
   useAddTagToAnimeMutation,
   useGetAllAnimeNPQuery,
   useRemoveTagMutation
-} from "../../services/Collections/AnimeService";
-import HCollectionCard from "../../components/HCollection/HCollectionCard";
-import {Link} from "react-router-dom";
+} from "../../../services/Collections/AnimeService";
+import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 
 const Anime = () => {
   const {data} = useGetAllAnimeNPQuery(null);
