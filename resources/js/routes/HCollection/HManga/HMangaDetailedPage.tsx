@@ -3,18 +3,23 @@ import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import Modal from "../../../components/UI/modal";
-import {useGetCollectionByIdQuery} from "../../../services/HCollectionService";
+import {
+  useAddTagToMangaMutation,
+  useGetMangaByIdQuery,
+  useRemoveTagMutation
+} from "../../../services/Collections/MangaService";
 
 const HMangaDetailedPage = () => {
   const passkey = localStorage.getItem("passkey");
   const [page, setPage] = useState({page: null, link: ""});
   const [isModal, setIsModal] = useState(false);
   const {id} = useParams();
-  const {data} = useGetCollectionByIdQuery({passkey, id, type: "manga"});
+  const {data} = useGetMangaByIdQuery({passkey, id});
+  const [addTag, {}] = useAddTagToMangaMutation();
+  const [removeTag] = useRemoveTagMutation();
 
   const viewHandler = (page, link) => {
-    setPage({...page, page: page});
-    setPage({...page, link: link});
+    setPage({...page, page: page, link: link});
     setIsModal(true);
   };
   return (
@@ -23,7 +28,7 @@ const HMangaDetailedPage = () => {
         <img className="p-4 max-h-screen" src={page.link} alt=""/>
       </Modal>
       <div className={"m-4 flex flex-col gap-4"}>
-        <HCollectionCard collection={data}/>
+        <HCollectionCard addTag={addTag} removeTag={removeTag} collection={data}/>
         <div className={"grid md:grid-cols-6 xs:grid-cols-3 gap-4 bg-neutral-700 rounded-lg p-4"}>
           {data?.pages?.map(p =>
             <Link to={`reader?page=${p.pageNumber}`} key={p.id} className={"basis-1/6"}>

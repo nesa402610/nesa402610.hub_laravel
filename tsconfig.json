@@ -3,7 +3,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "lib": [
-      "ES2016",
+      "ES2022",
       "DOM"
     ]
   }

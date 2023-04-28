@@ -3,7 +3,10 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\HCollectionController;
+use App\Http\Controllers\Collections\AnimeController;
+use App\Http\Controllers\Collections\MangaController;
+use App\Http\Controllers\Collections\StudioController;
+use App\Http\Controllers\Collections\TagController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\UserController;
@@ -35,9 +38,18 @@ Route::get('/blog', [BlogPostController::class, 'getAllPosts']);
 Route::get('/blog/{id}', [BlogPostController::class, 'getPostById']);
 Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
-Route::post('/NULL', [HCollectionController::class, 'getAllTitles']);
-Route::post('/NULL/{id}', [HCollectionController::class, 'getTitleById']);
 Route::get('/users', [UserController::class, 'getAllUsers']);
+
+Route::prefix('/anime')->group(function () {
+    Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
+    Route::post('{id}', [AnimeController::class, 'getAnimeById']);
+    Route::get('{id}/videos', [AnimeController::class, 'getAnimeVideos']);
+});
+Route::prefix('/manga')->group(function () {
+    Route::post('list', [MangaController::class, 'getPaginatedManga']);
+    Route::post('{id}', [MangaController::class, 'getMangaById']);
+});
+Route::get('/tags/list', [TagController::class, 'getAllTags']);
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
@@ -47,10 +59,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
     Route::prefix('user')->group(function () {
         Route::get('/', [AuthController::class, 'checkLogin']);
-        Route::post('/edit/account', [UserController::class, 'updateAccount']);
-        Route::post('/edit/profile', [UserController::class, 'updateProfile']);
-        Route::post('/edit/password', [UserController::class, 'updatePassword']);
-        Route::post('/edit/email', [UserController::class, 'updateEmail']);
+        Route::get('/list', [UserController::class, 'getAllUsers']);
+        Route::prefix('edit')->group(function () {
+            Route::post('account', [UserController::class, 'updateAccount']);
+            Route::post('profile', [UserController::class, 'updateProfile']);
+            Route::post('password', [UserController::class, 'updatePassword']);
+            Route::post('email', [UserController::class, 'updateEmail']);
+        });
     });
     Route::prefix('admin')->middleware(AdminProof::class)->group(function () {
         Route::post('/createProject', [ProjectController::class, 'createProject']);
@@ -75,16 +90,42 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/update', [SuggestionController::class, 'updateSuggestion']);
         Route::post('/setStatus', [SuggestionController::class, 'setStatus'])->middleware(AdminProof::class);
     });
-    Route::prefix('NULL')->group(function () {
-        Route::middleware([AdminProof::class])->group(function () {
-            Route::patch('/update', [HCollectionController::class, 'updateTitle']);
-            Route::patch('/add', [HCollectionController::class, 'addTitle']);
-            Route::put('/passkey', [HCollectionController::class, 'generatePasskey']);
-            Route::get('/passkeys', [HCollectionController::class, 'getAllPasskeys']);
-            Route::get('/tags', [HCollectionController::class, 'getAllTags'])->withoutMiddleware(['auth:sanctum', AdminProof::class]);
-            Route::put('/tags/add', [HCollectionController::class, 'addTagToCollection']);
-            Route::delete('/tags/delete', [HCollectionController::class, 'deleteTagFromCollection']);
+//    Route::prefix('manga')->group(function () {
+//        Route::middleware([AdminProof::class])->group(function () {
+//            Route::patch('/update', [MangaController::class, 'updateTitle']);
+//            Route::patch('/add', [MangaController::class, 'addTitle']);
+//            Route::put('/passkey', [MangaController::class, 'generatePasskey']);
+//            Route::get('/passkeys', [MangaController::class, 'getAllPasskeys']);
+//            Route::put('/tags/add', [MangaController::class, 'addTagToCollection']);
+//            Route::delete('/tags/remove', [MangaController::class, 'deleteTagFromCollection']);
+//        });
+//    });
+    Route::middleware([AdminProof::class])->group(function () {
+        Route::prefix('anime')->group(function () {
+            Route::get('all', [AnimeController::class, 'getAllAnime']);
+            Route::put('new', [AnimeController::class, 'createAnime']);
+            Route::patch('update', [AnimeController::class, 'updateAnime']);
+            Route::put('/tags/add', [AnimeController::class, 'addTag']);
+            Route::delete('/tags/remove', [AnimeController::class, 'removeTag']);
+            Route::delete('videos/delete/{id}', [AnimeController::class, 'deleteAnimeVideo']);
+            Route::prefix('studios')->group(function () {
+                Route::get('/list', [StudioController::class, 'getAllStudios']);
+                Route::put('/create', [StudioController::class, 'createStudio']);
+                Route::patch('/update', [StudioController::class, 'updateStudio']);
+            });
         });
-        Route::post('/passkey/validate', [HCollectionController::class, 'validatePasskey']);
+        Route::prefix('manga')->group(function () {
+            Route::get('all', [MangaController::class, 'getAllManga']);
+            Route::get('list', [AnimeController::class, 'getAllAnime']);
+            Route::get('list', [AnimeController::class, 'getAllAnime']);
+            Route::get('list', [AnimeController::class, 'getAllAnime']);
+            Route::get('list', [AnimeController::class, 'getAllAnime']);
+        });
+        Route::prefix('tags')->group(function () {
+            Route::post('new', [TagController::class, 'createTag']);
+            Route::patch('update', [TagController::class, 'updateTag']);
+            Route::patch('delete', [TagController::class, 'deleteTag']);
+        });
     });
 });
+

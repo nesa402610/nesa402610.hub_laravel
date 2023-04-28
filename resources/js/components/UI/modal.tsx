@@ -11,7 +11,7 @@ const Modal: FC<ModalProps> = ({title, isOpen, children, onClose}) => {
   if (!isOpen) return null;
 
   return (
-    <div className={"fixed left-[80px] backdrop-blur-md z-40 overflow-auto h-full top-0 left-0 bg-neutral-900/75 w-full flex justify-center items-center"}
+    <div className={"fixed backdrop-blur-md z-[9000] overflow-auto h-full top-0 left-0 bg-neutral-900/75 w-full flex justify-center items-center"}
          onClick={() => onClose(false)}
     >
       <div className={"absolute mx-8 flex flex-col"} onClick={e => e.stopPropagation()}>

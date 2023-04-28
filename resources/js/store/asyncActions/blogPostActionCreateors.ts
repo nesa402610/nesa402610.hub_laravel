@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import {IPost} from "../../types/types";
+import {IPost} from "../../types/Post";
 
 export const fetchPosts = createAsyncThunk(
     'blog/fetchAll',

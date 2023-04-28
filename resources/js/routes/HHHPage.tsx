@@ -1,25 +1,30 @@
 import React, {useEffect, useState} from "react";
-import {useGetCollectionTagsQuery} from "../services/HCollectionService";
-import {Outlet} from "react-router-dom";
+import {Outlet, useLocation, useNavigate} from "react-router-dom";
 import HCollectionFilter from "../components/HCollection/HCollectionFilter";
+import {useGetTagsQuery} from "../services/Collections/TagService";
 
 export const filterCollection = (collections, filter) => {
-  const filteredByTitle = collections?.collections.data.filter(c => c.title_ru.toLowerCase().includes(filter.title.toLowerCase()));
+  const filteredByTitle = collections?.data.filter(c => c.title_ru.toLowerCase().includes(filter.title.toLowerCase()));
   return filteredByTitle?.filter(item => {
     return filter.tags.every(tf => item.tags?.map(it => it.name).includes(tf));
   });
 };
 const HHHPage = () => {
 
-  const {data: tags, isLoading: tagsLoad} = useGetCollectionTagsQuery("");
+  const {data: tags, isLoading: tagsLoad} = useGetTagsQuery("");
   const [filter, setFilter] = useState({
     title: "",
     type: "anime",
     tags: []
   });
+  const location = useLocation();
+  const nav = useNavigate();
   useEffect(() => {
     if (/m$/.test(location.pathname)) {
       setFilter({...filter, type: "manga"});
+    } else {
+      nav("a");
+      setFilter({...filter, type: "anime"});
     }
   }, []);
 

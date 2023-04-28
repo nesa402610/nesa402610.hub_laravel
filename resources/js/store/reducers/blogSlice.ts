@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IComment, IPost} from "../../types/types";
 import {fetchPosts} from "../asyncActions/blogPostActionCreateors";
+import {IComment, IPost} from "../../types/Post";
 
 const initialState: postsState = {
     posts: [],

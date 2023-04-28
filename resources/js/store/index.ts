@@ -5,7 +5,11 @@ import {projectAPI} from "../services/projectService";
 import {postAPI} from "../services/postService";
 import {taskAPI} from "../services/tasksService";
 import {chatAPI} from "../services/chatService";
-import {hcollectionAPI} from "../services/HCollectionService";
+import {CollectionsAPI} from "../services/Collections/HCollectionService";
+import {TagAPI} from "../services/Collections/TagService";
+import {AnimeAPI} from "../services/Collections/AnimeService";
+import {MangaAPI} from "../services/Collections/MangaService";
+import {StudioAPI} from "../services/Collections/StudioService";
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +19,11 @@ export const store = configureStore({
     [postAPI.reducerPath]: postAPI.reducer,
     [taskAPI.reducerPath]: taskAPI.reducer,
     [chatAPI.reducerPath]: chatAPI.reducer,
-    [hcollectionAPI.reducerPath]: hcollectionAPI.reducer,
+    [CollectionsAPI.reducerPath]: CollectionsAPI.reducer,
+    [TagAPI.reducerPath]: TagAPI.reducer,
+    [AnimeAPI.reducerPath]: AnimeAPI.reducer,
+    [StudioAPI.reducerPath]: StudioAPI.reducer,
+    [MangaAPI.reducerPath]: MangaAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
@@ -24,9 +32,13 @@ export const store = configureStore({
       postAPI.middleware,
       taskAPI.middleware,
       chatAPI.middleware,
-      hcollectionAPI.middleware,
+      CollectionsAPI.middleware,
+      AnimeAPI.middleware,
+      StudioAPI.middleware,
+      MangaAPI.middleware,
+      TagAPI.middleware,
     ])
-})
+});
 
 export type RootState = ReturnType<typeof store.getState>
 

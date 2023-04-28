@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {IoSettingsSharp} from "react-icons/io5";
-import {IUser} from "../types/types";
 import moment from "moment";
 import {useParams} from "react-router";
 import axios from "axios";
 import {useGetUserQuery} from "../services/userService";
 import Loader from "../components/Loader";
+import {IUser} from "../types/User";
 
 const ProfilePage = () => {
   const {data: authedUser} = useGetUserQuery("");

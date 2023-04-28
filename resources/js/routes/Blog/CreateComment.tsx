@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
-import {IPost} from "../../types/types";
 import {useGetUserQuery} from "../../services/userService";
 import {useCreateCommentMutation} from "../../services/postService";
+import {IPost} from "../../types/Post";
 
 interface CreateCommentProps {
   handler?: any

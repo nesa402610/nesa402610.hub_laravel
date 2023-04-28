@@ -1,9 +1,9 @@
 import React, {FC, useState} from 'react';
-import {IUser} from "../types/types";
 import {Link} from "react-router-dom";
 import {useGetUserQuery} from "../services/userService";
 import {useGetMessagesQuery, useSendMessageMutation} from "../services/chatService";
 import Loader from "../components/Loader";
+import {IUser} from "../types/User";
 
 interface IMessage {
     id: number

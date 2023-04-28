@@ -1,14 +1,14 @@
 import React, {FC, useEffect} from "react";
 import {useParams} from "react-router";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {useGetCollectionByIdQuery} from "../../../services/HCollectionService";
+import {useGetMangaByIdQuery} from "../../../services/Collections/MangaService";
 
 const HReader: FC = () => {
   const passkey = localStorage.getItem("passkey");
   const {id} = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const nav = useNavigate();
-  const {data} = useGetCollectionByIdQuery({passkey, id, type: "manga"}, {
+  const {data} = useGetMangaByIdQuery({passkey, id, type: "manga"}, {
     selectFromResult: ({data}) => ({
       data: data?.pages.find(p => p.pageNumber == searchParams.get("page")),
     })

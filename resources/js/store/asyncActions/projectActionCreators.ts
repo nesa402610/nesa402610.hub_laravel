@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-import {IProject} from "../../types/types";
+import {IProject} from "../../types/Project";
 
 export const fetchProjects = createAsyncThunk(
     'projects/fetchAll',
