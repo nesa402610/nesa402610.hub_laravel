@@ -64,7 +64,7 @@ export const AnimeAPI = createApi({
         method: "PUT",
         body: data
       }),
-      invalidatesTags: ["anime"]
+      invalidatesTags: ["anime", "animeList"]
     }),
     removeTag: builder.mutation({
       query: (data) => ({
@@ -72,7 +72,7 @@ export const AnimeAPI = createApi({
         method: "DELETE",
         body: data
       }),
-      invalidatesTags: ["anime"]
+        invalidatesTags: ["anime", "animeList"]
     }),
     addAnime: builder.mutation<IAnime, IAnime>({
       query: (data) => ({
@@ -88,7 +88,7 @@ export const AnimeAPI = createApi({
         method: "PATCH",
         body: data
       }),
-      invalidatesTags: ["animeList"]
+        invalidatesTags: ["animeList", 'anime']
     }),
     deleteAnime: builder.mutation({
       query: (id) => ({
