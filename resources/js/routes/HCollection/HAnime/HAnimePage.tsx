@@ -1,14 +1,14 @@
 import React, {FC, useState} from "react";
-import {useOutletContext} from "react-router-dom";
 import Loader from "../../../components/Loader";
-import {filterCollection} from "../../HHHPage";
 import Paginator from "../../../components/UI/Paginator";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import {
-  useAddTagToAnimeMutation,
-  useGetAllAnimeQuery,
-  useRemoveTagMutation
+    useAddTagToAnimeMutation,
+    useGetAllAnimeQuery,
+    useRemoveTagMutation
 } from "../../../services/Collections/AnimeService";
+import {useAppSelector} from "../../../hooks/redux";
+import {filterCollection} from "../../HHHPage";
 
 
 // interface HAnimePageProps {
@@ -18,8 +18,8 @@ import {
 // }
 
 const HAnimePage: FC = () => {
-  const filter = useOutletContext();
-  const passkey = localStorage.getItem("passkey");
+    const {filter} = useAppSelector(state => state.collection)
+    const passkey = localStorage.getItem("passkey");
   const [page, setPage] = useState(1);
   const {data, isLoading, refetch} = useGetAllAnimeQuery({passkey, page});
   const [addTag] = useAddTagToAnimeMutation();

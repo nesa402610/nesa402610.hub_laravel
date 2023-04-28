@@ -1,20 +1,20 @@
 import React, {useState} from "react";
-import {useOutletContext} from "react-router-dom";
-import {filterCollection} from "../../HHHPage";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
 import {useGetAllMangaQuery} from "../../../services/Collections/MangaService";
+import {filterCollection} from "../../HHHPage";
+import {useAppSelector} from "../../../hooks/redux";
 
 
 const HMangaPage = () => {
-  const filter = useOutletContext();
-  const passkey = localStorage.getItem("passkey");
-  const [page, setPage] = useState(1);
-  const {data, isLoading, error, isFetching, refetch} = useGetAllMangaQuery({passkey, page});
-  const filteredCollection = filterCollection(data, filter);
-  if (isLoading) return <Loader/>;
-  return (
+    const {filter} = useAppSelector(state => state.collection)
+    const passkey = localStorage.getItem("passkey");
+    const [page, setPage] = useState(1);
+    const {data, isLoading, error, isFetching, refetch} = useGetAllMangaQuery({passkey, page});
+    const filteredCollection = filterCollection(data, filter);
+    if (isLoading) return <Loader/>;
+    return (
     <div className={"block--dark flex flex-col gap-4"}>
       {!isFetching ? filteredCollection?.map(collectionItem =>
         <HCollectionCard key={collectionItem.id}
