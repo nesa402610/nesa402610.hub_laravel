@@ -1,5 +1,13 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../mockData";
+import {IUser} from "../types/User";
+
+interface IChat {
+    id: number
+    user_id: number
+    message: string
+    user: IUser
+}
 
 export const chatAPI = createApi({
     reducerPath: 'chatAPI',
@@ -12,15 +20,15 @@ export const chatAPI = createApi({
     }),
     tagTypes: ['Message'],
     endpoints: build => ({
-        getMessages: build.query({
+        getMessages: build.query<IChat[], null>({
             query: () => '',
             providesTags: ['Message']
         }),
-        sendMessage: build.mutation({
+        sendMessage: build.mutation<IChat, string>({
             query: (message) => ({
                 url: 'send',
                 method: 'POST',
-                body: message,
+                body: {message},
             }),
             invalidatesTags: ['Message']
         })

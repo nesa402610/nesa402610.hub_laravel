@@ -3,22 +3,10 @@ import {Link} from "react-router-dom";
 import {useGetUserQuery} from "../services/userService";
 import {useGetMessagesQuery, useSendMessageMutation} from "../services/chatService";
 import Loader from "../components/Loader";
-import {IUser} from "../types/User";
-
-interface IMessage {
-    id: number
-    user_id: number
-    user: IUser
-    message: string
-}
-
-interface IChat {
-    message: IMessage
-}
 
 const ChatPage: FC = () => {
     const [message, setMessage] = useState('');
-    const {data: messages, isLoading} = useGetMessagesQuery('',
+    const {data: messages, isLoading} = useGetMessagesQuery(null,
         {pollingInterval: 15000}
     )
     const [sendMessage, {}] = useSendMessageMutation()
@@ -29,7 +17,7 @@ const ChatPage: FC = () => {
         if (message.length > 0 && e.key === 'Enter' && !timer) {
             setTimer(true)
             setMessage('')
-            sendMessage({message})
+            sendMessage(message)
             setTimeout(() => {
                 setTimer(false)
             }, 2000)
@@ -59,7 +47,7 @@ const ChatPage: FC = () => {
                 ) : <Loader/>}
             </div>
             {isAuth ? <input type="text"
-                             onKeyPress={e => sendMessageHandler(e)}
+                             onKeyPress={sendMessageHandler}
                              onChange={e => setMessage(e.target.value)}
                              placeholder={!timer ? 'Сообщение...' : 'Таймаут...'}
                              value={message}
