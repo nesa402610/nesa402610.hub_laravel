@@ -37,10 +37,10 @@ const ChatPage: FC = () => {
     }
 
     return (
-        <div className={'ml-4 block--dark flex gap-4 justify-between h-screen sm:flex-col'}>
+        <div className={'ml-4 block--dark flex gap-4 justify-between h-screen flex-col'}>
             <div className={'h-full overflow-auto'}>
                 {messages ? messages.map(msg =>
-                    <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center xs:flex-col xs:items-start'}>
+                    <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center flex-col xs:items-start'}>
                         {/*<div className={'w-[40px]'}>*/}
                         {/*    {msg.id}*/}
                         {/*</div>*/}
@@ -61,7 +61,7 @@ const ChatPage: FC = () => {
             {isAuth ? <input type="text"
                              onKeyPress={e => sendMessageHandler(e)}
                              onChange={e => setMessage(e.target.value)}
-                             placeholder={'Сообщение...'}
+                             placeholder={!timer ? 'Сообщение...' : 'Таймаут...'}
                              value={message}
                              disabled={timer}
                 /> :
