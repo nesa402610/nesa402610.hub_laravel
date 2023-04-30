@@ -18,7 +18,7 @@ const HHHPage: FC = () => {
         if (/m$/.test(location.pathname)) {
             dispatch(setFilterType('manga'))
         } else {
-            nav("a");
+            nav("a", {replace: true});
             dispatch(setFilterType('anime'))
         }
     }, []);

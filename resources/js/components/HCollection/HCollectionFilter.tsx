@@ -21,6 +21,7 @@ const HCollectionFilter: FC = () => {
         <div className={"flex sm:p-4 xs:p-2 flex-col gap-4"}>
             <input type="text"
                    value={filter.title}
+                   placeholder={'Название'}
                    onChange={e => dispatch(setFilterTitle(e.target.value))}/>
             <div className={"flex gap-4"}>
                 <select className={"bg-neutral-600 p-2 rounded-lg"}
