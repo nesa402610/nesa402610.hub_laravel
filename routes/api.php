@@ -34,8 +34,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 Route::get('/projects', [ProjectController::class, 'getAllProjects']);
 Route::get('/profile/{username}', [UserController::class, 'getUser']);
-Route::get('/blog', [BlogPostController::class, 'getAllPosts']);
-Route::get('/blog/{id}', [BlogPostController::class, 'getPostById']);
 Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
 Route::get('/users', [UserController::class, 'getAllUsers']);
@@ -73,10 +71,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::patch('/updateProject/{id}', [ProjectController::class, 'updateProject']);
     });
     Route::prefix('blog')->group(function () {
-        Route::prefix('comments')->group(function () {
-            Route::put('create', [BlogPostController::class, 'createComment']);
-            Route::patch('update', [BlogPostController::class, 'editComment']);
-            Route::delete('delete', [BlogPostController::class, 'deleteComment']);
+        Route::get('', [BlogPostController::class, 'getAllPosts'])->withoutMiddleware('auth:sanctum');
+        Route::prefix('{id}')->group(function () {
+            Route::get('', [BlogPostController::class, 'getPostById'])->withoutMiddleware('auth:sanctum');
+            Route::prefix('comments')->group(function () {
+                Route::get('list', [BlogPostController::class, 'getPostComments']);
+                Route::put('create', [BlogPostController::class, 'createComment']);
+                Route::patch('update', [BlogPostController::class, 'editComment']);
+                Route::delete('delete', [BlogPostController::class, 'deleteComment']);
+            });
         });
         Route::middleware([AdminProof::class])->group(function () {
             Route::put('/create', [BlogPostController::class, 'createPost']);

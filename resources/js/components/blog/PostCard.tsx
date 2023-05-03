@@ -7,46 +7,44 @@ import PostForm from "../admin/PostForm";
 import {IPost} from "../../types/Post";
 import {IUser} from "../../types/User";
 
-
 interface PostCardProps {
-  post: IPost
-  user: IUser
+    post: IPost
+    user: IUser
 }
 
 const PostCard: FC<PostCardProps> = ({post, user}) => {
-  const [isModal, setIsModal] = useState<boolean>(false);
+    const [isModal, setIsModal] = useState<boolean>(false);
 
-  return (
-    <>
-      <PostForm isModal={isModal} setIsModal={setIsModal} post={post}/>
-      <Link to={`${post.id}`} key={post.id}>
-        <div
-          className={' h-[250px] transition-all cursor-pointer hover:-translate-y-2 group drop-shadow-xl sm:flex-col xs:justify-start' + (post.visibility ? ' brightness-150 block--dark opacity-30' : ' block--light')}>
-          {user?.id == 1 &&
-            <PostCardAdmin post={post} setIsModal={setIsModal}/>
-          }
-          <div className={'flex justify-between gap-2'}>
-                        <span
-                          className={'font-bold overflow-hidden overflow-ellipsis whitespace-nowrap'}>
+    return (
+        <>
+            <PostForm isModal={isModal} setIsModal={setIsModal} post={post}/>
+            <Link to={`${post.id}`} key={post.id}>
+                <div
+                    className={'flex h-[250px] transition-all cursor-pointer hover:-translate-y-2 drop-shadow-xl sm:flex-col xs:justify-start' + (post.visibility ? ' brightness-150 block--dark opacity-30' : ' block--light')}>
+                    {user?.id == 1 &&
+                        <PostCardAdmin post={post} setIsModal={setIsModal}/>
+                    }
+                    <div className={'flex justify-between gap-2'}>
+                        <span className={'font-bold overflow-hidden overflow-ellipsis whitespace-nowrap'}>
                     {post.title}
                         </span>
-          </div>
-          <div className={'flex-1 overflow-ellipsis'}>
-            {post.body.length > 180 ?
-              post.body.substring(0, 180) + '....'
-              : post.body
-            }
-          </div>
-          <div className={'flex justify-end'}>
+                    </div>
+                    <div className={'flex-1 overflow-ellipsis'}>
+                        {post.body.length > 180 ?
+                            post.body.substring(0, 180) + '....'
+                            : post.body
+                        }
+                    </div>
+                    <div className={'flex justify-end'}>
                         <span className={'flex items-center gap-1'}>
                             {moment(post.created_at).format('DD.MM.YYYY')}
-                          <BiTime className={'text-lg'}/>
+                            <BiTime className={'text-lg'}/>
                         </span>
-          </div>
-        </div>
-      </Link>
-    </>
-  );
+                    </div>
+                </div>
+            </Link>
+        </>
+    );
 };
 
 export default PostCard;

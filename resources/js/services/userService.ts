@@ -1,5 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../mockData";
+import {IUser} from "../types/User";
 
 export const userAPI = createApi({
   reducerPath: "userApi",
@@ -12,10 +13,10 @@ export const userAPI = createApi({
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
-    getUser: builder.query({
-      query: () => ``,
-      providesTags: ["User"]
-    }),
+      getUser: builder.query<IUser, void>({
+          query: () => ``,
+          providesTags: ["User"]
+      }),
     updateProfile: builder.mutation({
       query: (data) => ({
         url: "/edit/profile",
@@ -32,10 +33,10 @@ export const userAPI = createApi({
       }),
       invalidatesTags: ["User"]
     }),
-    getAllUsers: builder.query({
-      query: () => `list`,
-      providesTags: ["User"]
-    }),
+      getAllUsers: builder.query<IUser[], void>({
+          query: () => `list`,
+          providesTags: ["User"]
+      }),
   }),
 });
 
