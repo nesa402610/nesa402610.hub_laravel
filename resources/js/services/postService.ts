@@ -21,7 +21,7 @@ export const postAPI = createApi({
             query: (id) => `${id}`,
             providesTags: ['Post']
         }),
-        getPostComments: builder.query<IComment[], string>({
+        getPostComments: builder.query<IComment[], number>({
             query: (id) => ({
                 url: `${id}/comments/list`
             }),
@@ -33,7 +33,7 @@ export const postAPI = createApi({
                 method: 'PUT',
                 body: data
             }),
-            invalidatesTags: ['CommentList']
+            invalidatesTags: ['PostList']
         }),
         updatePost: builder.mutation({
             query: (data) => ({
@@ -79,7 +79,7 @@ export const postAPI = createApi({
             query: ({postId, id}) => ({
                 url: `${id}/comments/delete`,
                 method: 'DELETE',
-                body: postId
+                body: {id}
             }),
             invalidatesTags: ['CommentList']
         })

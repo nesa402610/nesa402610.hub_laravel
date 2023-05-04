@@ -4,18 +4,14 @@ import {useDeleteCommentMutation} from "../services/postService";
 
 interface CommentEditProps {
     id: number
-    postId: string
+    postId: number
     setIsEdit: any
-    body: string
-    setComment: any
 }
 
-const CommentEdit: FC<CommentEditProps> = ({id, postId, setIsEdit, body, setComment}) => {
+const CommentEdit: FC<CommentEditProps> = ({id, postId, setIsEdit}) => {
     const [deleteComment, {}] = useDeleteCommentMutation()
     const updateCommentHandler = () => {
         setIsEdit(id)
-        setComment(body)
-        // axios.post('/blog/comments/edit')
     }
     const deleteCommentHandler = () => {
         deleteComment({postId, id})
