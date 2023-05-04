@@ -42,8 +42,8 @@ const RegistrationPage: FC = () => {
             })
     }
     return (
-        <div className={'flex flex-col items-center justify-center h-screen'}>
-            <form className={'flex flex-col gap-4 bg-neutral-800 p-4 rounded-lg'}>
+        <div className={'flex flex-col items-center justify-center h-screen xs:p-4 sm:p-0'}>
+            <form className={'flex flex-col gap-4 bg-neutral-800 p-4 rounded-lg xs:w-full sm:w-auto'}>
                 <h3 className={'text-center text-2xl'}>Вход в аккаунт</h3>
                 {errors ? <h4 className={'text-center text-rose-400 text-lg'}>
                         Проверьте данные. с ними все впорядке?</h4>
