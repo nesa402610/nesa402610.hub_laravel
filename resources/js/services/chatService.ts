@@ -20,7 +20,7 @@ export const chatAPI = createApi({
     }),
     tagTypes: ['Message'],
     endpoints: build => ({
-        getMessages: build.query<IChat[], null>({
+        getMessages: build.query<IChat[], void>({
             query: () => '',
             providesTags: ['Message']
         }),

@@ -17,8 +17,8 @@ interface CollectionProps {
 }
 
 const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, addTag, removeTag}) => {
-  const {data: user} = useGetUserQuery("");
-  const [tagDropDown, setTagDropDown] = useState(false);
+  const {data: user} = useGetUserQuery();
+    const [tagDropDown, setTagDropDown] = useState(false);
   if (!collection) return null;
   return (
     <div className={"bg-neutral-700 p-4 rounded-lg"}>

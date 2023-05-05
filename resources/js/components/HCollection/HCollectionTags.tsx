@@ -2,7 +2,7 @@ import React from "react";
 import {useGetUserQuery} from "../../services/userService";
 
 const HCollectionTags = ({collection, removeTag}) => {
-    const {data: user} = useGetUserQuery("");
+    const {data: user} = useGetUserQuery();
 
     const deleteTagHandler = (titleId, tagId) => {
         removeTag({titleId, tagId});

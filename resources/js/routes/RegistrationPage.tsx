@@ -1,6 +1,7 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import {useGetUserQuery} from "../services/userService";
 
 interface userProps {
     name: string;
@@ -10,6 +11,7 @@ interface userProps {
 }
 
 const RegistrationPage: FC = () => {
+    const {data: authedUser} = useGetUserQuery()
     const [user, setUser] = useState<userProps>({name: '', password: '', passwordConfirm: '', email: ''})
     const [errors, setErrors] = useState<boolean>(false)
     const navigate = useNavigate()
@@ -23,7 +25,7 @@ const RegistrationPage: FC = () => {
                 password_confirmation: user.passwordConfirm,
                 email: user.email
             }).then(() => {
-                navigate('/');
+            navigate('/');
         }).catch(err => {
             setErrors(err.response.data.errors)
             // for (const err in errorsArr) {
@@ -33,6 +35,11 @@ const RegistrationPage: FC = () => {
             // }
         })
     }
+    useEffect(() => {
+        if (authedUser) {
+            navigate(-1)
+        }
+    }, [authedUser]);
     return (
         <div className={'flex flex-col items-center justify-center h-screen xs:p-4 sx:p-0'}>
             <div className={'flex flex-col gap-4 bg-neutral-800 p-4 rounded-lg xs:w-full sm:w-auto'}>

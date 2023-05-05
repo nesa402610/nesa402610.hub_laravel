@@ -8,17 +8,17 @@ import {useGetUserQuery} from "../../services/userService";
 
 const Rating = ({project}) => {
   const dispatch = useAppDispatch();
-  const {data: user} = useGetUserQuery("");
-  const setRatingHandle = (e, value) => {
-    if (project.status !== "Planned" &&
-      user &&
-      user.rates.filter(item => item.project_id === project.id).length <= 0
-    ) {
-      axios.post("/setRating", {
-        project_id: project.id,
-        rating: value
-      }).then(r => {
-        dispatch(setRating({id: project.id, rate: r.data}));
+    const {data: user} = useGetUserQuery();
+    const setRatingHandle = (e, value) => {
+        if (project.status !== "Planned" &&
+            user &&
+            user.rates.filter(item => item.project_id === project.id).length <= 0
+        ) {
+            axios.post("/setRating", {
+                project_id: project.id,
+                rating: value
+            }).then(r => {
+                dispatch(setRating({id: project.id, rate: r.data}));
         dispatch(rated({id: project.id, rating: value}));
       });
     }

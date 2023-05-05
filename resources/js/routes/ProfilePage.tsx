@@ -1,39 +1,37 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {IoSettingsSharp} from "react-icons/io5";
 import moment from "moment";
 import {useParams} from "react-router";
-import axios from "axios";
 import {useGetUserQuery} from "../services/userService";
 import Loader from "../components/Loader";
-import {IUser} from "../types/User";
 
 const ProfilePage = () => {
-  const {data: authedUser} = useGetUserQuery("");
-  const [user, setUser] = useState<IUser>(null);
-  const {username} = useParams();
+    const {username} = useParams();
+    const {data: user, isLoading} = useGetUserQuery(username);
+    // const [user, setUser] = useState<IUser>(null);
 
-  useEffect(() => {
-    if (authedUser?.id == username || !username) {
-      return setUser(authedUser);
-    } else {
-      axios.get("/profile/" + username)
-        .then(r => {
-          setUser(r.data);
-        });
-    }
+    // useEffect(() => {
+    //   if (authedUser?.id === +username || !username) {
+    //     return setUser(authedUser);
+    //   } else {
+    //     axios.get("/profile/" + username)
+    //       .then(r => {
+    //         setUser(r.data);
+    //       });
+    //   }
+    //
+    // }, [username]);
 
-  }, [username]);
+    if (!user) return <Loader/>;
 
-  if (!user) return <Loader/>;
-
-  return (
-    <div className={"p-4"}>
-      <div className={"block--light"}>
-        <div className={"flex sm:flex-row xs:flex-col gap-4 w-full"}>
-          <div className={"flex xs:items-center flex-col gap-2 sm:items-end"}>
-            <img className={"rounded-lg"}
-                 width={"200px"}
+    return (
+        <div className={"p-4"}>
+            <div className={"block--light"}>
+                <div className={"flex sm:flex-row xs:flex-col gap-4 w-full"}>
+                    <div className={"flex xs:items-center flex-col gap-2 sm:items-end"}>
+                        <img className={"rounded-lg"}
+                             width={"200px"}
                  height={"200px"}
                  src={user.avatar}
                  alt="user profile picture"/>

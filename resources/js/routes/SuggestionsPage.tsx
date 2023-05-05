@@ -10,19 +10,19 @@ import Loader from "../components/Loader";
 
 
 const SuggestionsPage: FC = () => {
-  const [isModal, setIsModal] = useState(false);
-  const {data: isAuth} = useGetUserQuery("");
-  const {data: tasks, isLoading} = useGetTasksQuery("");
-  const [hover, setHover] = useState(0);
+    const [isModal, setIsModal] = useState(false);
+    const {data: isAuth} = useGetUserQuery();
+    const {data: tasks, isLoading} = useGetTasksQuery();
+    const [hover, setHover] = useState(0);
 
-  const addNewIdea = () => {
-    setIsModal(true);
-  };
-  const closeHandler = () => {
-    setIsModal(false);
-  };
-  const adminMenu = (id) => {
-    setHover(id);
+    const addNewIdea = () => {
+        setIsModal(true);
+    };
+    const closeHandler = () => {
+        setIsModal(false);
+    };
+    const adminMenu = (id) => {
+        setHover(id);
   };
   if (isLoading) return <Loader/>;
   return (

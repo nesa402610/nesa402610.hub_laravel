@@ -12,8 +12,8 @@ interface TaskActionsProps {
 }
 
 const TaskActions: FC<TaskActionsProps> = ({task, hover}) => {
-  const {data: user} = useGetUserQuery("");
-  const [setStatus, {}] = useSetTaskStatusMutation();
+  const {data: user} = useGetUserQuery();
+    const [setStatus, {}] = useSetTaskStatusMutation();
   const setStatusHandler = (e: React.MouseEvent<HTMLSpanElement>, id: number, status: number) => {
     e.preventDefault();
     setStatus({id, status});

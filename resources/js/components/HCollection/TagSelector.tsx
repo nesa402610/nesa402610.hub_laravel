@@ -1,18 +1,18 @@
 import React, {FC, useEffect, useState} from "react";
-import {ICollection} from "../../types/types";
 import Loader from "../Loader";
 import {useGetTagsQuery} from "../../services/Collections/TagService";
 import {ICollectionTag} from "../../types/Tag";
+import {IAnime} from "../../types/Anime";
 
 interface TagSelectorProps {
-  collection: ICollection;
+    collection: IAnime;
 
-  addTag({titleId, tagId}): any;
+    addTag({titleId, tagId}): any;
 }
 
 const TagSelector: FC<TagSelectorProps> = ({collection, addTag}) => {
-  const {data: tags, isLoading} = useGetTagsQuery("");
-  const [freeTags, setFreeTags] = useState<ICollectionTag[]>([]);
+    const {data: tags, isLoading} = useGetTagsQuery();
+    const [freeTags, setFreeTags] = useState<ICollectionTag[]>([]);
 
   useEffect(() => {
     if (!tags) return;

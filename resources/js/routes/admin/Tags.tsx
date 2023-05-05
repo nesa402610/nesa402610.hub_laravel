@@ -4,8 +4,8 @@ import List from "../../components/admin/List";
 import QuickAdder from "../../components/admin/QuickAdder";
 
 const Tags = () => {
-  const {data} = useGetTagsQuery("");
-  const [tag, setTag] = useState("");
+  const {data} = useGetTagsQuery();
+    const [tag, setTag] = useState("");
   const [createTag, {error}] = useCreateTagMutation();
   const [updateTag] = useUpdateTagMutation();
   return (

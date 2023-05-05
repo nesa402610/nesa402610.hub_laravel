@@ -33,10 +33,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
 });
 Route::get('/projects', [ProjectController::class, 'getAllProjects']);
-Route::get('/profile/{username}', [UserController::class, 'getUser']);
 Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
-Route::get('/users', [UserController::class, 'getAllUsers']);
 
 Route::prefix('/anime')->group(function () {
     Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
@@ -56,8 +54,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/send', [ChatController::class, 'sendMessage']);
     });
     Route::prefix('user')->group(function () {
-        Route::get('/', [AuthController::class, 'checkLogin']);
-        Route::get('/list', [UserController::class, 'getAllUsers']);
+        Route::get('', [AuthController::class, 'checkLogin']);
+        Route::get('list', [UserController::class, 'getAllUsers']);
+        Route::get('{username}', [UserController::class, 'getUser'])->withoutMiddleware('auth:sanctum');
         Route::prefix('edit')->group(function () {
             Route::post('account', [UserController::class, 'updateAccount']);
             Route::post('profile', [UserController::class, 'updateProfile']);

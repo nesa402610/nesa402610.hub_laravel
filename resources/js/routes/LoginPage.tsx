@@ -1,8 +1,9 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
 import {login} from "../store/reducers/authSlice";
 import {useAppDispatch} from "../hooks/redux";
+import {useGetUserQuery} from "../services/userService";
 
 
 interface userProps {
@@ -16,7 +17,8 @@ interface userProps {
 //     user: userProps
 // }
 
-const RegistrationPage: FC = () => {
+const LoginPage: FC = () => {
+    const {data: authedUser} = useGetUserQuery()
     const [user, setUser] = useState<userProps>({password: '', email: ''})
     const [errors, setErrors] = useState(null)
     const navigate = useNavigate()
@@ -41,12 +43,17 @@ const RegistrationPage: FC = () => {
                 setErrors(err.response.data.errors)//TODO
             })
     }
+    useEffect(() => {
+        if (authedUser) {
+            navigate(-1)
+        }
+    }, [authedUser]);
     return (
         <div className={'flex flex-col items-center justify-center h-screen xs:p-4 sm:p-0'}>
             <form className={'flex flex-col gap-4 bg-neutral-800 p-4 rounded-lg xs:w-full sm:w-auto'}>
                 <h3 className={'text-center text-2xl'}>Вход в аккаунт</h3>
                 {errors ? <h4 className={'text-center text-rose-400 text-lg'}>
-                        Проверьте данные. с ними все впорядке?</h4>
+                        Проверьте данные. с ними все в порядке?</h4>
                     : ''
                 }
                 <div>
@@ -81,4 +88,4 @@ const RegistrationPage: FC = () => {
     );
 };
 
-export default RegistrationPage;
+export default LoginPage;

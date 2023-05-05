@@ -43,10 +43,10 @@ export const router = createBrowserRouter(
         <Route path={"/"} element={<HomePage/>}/>
         <Route path={"/suggestions"} element={<SuggestionsPage/>}/>
         <Route path={"/registration"} element={<RegistrationPage/>}/>
-        <Route path={"/login"} element={<LoginPage/>}/>
-        <Route path={"/profile"} element={<ProfilePage/>}>
-          <Route path={":username"} element={<ProfilePage/>}/>
-        </Route>
+          <Route path={"/login"} element={<LoginPage/>}/>
+          <Route path={"/profile"} element={<ProfilePage/>}>
+              <Route path={":username"} element={<ProfilePage/>}/>
+          </Route>
         <Route path={"/profile/edit"} element={<ProfileEditPage/>}/>
         <Route path={"/chat"} element={<ChatPage/>}/>
         <Route path={"/blog"} element={<BlogPage/>}>
