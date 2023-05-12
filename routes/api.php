@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/registration', 'registration');
-    Route::post('/login', 'login');
+    Route::post('/login', 'login')->name('login');
 });
 Route::get('/projects', [ProjectController::class, 'getAllProjects']);
 Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
