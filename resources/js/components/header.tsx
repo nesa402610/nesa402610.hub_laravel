@@ -1,6 +1,5 @@
 import React, {FC, useState} from "react";
 import {NavLink} from "react-router-dom";
-
 import MyLinkItem from "./UI/myLinkItem";
 import {IoBookmarks, IoChatbox, IoHome, IoNewspaper, IoPerson} from "react-icons/io5";
 import {useGetUserQuery} from "../services/userService";
@@ -12,8 +11,7 @@ import {GiCentaurHeart} from "react-icons/gi";
 
 const Header: FC = () => {
     const [isModal, setIsModal] = useState<boolean>(false);
-    const {data, error, isLoading} = useGetUserQuery(null);
-
+    const {data, error, isLoading} = useGetUserQuery();
     return (
         <>
             <Modal title={"Добавление проекта"} isOpen={isModal} onClose={setIsModal}>
