@@ -11,7 +11,7 @@ const HMangaPage = () => {
     const {filter} = useAppSelector(state => state.collection)
     const passkey = localStorage.getItem("passkey");
     const [page, setPage] = useState(1);
-    const {data, isLoading, error, isFetching} = useGetAllMangaQuery({passkey, page});
+    const {data, isLoading, isFetching} = useGetAllMangaQuery({passkey, page});
     const filteredCollection = filterCollection(data, filter);
     if (isLoading) return <Loader/>;
     return (
