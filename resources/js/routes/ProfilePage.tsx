@@ -9,7 +9,7 @@ import Loader from "../components/Loader";
 const ProfilePage = () => {
     const {username} = useParams();
     const {data: authedUser} = useGetUserQuery()
-    const {user} = useGetUserQuery(username,
+    const {user} = useGetUserQuery(+username === authedUser?.id ? undefined : username,
         {
             selectFromResult: ({data}) => ({
                 user: authedUser?.id === +username ? authedUser : data,
