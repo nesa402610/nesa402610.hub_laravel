@@ -11,26 +11,25 @@ const HMangaPage = () => {
     const {filter} = useAppSelector(state => state.collection)
     const passkey = localStorage.getItem("passkey");
     const [page, setPage] = useState(1);
-    const {data, isLoading, error, isFetching, refetch} = useGetAllMangaQuery({passkey, page});
+    const {data, isLoading, error, isFetching} = useGetAllMangaQuery({passkey, page});
     const filteredCollection = filterCollection(data, filter);
     if (isLoading) return <Loader/>;
     return (
-    <div className={"block--dark flex flex-col gap-4"}>
-      {!isFetching ? filteredCollection?.map(collectionItem =>
-        <HCollectionCard key={collectionItem.id}
-                         addTag={() => {
-                         }}
-                         removeTag={() => {
-                         }}
-                         link
-                         collection={collectionItem}/>
-      ) : <Loader/>}
-      <Paginator currentPage={data.current_page}
-                 totalPages={data.last_page}
-                 setCurrentPage={setPage}
-                 handler={refetch}/>
-    </div>
-  );
+        <div className={"block--dark flex flex-col gap-4"}>
+            {!isFetching ? filteredCollection?.map(collectionItem =>
+                <HCollectionCard key={collectionItem.id}
+                                 addTag={() => {
+                                 }}
+                                 removeTag={() => {
+                                 }}
+                                 link
+                                 collection={collectionItem}/>
+            ) : <Loader/>}
+            <Paginator currentPage={data.current_page}
+                       totalPages={data.last_page}
+                       setCurrentPage={setPage}/>
+        </div>
+    );
 };
 
 export default HMangaPage;
