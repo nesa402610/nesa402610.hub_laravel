@@ -9,15 +9,18 @@ use App\Models\Passkey;
 use Auth;
 use Illuminate\Http\Request;
 
-class AnimeController extends Controller {
-    public function createAnime(Request $request) {
+class AnimeController extends Controller
+{
+    public function createAnime(Request $request)
+    {
         $anime = new HAnime();
         $this->animeFields($request, $anime);
         $anime->save();
         return response($anime);
     }
 
-    public function getAllAnime() {
+    public function getAllAnime()
+    {
         $anime = HAnime::all();
         foreach ($anime as $collection) {
             $collection->tags->makeHidden('pivot');
@@ -27,10 +30,31 @@ class AnimeController extends Controller {
 
     }
 
-    public function getPaginatedAnime(Request $request) {
+    public function getPaginatedAnime(Request $request)
+    {
         $exist = $this->checkPasskey($request);
         if (count($exist) !== 0) {
-            $collections = HAnime::paginate(5);
+            $tags = $request->tags;
+            $title = $request->title;
+
+            $query = HAnime::query();
+
+            if (!empty($title)) {
+                $query->where(function ($query) use ($title) {
+                    $query->where('title_ru', 'like', '%' . $title . '%')
+                        ->orWhere('title_en', 'like', '%' . $title . '%')
+                        ->orWhere('title_original', 'like', '%' . $title . '%');
+                });
+            }
+
+            if (!empty($tags)) {
+                $query->whereHas('tags', function ($query) use ($tags) {
+                    $query->whereIn('name', $tags);
+                });
+            }
+
+            $collections = $query->paginate(5);
+
             foreach ($collections as $collection) {
                 $collection->tags->makeHidden('pivot');
                 $collection->studios->makeHidden('pivot');
@@ -40,7 +64,8 @@ class AnimeController extends Controller {
         return response('Какая-то ошибка');
     }
 
-    public function getAnimeById(Request $request, $id) {
+    public function getAnimeById(Request $request, $id)
+    {
         $exist = $this->checkPasskey($request);
         if (count($exist) !== 0) {
             $collection = HAnime::find($id);
@@ -51,22 +76,26 @@ class AnimeController extends Controller {
         return response('Какая-то ошибка');
     }
 
-    public function getAnimeVideos($id) {
+    public function getAnimeVideos($id)
+    {
         $videos = HAnime::find($id)->links;
         if ($videos->isEmpty()) return response(null);
         return response($videos);
     }
 
-    public function deleteAnimeVideo($id) {
+    public function deleteAnimeVideo($id)
+    {
 
         $videos = HLinks::find($id)->delete();
     }
 
-    public function addTitle() {
+    public function addTitle()
+    {
 
     }
 
-    public function updateAnime(Request $request) {
+    public function updateAnime(Request $request)
+    {
         $requestAnime = $request['anime'];
         $requestVideos = $request->videos;
         $anime = HAnime::find($requestAnime['id']);
@@ -96,17 +125,20 @@ class AnimeController extends Controller {
         }
     }
 
-    public function addTag(Request $request) {
+    public function addTag(Request $request)
+    {
         $collection = HAnime::find($request->titleId);
         $collection->tags()->attach($request->tagId);
     }
 
-    public function removeTag(Request $request) {
+    public function removeTag(Request $request)
+    {
         $collection = HAnime::find($request->titleId);
         $collection->tags()->detach($request->tagId);
     }
 
-    public function checkPasskey(Request $request) {
+    public function checkPasskey(Request $request)
+    {
         if (Auth::check()) {
             if (Auth::user()->id === 1)
                 return [1];
@@ -125,7 +157,8 @@ class AnimeController extends Controller {
      * @param HAnime $anime
      * @return void
      */
-    public function animeFields($request, HAnime $anime): void {
+    public function animeFields($request, HAnime $anime): void
+    {
         $anime->title_ru = $request['title_ru'];
         $anime->title_en = $request['title_en'];
         $anime->title_original = $request['title_original'];

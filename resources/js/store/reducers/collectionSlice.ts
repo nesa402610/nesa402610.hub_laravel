@@ -11,7 +11,7 @@ const initialState: collectionSlice = {
 }
 
 interface collectionSlice {
-    filter: collectionFilter | null
+    filter: collectionFilter
     filteredCollection: ICollection[]
 }
 
@@ -31,17 +31,18 @@ const collectionSlice = createSlice({
         setFilterType(state, action: PayloadAction<string>) {
             state.filter.type = action.payload
         },
-        setFilterTags(state, action: PayloadAction<string>) {
-            state.filter.tags.push(action.payload)
+        setFilterTags(state, action: PayloadAction<string[]>) {
+            state.filter.tags = action.payload
         },
-        removeTag(state, action: PayloadAction<string>) {
-            state.filter.tags = state.filter.tags.filter(tagId => tagId !== action.payload)
+        clearFilter(state) {
+            state.filter.title = ''
+            state.filter.tags = []
         },
-        setFilteredCollection(state, action) {
-            const filteredByTitle = action.payload?.filter(c => c.title_ru.toLowerCase().includes(state.filter.title.toLowerCase()));
-            state.filteredCollection = filteredByTitle?.filter(item => state.filter.tags.every(tf => item.tags?.map(it => it.name).includes(tf))
-            );
-        }
+        // setFilteredCollection(state, action) {
+        //     const filteredByTitle = action.payload?.filter(c => c.title_ru.toLowerCase().includes(state.filter.title.toLowerCase()));
+        //     state.filteredCollection = filteredByTitle?.filter(item => state.filter.tags.every(tf => item.tags?.map(it => it.name).includes(tf))
+        //     );
+        // }
 
     },
 })
@@ -49,8 +50,7 @@ const collectionSlice = createSlice({
 export default collectionSlice.reducer
 export const {
     setFilterTitle,
-    setFilteredCollection,
     setFilterTags,
-    removeTag,
-    setFilterType
+    setFilterType,
+    clearFilter
 } = collectionSlice.actions
