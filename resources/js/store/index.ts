@@ -11,9 +11,11 @@ import {AnimeAPI} from "../services/Collections/AnimeService";
 import {MangaAPI} from "../services/Collections/MangaService";
 import {StudioAPI} from "../services/Collections/StudioService";
 import collectionSlice from "./reducers/collectionSlice";
+import appSlice from "./reducers/appSlice";
 
 export const store = configureStore({
     reducer: {
+        app: appSlice,
         modal: modalSlice,
         collection: collectionSlice,
         [userAPI.reducerPath]: userAPI.reducer,
