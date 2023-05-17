@@ -11,6 +11,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminProof;
+use App\Mail\PasswordReset;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,9 @@ Route::controller(AuthController::class)->group(function () {
 Route::get('/projects', [ProjectController::class, 'getAllProjects']);
 Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
+Route::post('mail', function () {
+    Mail::to('hentaitrap@icloud.com')->send(new PasswordReset());
+});
 
 Route::prefix('/anime')->group(function () {
     Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
@@ -50,7 +54,7 @@ Route::get('/tags/list', [TagController::class, 'getAllTags']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::prefix('chat')->group(function () {
-        Route::get('/', [ChatController::class, 'getMessages']);
+        Route::get('/', [ChatController::class, 'getMessages'])->withoutMiddleware('auth:sanctum');
         Route::post('/send', [ChatController::class, 'sendMessage']);
     });
     Route::prefix('user')->group(function () {
