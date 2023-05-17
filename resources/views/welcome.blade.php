@@ -3,16 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <meta name="viewport" content="initial-scale=1, width=device-width"/>
     <meta name="yandex-verification" content="5d64da24dba353a3"/>
     <meta name="keywords" content="nesa, n/esa, nesa402610, Ferris Argyle. hub, неса, нэса">
-    <meta name="description" content="Здесь собраны все мои проекты и сертификаты на данный момент">
+    <meta name="description"
+          content="Здесь собраны все мои проекты и сертификаты на данный момент и даже чуть-чуть больше">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#44403c">
+    <meta name="msapplication-TileColor" content="#171717">
+    <meta name="theme-color" content="#171717">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>n/esa | hub</title>
     @viteReactRefresh
