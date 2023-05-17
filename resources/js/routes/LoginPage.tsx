@@ -74,8 +74,10 @@ const LoginPage: FC = () => {
                            required={true}
                            placeholder={'QWERTY00'}/>
                 </div>
-                <div className={'flex justify-end'}>
-                    <Link to={'/registration'} className={'text-sm italic text-end text-neutral-300'}>Создать аккаунт</Link>
+                <div className={'flex justify-between'}>
+                    <Link to={''} className={'text-sm italic text-end text-neutral-300'}>Забыли пароль?</Link>
+                    <Link to={'/registration'} className={'text-sm italic text-end text-neutral-300'}>Создать
+                        аккаунт</Link>
                 </div>
 
                 <button className={'w-full bg-neutral-700 hover:bg-neutral-900 p-2 rounded-lg'}
