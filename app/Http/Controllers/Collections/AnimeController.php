@@ -50,7 +50,7 @@ class AnimeController extends Controller
             if (!empty($tags)) {
                 $query->whereHas('tags', function ($query) use ($tags) {
                     $query->whereIn('name', $tags);
-                });
+                }, '=', count($tags));
             }
 
             $collections = $query->paginate(5);
