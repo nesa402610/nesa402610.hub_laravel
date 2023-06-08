@@ -18,18 +18,18 @@ const BlogPostsPage = () => {
         <>
             <PostForm isModal={isModal} setIsModal={setIsModal}/>
             <h1 className={'text-center text-3xl mb-8 font-bold'}>Посты</h1>
-            <div className={'px-4 gap-4 grid sm:grid-cols-4 xs:grid-cols-1'}>
-        {user?.id === 1 &&
-          <div className={'block--light'} onClick={createPost}>
-            Новый пост
-          </div>
-        }
-        {posts?.map(post => (post.visibility === 0 || user?.id === 1) &&
-          <PostCard key={post.id} post={post} user={user}/>
-        )}
-      </div>
-    </>
-  );
+            <div className={'px-4 gap-4 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xs:grid-cols-1'}>
+                {user?.id === 1 &&
+                    <div className={'block--light'} onClick={createPost}>
+                        Новый пост
+                    </div>
+                }
+                {posts?.map(post => (post.visibility === 0 || user?.id === 1) &&
+                    <PostCard key={post.id} post={post} user={user}/>
+                )}
+            </div>
+        </>
+    );
 };
 
 export default BlogPostsPage;

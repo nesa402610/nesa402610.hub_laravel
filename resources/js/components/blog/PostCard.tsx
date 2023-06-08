@@ -20,7 +20,7 @@ const PostCard: FC<PostCardProps> = ({post, user}) => {
             <PostForm isModal={isModal} setIsModal={setIsModal} post={post}/>
             <Link to={`${post.id}`} key={post.id}>
                 <div
-                    className={'flex h-[250px] transition-all cursor-pointer hover:-translate-y-2 drop-shadow-xl sm:flex-col xs:justify-start' + (post.visibility ? ' brightness-150 block--dark opacity-30' : ' block--light')}>
+                    className={'flex h-[250px] transition-all cursor-pointer hover:-translate-y-2 drop-shadow-xl flex-col xs:justify-start' + (post.visibility ? ' brightness-150 block--dark opacity-30' : ' block--light')}>
                     {user?.id == 1 &&
                         <PostCardAdmin post={post} setIsModal={setIsModal}/>
                     }
@@ -30,8 +30,8 @@ const PostCard: FC<PostCardProps> = ({post, user}) => {
                         </span>
                     </div>
                     <div className={'flex-1 overflow-ellipsis'}>
-                        {post.body.length > 180 ?
-                            post.body.substring(0, 180) + '....'
+                        {post.body.length > 130 ?
+                            post.body.substring(0, 130) + '....'
                             : post.body
                         }
                     </div>
