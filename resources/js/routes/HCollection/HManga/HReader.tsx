@@ -16,11 +16,7 @@ const HReader: FC = () => {
             data: data?.pages.find(p => p.pageNumber == searchParams.get("page")),
         })
     });
-    useEffect(() => {
-        if (!data) {
-            nav("/NULL/m/" + id);
-        }
-    }, [data]);
+
     useEffect(() => {
         if (!searchParams) setSearchParams({page: "1"});
         dispatch(setHeaderType(1))

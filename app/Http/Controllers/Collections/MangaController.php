@@ -72,7 +72,7 @@ class MangaController extends Controller {
             $i = 1;
             foreach ($files as $file) {
                 $pages[] = [
-                    'file_link' => Storage::temporaryUrl($file, now()->addMinute(5)),
+                    'file_link' => Storage::temporaryUrl($file, now()->addHour(6)),
                     'pageNumber' => $i++
                 ];
             }
