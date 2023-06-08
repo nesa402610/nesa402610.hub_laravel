@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Collections;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnimeUserStatus;
 use App\Models\HAnime;
 use App\Models\HLinks;
 use App\Models\Passkey;
@@ -58,6 +59,7 @@ class AnimeController extends Controller
             foreach ($collections as $collection) {
                 $collection->tags->makeHidden('pivot');
                 $collection->studios->makeHidden('pivot');
+                $collection->status = $collection->animeStatus();
             }
             return response($collections, 200);
         }
@@ -91,6 +93,21 @@ class AnimeController extends Controller
 
     public function addTitle()
     {
+
+    }
+
+    public function setAnimeStatus(Request $request)
+    {
+        $animeUserStatus = AnimeUserStatus::where('anime_id', $request->animeID)
+            ->where('user_id', Auth::user()->id)
+            ->first();
+        if (!$animeUserStatus) {
+            $animeUserStatus = new AnimeUserStatus();
+            $animeUserStatus->anime_id = $request->animeID;
+            $animeUserStatus->user_id = Auth::user()->id;
+        }
+        $animeUserStatus->status = $request->status;
+        $animeUserStatus->save();
 
     }
 

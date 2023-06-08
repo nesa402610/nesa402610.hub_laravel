@@ -7,7 +7,8 @@ interface paginate {
 }
 export interface IAnime{
   review: string;
-  id?: number;
+  status: number
+    id?: number;
   title_ru: string;
   title_en: string;
   title_original: string;

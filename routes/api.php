@@ -114,6 +114,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::put('/tags/add', [AnimeController::class, 'addTag']);
             Route::delete('/tags/remove', [AnimeController::class, 'removeTag']);
             Route::delete('videos/delete/{id}', [AnimeController::class, 'deleteAnimeVideo']);
+            Route::patch('status', [AnimeController::class, 'setAnimeStatus']);
             Route::prefix('studios')->group(function () {
                 Route::get('/list', [StudioController::class, 'getAllStudios']);
                 Route::put('/create', [StudioController::class, 'createStudio']);

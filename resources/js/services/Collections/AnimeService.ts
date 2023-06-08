@@ -107,12 +107,21 @@ export const AnimeAPI = createApi({
             }),
             invalidatesTags: ["animeList"]
         }),
+        setAnimeStatus: builder.mutation<IAnime[], { status: number, animeID: number }>({
+            query: ({status, animeID}) => ({
+                url: "status",
+                method: "PATCH",
+                body: {status, animeID}
+            }),
+            invalidatesTags: ["animeList"]
+        }),
     }),
 });
 
 export const {
     useGetAllAnimeQuery,
     useLazyGetAllAnimeQuery,
+    useSetAnimeStatusMutation,
     useGetAllAnimeNPQuery,
     useGetAnimeByIdQuery,
     useGetAnimeVideosQuery,

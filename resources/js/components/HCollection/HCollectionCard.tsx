@@ -5,6 +5,7 @@ import HCollectionTags from "./HCollectionTags";
 import {Link} from "react-router-dom";
 import {IAnime} from "../../types/Anime";
 import Title from "./Title";
+import CollectionStatus from "./CollectionStatus";
 
 
 interface CollectionProps {
@@ -24,12 +25,16 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
     return (
         <div className={"bg-neutral-700 p-4 rounded-lg"}>
             <div className={"flex xs:flex-col md:flex-row gap-4"}>
-                <Link className={"contents"}
-                      to={`${link ? collection.id : ""}`}>
-                    <img
-                        className={"rounded-lg w-[200px] h-fit self-center" + (hover ? " hover:scale-105 transition-all" : "")}
-                        src={collection.image}
-                        alt="Изображение тайтла"/></Link>
+                <div className={'flex-shrink-0 basis-auto flex flex-col gap-2'}>
+                    <Link
+                        to={`${link ? collection.id : ""}`}>
+                        <img
+                            className={"rounded-lg w-[200px] h-fit self-center" + (hover ? " hover:scale-105 transition-all" : "")}
+                            src={collection.image}
+                            alt="Изображение тайтла"/>
+                    </Link>
+                    <CollectionStatus status={collection.status} animeID={collection.id}/>
+                </div>
                 <div className={"flex flex-col"}>
                     <div className={'flex flex-col'}>
                         {link ? <Title collection={collection} hover link/> : <Title collection={collection}/>}
