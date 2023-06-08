@@ -36,7 +36,7 @@ const HAnimePage: FC = () => {
                     Кажется, по этому запросу еще ничего нет
                 </h2>
             }
-            <div className={'relative flex flex-col gap-4'}>
+            <div className={'relative flex flex-col gap-4 min-h-[100px]'}>
                 {isFetching &&
                     <div className={'z-40 absolute rounded-lg bg-neutral-700/70 h-full w-full'}>
                         <Loader center/>
