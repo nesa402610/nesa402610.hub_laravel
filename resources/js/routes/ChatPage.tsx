@@ -8,7 +8,7 @@ const ChatPage: FC = () => {
     const {data: user} = useGetUserQuery()
     const {
         data: messages,
-        isLoading
+        isLoading,
     } = useGetMessagesQuery(null, {pollingInterval: 15000})
     const [sendMessage, {}] = useSendMessageMutation()
     const [message, setMessage] = useState('');
