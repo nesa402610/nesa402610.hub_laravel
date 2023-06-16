@@ -81,6 +81,8 @@ class HAnime extends Model
 
     public function animeStatus()
     {
+        if (!Auth::check()) return null;
+
         return $this->hasOne(AnimeUserStatus::class, 'anime_id')->where('user_id', Auth::user()->id)->value('status');
     }
 }

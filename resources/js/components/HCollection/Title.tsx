@@ -1,11 +1,12 @@
 import React, {FC} from 'react';
 import {Link} from "react-router-dom";
 import {ICollection} from "../../types/types";
+import {IAnime} from "../../types/Anime";
 
 interface TitleProps {
     link?: boolean
     hover?: boolean
-    collection: ICollection
+    collection: ICollection | IAnime
 }
 
 const Title: FC<TitleProps> = ({link, collection, hover}) => {
