@@ -73,6 +73,7 @@ class AnimeController extends Controller
             $collection = HAnime::find($id);
             $collection->tags->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
+            $collection->status = $collection->animeStatus();
             return response($collection, 200);
         }
         return response('Какая-то ошибка');

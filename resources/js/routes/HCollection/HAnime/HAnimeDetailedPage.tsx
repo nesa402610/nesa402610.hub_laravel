@@ -18,7 +18,6 @@ const HAnimeDetailedPage = () => {
   //   })
   // })
 
-
   if (!data) return <Loader/>;
   return (
     <div className={"m-4 flex flex-col gap-4"}>

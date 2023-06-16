@@ -26,10 +26,10 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
         <div className={"bg-neutral-700 p-4 rounded-lg"}>
             <div className={"flex xs:flex-col md:flex-row gap-4"}>
                 <div className={'flex-shrink-0 basis-auto flex flex-col gap-2'}>
-                    <Link
-                        to={`${link ? collection.id : ""}`}>
+                    <Link className={'flex justify-center'}
+                          to={`${link ? collection.id : ""}`}>
                         <img
-                            className={"rounded-lg w-[200px] h-fit self-center" + (hover ? " hover:scale-105 transition-all" : "")}
+                            className={"rounded-lg w-[200px] h-fit" + (hover ? " hover:scale-105 transition-all" : "")}
                             src={collection.image}
                             alt="Изображение тайтла"/>
                     </Link>
