@@ -28,8 +28,8 @@ const CollectionStatus = ({status, animeID}) => {
                 {!status && status !== 0 &&
                     <span>Добавить в список</span>
                 }
-                {statuses.map(s =>
-                    <span>{status === s.status && s.name}</span>
+                {statuses.map((s, index) =>
+                    <span key={index}>{status === s.status && s.name}</span>
                 )}
             </div>
             {isOpen &&

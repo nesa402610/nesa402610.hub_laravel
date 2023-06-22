@@ -66,12 +66,19 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
                                 /
                                 <span>{collection.episodes_total}</span>
                             </div>}
-                            {collection.episode_time && <div className={"flex"}>
-                                <h4>Длительность серии:&nbsp;</h4>
-                                <span>{collection.episode_time} мин.</span>
-                            </div>}
-                            {collection.studios && <span>Студия: {collection.studios.map(studio => studio.name)}</span>}
+                            {collection.episode_time &&
+                                <div className={"flex"}>
+                                    <h4>Длительность серии:&nbsp;</h4>
+                                    <span>{collection.episode_time} мин.</span>
+                                </div>
+                            }
+                            {collection.studios &&
+                                <span>
+                                    Студия: {collection.studios.map(studio => studio.name)}
+                                </span>
+                            }
                             <span>Цензура: {collection.censure ? "С цензурой" : "Без цензуры"}</span>
+                            <span>Рейтинг: {collection.rating}</span>
                         </div>
                         <h3 className={"mt-4 font-bold"}>Описание</h3>
                         <p>{collection.description}</p>

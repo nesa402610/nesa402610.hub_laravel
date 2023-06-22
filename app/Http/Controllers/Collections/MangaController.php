@@ -40,7 +40,7 @@ class MangaController extends Controller {
 //    }
 
     public function getAllManga(Request $request) {
-        $manga = HManga::all();
+        $manga = HManga::where('type', 1)->get();
         foreach ($manga as $collection) {
             $collection->tags;
 //                    $collection->links->makeHidden('pivot');
@@ -52,7 +52,7 @@ class MangaController extends Controller {
     public function getPaginatedManga(Request $request) {
         $exist = $this->checkPasskey($request);
         if (count($exist) !== 0) {
-            $collections = HManga::paginate(5);
+            $collections = HManga::where('type', 1)->paginate(5);
             foreach ($collections as $collection) {
                 $collection->tags;
 //                    $collection->links->makeHidden('pivot');

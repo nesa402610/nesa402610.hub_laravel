@@ -22,10 +22,11 @@ class AnimeController extends Controller
 
     public function getAllAnime()
     {
-        $anime = HAnime::all();
+        $anime = HAnime::where('type', 0)->get();
         foreach ($anime as $collection) {
             $collection->tags->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
+            $collection->status = $collection->animeStatus();
         }
         return response($anime, 200);
 
@@ -43,6 +44,7 @@ class AnimeController extends Controller
             if (!empty($title)) {
                 $query->where(function ($query) use ($title) {
                     $query->where('title_ru', 'like', '%' . $title . '%')
+                        ->where('type', 0)
                         ->orWhere('title_en', 'like', '%' . $title . '%')
                         ->orWhere('title_original', 'like', '%' . $title . '%');
                 });
@@ -54,7 +56,7 @@ class AnimeController extends Controller
                 }, '=', count($tags));
             }
 
-            $collections = $query->paginate(5);
+            $collections = $query->where('type', 0)->paginate(5);
 
             foreach ($collections as $collection) {
                 $collection->tags->makeHidden('pivot');
@@ -191,5 +193,8 @@ class AnimeController extends Controller
         $anime->episodes_total = $request['episodes_total'];
         $anime->author = $request['author'];
         $anime->review = $request['review'];
+        $anime->rating = $request['rating'];
+        $anime->style = $request['style'];
+        $anime->type = 0;
     }
 }

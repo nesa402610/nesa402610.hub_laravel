@@ -49,6 +49,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class HManga extends Model {
     use HasFactory;
+    protected $table = 'h_collections';
 
 //    public function pages() {
 //        $pages = $this->hasMany(hmangapages::class, 'manga_id');
