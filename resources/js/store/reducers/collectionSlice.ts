@@ -5,7 +5,8 @@ const initialState: collectionSlice = {
     filter: {
         title: '',
         tags: [],
-        type: 'anime'
+        type: 'anime',
+        rating: 'Rx'
     },
     filteredCollection: []
 }
@@ -19,6 +20,7 @@ interface collectionFilter {
     title: string
     tags: string[]
     type: string
+    rating: string
 }
 
 const collectionSlice = createSlice({
@@ -33,6 +35,9 @@ const collectionSlice = createSlice({
         },
         setFilterTags(state, action: PayloadAction<string[]>) {
             state.filter.tags = action.payload
+        },
+        setFilterRating(state, action: PayloadAction<string>) {
+            state.filter.rating = action.payload
         },
         clearFilter(state) {
             state.filter.title = ''
@@ -52,5 +57,6 @@ export const {
     setFilterTitle,
     setFilterTags,
     setFilterType,
-    clearFilter
+    setFilterRating,
+    clearFilter,
 } = collectionSlice.actions

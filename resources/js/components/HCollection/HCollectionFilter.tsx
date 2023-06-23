@@ -1,7 +1,13 @@
 import React, {FC, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {clearFilter, setFilterTags, setFilterTitle, setFilterType} from "../../store/reducers/collectionSlice";
+import {
+    clearFilter,
+    setFilterRating,
+    setFilterTags,
+    setFilterTitle,
+    setFilterType
+} from "../../store/reducers/collectionSlice";
 import {useGetTagsQuery} from "../../services/Collections/TagService";
 
 const HCollectionFilter: FC = () => {
@@ -11,24 +17,24 @@ const HCollectionFilter: FC = () => {
     const nav = useNavigate();
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState([]);
-
-    const typeHandler = (e) => {
-        if (e.target.value === "anime") {
-            nav("a");
-        } else {
-            nav("m");
-        }
-        dispatch(setFilterType(e.target.value))
-    };
+    const [rating, setRating] = useState('Rx');
 
     const clearFilterHandler = () => {
         dispatch(clearFilter())
         setTitle('')
         setTags([])
     }
-    const searchWithFilterHandler = () => {
+    const searchWithFilterHandler = async () => {
         dispatch(setFilterTags(tags))
         dispatch(setFilterTitle(title))
+        dispatch(setFilterRating(rating))
+
+    }
+    const typeHandler = (e) => {
+        dispatch(setFilterType(e.target.value))
+        if (e.target.value === 'anime') {
+            nav('a')
+        } else nav('m')
     }
 
     return (
@@ -44,6 +50,17 @@ const HCollectionFilter: FC = () => {
                             onChange={e => typeHandler(e)}>
                         <option value="anime">Аниме</option>
                         <option value="manga">Манга</option>
+                    </select>
+                    <select className={"bg-neutral-600 p-2 rounded-lg"}
+                            value={rating}
+                            onChange={e => setRating(e.target.value)}
+                    >
+                        <option value={null}></option>
+                        <option value="0+">0+</option>
+                        <option value="6+">6+</option>
+                        <option value="13+">13+</option>
+                        <option value="18+">18+</option>
+                        <option value="Rx">Rx</option>
                     </select>
                     <div className={"flex gap-1 flex-wrap items-center bg-neutral-600 xs:w-full p-2 rounded-lg"}>
                         {!tags.length ? <span>Жанры</span> : ''}

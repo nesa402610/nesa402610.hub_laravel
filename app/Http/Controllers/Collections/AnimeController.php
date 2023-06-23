@@ -38,13 +38,13 @@ class AnimeController extends Controller
         if (count($exist) !== 0) {
             $tags = $request->tags;
             $title = $request->title;
+            $rating = $request->rating;
 
             $query = HAnime::query();
 
             if (!empty($title)) {
-                $query->where(function ($query) use ($title) {
+                $query->where(function ($query) use ($title, $rating) {
                     $query->where('title_ru', 'like', '%' . $title . '%')
-                        ->where('type', 0)
                         ->orWhere('title_en', 'like', '%' . $title . '%')
                         ->orWhere('title_original', 'like', '%' . $title . '%');
                 });
@@ -54,6 +54,9 @@ class AnimeController extends Controller
                 $query->whereHas('tags', function ($query) use ($tags) {
                     $query->whereIn('name', $tags);
                 }, '=', count($tags));
+            }
+            if (!empty($rating)) {
+                $query->where('rating', $rating);
             }
 
             $collections = $query->where('type', 0)->paginate(5);
