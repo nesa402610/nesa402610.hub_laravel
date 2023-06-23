@@ -13,7 +13,7 @@ import {useGetTagsQuery} from "../../services/Collections/TagService";
 const HCollectionFilter: FC = () => {
     const {data: dataTags} = useGetTagsQuery()
     const dispatch = useAppDispatch()
-    const {filter, filteredCollection} = useAppSelector(state => state.collection)
+    const {filter} = useAppSelector(state => state.collection)
     const nav = useNavigate();
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState([]);

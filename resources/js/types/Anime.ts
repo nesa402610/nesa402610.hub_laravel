@@ -1,11 +1,5 @@
 import {ICollectionTag} from "./Tag";
 
-
-interface paginate {
-    current_page: number
-    last_page: number
-}
-
 export interface IAnime {
     rating: number;
     style: number;
