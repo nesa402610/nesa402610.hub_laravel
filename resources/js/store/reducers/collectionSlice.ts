@@ -42,6 +42,7 @@ const collectionSlice = createSlice({
         clearFilter(state) {
             state.filter.title = ''
             state.filter.tags = []
+            state.filter.rating = 'Rx'
         },
         // setFilteredCollection(state, action) {
         //     const filteredByTitle = action.payload?.filter(c => c.title_ru.toLowerCase().includes(state.filter.title.toLowerCase()));

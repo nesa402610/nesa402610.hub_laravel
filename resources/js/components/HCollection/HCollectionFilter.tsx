@@ -23,6 +23,7 @@ const HCollectionFilter: FC = () => {
         dispatch(clearFilter())
         setTitle('')
         setTags([])
+        setRating('Rx')
     }
     const searchWithFilterHandler = async () => {
         dispatch(setFilterTags(tags))
