@@ -15,8 +15,8 @@ class AdminProof {
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next) {
-        if (Auth::user()->id !== 1) {
-            return response('Ты куда лезешь? Уебывай от сюда. Тебя не записали в админы', 403);
+        if (Auth::user()->id !== 1 && Auth::user()->id !== 3) {
+            return response(`Ты куда лезешь? Уебывай от сюда. Тебя не записали в админы`, 403);
         }
         return $next($request);
     }

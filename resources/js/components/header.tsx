@@ -75,7 +75,7 @@ const Header: FC = () => {
                             </>
 
                         }
-                        {data?.id === 1 &&
+                        {(data?.id === 1 || data?.id === 3) &&
                             <>
                                 <NavLink className={"flex items-center hover:text-neutral-400 transition-colors"}
                                          to={"/admin/"}>dashboard</NavLink>
