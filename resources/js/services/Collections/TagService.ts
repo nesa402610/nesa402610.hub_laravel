@@ -21,7 +21,7 @@ export const TagAPI = createApi({
       query: (name) => ({
         url: "new",
         method: "POST",
-        body: {name}
+        body: name
       }),
       invalidatesTags: ["tag"]
     }),

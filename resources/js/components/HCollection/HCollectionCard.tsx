@@ -52,10 +52,8 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
                                  className={"bg-neutral-800 px-2 rounded-full relative"}>
                                 +
                                 {tagDropDown &&
-                                    <div onClick={e => e.stopPropagation()}
-                                         className={"absolute p-2 rounded-lg h-[200px] overflow-scroll bg-neutral-800 flex flex-col gap-2"}>
-                                        <TagSelector addTag={addTag} collection={collection}/>
-                                    </div>
+                                    <TagSelector onBlur={() => setTagDropDown(false)} addTag={addTag}
+                                                 collection={collection}/>
                                 }
                             </div>}
                     </div>
