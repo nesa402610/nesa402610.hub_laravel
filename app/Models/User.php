@@ -51,7 +51,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property string|null $banner_image
  * @property string|null $background_profile_image
  * @property string|null $background_site_image
@@ -62,6 +61,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereBadge($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereBannerImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereVerified($value)
+ * @mixin \Eloquent
  */
 class User extends Authenticatable
 {

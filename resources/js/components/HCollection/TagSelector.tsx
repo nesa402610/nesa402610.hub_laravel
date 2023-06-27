@@ -9,7 +9,7 @@ interface TagSelectorProps {
 
     addTag({titleId, tagId}): any;
 
-    onBlur(b): boolean
+    onBlur(b): void
 }
 
 const TagSelector: FC<TagSelectorProps> = ({collection, addTag, onBlur}) => {

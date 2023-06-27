@@ -54,9 +54,19 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereTitleOriginal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereTitleRu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Studios[] $studios
  * @property-read int|null $studios_count
+ * @property int $type
+ * @property string $rating
+ * @property int $colored
+ * @property string $style
+ * @property int $totalPages
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereColored($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereStyle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereTotalPages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereType($value)
+ * @mixin \Eloquent
  */
 class HAnime extends Model
 {

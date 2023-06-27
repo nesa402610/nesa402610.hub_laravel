@@ -45,6 +45,24 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|HManga whereTitleOriginal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HManga whereTitleRu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HManga whereUpdatedAt($value)
+ * @property int $episode_time
+ * @property int $episodes_released
+ * @property int $episodes_total
+ * @property string|null $origins
+ * @property int $type
+ * @property string $rating
+ * @property int $colored
+ * @property string $style
+ * @property int $totalPages
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereColored($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereEpisodeTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereEpisodesReleased($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereEpisodesTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereOrigins($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereStyle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereTotalPages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereType($value)
  * @mixin \Eloquent
  */
 class HManga extends Model {
