@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
 use App\Models\HAnime;
+use App\Models\HManga;
+use App\Models\Project;
+use App\Models\Studios;
 use App\Models\Tags;
 use App\Models\User;
-use Illuminate\Http\Request;
 
-class adminPanelController extends Controller {
-    public function getAllAnime() {
+class adminPanelController extends Controller
+{
+    public function getAllAnime()
+    {
         return response(HAnime::all());
     }
 
-    public function getAllModels() {
+    public function getAllModels()
+    {
         $models = [];
         $files = glob(app_path('Models') . '/*.php');
 
@@ -24,22 +30,23 @@ class adminPanelController extends Controller {
         return response($models);
     }
 
-    public function getTableData(Request $request, $path) {
-        $model = [];
-        $msg = '';
-        switch ($path) {
-            case 'anime':
-                $model = HAnime::all();
-                break;
-            case 'users':
-                $model = User::all();
-                break;
-            case 'tags':
-                $model = Tags::all();
-                break;
-            default:
-                $msg = 'Ошибочка какая-то';
-        }
-        return response(['msg' => $msg, 'model' => $model]);
+    public function getOverview()
+    {
+        $animeCount = HAnime::where('type', 0)->count();
+        $animeStudiosCount = Studios::count();
+        $mangaCount = HManga::where('type', 1)->count();
+        $tagsCount = Tags::count();
+        $usersCount = User::count();
+        $messagesCount = Chat::count();
+        $projectsCount = Project::count();
+        return response([
+            'animeCount' => $animeCount,
+            'animeStudiosCount' => $animeStudiosCount,
+            'mangaCount' => $mangaCount,
+            'tagsCount' => $tagsCount,
+            'usersCount' => $usersCount,
+            'messagesCount' => $messagesCount,
+            'projectsCount' => $projectsCount,
+        ]);
     }
 }

@@ -12,6 +12,7 @@ import {MangaAPI} from "../services/Collections/MangaService";
 import {StudioAPI} from "../services/Collections/StudioService";
 import collectionSlice from "./reducers/collectionSlice";
 import appSlice from "./reducers/appSlice";
+import {dashboardAPI} from "../services/admin/dashboardService";
 
 export const store = configureStore({
     reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
         [AnimeAPI.reducerPath]: AnimeAPI.reducer,
         [StudioAPI.reducerPath]: StudioAPI.reducer,
         [MangaAPI.reducerPath]: MangaAPI.reducer,
+        [dashboardAPI.reducerPath]: dashboardAPI.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat([
@@ -41,6 +43,7 @@ export const store = configureStore({
             StudioAPI.middleware,
             MangaAPI.middleware,
             TagAPI.middleware,
+            dashboardAPI.middleware,
         ])
 });
 

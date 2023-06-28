@@ -32,6 +32,7 @@ import Studios from "./admin/Studios";
 import AnimeCreate from "./admin/anime/AnimeCreate";
 import AnimeEdit from "./admin/anime/AnimeEdit";
 import Anime from "./admin/anime/Anime";
+import Dashboard from "./admin/Dashboard";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -70,12 +71,13 @@ export const router = createBrowserRouter(
       </Route>
       <Route path={"admin"}
              element={<IndexAdmin/>}>
-        <Route path={"anime"} element={<Outlet/>}>
-          <Route path={""} element={<Anime/>}/>
-          <Route path={"studios"} element={<Studios/>}/>
-          <Route path={"new"} element={<AnimeCreate/>}/>
-          <Route path={":id"} element={<AnimeEdit/>}/>
-        </Route>
+          <Route path={""} element={<Dashboard/>}/>
+          <Route path={"anime"} element={<Outlet/>}>
+              <Route path={""} element={<Anime/>}/>
+              <Route path={"studios"} element={<Studios/>}/>
+              <Route path={"new"} element={<AnimeCreate/>}/>
+              <Route path={":id"} element={<AnimeEdit/>}/>
+          </Route>
         <Route path={"manga"} element={<Outlet/>}>
           <Route path={""} element={<Manga/>}/>
           <Route path={":id"} element={<Manga/>}/>

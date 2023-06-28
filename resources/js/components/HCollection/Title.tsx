@@ -12,7 +12,7 @@ interface TitleProps {
 const Title: FC<TitleProps> = ({link, collection, hover}) => {
     return (
         <Link
-            to={link ? collection.id + '-' + (collection.title_en ? collection.title_en.toLowerCase().replace(' ', '-') : collection.title_original.toLowerCase().replace(' ', '-')) : ''}>
+            to={link ? `${collection.id}` : ''}>
             <div
                 className={`flex items-center flex-wrap ${hover ? "hover:text-neutral-300 transition-all" : ""}`}>
                 <span>{collection.title_ru}</span>

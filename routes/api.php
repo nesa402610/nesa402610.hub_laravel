@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\adminPanelController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ChatController;
@@ -107,6 +108,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 //        });
 //    });
     Route::middleware([AdminProof::class])->group(function () {
+        Route::prefix('dashboard')->group(function () {
+            Route::get('', [adminPanelController::class, 'getOverview']);
+        });
         Route::prefix('anime')->group(function () {
             Route::get('all', [AnimeController::class, 'getAllAnime']);
             Route::put('new', [AnimeController::class, 'createAnime']);
