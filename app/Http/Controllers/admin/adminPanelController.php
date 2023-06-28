@@ -33,20 +33,43 @@ class adminPanelController extends Controller
     public function getOverview()
     {
         $animeCount = HAnime::where('type', 0)->count();
+        $rxCount = HAnime::where('type', 0)->where('rating', '=', 'Rx')->count();
+        $ffCount = HAnime::where('type', 0)->where('rating', '!=', 'Rx')->count();
         $animeStudiosCount = Studios::count();
+
         $mangaCount = HManga::where('type', 1)->count();
         $tagsCount = Tags::count();
+
         $usersCount = User::count();
+
         $messagesCount = Chat::count();
+
         $projectsCount = Project::count();
+        $completedProjectsCount = Project::where('status', 'Completed')->count();
+        $plannedProjectsCount = Project::where('status', 'Planned')->count();
+        $droppedProjectsCount = Project::where('status', 'Dropped')->count();
         return response([
-            'animeCount' => $animeCount,
-            'animeStudiosCount' => $animeStudiosCount,
-            'mangaCount' => $mangaCount,
-            'tagsCount' => $tagsCount,
+            'collection' => [
+                'anime' => [
+                    'total' => $animeCount,
+                    'rx' => $rxCount,
+                    'ff' => $ffCount,
+                    'studiosCount' => $animeStudiosCount,
+                ],
+                'manga' => [
+                    'total' => $mangaCount,
+                ],
+                'tagsCount' => $tagsCount,
+            ],
             'usersCount' => $usersCount,
             'messagesCount' => $messagesCount,
-            'projectsCount' => $projectsCount,
+            'projects' => [
+                'completed' => $completedProjectsCount,
+                'planned' => $plannedProjectsCount,
+                'dropped' => $droppedProjectsCount,
+                'total' => $projectsCount,
+
+            ]
         ]);
     }
 }

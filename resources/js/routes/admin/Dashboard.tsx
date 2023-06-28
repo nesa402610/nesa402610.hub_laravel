@@ -12,21 +12,28 @@ const Dashboard: FC = () => {
                 <div className={'flex gap-4'}>
                     <div
                         className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>
-                        <span>Всего аниме: {data.animeCount}</span>
-                        <span>Всего студий: {data.animeStudiosCount}</span>
+                        <div className={'flex flex-col'}>
+                            <span>Всего аниме: {data.collection.anime.total}</span>
+                            <span>Rx: {data.collection.anime.rx}</span>
+                            <span>Family-friendly: {data.collection.anime.ff}</span>
+                        </div>
+                        <span>Всего студий: {data.collection.anime.studiosCount}</span>
                     </div>
                     <div
                         className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>
-                        Всего манги: {data.mangaCount}
+                        Всего манги: {data.collection.manga.total}
                     </div>
                     <div
                         className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>
-                        Всего тегов: {data.tagsCount}
+                        Всего тегов: {data.collection.tagsCount}
                     </div>
                 </div>
             </div>
-            <div className={'bg-slate-700 p-4 rounded-lg'}>
-                Всего проект я сделал: {data.projectsCount}
+            <div className={'flex gap-4 bg-slate-700 p-4 rounded-lg'}>
+                <span>Всего проект я сделал: {data.projects.total}</span>
+                <span>Завершил: {data.projects.completed}</span>
+                <span>Бросил: {data.projects.dropped}</span>
+                <span>Запланировал: {data.projects.planned}</span>
             </div>
             <div className={'bg-slate-700 p-4 rounded-lg'}>
                 Всего пользователей: {data.usersCount}
