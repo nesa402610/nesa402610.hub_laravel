@@ -31,7 +31,7 @@ const TagSelector: FC<TagSelectorProps> = ({collection, addTag, onBlur}) => {
         <div onClick={e => e.stopPropagation()}
              onBlur={onBlur}
              placeholder={'Школа'}
-             className={"absolute p-2 rounded-lg min-w-[250px] h-[200px] overflow-hidden bg-neutral-800 flex flex-col gap-2"}>
+             className={"absolute p-2 rounded-lg min-w-[250px] h-[200px] overflow-hidden bg-neutral-800 flex flex-col gap-2 right-0"}>
             {isLoading ? <Loader/> :
                 <>
                     <div>
