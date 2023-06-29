@@ -27,6 +27,7 @@ const AnimeVideoFields: FC<AnimeVideoFieldsProps> = ({videos, setVideos}) => {
             return setVideos([{link: "", episode: 1, platform: "", iframe: false}]);
         }
         setVideos([...videos, {link: "", episode: videos.at(-1).episode + 1, platform: "", iframe: false}]);
+        console.log(videos)
     };
 
     const deleteEpisodeHandler = (i, id) => {

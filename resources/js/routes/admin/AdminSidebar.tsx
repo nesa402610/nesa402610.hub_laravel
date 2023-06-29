@@ -20,8 +20,8 @@ const AdminSidebar = () => {
             <Link to={"/"}>На основной сайт</Link>
             <h2 className={"font-bold border-b mb-4"}>Таблицы</h2>
             <menu className={"flex flex-col gap-4"}>
-                {NavLinks.map(({to, name}) =>
-                    <NavLink to={to}
+                {NavLinks.map(({to, name}, index) =>
+                    <NavLink to={to} key={index}
                              className={" p-2 rounded-lg bg-slate-700 hover:scale-105 hover:bg-slate-600 transition-all"}>
                         {name}
                     </NavLink>

@@ -85,11 +85,12 @@ const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
             </label>
             <label>
                 <span>Эпизодов вышло *</span>
-                <input type="text" value={anime.episodes_released} onChange={e => setHandler(e, "episodes_released")}/>
+                <input type="number" value={anime.episodes_released}
+                       onChange={e => setHandler(e, "episodes_released")}/>
             </label>
             <label>
                 <span>Эпизодов всего *</span>
-                <input type="text" value={anime.episodes_total} onChange={e => setHandler(e, "episodes_total")}/>
+                <input type="number" value={anime.episodes_total} onChange={e => setHandler(e, "episodes_total")}/>
             </label>
             <label>
                 <span>Первоисточник</span>

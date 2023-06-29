@@ -10,7 +10,7 @@ const DashboardGraph: FC<DashboardGraphProps> = ({values}) => {
 
     const data = [
         {
-            name: 'Total',
+            name: 'Всего',
             type: 'Аниме',
             value: values.collection.anime.total,
         },
@@ -25,27 +25,27 @@ const DashboardGraph: FC<DashboardGraphProps> = ({values}) => {
             value: values.collection.anime.ff,
         },
         {
-            name: 'Studies',
+            name: 'Студии',
             type: 'Аниме',
             value: values.collection.anime.studiosCount,
         },
         {
-            name: 'Total mangas',
+            name: 'Всего манги',
             type: 'Манга',
             value: values.collection.manga.total,
         },
         {
-            name: 'Total messages',
+            name: 'Всего сообщений',
             type: 'Сообщения',
             value: values.messagesCount,
         },
         {
-            name: 'Total users',
+            name: 'Всего пользователей',
             type: 'Пользователи',
             value: values.usersCount,
         },
         {
-            name: 'Total tags',
+            name: 'Всего тегов',
             type: 'Тэги',
             value: values.collection.tagsCount
         }
