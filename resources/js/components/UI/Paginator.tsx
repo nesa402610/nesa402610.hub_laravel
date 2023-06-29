@@ -3,6 +3,7 @@ import {FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight} from "
 
 const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
     const toPageHandler = (page) => {
+        if (page > totalPages) return
         setCurrentPage(page)
 
     };
