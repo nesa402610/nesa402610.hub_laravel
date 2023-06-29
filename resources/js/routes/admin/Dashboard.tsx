@@ -5,7 +5,6 @@ import DashboardGraph from "./Dashboard/DashboardGraph";
 
 const Dashboard: FC = () => {
     const {data, isLoading} = useGetOverviewQuery()
-    const [total, rx, ff] = [data?.collection.anime.total, data?.collection.anime.rx, data?.collection.anime.ff]
     if (isLoading) return <Loader/>
     return (
         <div className={'flex flex-col gap-4'}>
