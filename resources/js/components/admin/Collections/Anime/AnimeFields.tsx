@@ -18,19 +18,19 @@ const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
     return (
         <div className={"flex flex-col"}>
             <label>
-                <span>Название на русском</span>
+                <span>Название на русском *</span>
                 <input type="text" value={anime.title_ru} onChange={e => setHandler(e, "title_ru")}/>
             </label>
             <label>
-                <span>Название на английском</span>
+                <span>Название на английском *</span>
                 <input type="text" value={anime.title_en} onChange={e => setHandler(e, "title_en")}/>
             </label>
             <label>
-                <span>Оригинальное название</span>
+                <span>Оригинальное название *</span>
                 <input type="text" value={anime.title_original} onChange={e => setHandler(e, "title_original")}/>
             </label>
             <label className={"flex flex-col"}>
-                <span>Описание</span>
+                <span>Описание *</span>
                 <textarea className={"rounded-lg bg-neutral-600 p-2"}
                           value={anime.description}
                           onChange={e => setHandler(e, "description")}/>
@@ -42,7 +42,7 @@ const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
                           onChange={e => setHandler(e, "description_short")}/>
             </label>
             <label>
-                <span>Время эпизода</span>
+                <span>Время эпизода *</span>
                 <input type="text" value={anime.episode_time} onChange={e => setHandler(e, "episode_time")}/>
             </label>
             <label className={"flex gap-2"}>
@@ -51,7 +51,7 @@ const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
                        onChange={e => setHandler(e, "censure")}/>
             </label>
             <label>
-                <span>Изображение</span>
+                <span>Изображение *</span>
                 <input type="text" value={anime.image} onChange={e => setHandler(e, "image")}/>
             </label>
             <label className={'flex flex-col'}>
@@ -76,19 +76,19 @@ const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
                 </select>
             </label>
             <label>
-                <span>Дата анонса</span>
+                <span>Дата анонса * (2016-03-07 формат)</span>
                 <input type="text" value={anime.announce_date} onChange={e => setHandler(e, "announce_date")}/>
             </label>
             <label>
-                <span>Дата релиза</span>
+                <span>Дата релиза * (2016-03-07)</span>
                 <input type="text" value={anime.release_date} onChange={e => setHandler(e, "release_date")}/>
             </label>
             <label>
-                <span>Эпизодов вышло</span>
+                <span>Эпизодов вышло *</span>
                 <input type="text" value={anime.episodes_released} onChange={e => setHandler(e, "episodes_released")}/>
             </label>
             <label>
-                <span>Эпизодов всего</span>
+                <span>Эпизодов всего *</span>
                 <input type="text" value={anime.episodes_total} onChange={e => setHandler(e, "episodes_total")}/>
             </label>
             <label>
