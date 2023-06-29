@@ -97,7 +97,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function rates() {
+    public function rates()
+    {
         return $this->hasMany(Rating::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
     }
 }

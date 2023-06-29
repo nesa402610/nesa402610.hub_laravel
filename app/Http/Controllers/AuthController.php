@@ -6,8 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -55,6 +55,7 @@ class AuthController extends Controller
     public function checkLogin() {
         $user = Auth::user();
         $user->rates;
+        $user->role;
 
         return response($user, 200);
     }
