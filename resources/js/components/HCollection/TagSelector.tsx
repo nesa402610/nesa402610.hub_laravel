@@ -8,11 +8,9 @@ interface TagSelectorProps {
     collection: IAnime;
 
     addTag({titleId, tagId}): any;
-
-    onBlur(b): void
 }
 
-const TagSelector: FC<TagSelectorProps> = ({collection, addTag, onBlur}) => {
+const TagSelector: FC<TagSelectorProps> = ({collection, addTag}) => {
     const {data: tags, isLoading} = useGetTagsQuery();
     const [freeTags, setFreeTags] = useState<ICollectionTag[]>([]);
     const [tagSearch, setTagSearch] = useState('');

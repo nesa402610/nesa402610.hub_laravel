@@ -52,8 +52,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
                                  className={"bg-neutral-800 px-2 rounded-full relative"}>
                                 +
                                 {tagDropDown &&
-                                    <TagSelector onBlur={() => setTagDropDown(false)} addTag={addTag}
-                                                 collection={collection}/>
+                                    <TagSelector addTag={addTag} collection={collection}/>
                                 }
                             </div>}
                     </div>
