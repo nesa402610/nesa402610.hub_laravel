@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {csrf_token} from "../../mockData";
 
-interface IOverview {
+export interface IOverview {
     collection: {
         anime: {
             total: number
