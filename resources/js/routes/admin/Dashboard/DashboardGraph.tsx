@@ -88,6 +88,7 @@ const DashboardGraph: FC<DashboardGraphProps> = ({values}) => {
             ],
         },
     };
+    // @ts-ignore
     return <Column {...config} />;
 };
 

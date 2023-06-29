@@ -53,6 +53,7 @@ const AnimeChartPie = ({total, rx, ff}) => {
             },
         },
     };
+    // @ts-ignore
     return <Pie {...config} />;
 };
 
