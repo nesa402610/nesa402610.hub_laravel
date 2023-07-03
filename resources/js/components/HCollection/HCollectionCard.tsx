@@ -54,14 +54,17 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
                                 {tagDropDown &&
                                     <TagSelector addTag={addTag} collection={collection}/>
                                 }
-                            </div>}
+                            </div>
+                        }
                     </div>
                   </span>
                             {collection.episodes_released && <div className={"flex items-center"}>
                                 <h4>Эпизоды:&nbsp;</h4>
                                 <span>{collection.episodes_released}</span>
                                 /
-                                <span>{collection.episodes_total}</span>
+                                <span>
+                                    {collection.episodes_total === 0 ? '?' : collection.episodes_total}
+                                </span>
                             </div>}
                             {collection.episode_time &&
                                 <div className={"flex"}>
