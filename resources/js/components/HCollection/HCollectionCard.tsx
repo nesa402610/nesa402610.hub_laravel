@@ -29,7 +29,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
                     <Link className={'flex justify-center'}
                           to={`${link ? collection.id : ""}`}>
                         <img
-                            className={"rounded-lg w-[200px] h-auto" + (hover ? " hover:scale-105 transition-all" : "")}
+                            className={"rounded-lg w-[200px] h-auto" + (hover ? " hover:scale-105 transition-all" : "cursor-default")}
                             src={collection.image}
                             alt="Изображение тайтла"/>
                     </Link>
