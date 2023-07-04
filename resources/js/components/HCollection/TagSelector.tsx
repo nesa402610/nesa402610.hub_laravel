@@ -19,7 +19,7 @@ const TagSelector: FC<TagSelectorProps> = ({collection, addTag}) => {
         if (!tags) return;
         const itemTags = collection.tags;
         const freeTags = tags.filter(tag => !itemTags?.map(itemTag => itemTag.name).includes(tag.name));
-        setFreeTags(freeTags.filter(tag => tag.name.includes(tagSearch)));
+        setFreeTags(freeTags.filter(tag => tag.name.toLowerCase().includes(tagSearch.toLowerCase())));
     }, [tags, collection, tagSearch]);
 
     const addTagHandler = (titleId, tagId) => {
