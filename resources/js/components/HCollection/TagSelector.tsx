@@ -30,7 +30,7 @@ const TagSelector: FC<TagSelectorProps> = ({collection, addTag}) => {
     return (
         <div onClick={e => e.stopPropagation()}
              placeholder={'Школа'}
-             className={"absolute p-2 rounded-lg min-w-[250px] h-[200px] overflow-hidden bg-neutral-800 flex flex-col gap-2 right-0"}>
+             className={"absolute p-2 rounded-lg min-w-[250px] h-[300px] overflow-hidden bg-neutral-800 flex flex-col gap-2 right-0"}>
             {isLoading ? <Loader/> :
                 <>
                     <div className={'flex flex-col gap-2 bg-neutral-900 p-2 rounded-lg'}>
