@@ -4,9 +4,10 @@ import {useAddAnimeMutation} from "../../../services/Collections/AnimeService";
 import {IAnime} from "../../../types/Anime";
 import AnimeFields from "../../../components/admin/Collections/Anime/AnimeFields";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
+import Loader from "../../../components/Loader";
 
 const AnimeCreate = () => {
-    const [createAnime, {data}] = useAddAnimeMutation();
+    const [createAnime, {data, isLoading}] = useAddAnimeMutation();
     const nav = useNavigate();
     const [anime, setAnime] = useState<IAnime>({
         announce_date: "",
@@ -33,11 +34,15 @@ const AnimeCreate = () => {
         style: 0
 
     });
-    const createAnimeHandler = () => {
-        createAnime(anime).then(() => {
-            nav("/admin/anime" + data.id);
-        });
+    const createAnimeHandler = async () => {
+        createAnime(anime)
+            .unwrap()
+            .then(r => {
+                nav("/admin/anime/" + r.id);
+
+            })
     };
+    if (isLoading) return <Loader/>
     return (
         <div className={"flex flex-col gap-4"}>
             <button onClick={createAnimeHandler}>Создать</button>
