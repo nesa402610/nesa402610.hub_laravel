@@ -28,6 +28,7 @@ class TagController extends Controller
 ///
         $tag = new Tags();
         $tag->name = $request->name;
+        $tag->type = $request->type;
         $tag->save();
     }
 
@@ -35,6 +36,7 @@ class TagController extends Controller
     {
         $tag = Tags::find($request->id);
         $tag->name = $request->name;
+        $tag->type = $request->type;
         $tag->save();
     }
 

@@ -18,10 +18,10 @@ export const TagAPI = createApi({
         providesTags: ["tag"]
     }),
     createTag: build.mutation<ICollectionTag, string>({
-      query: (name) => ({
-        url: "new",
-        method: "POST",
-        body: name
+      query: (data) => ({
+          url: "new",
+          method: "POST",
+          body: data
       }),
       invalidatesTags: ["tag"]
     }),
