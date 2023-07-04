@@ -7,7 +7,7 @@ import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import Loader from "../../../components/Loader";
 
 const AnimeCreate = () => {
-    const [createAnime, {data, isLoading}] = useAddAnimeMutation();
+    const [createAnime, {isLoading}] = useAddAnimeMutation();
     const nav = useNavigate();
     const [anime, setAnime] = useState<IAnime>({
         announce_date: "",
