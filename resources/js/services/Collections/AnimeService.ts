@@ -57,7 +57,7 @@ export const AnimeAPI = createApi({
             }),
             providesTags: ["animeList"]
         }),
-        getAnimeVideos: builder.query({
+        getAnimeVideos: builder.query<IAnimeVideos[], number | string>({
             query: (id) => id + "/videos",
             providesTags: ["videos"]
         }),

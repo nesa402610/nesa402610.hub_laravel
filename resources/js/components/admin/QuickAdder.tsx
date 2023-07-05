@@ -1,6 +1,17 @@
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
+import {SerializedError} from "@reduxjs/toolkit";
+import {FetchBaseQueryError} from "@reduxjs/toolkit/query";
 
-const QuickAdder = ({error, createFn, length, tag}) => {
+interface QuickAdderProps {
+    error: SerializedError | FetchBaseQueryError
+
+    createFn(any): any
+
+    length: number
+    tag?: boolean
+}
+
+const QuickAdder: FC<QuickAdderProps> = ({error, createFn, length, tag}) => {
     const [value, setValue] = useState('');
     const [rx, setRx] = useState(false);
     const [errorValue, setErrorValue] = useState('');

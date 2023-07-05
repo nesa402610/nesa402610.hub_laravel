@@ -3,14 +3,12 @@ import ListItem from "./ListItem";
 
 interface ListProps {
     data: any[];
-    tag: boolean
 
     updateFn(name, id): any;
 }
 
 const List: FC<ListProps> = ({data, updateFn}) => {
     if (!data) return null;
-    console.log(data)
     return (
         <>
             {

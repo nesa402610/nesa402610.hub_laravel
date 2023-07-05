@@ -10,7 +10,7 @@ const Tags = () => {
     return (
         <div className={"flex flex-col gap-4"}>
             <QuickAdder createFn={createTag} error={error} length={data?.length} tag/>
-            <List data={data} updateFn={updateTag} tag/>
+            <List data={data} updateFn={updateTag}/>
         </div>
     );
 };
