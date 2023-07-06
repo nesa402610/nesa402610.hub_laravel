@@ -29,7 +29,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover})
                             src={collection.image}
                             alt="Изображение тайтла"/>
                     </Link>
-                    {user && <CollectionStatus status={collection.status} animeID={collection.id}/>}
+                    <CollectionStatus status={collection.status} animeID={collection.id}/>
                 </div>
                 <div className={"flex flex-col"}>
                     <div className={'flex flex-col'}>

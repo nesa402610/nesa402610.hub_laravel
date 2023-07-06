@@ -1,60 +1,26 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import {IoSettingsSharp} from "react-icons/io5";
-import moment from "moment";
 import {useParams} from "react-router";
 import {useGetUserQuery} from "../services/userService";
 import Loader from "../components/Loader";
+import UserOverview from "../components/profilePage/profile/UserOverview";
+import UserAnimeOverview from "../components/profilePage/profile/UserAnimeOverview";
 
 const ProfilePage = () => {
-    const {username} = useParams();
+    const {username: userId} = useParams();
     const {data: authedUser} = useGetUserQuery()
-    const {user} = useGetUserQuery(+username === authedUser?.id ? undefined : username,
-        {
-            selectFromResult: ({data}) => ({
-                user: authedUser?.id === +username ? authedUser : data,
-            }),
-        })
+
+    const {user} = useGetUserQuery(null, {
+        selectFromResult: ({data}) => ({
+            user: authedUser?.id === +userId ? authedUser : data,
+        }),
+    })
 
     if (!user) return <Loader/>;
 
     return (
-        <div className={"p-4"}>
-            <div className={"block--light"}>
-                <div className={"flex sm:flex-row xs:flex-col gap-4 w-full"}>
-                    <div className={"flex xs:items-center flex-col gap-2 sm:items-end"}>
-                        <img className={"rounded-lg"}
-                             width={"200px"}
-                             height={"200px"}
-                             src={user.avatar}
-                             alt="user profile picture"/>
-                        {authedUser.id === +username && <Link to={"edit"}
-                                                              className={"hover:text-stone-400 transition-colors flex gap-2 text-2xl items-center"}>
-                            <span className={"text-lg"}>Настройки</span>
-                            <IoSettingsSharp/>
-                        </Link>}
-                    </div>
-                    <div className={"flex flex-col gap-8 flex-1"}>
-                        <div>
-                            <div>
-                                {user.name} {user.lastName} {user.middleName}
-                            </div>
-                            <div>
-                                {user.birthday &&
-                                    (moment(user.birthday).format("YYYY")) + " года / "}
-                                {user.status && user.status + " / "} Здесь
-                                с {moment(user.created_at).format("YYYY")} года
-                            </div>
-                        </div>
-                        <div className={"flex flex-col flex-1"}>
-                            <h2 className={"font-bold mb-2 italic text-end mr-2"}>Информация обо мне</h2>
-                            <div className={"block--dark flex-1"}>
-                                {user.about}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div className={"p-4 flex flex-col gap-4"}>
+            <UserOverview user={user} userId={userId} authedUserId={authedUser.id}/>
+            <UserAnimeOverview userId={userId}/>
         </div>
     );
 };

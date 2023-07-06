@@ -17,13 +17,7 @@ const HMangaPage = () => {
     return (
         <div className={"block--dark flex flex-col gap-4"}>
             {!isFetching ? filteredCollection?.map(collectionItem =>
-                <HCollectionCard key={collectionItem.id}
-                                 addTag={() => {
-                                 }}
-                                 removeTag={() => {
-                                 }}
-                                 link
-                                 collection={collectionItem}/>
+                <HCollectionCard key={collectionItem.id} link collection={collectionItem}/>
             ) : <Loader/>}
             <Paginator currentPage={data.current_page}
                        totalPages={data.last_page}

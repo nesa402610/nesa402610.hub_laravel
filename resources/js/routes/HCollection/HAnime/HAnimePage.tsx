@@ -43,7 +43,7 @@ const HAnimePage: FC = () => {
                     </div>
                 }
                 {data?.data?.map(collectionItem =>
-                    <HCollectionCard removeTag={removeTag} addTag={addTag} key={collectionItem.id}
+                    <HCollectionCard key={collectionItem.id}
                                      hover link
                                      collection={collectionItem}/>
                 )}

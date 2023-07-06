@@ -106,4 +106,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
     }
+
+    public function animeList()
+    {
+        $rel = $this->hasMany(AnimeUserStatus::class);
+//        foreach ($rel as $anime) {
+//            $anime
+//        }
+        return $rel;
+    }
 }

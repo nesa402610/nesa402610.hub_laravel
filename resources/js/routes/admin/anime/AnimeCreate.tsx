@@ -47,7 +47,7 @@ const AnimeCreate = () => {
         <div className={"flex flex-col gap-4"}>
             <button onClick={createAnimeHandler}>Создать</button>
             <AnimeFields anime={anime} setAnime={setAnime}/>
-            <HCollectionCard collection={anime} addTag={null} removeTag={null}/>
+            <HCollectionCard collection={anime}/>
         </div>
     );
 };

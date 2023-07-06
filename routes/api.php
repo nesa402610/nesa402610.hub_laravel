@@ -45,6 +45,8 @@ Route::prefix('/anime')->group(function () {
     Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
     Route::post('{id}', [AnimeController::class, 'getAnimeById']);
     Route::get('{id}/videos', [AnimeController::class, 'getAnimeVideos']);
+    Route::get('animeList/{userId}', [UserController::class, 'getUserAnimeOverview']);
+    Route::get('animeList/{userId}/{animeStatus}', [UserController::class, 'getUserAnimeList']);
 });
 Route::prefix('/manga')->group(function () {
     Route::post('list', [MangaController::class, 'getPaginatedManga']);

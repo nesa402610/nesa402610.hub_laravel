@@ -29,4 +29,18 @@ class AnimeUserStatus extends Model
 {
     protected $table = 'anime_user_status';
     use HasFactory;
+
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at',
+        'user_id',
+        'anime_id',
+    ];
+
+    public function anime()
+    {
+        return $this->belongsTo(HAnime::class);
+    }
+
 }

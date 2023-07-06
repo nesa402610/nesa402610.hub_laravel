@@ -15,6 +15,16 @@ interface withPaginate {
     last_page: number;
 }
 
+interface AnimeListOverviewProps {
+    count: number
+    watched: number
+    unwatched: number
+    dropped: number
+    planned: number
+    watching: number
+    status: number
+}
+
 export const AnimeAPI = createApi({
     reducerPath: "AnimeAPI",
     baseQuery: fetchBaseQuery({
@@ -24,7 +34,7 @@ export const AnimeAPI = createApi({
             return headers;
         },
     }),
-    tagTypes: ["anime", "videos", "animeList"],
+    tagTypes: ["anime", "videos", "animeList", 'UserAnimeList'],
     endpoints: (builder) => ({
         getAllAnime: builder.query<withPaginate, getArgs>({
             query: ({page = 1, passkey, query = null}) => ({
@@ -73,7 +83,7 @@ export const AnimeAPI = createApi({
                 method: "PUT",
                 body: data
             }),
-            invalidatesTags: ["anime", "animeList"]
+            invalidatesTags: ["anime", "animeList", 'UserAnimeList']
         }),
         removeTag: builder.mutation({
             query: (data) => ({
@@ -81,7 +91,7 @@ export const AnimeAPI = createApi({
                 method: "DELETE",
                 body: data
             }),
-            invalidatesTags: ["anime", "animeList"]
+            invalidatesTags: ["anime", "animeList", 'UserAnimeList']
         }),
         addAnime: builder.mutation<IAnime, IAnime>({
             query: (data) => ({
@@ -97,7 +107,7 @@ export const AnimeAPI = createApi({
                 method: "PATCH",
                 body: data
             }),
-            invalidatesTags: ["animeList", 'anime']
+            invalidatesTags: ["animeList", 'anime', 'UserAnimeList']
         }),
         deleteAnime: builder.mutation({
             query: (id) => ({
@@ -105,7 +115,7 @@ export const AnimeAPI = createApi({
                 method: "DELETE",
                 body: {id}
             }),
-            invalidatesTags: ["animeList"]
+            invalidatesTags: ["animeList", 'UserAnimeList']
         }),
         setAnimeStatus: builder.mutation<IAnime[], { status: number, animeID: number }>({
             query: ({status, animeID}) => ({
@@ -113,7 +123,15 @@ export const AnimeAPI = createApi({
                 method: "PATCH",
                 body: {status, animeID}
             }),
-            invalidatesTags: ["animeList"]
+            invalidatesTags: ["animeList", 'UserAnimeList']
+        }),
+        getUserAnimeOverview: builder.query<AnimeListOverviewProps, string>({
+            query: (userId) => `animeList/${userId}`,
+            providesTags: ['UserAnimeList']
+        }),
+        getUserAnimeList: builder.query<{ anime: IAnime, status: number }[], { userId: string, animestatus: string }>({
+            query: ({userId, animestatus}) => `animeList/${userId}/${animestatus}`,
+            providesTags: ['UserAnimeList'],
         }),
     }),
 });
@@ -130,5 +148,7 @@ export const {
     useAddAnimeMutation,
     useUpdateAnimeMutation,
     useDeleteAnimeMutation,
-    useDeleteAnimeVideoMutation
+    useDeleteAnimeVideoMutation,
+    useGetUserAnimeOverviewQuery,
+    useGetUserAnimeListQuery
 } = AnimeAPI;

@@ -58,7 +58,7 @@ const AnimeEdit = () => {
             <AnimeVideoFields setVideos={setVideos} videos={videos}/>
             {preview &&
                 <>
-                    <HCollectionCard collection={anime} addTag={addTag} removeTag={null}/>
+                    <HCollectionCard collection={anime}/>
                     <AnimeVideos anime={anime} videosData={{...videosResponse, data: videos}}/>
                 </>
             }

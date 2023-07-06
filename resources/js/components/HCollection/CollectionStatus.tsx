@@ -1,7 +1,11 @@
 import React, {useState} from 'react';
 import {useSetAnimeStatusMutation} from "../../services/Collections/AnimeService";
+import {useGetUserQuery} from "../../services/userService";
 
 const CollectionStatus = ({status, animeID}) => {
+    const {data: user} = useGetUserQuery();
+    if (!user) return null;
+
     const [setStatus, {}] = useSetAnimeStatusMutation()
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const statuses = [

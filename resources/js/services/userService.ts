@@ -11,7 +11,7 @@ export const userAPI = createApi({
             return headers;
         },
     }),
-    tagTypes: ["User"],
+    tagTypes: ["User", 'UserAnimeList'],
     endpoints: (builder) => ({
         getUser: builder.query<IUser, void | string>({
             query: (id) => `${id ? id : ''}`,
@@ -49,6 +49,8 @@ export const userAPI = createApi({
 });
 
 export const {
-    useGetUserQuery, useUpdateProfileMutation, useUpdateAccountMutation,
-    useGetAllUsersQuery
+    useGetUserQuery,
+    useUpdateProfileMutation,
+    useUpdateAccountMutation,
+    useGetAllUsersQuery,
 } = userAPI;

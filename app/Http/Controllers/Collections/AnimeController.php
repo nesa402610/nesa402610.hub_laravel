@@ -59,7 +59,7 @@ class AnimeController extends Controller
                 $query->where('rating', $rating);
             }
 
-            $collections = $query->where('type', 0)->paginate(5);
+            $collections = $query->where('type', 0)->paginate(15);
 
             foreach ($collections as $collection) {
                 $collection->tags->makeHidden('pivot');
