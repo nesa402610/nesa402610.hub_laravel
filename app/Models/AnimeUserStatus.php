@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereUserId($value)
+ * @property-read \App\Models\HAnime $anime
  * @mixin \Eloquent
  */
 class AnimeUserStatus extends Model

@@ -19,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Tags whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tags whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tags whereUpdatedAt($value)
+ * @property int $type
+ * @method static \Illuminate\Database\Eloquent\Builder|Tags whereType($value)
  * @mixin \Eloquent
  */
 class Tags extends Model

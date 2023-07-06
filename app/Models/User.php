@@ -61,6 +61,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereBadge($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereBannerImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereVerified($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AnimeUserStatus> $animeList
+ * @property-read int|null $anime_list_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Role> $role
+ * @property-read int|null $role_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable
