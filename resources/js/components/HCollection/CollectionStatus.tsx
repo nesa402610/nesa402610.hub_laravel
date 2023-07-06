@@ -4,7 +4,7 @@ import {useGetUserQuery} from "../../services/userService";
 
 const CollectionStatus = ({status, animeID}) => {
     const {data: user} = useGetUserQuery();
-    if (!user) return null;
+
 
     const [setStatus, {}] = useSetAnimeStatusMutation()
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -26,6 +26,7 @@ const CollectionStatus = ({status, animeID}) => {
             .catch(err => console.error(err))
             .finally(() => setIsOpen(false))
     }
+    if (!user) return null;
     return (
         <div className={'flex bg-neutral-800 hover:bg-neutral-900 relative rounded-lg transition-all cursor-pointer'}>
             <div className={'p-2 w-full'} onClick={() => setIsOpen(true)}>
