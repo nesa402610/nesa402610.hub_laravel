@@ -2,11 +2,7 @@ import React, {FC, useState} from "react";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
-import {
-    useAddTagToAnimeMutation,
-    useGetAllAnimeQuery,
-    useRemoveTagMutation
-} from "../../../services/Collections/AnimeService";
+import {useGetAllAnimeQuery} from "../../../services/Collections/AnimeService";
 import {useAppSelector} from "../../../hooks/redux";
 
 
@@ -25,8 +21,7 @@ const HAnimePage: FC = () => {
         page,
         query: filter
     });
-    const [addTag] = useAddTagToAnimeMutation();
-    const [removeTag] = useRemoveTagMutation();
+
     if (isLoading) return <Loader/>;
 
     return (

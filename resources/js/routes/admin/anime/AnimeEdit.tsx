@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import {
-    useAddTagToAnimeMutation,
     useGetAllAnimeNPQuery,
     useGetAnimeVideosQuery,
     useUpdateAnimeMutation
@@ -26,7 +25,7 @@ const AnimeEdit = () => {
     const [preview, setPreview] = useState(true);
     const [anime, setAnime] = useState<IAnime>(null);
     const [videos, setVideos] = useState<IAnimeVideos[]>(null);
-    const [addTag] = useAddTagToAnimeMutation();
+
     useEffect(() => {
         setAnime(animeData);
     }, [animeData]);

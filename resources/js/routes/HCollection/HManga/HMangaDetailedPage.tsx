@@ -3,11 +3,7 @@ import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import Modal from "../../../components/UI/modal";
-import {
-    useAddTagToMangaMutation,
-    useGetMangaByIdQuery,
-    useRemoveTagMutation
-} from "../../../services/Collections/MangaService";
+import {useGetMangaByIdQuery} from "../../../services/Collections/MangaService";
 
 const HMangaDetailedPage = () => {
     const passkey = localStorage.getItem("passkey");
@@ -15,8 +11,6 @@ const HMangaDetailedPage = () => {
     const [isModal, setIsModal] = useState(false);
     const {id} = useParams();
     const {data} = useGetMangaByIdQuery({passkey, id});
-    const [addTag, {}] = useAddTagToMangaMutation();
-    const [removeTag] = useRemoveTagMutation();
 
     const viewHandler = (page, link) => {
         setPage({...page, page: page, link: link});

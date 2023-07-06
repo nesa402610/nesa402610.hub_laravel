@@ -24,7 +24,7 @@ export default defineConfig({
                             '@ant-design/charts',
                             '@reduxjs/toolkit',
                             '@types/react',
-                            "@types/react-dom", ,
+                            "@types/react-dom",
                             "@types/react-router",
                             "@types/react-router-dom",
                             "@vitejs/plugin-react",

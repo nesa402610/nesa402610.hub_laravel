@@ -7,8 +7,8 @@ import {Link} from "react-router-dom";
 
 const AnimeListPage = () => {
     const {animestatus, username} = useParams()
-    const {data, isLoading, isFetching} = useGetUserAnimeListQuery({userId: username, animestatus})
-    const {data: animeOverview, isLoading: valuesLoading} = useGetUserAnimeOverviewQuery(username)
+    const {data, isFetching} = useGetUserAnimeListQuery({userId: username, animestatus})
+    const {data: animeOverview} = useGetUserAnimeOverviewQuery(username)
     const statusList = [
         {name: 'watching', text: 'Сейчас смотрю', count: animeOverview?.watching},
         {name: 'planned', text: 'Запланированные', count: animeOverview?.planned},
