@@ -12,13 +12,9 @@ interface CollectionProps {
     collection: IAnime;
     hover?: boolean;
     link?: boolean;
-
-    addTag({titleId, tagId}): any;
-
-    removeTag(titleId, tagId): any;
 }
 
-const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, addTag, removeTag}) => {
+const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover}) => {
     const {data: user} = useGetUserQuery();
     const [tagDropDown, setTagDropDown] = useState(false);
     if (!collection) return null;
@@ -46,13 +42,13 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
                             <span>Год выхода: {collection.announce_date.slice(0, 4)}</span>
                             <span className={"flex gap-1 md:flex-nowrap xs:flex-wrap"}>Жанры:
                     <div className={"flex gap-1 flex-wrap"}>
-                      <HCollectionTags removeTag={removeTag} collection={collection}/>
+                      <HCollectionTags collection={collection}/>
                         {user?.role[0].name === 'Admin' &&
                             <div onClick={() => setTagDropDown(prev => !prev)}
                                  className={"bg-neutral-800 px-2 rounded-full relative"}>
                                 +
                                 {tagDropDown &&
-                                    <TagSelector addTag={addTag} collection={collection}/>
+                                    <TagSelector collection={collection}/>
                                 }
                             </div>
                         }

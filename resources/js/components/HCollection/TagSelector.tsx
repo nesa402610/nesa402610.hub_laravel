@@ -3,14 +3,13 @@ import Loader from "../Loader";
 import {useGetTagsQuery} from "../../services/Collections/TagService";
 import {ICollectionTag} from "../../types/Tag";
 import {IAnime} from "../../types/Anime";
+import {useAddTagToAnimeMutation} from "../../services/Collections/AnimeService";
 
 interface TagSelectorProps {
     collection: IAnime;
-
-    addTag({titleId, tagId}): any;
 }
 
-const TagSelector: FC<TagSelectorProps> = ({collection, addTag}) => {
+const TagSelector: FC<TagSelectorProps> = ({collection}) => {
     const {data: tags, isLoading} = useGetTagsQuery();
     const [freeTags, setFreeTags] = useState<ICollectionTag[]>([]);
     const [tagSearch, setTagSearch] = useState('');
@@ -24,6 +23,7 @@ const TagSelector: FC<TagSelectorProps> = ({collection, addTag}) => {
         setFreeTags(freeTagsWithSearch);
     }, [tags, collection, tagSearch, rxSearch]);
 
+    const [addTag] = useAddTagToAnimeMutation();
     const addTagHandler = (titleId, tagId) => {
         addTag({titleId, tagId});
     };
