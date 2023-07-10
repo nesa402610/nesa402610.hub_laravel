@@ -1,5 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../../mockData";
+import {ICollectionStudio} from "../../types/Anime";
 
 export const StudioAPI = createApi({
   reducerPath: "StudioAPI",
@@ -18,14 +19,14 @@ export const StudioAPI = createApi({
       }),
       providesTags: ["studio"]
     }),
-    createStudio: builder.mutation({
-      query: (data) => ({
-        url: "create",
-        method: "PUT",
-        body: data
+      createStudio: builder.mutation<ICollectionStudio[], ICollectionStudio>({
+          query: (data) => ({
+              url: "create",
+              method: "PUT",
+              body: data
+          }),
+          invalidatesTags: ["studio"]
       }),
-      invalidatesTags: ["studio"]
-    }),
     updateStudio: builder.mutation({
       query: (data) => ({
         url: "update",

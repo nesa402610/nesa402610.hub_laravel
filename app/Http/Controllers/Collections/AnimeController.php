@@ -3,70 +3,123 @@
 namespace App\Http\Controllers\Collections;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnimeUserStatus;
 use App\Models\HAnime;
 use App\Models\HLinks;
 use App\Models\Passkey;
 use Auth;
 use Illuminate\Http\Request;
 
-class AnimeController extends Controller {
-    public function createAnime(Request $request) {
+class AnimeController extends Controller
+{
+    public function createAnime(Request $request)
+    {
         $anime = new HAnime();
         $this->animeFields($request, $anime);
         $anime->save();
         return response($anime);
     }
 
-    public function getAllAnime() {
-        $anime = HAnime::all();
+    public function getAllAnime()
+    {
+        $anime = HAnime::where('type', 0)->get();
         foreach ($anime as $collection) {
             $collection->tags->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
+            $collection->status = $collection->animeStatus();
         }
         return response($anime, 200);
 
     }
 
-    public function getPaginatedAnime(Request $request) {
+    public function getPaginatedAnime(Request $request)
+    {
         $exist = $this->checkPasskey($request);
         if (count($exist) !== 0) {
-            $collections = HAnime::paginate(5);
+            $tags = $request->tags;
+            $title = $request->title;
+            $rating = $request->rating;
+            $APP = $request->APP ?? 15;
+
+            $query = HAnime::query();
+
+            if (!empty($title)) {
+                $query->where(function ($query) use ($title, $rating) {
+                    $query->where('title_ru', 'like', '%' . $title . '%')
+                        ->orWhere('title_en', 'like', '%' . $title . '%')
+                        ->orWhere('title_original', 'like', '%' . $title . '%');
+                });
+            }
+
+            if (!empty($tags)) {
+                $query->whereHas('tags', function ($query) use ($tags) {
+                    $query->whereIn('name', $tags);
+                }, '=', count($tags));
+            }
+            if (!empty($rating)) {
+                $query->where('rating', $rating);
+            }
+            //сортируем Rx в конец, тип отвечает за аниме - 0 / мангу - 1
+            $collections = $query->orderBy('rating')->orderByDesc('created_at')->where('type', 0)->paginate($APP);
+
             foreach ($collections as $collection) {
                 $collection->tags->makeHidden('pivot');
                 $collection->studios->makeHidden('pivot');
+                $collection->status = $collection->animeStatus();
             }
             return response($collections, 200);
         }
         return response('Какая-то ошибка');
     }
 
-    public function getAnimeById(Request $request, $id) {
+    public function getAnimeById(Request $request, $id)
+    {
         $exist = $this->checkPasskey($request);
         if (count($exist) !== 0) {
             $collection = HAnime::find($id);
             $collection->tags->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
+            $collection->status = $collection->animeStatus();
             return response($collection, 200);
         }
         return response('Какая-то ошибка');
     }
 
-    public function getAnimeVideos($id) {
+    public function getAnimeVideos($id)
+    {
         $videos = HAnime::find($id)->links;
         if ($videos->isEmpty()) return response(null);
         return response($videos);
     }
 
-    public function deleteAnimeVideo($id) {
+    public function deleteAnimeVideo($id)
+    {
 
         $videos = HLinks::find($id)->delete();
     }
 
-    public function addTitle() {
+    public function addTitle()
+    {
 
     }
 
-    public function updateAnime(Request $request) {
+    public function setAnimeStatus(Request $request)
+    {
+        $animeUserStatus = AnimeUserStatus::where('anime_id', $request->animeID)
+            ->where('user_id', Auth::user()->id)
+            ->first();
+        if (!$animeUserStatus) {
+            $animeUserStatus = new AnimeUserStatus();
+            $animeUserStatus->anime_id = $request->animeID;
+            $animeUserStatus->user_id = Auth::user()->id;
+        }
+        $animeUserStatus->status = $request->status;
+        $animeUserStatus->save();
+
+    }
+
+    public function updateAnime(Request $request)
+    {
         $requestAnime = $request['anime'];
         $requestVideos = $request->videos;
         $anime = HAnime::find($requestAnime['id']);
@@ -96,17 +149,20 @@ class AnimeController extends Controller {
         }
     }
 
-    public function addTag(Request $request) {
+    public function addTag(Request $request)
+    {
         $collection = HAnime::find($request->titleId);
         $collection->tags()->attach($request->tagId);
     }
 
-    public function removeTag(Request $request) {
+    public function removeTag(Request $request)
+    {
         $collection = HAnime::find($request->titleId);
         $collection->tags()->detach($request->tagId);
     }
 
-    public function checkPasskey(Request $request) {
+    public function checkPasskey(Request $request)
+    {
         if (Auth::check()) {
             if (Auth::user()->id === 1)
                 return [1];
@@ -125,7 +181,8 @@ class AnimeController extends Controller {
      * @param HAnime $anime
      * @return void
      */
-    public function animeFields($request, HAnime $anime): void {
+    public function animeFields($request, HAnime $anime): void
+    {
         $anime->title_ru = $request['title_ru'];
         $anime->title_en = $request['title_en'];
         $anime->title_original = $request['title_original'];
@@ -140,5 +197,8 @@ class AnimeController extends Controller {
         $anime->episodes_total = $request['episodes_total'];
         $anime->author = $request['author'];
         $anime->review = $request['review'];
+        $anime->rating = $request['rating'];
+        $anime->style = $request['style'];
+        $anime->type = 0;
     }
 }

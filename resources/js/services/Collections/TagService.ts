@@ -13,15 +13,15 @@ export const TagAPI = createApi({
   }),
   tagTypes: ["tag"],
   endpoints: build => ({
-    getTags: build.query<ICollectionTag[], unknown>({
-      query: () => "list",
-      providesTags: ["tag"]
+    getTags: build.query<ICollectionTag[], void>({
+        query: () => "list",
+        providesTags: ["tag"]
     }),
     createTag: build.mutation<ICollectionTag, string>({
-      query: (name) => ({
-        url: "new",
-        method: "POST",
-        body: {name}
+      query: (data) => ({
+          url: "new",
+          method: "POST",
+          body: data
       }),
       invalidatesTags: ["tag"]
     }),

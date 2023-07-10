@@ -5,7 +5,7 @@ import Loader from "./Loader";
 
 
 const ProjectSection: FC = () => {
-    const {data:projects, isLoading} = useGetProjectsQuery('')
+    const {data: projects, isLoading} = useGetProjectsQuery()
     if (isLoading) return <Loader/>
     return (
         <section>

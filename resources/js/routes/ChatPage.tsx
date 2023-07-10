@@ -3,33 +3,22 @@ import {Link} from "react-router-dom";
 import {useGetUserQuery} from "../services/userService";
 import {useGetMessagesQuery, useSendMessageMutation} from "../services/chatService";
 import Loader from "../components/Loader";
-import {IUser} from "../types/User";
-
-interface IMessage {
-    id: number
-    user_id: number
-    user: IUser
-    message: string
-}
-
-interface IChat {
-    message: IMessage
-}
 
 const ChatPage: FC = () => {
-    const [message, setMessage] = useState('');
-    const {data: messages, isLoading} = useGetMessagesQuery('',
-        {pollingInterval: 15000}
-    )
+    const {data: user} = useGetUserQuery()
+    const {
+        data: messages,
+        isLoading,
+    } = useGetMessagesQuery(null, {pollingInterval: 15000})
     const [sendMessage, {}] = useSendMessageMutation()
+    const [message, setMessage] = useState('');
     const [timer, setTimer] = useState(false);
-    const {data: isAuth} = useGetUserQuery('')
 
     const sendMessageHandler = (e) => {
         if (message.length > 0 && e.key === 'Enter' && !timer) {
             setTimer(true)
             setMessage('')
-            sendMessage({message})
+            sendMessage(message)
             setTimeout(() => {
                 setTimer(false)
             }, 2000)
@@ -37,10 +26,10 @@ const ChatPage: FC = () => {
     }
 
     return (
-        <div className={'ml-4 block--dark flex gap-4 justify-between h-screen sm:flex-col'}>
+        <div className={'ml-4 block--dark flex gap-4 justify-between h-screen flex-col'}>
             <div className={'h-full overflow-auto'}>
-                {messages ? messages.map(msg =>
-                    <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center xs:flex-col xs:items-start'}>
+                {!isLoading ? messages.map(msg =>
+                    <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center flex-col xs:items-start'}>
                         {/*<div className={'w-[40px]'}>*/}
                         {/*    {msg.id}*/}
                         {/*</div>*/}
@@ -58,12 +47,12 @@ const ChatPage: FC = () => {
                     </div>
                 ) : <Loader/>}
             </div>
-            {isAuth ? <input type="text"
-                             onKeyPress={e => sendMessageHandler(e)}
-                             onChange={e => setMessage(e.target.value)}
-                             placeholder={'Сообщение...'}
-                             value={message}
-                             disabled={timer}
+            {user ? <input type="text"
+                           onKeyPress={sendMessageHandler}
+                           onChange={e => setMessage(e.target.value)}
+                           placeholder={!timer ? 'Сообщение...' : 'Таймаут...'}
+                           value={message}
+                           disabled={timer}
                 /> :
                 <h2 className={'text-center font-bold'}>
                     <span>Для общения в чате требуется &nbsp;</span>

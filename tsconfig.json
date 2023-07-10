@@ -1,10 +1,11 @@
 {
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "jsx": "react",
-    "lib": [
-      "ES2022",
-      "DOM"
-    ]
-  }
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "jsx": "react",
+        "skipLibCheck": true,
+        "lib": [
+            "ES2022",
+            "DOM"
+        ]
+    }
 }

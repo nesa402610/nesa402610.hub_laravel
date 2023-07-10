@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -53,22 +54,45 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereTitleOriginal($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereTitleRu($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereUpdatedAt($value)
- * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Studios[] $studios
  * @property-read int|null $studios_count
+ * @property int $type
+ * @property string $rating
+ * @property int $colored
+ * @property string $style
+ * @property int $totalPages
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereColored($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereRating($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereStyle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereTotalPages($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereType($value)
+ * @mixin \Eloquent
  */
 class HAnime extends Model
 {
     protected $table = 'h_collections';
 
     use HasFactory;
-    public function studios() {
+
+    public function studios()
+    {
         return $this->belongsToMany(Studios::class, 'studio_collection', 'collection_id', 'studio_id');
     }
-    public function tags() {
+
+    public function tags()
+    {
         return $this->belongsToMany(Tags::class, 'tag_collection', 'collection_id', 'tag_id')->select(['tag_id', 'name']);
     }
-    public function links() {
+
+    public function links()
+    {
         return $this->belongsToMany(HLinks::class, 'link_collection', 'collection_id', 'link_id');
+    }
+
+    public function animeStatus()
+    {
+        if (!Auth::check()) return null;
+
+        return $this->hasOne(AnimeUserStatus::class, 'anime_id')->where('user_id', Auth::user()->id)->value('status');
     }
 }

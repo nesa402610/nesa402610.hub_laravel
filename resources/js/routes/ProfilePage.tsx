@@ -1,71 +1,28 @@
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
-import {IoSettingsSharp} from "react-icons/io5";
-import moment from "moment";
+import React from "react";
 import {useParams} from "react-router";
-import axios from "axios";
 import {useGetUserQuery} from "../services/userService";
 import Loader from "../components/Loader";
-import {IUser} from "../types/User";
+import UserOverview from "../components/profilePage/profile/UserOverview";
+import UserAnimeOverview from "../components/profilePage/profile/UserAnimeOverview";
 
 const ProfilePage = () => {
-  const {data: authedUser} = useGetUserQuery("");
-  const [user, setUser] = useState<IUser>(null);
-  const {username} = useParams();
+    const {username: userId} = useParams();
+    const {data: authedUser} = useGetUserQuery()
 
-  useEffect(() => {
-    if (authedUser?.id == username || !username) {
-      return setUser(authedUser);
-    } else {
-      axios.get("/profile/" + username)
-        .then(r => {
-          setUser(r.data);
-        });
-    }
+    const {user} = useGetUserQuery(null, {
+        selectFromResult: ({data}) => ({
+            user: authedUser?.id === +userId ? authedUser : data,
+        }),
+    })
 
-  }, [username]);
+    if (!user) return <Loader/>;
 
-  if (!user) return <Loader/>;
-
-  return (
-    <div className={"p-4"}>
-      <div className={"block--light"}>
-        <div className={"flex sm:flex-row xs:flex-col gap-4 w-full"}>
-          <div className={"flex xs:items-center flex-col gap-2 sm:items-end"}>
-            <img className={"rounded-lg"}
-                 width={"200px"}
-                 height={"200px"}
-                 src={user.avatar}
-                 alt="user profile picture"/>
-            {String(user.id) === username && <Link to={"edit"}
-                                          className={"hover:text-stone-400 transition-colors flex gap-2 text-2xl items-center"}>
-              <span className={"text-lg"}>Настройки</span>
-              <IoSettingsSharp/>
-            </Link>}
-          </div>
-          <div className={"flex flex-col gap-8 flex-1"}>
-            <div>
-              <div>
-                {user.name} {user.lastName} {user.middleName}
-              </div>
-              <div>
-                {user.birthday &&
-                  (moment(user.birthday).format("YYYY")) + " года / "}
-                {user.status && user.status + " / "} Здесь
-                                                     с {moment(user.created_at).format("YYYY")} года
-              </div>
-            </div>
-            <div className={"flex flex-col flex-1"}>
-              <h2 className={"font-bold mb-2 italic text-end mr-2"}>Информация обо мне</h2>
-              <div className={"block--dark flex-1"}>
-                {user.about}
-              </div>
-            </div>
-          </div>
+    return (
+        <div className={"p-4 flex flex-col gap-4"}>
+            <UserOverview user={user} userId={userId} authedUserId={authedUser.id}/>
+            <UserAnimeOverview userId={userId}/>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default ProfilePage;

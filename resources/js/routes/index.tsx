@@ -32,58 +32,62 @@ import Studios from "./admin/Studios";
 import AnimeCreate from "./admin/anime/AnimeCreate";
 import AnimeEdit from "./admin/anime/AnimeEdit";
 import Anime from "./admin/anime/Anime";
+import Dashboard from "./admin/Dashboard";
+import AnimeListPage from "./profile/AnimeListPage";
 
 export const router = createBrowserRouter(
-  createRoutesFromElements(
-    <>
-      <Route
-        path="/"
-        element={<App/>}
-        errorElement={<NotFound/>}>
-        <Route path={"/"} element={<HomePage/>}/>
-        <Route path={"/suggestions"} element={<SuggestionsPage/>}/>
-        <Route path={"/registration"} element={<RegistrationPage/>}/>
-        <Route path={"/login"} element={<LoginPage/>}/>
-        <Route path={"/profile"} element={<ProfilePage/>}>
-          <Route path={":username"} element={<ProfilePage/>}/>
-        </Route>
-        <Route path={"/profile/edit"} element={<ProfileEditPage/>}/>
-        <Route path={"/chat"} element={<ChatPage/>}/>
-        <Route path={"/blog"} element={<BlogPage/>}>
-          <Route path={""} element={<BlogPostsPage/>}/>
-          <Route path={":id"} element={<BlogPostPage/>}/>
-        </Route>
-        <Route path={"/about"} element={<AboutPage/>}/>
-        <Route path={"/mini-apps"} element={<MiniApps/>}>
-          <Route path={"timer"} element={<TimerApp/>}/>
-        </Route>
-        <Route path={"NULL"} element={<Index/>}>
-          <Route path={""} element={<HHHPage/>}>
-            <Route path={"a"} element={<HAnimePage/>}/>
-            <Route path={"m"} element={<HMangaPage/>}/>
-          </Route>
-          <Route path={"m/:id"} element={<HMangaDetailedPage/>}/>
-          <Route path={"m/:id/reader"} element={<HReader/>}/>
-          <Route path={"a/:id"} element={<HAnimeDetailedPage/>}/>
-        </Route>
-        <Route path={"users"} element={<UsersPage/>}/>
-      </Route>
-      <Route path={"admin"}
-             element={<IndexAdmin/>}>
-        <Route path={"anime"} element={<Outlet/>}>
-          <Route path={""} element={<Anime/>}/>
-          <Route path={"studios"} element={<Studios/>}/>
-          <Route path={"new"} element={<AnimeCreate/>}/>
-          <Route path={":id"} element={<AnimeEdit/>}/>
-        </Route>
-        <Route path={"manga"} element={<Outlet/>}>
-          <Route path={""} element={<Manga/>}/>
-          <Route path={":id"} element={<Manga/>}/>
-        </Route>
-        <Route path={"users"} element={<Users/>}/>
-        <Route path={"tags"} element={<Tags/>}/>
-        <Route path={"projects"} element={<ProjectsPage/>}/>
-      </Route>
-    </>
-  )
+    createRoutesFromElements(
+        <>
+            <Route
+                path="/"
+                element={<App/>}
+                errorElement={<NotFound/>}>
+                <Route path={"/"} element={<HomePage/>}/>
+                <Route path={"/suggestions"} element={<SuggestionsPage/>}/>
+                <Route path={"/registration"} element={<RegistrationPage/>}/>
+                <Route path={"/login"} element={<LoginPage/>}/>
+                <Route path={"/profile"} element={<ProfilePage/>}>
+                    <Route path={":username"} element={<ProfilePage/>}/>
+                </Route>
+                <Route path={'profile/:username/animelist/:animestatus'} element={<AnimeListPage/>}/>
+                <Route path={"/profile/edit"} element={<ProfileEditPage/>}/>
+                <Route path={"/chat"} element={<ChatPage/>}/>
+                <Route path={"/blog"} element={<BlogPage/>}>
+                    <Route path={""} element={<BlogPostsPage/>}/>
+                    <Route path={":id"} element={<BlogPostPage/>}/>
+                </Route>
+                <Route path={"/about"} element={<AboutPage/>}/>
+                <Route path={"/mini-apps"} element={<MiniApps/>}>
+                    <Route path={"timer"} element={<TimerApp/>}/>
+                </Route>
+                <Route path={"NULL"} element={<Index/>}>
+                    <Route path={""} element={<HHHPage/>}>
+                        <Route path={"a"} element={<HAnimePage/>}/>
+                        <Route path={"m"} element={<HMangaPage/>}/>
+                    </Route>
+                    <Route path={"m/:id"} element={<HMangaDetailedPage/>}/>
+                    <Route path={"m/:id/reader"} element={<HReader/>}/>
+                    <Route path={"a/:id"} element={<HAnimeDetailedPage/>}/>
+                </Route>
+                <Route path={"users"} element={<UsersPage/>}/>
+            </Route>
+            <Route path={"admin"}
+                   element={<IndexAdmin/>}>
+                <Route path={""} element={<Dashboard/>}/>
+                <Route path={"anime"} element={<Outlet/>}>
+                    <Route path={""} element={<Anime/>}/>
+                    <Route path={"studios"} element={<Studios/>}/>
+                    <Route path={"new"} element={<AnimeCreate/>}/>
+                    <Route path={":id"} element={<AnimeEdit/>}/>
+                </Route>
+                <Route path={"manga"} element={<Outlet/>}>
+                    <Route path={""} element={<Manga/>}/>
+                    <Route path={":id"} element={<Manga/>}/>
+                </Route>
+                <Route path={"users"} element={<Users/>}/>
+                <Route path={"tags"} element={<Tags/>}/>
+                <Route path={"projects"} element={<ProjectsPage/>}/>
+            </Route>
+        </>
+    )
 );

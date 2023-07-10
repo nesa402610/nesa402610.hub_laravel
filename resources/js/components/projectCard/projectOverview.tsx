@@ -7,11 +7,11 @@ import {IProjectProps} from "../../types/Project";
 
 const ProjectOverview: FC<IProjectProps> = ({project}) => {
   return (
-    <div className={"siteOverview"}>
-      <SiteOverviewState project={project}/>
-      <SiteOverviewLevel project={project}/>
-      <SiteOverviewHost project={project}/>
-      <ProjectOverviewGithub project={project}/>
+    <div className={"siteOverview"} onClick={e => e.stopPropagation()}>
+        <SiteOverviewState project={project}/>
+        <SiteOverviewLevel project={project}/>
+        <SiteOverviewHost project={project}/>
+        <ProjectOverviewGithub project={project}/>
     </div>
   );
 };

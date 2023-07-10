@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\adminPanelController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ChatController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SuggestionController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminProof;
+use App\Mail\PasswordReset;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,20 +32,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/registration', 'registration');
-    Route::post('/login', 'login');
+    Route::post('/login', 'login')->name('login');
 });
 Route::get('/projects', [ProjectController::class, 'getAllProjects']);
-Route::get('/profile/{username}', [UserController::class, 'getUser']);
-Route::get('/blog', [BlogPostController::class, 'getAllPosts']);
-Route::get('/blog/{id}', [BlogPostController::class, 'getPostById']);
 Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
 Route::post('/setRating', [ProjectController::class, 'setRating']);
-Route::get('/users', [UserController::class, 'getAllUsers']);
+Route::post('mail', function () {
+    Mail::to('hentaitrap@icloud.com')->send(new PasswordReset());
+});
 
 Route::prefix('/anime')->group(function () {
     Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
     Route::post('{id}', [AnimeController::class, 'getAnimeById']);
     Route::get('{id}/videos', [AnimeController::class, 'getAnimeVideos']);
+    Route::get('animeList/{userId}', [UserController::class, 'getUserAnimeOverview']);
+    Route::get('animeList/{userId}/{animeStatus}', [UserController::class, 'getUserAnimeList']);
 });
 Route::prefix('/manga')->group(function () {
     Route::post('list', [MangaController::class, 'getPaginatedManga']);
@@ -54,12 +57,13 @@ Route::get('/tags/list', [TagController::class, 'getAllTags']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::prefix('chat')->group(function () {
-        Route::get('/', [ChatController::class, 'getMessages']);
+        Route::get('/', [ChatController::class, 'getMessages'])->withoutMiddleware('auth:sanctum');
         Route::post('/send', [ChatController::class, 'sendMessage']);
     });
     Route::prefix('user')->group(function () {
-        Route::get('/', [AuthController::class, 'checkLogin']);
-        Route::get('/list', [UserController::class, 'getAllUsers']);
+        Route::get('', [AuthController::class, 'checkLogin']);
+        Route::get('list', [UserController::class, 'getAllUsers']);
+        Route::get('{username}', [UserController::class, 'getUser'])->withoutMiddleware('auth:sanctum');
         Route::prefix('edit')->group(function () {
             Route::post('account', [UserController::class, 'updateAccount']);
             Route::post('profile', [UserController::class, 'updateProfile']);
@@ -73,10 +77,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::patch('/updateProject/{id}', [ProjectController::class, 'updateProject']);
     });
     Route::prefix('blog')->group(function () {
-        Route::prefix('comments')->group(function () {
-            Route::put('create', [BlogPostController::class, 'createComment']);
-            Route::patch('update', [BlogPostController::class, 'editComment']);
-            Route::delete('delete', [BlogPostController::class, 'deleteComment']);
+        Route::get('', [BlogPostController::class, 'getAllPosts'])->withoutMiddleware('auth:sanctum');
+        Route::prefix('{id}')->group(function () {
+            Route::get('', [BlogPostController::class, 'getPostById'])->withoutMiddleware('auth:sanctum');
+            Route::prefix('comments')->group(function () {
+                Route::get('list', [BlogPostController::class, 'getPostComments']);
+                Route::put('create', [BlogPostController::class, 'createComment']);
+                Route::patch('update', [BlogPostController::class, 'editComment']);
+                Route::delete('delete', [BlogPostController::class, 'deleteComment']);
+            });
         });
         Route::middleware([AdminProof::class])->group(function () {
             Route::put('/create', [BlogPostController::class, 'createPost']);
@@ -101,6 +110,9 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 //        });
 //    });
     Route::middleware([AdminProof::class])->group(function () {
+        Route::prefix('dashboard')->group(function () {
+            Route::get('', [adminPanelController::class, 'getOverview']);
+        });
         Route::prefix('anime')->group(function () {
             Route::get('all', [AnimeController::class, 'getAllAnime']);
             Route::put('new', [AnimeController::class, 'createAnime']);
@@ -108,6 +120,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::put('/tags/add', [AnimeController::class, 'addTag']);
             Route::delete('/tags/remove', [AnimeController::class, 'removeTag']);
             Route::delete('videos/delete/{id}', [AnimeController::class, 'deleteAnimeVideo']);
+            Route::patch('status', [AnimeController::class, 'setAnimeStatus']);
             Route::prefix('studios')->group(function () {
                 Route::get('/list', [StudioController::class, 'getAllStudios']);
                 Route::put('/create', [StudioController::class, 'createStudio']);

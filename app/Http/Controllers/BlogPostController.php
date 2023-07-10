@@ -7,28 +7,33 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BlogPostController extends Controller {
-    public function getAllPosts() {
+class BlogPostController extends Controller
+{
+    public function getAllPosts()
+    {
         $posts = BlogPost::orderBy('id', 'desc')->get();
-        foreach ($posts as $post) {
-            $post->comments;
-            foreach ($post->comments as $comment) {
-                $comment->user;
-            }
-        }
+
         return response($posts, 200);
     }
 
-    public function getPostById($id) {
+    public function getPostById($id)
+    {
         $post = BlogPost::find($id);
-        $post->comments;
-        foreach ($post->comments as $comment) {
-            $comment->user;
-        }
+
         return response($post, 200);
     }
 
-    public function createComment(Request $request) {
+    public function getPostComments($id)
+    {
+        $comments = Comment::where('post_id', '=', $id)->get();
+        foreach ($comments as $comment) {
+            $comment->user;
+        }
+        return response($comments, 200);
+    }
+
+    public function createComment(Request $request)
+    {
         $comment = new Comment;
 
         $comment->user_id = Auth::user()->id;
@@ -39,7 +44,8 @@ class BlogPostController extends Controller {
         return response($comment, 201);
     }
 
-    public function editComment(Request $request) {
+    public function editComment(Request $request)
+    {
         $comment = Comment::find($request->id);
         $comment->body = $request->comment;
         $comment->save();
@@ -48,14 +54,16 @@ class BlogPostController extends Controller {
 
     }
 
-    public function deleteComment(Request $request) {
+    public function deleteComment(Request $request)
+    {
         $comment = Comment::find($request->id);
         $comment->delete();
 //        return response()->status(201);
 
     }
 
-    public function createPost(Request $request) {
+    public function createPost(Request $request)
+    {
         $post = new BlogPost;
 
         $post->user_id = Auth::user()->id;
@@ -65,7 +73,8 @@ class BlogPostController extends Controller {
         return response($post);
     }
 
-    public function updatePost(Request $request) {
+    public function updatePost(Request $request)
+    {
         $post = BlogPost::find($request->id);
         $post->title = $request->title;
         $post->body = $request->comment;
@@ -77,12 +86,14 @@ class BlogPostController extends Controller {
         return response($post, 201);
     }
 
-    public function deletePost(Request $request) {
+    public function deletePost(Request $request)
+    {
         $post = BlogPost::find($request->id);
         $post->delete();
     }
 
-    public function visibility(Request $request) {
+    public function visibility(Request $request)
+    {
         $post = BlogPost::find($request->id);
         if ($post->visibility == 0) {
             $post->visibility = 1;

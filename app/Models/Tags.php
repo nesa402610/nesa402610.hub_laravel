@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Ramsey\Collection\Collection;
 
 /**
  * App\Models\Tags
@@ -20,6 +19,8 @@ use Ramsey\Collection\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder|Tags whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tags whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tags whereUpdatedAt($value)
+ * @property int $type
+ * @method static \Illuminate\Database\Eloquent\Builder|Tags whereType($value)
  * @mixin \Eloquent
  */
 class Tags extends Model
