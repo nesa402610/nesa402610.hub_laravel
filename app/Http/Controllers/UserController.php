@@ -85,6 +85,15 @@ class UserController extends Controller
             case 'planned':
                 $animeStatus = 2;
                 break;
+            case 'rewatching':
+                $animeStatus = 3;
+                break;
+            case 'out':
+                $animeStatus = 4;
+                break;
+            case 'fuckout':
+                $animeStatus = 5;
+                break;
             case 'watched':
                 $animeStatus = 6;
                 break;
@@ -108,6 +117,9 @@ class UserController extends Controller
         $animeDropped = AnimeUserStatus::where('user_id', $userId)->where('status', 0)->count();
         $animePlanned = AnimeUserStatus::where('user_id', $userId)->where('status', 2)->count();
         $animeWatching = AnimeUserStatus::where('user_id', $userId)->where('status', 1)->count();
+        $animeRewatching = AnimeUserStatus::where('user_id', $userId)->where('status', 3)->count();
+        $animeOut = AnimeUserStatus::where('user_id', $userId)->where('status', 4)->count();
+        $animeFuckout = AnimeUserStatus::where('user_id', $userId)->where('status', 5)->count();
 
         return response([
             'count' => $animeListCount,
@@ -116,6 +128,9 @@ class UserController extends Controller
             'planned' => $animePlanned,
             'dropped' => $animeDropped,
             'watching' => $animeWatching,
+            'rewatching' => $animeRewatching,
+            'out' => $animeOut,
+            'fuckout' => $animeFuckout,
 
         ], 200);
     }

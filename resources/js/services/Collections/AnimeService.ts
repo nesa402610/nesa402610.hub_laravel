@@ -18,10 +18,13 @@ interface withPaginate {
 interface AnimeListOverviewProps {
     count: number
     watched: number
+    rewatching: number
     unwatched: number
     dropped: number
     planned: number
     watching: number
+    out: number
+    fuckout: number
     status: number
 }
 
