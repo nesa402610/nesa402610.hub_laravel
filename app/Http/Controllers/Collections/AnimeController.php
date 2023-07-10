@@ -39,6 +39,7 @@ class AnimeController extends Controller
             $tags = $request->tags;
             $title = $request->title;
             $rating = $request->rating;
+            $APP = $request->APP ?? 15;
 
             $query = HAnime::query();
 
@@ -58,8 +59,8 @@ class AnimeController extends Controller
             if (!empty($rating)) {
                 $query->where('rating', $rating);
             }
-
-            $collections = $query->where('type', 0)->paginate(15);
+            //сортируем Rx в конец, тип отвечает за аниме - 0 / мангу - 1
+            $collections = $query->orderBy('rating')->orderByDesc('created_at')->where('type', 0)->paginate($APP);
 
             foreach ($collections as $collection) {
                 $collection->tags->makeHidden('pivot');
