@@ -42,7 +42,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover})
                             <span>Год выхода: {collection.announce_date.slice(0, 4)}</span>
                             <span className={"flex gap-1 md:flex-nowrap xs:flex-wrap"}>Жанры:
                     <div className={"flex gap-1 flex-wrap"}>
-                      <HCollectionTags collection={collection}/>
+                      <HCollectionTags tags={collection.tags} collectionID={collection.id}/>
                         {user?.role[0].name === 'Admin' &&
                             <div onClick={() => setTagDropDown(prev => !prev)}
                                  className={"bg-neutral-800 px-2 rounded-full relative"}>
