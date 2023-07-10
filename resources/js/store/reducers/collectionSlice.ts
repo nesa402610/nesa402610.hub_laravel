@@ -6,7 +6,7 @@ const initialState: collectionSlice = {
         title: '',
         tags: [],
         type: 'anime',
-        rating: 'Rx'
+        rating: ''
     },
     filteredCollection: []
 }
@@ -42,7 +42,7 @@ const collectionSlice = createSlice({
         clearFilter(state) {
             state.filter.title = ''
             state.filter.tags = []
-            state.filter.rating = 'Rx'
+            state.filter.rating = ''
         },
         // setFilteredCollection(state, action) {
         //     const filteredByTitle = action.payload?.filter(c => c.title_ru.toLowerCase().includes(state.filter.title.toLowerCase()));

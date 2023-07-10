@@ -17,7 +17,7 @@ const HCollectionFilter: FC = () => {
     const nav = useNavigate();
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState([]);
-    const [rating, setRating] = useState('Rx');
+    const [rating, setRating] = useState('');
 
     const clearFilterHandler = () => {
         dispatch(clearFilter())
