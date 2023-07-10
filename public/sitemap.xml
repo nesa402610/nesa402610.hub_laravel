@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://nesa402610.lh1.in</loc>
+        <loc>https://nesa402610.ru</loc>
         <lastmod>2022-10-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://nesa402610.lh1.in/roadmap</loc>
+        <loc>https://nesa402610.ru/roadmap</loc>
         <lastmod>2022-10-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
-        <loc>https://nesa402610.lh1.in/profile</loc>
+        <loc>https://nesa402610.ru/profile</loc>
         <lastmod>2022-10-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.2</priority>
     </url>
     <url>
-        <loc>https://nesa402610.lh1.in/profile/edit</loc>
+        <loc>https://nesa402610.ru/profile/edit</loc>
         <lastmod>2022-10-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.2</priority>
     </url>
     <url>
-        <loc>https://nesa402610.lh1.in/about</loc>
+        <loc>https://nesa402610.ru/about</loc>
         <lastmod>2022-10-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.2</priority>
     </url>
     <url>
-        <loc>https://nesa402610.lh1.in/NULL</loc>
+        <loc>https://nesa402610.ru/NULL/a</loc>
         <lastmod>2022-10-05</lastmod>
         <changefreq>monthly</changefreq>
-        <priority>0.2</priority>
+        <priority>1</priority>
     </url>
     <url>
-        <loc>https://nesa402610.lh1.in/users</loc>
+        <loc>https://nesa402610.ru/NULL/m</loc>
+        <lastmod>2022-10-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+    </url>
+    <url>
+        <loc>https://nesa402610.ru/users</loc>
         <lastmod>2022-10-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.2</priority>
