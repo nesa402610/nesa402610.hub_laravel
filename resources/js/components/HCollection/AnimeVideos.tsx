@@ -39,7 +39,7 @@ const AnimeVideos: FC<AnimeVideosProps> = ({animeID, videosData}) => {
           {videos.map((link, index) =>
             <div key={link.id} onClick={() => setEpisode(index + 1)}
                  className={"flex whitespace-nowrap xs:basis-1/4 xs:flex-1 md:p-4 xs:p-2 rounded-lg " + (episode === index + 1 ? "bg-neutral-900" : "bg-neutral-800")}>
-              Серия {index + 1}
+                Серия {link.episode}
             </div>
           )}
         </div>

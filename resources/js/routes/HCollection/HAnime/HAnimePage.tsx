@@ -39,7 +39,7 @@ const HAnimePage: FC = () => {
                 }
                 {data?.data?.map(collectionItem =>
                     <HCollectionCard key={collectionItem.id}
-                                     hover link
+                                     hover link absPath
                                      collection={collectionItem}/>
                 )}
             </div>
