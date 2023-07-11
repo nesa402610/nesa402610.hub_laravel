@@ -62,7 +62,6 @@ class UserController extends Controller
     public function getUser($username)
     {
         $user = User::find($username);
-        $user->animeStatuses();
 
         return response($user, 200);
     }

@@ -9,11 +9,12 @@ const ProfilePage = () => {
     const {username: userId} = useParams();
     const {data: authedUser} = useGetUserQuery()
 
-    const {user} = useGetUserQuery(null, {
+    const {user} = useGetUserQuery(userId, {
         selectFromResult: ({data}) => ({
             user: authedUser?.id === +userId ? authedUser : data,
         }),
     })
+    console.log(authedUser?.id === +userId ? {authedUser} : {user})
 
     if (!user) return <Loader/>;
 
