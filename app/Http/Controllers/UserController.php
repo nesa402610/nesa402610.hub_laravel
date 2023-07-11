@@ -105,6 +105,7 @@ class UserController extends Controller
             $anime->anime;
             $anime->anime->tags;
             $anime->anime->status = $anime->anime->animeStatus();
+            $anime->anime->videosCount = $anime->anime->links()->count();
         }
         return $animeList;
 
