@@ -29,7 +29,7 @@ const UserAnimeOverview: FC<UserAnimeOverviewProps> = ({userId}) => {
                     <span>{animeData.unwatched}</span>
                 </div>
             </div>
-            <div className={'flex gap-2'}>
+            <div className={'flex gap-2 xs:flex-wrap'}>
                 <Link to={userId + '/animelist/planned'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Запланировано {animeData.planned}</Link>
                 <Link to={userId + '/animelist/watched'}
