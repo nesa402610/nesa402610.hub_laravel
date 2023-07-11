@@ -5,12 +5,13 @@ import {
     useGetAnimeVideosQuery,
     useUpdateAnimeMutation
 } from "../../../services/Collections/AnimeService";
-import {IAnime, IAnimeVideos} from "../../../types/Anime";
+import {IAnimeVideos} from "../../../types/Anime";
 import Loader from "../../../components/Loader";
 import AnimeFields from "../../../components/admin/Collections/Anime/AnimeFields";
 import AnimeVideoFields from "../../../components/admin/Collections/Anime/AnimeVideoFields";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import AnimeVideos from "../../../components/HCollection/AnimeVideos";
+import {ICollection} from "../../../types/types";
 
 const AnimeEdit = () => {
     const {id} = useParams();
@@ -23,7 +24,7 @@ const AnimeEdit = () => {
     const {data: videosData} = videosResponse;
     const [updateAnime] = useUpdateAnimeMutation();
     const [preview, setPreview] = useState(true);
-    const [anime, setAnime] = useState<IAnime>(null);
+    const [anime, setAnime] = useState<ICollection>(null);
     const [videos, setVideos] = useState<IAnimeVideos[]>(null);
 
     useEffect(() => {
@@ -58,7 +59,7 @@ const AnimeEdit = () => {
             {preview &&
                 <>
                     <HCollectionCard collection={anime}/>
-                    <AnimeVideos anime={anime} videosData={{...videosResponse, data: videos}}/>
+                    <AnimeVideos animeID={anime.id} videosData={{...videosResponse, data: videos}}/>
                 </>
             }
         </div>

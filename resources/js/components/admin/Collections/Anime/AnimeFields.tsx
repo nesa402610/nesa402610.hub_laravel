@@ -1,9 +1,9 @@
 import React, {Dispatch, FC, SetStateAction} from "react";
-import {IAnime} from "../../../../types/Anime";
+import {ICollection} from "../../../../types/types";
 
 interface AnimeFieldsProps {
-    anime: IAnime;
-    setAnime: Dispatch<SetStateAction<IAnime>>;
+    anime: ICollection;
+    setAnime: Dispatch<SetStateAction<ICollection>>;
 }
 
 const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {

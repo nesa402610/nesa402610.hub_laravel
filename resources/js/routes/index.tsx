@@ -65,9 +65,9 @@ export const router = createBrowserRouter(
                         <Route path={"a"} element={<HAnimePage/>}/>
                         <Route path={"m"} element={<HMangaPage/>}/>
                     </Route>
-                    <Route path={"m/:id"} element={<HMangaDetailedPage/>}/>
-                    <Route path={"m/:id/reader"} element={<HReader/>}/>
-                    <Route path={"a/:id"} element={<HAnimeDetailedPage/>}/>
+                    <Route path={"unit/ONE/:id"} element={<HMangaDetailedPage/>}/>
+                    <Route path={"unit/:id/reader"} element={<HReader/>}/>
+                    <Route path={"unit/ZERO/:id"} element={<HAnimeDetailedPage/>}/>
                 </Route>
                 <Route path={"users"} element={<UsersPage/>}/>
             </Route>

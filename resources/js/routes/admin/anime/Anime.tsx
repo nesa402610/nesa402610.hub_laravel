@@ -12,7 +12,7 @@ const Anime = () => {
         <div className={"flex flex-col gap-4"}>
             <Link to={"new"}>создать</Link>
             {data?.map(anime =>
-                <HCollectionCard key={anime.id} link collection={anime}/>
+                <HCollectionCard admin key={anime.id} link collection={anime}/>
             )}
         </div>
     );

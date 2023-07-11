@@ -1,26 +1,25 @@
 import React, {FC, useState} from "react";
-import {IAnime} from "../../types/Anime";
 import InfoBox from "../UI/InfoBox";
 import {useGetAnimeVideosQuery} from "../../services/Collections/AnimeService";
 import Loader from "../Loader";
 
 interface AnimeVideosProps {
-  anime: IAnime;
-  videosData?: any;
+    animeID: number;
+    videosData?: any;
 }
 
-const AnimeVideos: FC<AnimeVideosProps> = ({anime, videosData}) => {
-  const {data: videos, isLoading} = videosData ?? useGetAnimeVideosQuery(anime.id);
-  const [autoPlay, setAutoPlay] = useState(JSON.parse(localStorage.getItem("autoplay")) ?? true);
-  const [episode, setEpisode] = useState(1);
-  const autoplayHandler = () => {
-    setAutoPlay(prev => {
-      localStorage.setItem("autoplay", JSON.stringify(!prev));
-      return !prev;
-    });
-  };
-  if (isLoading) return <Loader text={"Ищем видосы"}/>;
-  if (!videos) {
+const AnimeVideos: FC<AnimeVideosProps> = ({animeID, videosData}) => {
+    const {data: videos, isLoading} = videosData ?? useGetAnimeVideosQuery(animeID);
+    const [autoPlay, setAutoPlay] = useState(JSON.parse(localStorage.getItem("autoplay")) ?? true);
+    const [episode, setEpisode] = useState(1);
+    const autoplayHandler = () => {
+        setAutoPlay(prev => {
+            localStorage.setItem("autoplay", JSON.stringify(!prev));
+            return !prev;
+        });
+    };
+    if (isLoading) return <Loader text={"Ищем видосы"}/>;
+    if (!videos) {
     return (
       <InfoBox title={"Причины отсутствия видео"}>
         <ul className={"py-2 px-4 list-inside list-disc"}>

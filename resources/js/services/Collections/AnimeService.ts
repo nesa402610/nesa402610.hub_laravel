@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../../mockData";
-import {IAnime, IAnimeVideos} from "../../types/Anime";
+import {IAnimeVideos} from "../../types/Anime";
+import {ICollection} from "../../types/types";
 
 interface getArgs {
     page?: number;
@@ -10,7 +11,7 @@ interface getArgs {
 }
 
 interface withPaginate {
-    data: IAnime[];
+    data: ICollection[];
     current_page: number;
     last_page: number;
 }
@@ -55,7 +56,7 @@ export const AnimeAPI = createApi({
         //     }),
         //     invalidatesTags: ["animeList"]
         // }),
-        getAnimeById: builder.query<IAnime, getArgs>({
+        getAnimeById: builder.query<ICollection, getArgs>({
             query: ({id, passkey}) => ({
                 url: id,
                 method: "POST",
@@ -63,7 +64,7 @@ export const AnimeAPI = createApi({
             }),
             providesTags: ["anime"]
         }),
-        getAllAnimeNP: builder.query<IAnime[], void>({
+        getAllAnimeNP: builder.query<ICollection[], void>({
             query: () => ({
                 url: "all",
                 method: "GET",
@@ -96,7 +97,7 @@ export const AnimeAPI = createApi({
             }),
             invalidatesTags: ["anime", "animeList", 'UserAnimeList']
         }),
-        addAnime: builder.mutation<IAnime, IAnime>({
+        addAnime: builder.mutation<ICollection, ICollection>({
             query: (data) => ({
                 url: "new",
                 method: "PUT",
@@ -104,7 +105,7 @@ export const AnimeAPI = createApi({
             }),
             invalidatesTags: ["animeList"]
         }),
-        updateAnime: builder.mutation<IAnime, { anime: IAnime, videos: IAnimeVideos[] }>({
+        updateAnime: builder.mutation<ICollection, { anime: ICollection, videos: IAnimeVideos[] }>({
             query: (data) => ({
                 url: "update",
                 method: "PATCH",
@@ -120,7 +121,7 @@ export const AnimeAPI = createApi({
             }),
             invalidatesTags: ["animeList", 'UserAnimeList']
         }),
-        setAnimeStatus: builder.mutation<IAnime[], { status: number, animeID: number }>({
+        setAnimeStatus: builder.mutation<ICollection[], { status: number, animeID: number }>({
             query: ({status, animeID}) => ({
                 url: "status",
                 method: "PATCH",
@@ -132,7 +133,10 @@ export const AnimeAPI = createApi({
             query: (userId) => `animeList/${userId}`,
             providesTags: ['UserAnimeList']
         }),
-        getUserAnimeList: builder.query<{ anime: IAnime, status: number }[], { userId: string, animestatus: string }>({
+        getUserAnimeList: builder.query<{ anime: ICollection, status: number }[], {
+            userId: string,
+            animestatus: string
+        }>({
             query: ({userId, animestatus}) => `animeList/${userId}/${animestatus}`,
             providesTags: ['UserAnimeList'],
         }),

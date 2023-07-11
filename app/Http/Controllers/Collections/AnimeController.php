@@ -27,6 +27,8 @@ class AnimeController extends Controller
             $collection->tags->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
             $collection->status = $collection->animeStatus();
+            $collection->videosCount = $collection->links()->count();
+
         }
         return response($anime, 200);
 
@@ -66,6 +68,7 @@ class AnimeController extends Controller
                 $collection->tags->makeHidden('pivot');
                 $collection->studios->makeHidden('pivot');
                 $collection->status = $collection->animeStatus();
+                $collection->videosCount = $collection->links()->count();
             }
             return response($collections, 200);
         }
@@ -80,6 +83,8 @@ class AnimeController extends Controller
             $collection->tags->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
             $collection->status = $collection->animeStatus();
+            $collection->videosCount = $collection->links()->count();
+
             return response($collection, 200);
         }
         return response('Какая-то ошибка');

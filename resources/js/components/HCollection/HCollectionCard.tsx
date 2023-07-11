@@ -3,27 +3,31 @@ import {useGetUserQuery} from "../../services/userService";
 import TagSelector from "./TagSelector";
 import HCollectionTags from "./HCollectionTags";
 import {Link} from "react-router-dom";
-import {IAnime} from "../../types/Anime";
 import Title from "./Title";
 import CollectionStatus from "./CollectionStatus";
+import {ICollection} from "../../types/types";
 
 
 interface CollectionProps {
-    collection: IAnime;
+    collection: ICollection;
     hover?: boolean;
     link?: boolean;
+    absPath?: boolean
+    admin?: boolean
 }
 
-const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover}) => {
+const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, absPath = false, admin = false}) => {
     const {data: user} = useGetUserQuery();
     const [tagDropDown, setTagDropDown] = useState(false);
+    const type = collection?.type === 0 ? 'ZERO' : 'ONE'
     if (!collection) return null;
+    const path = admin ? `${collection.id}` : `${absPath ? '/' : ''}NULL/unit/${type}/${collection.id}`
     return (
         <div className={"bg-neutral-700 p-4 rounded-lg"}>
             <div className={"flex xs:flex-col md:flex-row gap-4"}>
                 <div className={'flex-shrink-0 basis-auto flex flex-col gap-2'}>
                     <Link className={'flex justify-center'}
-                          to={`${link ? collection.id : ""}`}>
+                          to={`${link ? path : ""}`}>
                         <img
                             className={"rounded-lg w-[200px] h-auto" + (hover ? " hover:scale-105 transition-all" : "cursor-default")}
                             src={collection.image}
@@ -33,7 +37,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover})
                 </div>
                 <div className={"flex flex-col"}>
                     <div className={'flex flex-col'}>
-                        {link ? <Title collection={collection} hover link/> : <Title collection={collection}/>}
+                        <Title path={path} collection={collection} hover={!!link} link={!!link}/>
                         <span className={'text-sm italic text-neutral-400'}>{collection.title_en}</span>
                     </div>
                     <div className={"text-neutral-300"}>
@@ -59,7 +63,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover})
                                 <span>{collection.episodes_released}</span>
                                 /
                                 <span>
-                                    {collection.episodes_total === 0 ? '?' : collection.episodes_total}
+                                    {collection.episodes_total === 0 ? '?' : collection.episodes_total} {collection.videosCount ? `(${collection.videosCount} добавлено)` : ''}
                                 </span>
                             </div>}
                             {collection.episode_time &&

@@ -2,11 +2,11 @@ import React, {FC, useEffect, useState} from "react";
 import Loader from "../Loader";
 import {useGetTagsQuery} from "../../services/Collections/TagService";
 import {ICollectionTag} from "../../types/Tag";
-import {IAnime} from "../../types/Anime";
 import {useAddTagToAnimeMutation} from "../../services/Collections/AnimeService";
+import {ICollection} from "../../types/types";
 
 interface TagSelectorProps {
-    collection: IAnime;
+    collection: ICollection;
 }
 
 const TagSelector: FC<TagSelectorProps> = ({collection}) => {

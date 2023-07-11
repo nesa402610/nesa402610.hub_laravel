@@ -1,17 +1,20 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAddAnimeMutation} from "../../../services/Collections/AnimeService";
-import {IAnime} from "../../../types/Anime";
 import AnimeFields from "../../../components/admin/Collections/Anime/AnimeFields";
 import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import Loader from "../../../components/Loader";
+import {ICollection} from "../../../types/types";
 
 const AnimeCreate = () => {
     const [createAnime, {isLoading}] = useAddAnimeMutation();
     const nav = useNavigate();
-    const [anime, setAnime] = useState<IAnime>({
+    const [anime, setAnime] = useState<ICollection>({
         announce_date: "",
         author: "",
+        videosCount: 0,
+        links: [],
+        type: 0,
         censure: false,
         created_at: "",
         description: "",
