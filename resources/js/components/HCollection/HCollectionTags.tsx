@@ -15,7 +15,7 @@ const HCollectionTags = ({tags, collectionID}) => {
                 <div key={tag.tag_id}
                      className={(tag.name === "Золото" ? "bg-amber-400 text-neutral-600" : tag.name === "Серебро" ? "bg-zinc-500" : tag.name === "Медь" ? "bg-amber-700" : "bg-neutral-800") + "  px-2 rounded-full flex items-center"}>
                     <span className={"whitespace-nowrap"}>{tag.name}</span>
-                    {user?.role[0].name === 'Admin' &&
+                    {user?.role[0]?.name === 'Admin' &&
                         <span onClick={() => deleteTagHandler(collectionID, tag.tag_id)}
                               className={"cursor-pointer ml-2 px-1 bg-neutral-700 text-white rounded-full leading-none text-inherit"}>
                               -

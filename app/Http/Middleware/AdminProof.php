@@ -15,7 +15,8 @@ class AdminProof {
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next) {
-        if (Auth::user()->role === 'Admin') {
+        $userRole = Auth::user()->role->first()->name ?? null;
+        if ($userRole !== 'Admin') {
             return response(`Ты куда лезешь? Уебывай от сюда. Тебя не записали в админы`, 403);
         }
         return $next($request);
