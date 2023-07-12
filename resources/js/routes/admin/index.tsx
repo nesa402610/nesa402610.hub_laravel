@@ -2,10 +2,12 @@ import React, {FC} from "react";
 import {Outlet, useNavigate} from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 import {useGetUserQuery} from "../../services/userService";
+import Loader from "../../components/Loader";
 
 const Index: FC = () => {
-    const {data: user} = useGetUserQuery()
+    const {data: user, isLoading} = useGetUserQuery()
     const nav = useNavigate()
+    if (isLoading) return <Loader/>
     if (user?.role[0]?.name !== 'Admin') {
         nav('/');
     }
