@@ -24,6 +24,7 @@ const BlogComment: FC<BlogCommentProps> = ({comment: commentData}) => {
     return (
         <div key={comment.id} className={'block--light sm:flex-col relative'}>
             <CommentEdit id={comment.id}
+                         userId={comment.user_id}
                          postId={comment.post_id}
                          setIsEdit={setIsEdit}/>
             <div className={'flex gap-4 items-center'}>
@@ -35,7 +36,8 @@ const BlogComment: FC<BlogCommentProps> = ({comment: commentData}) => {
                     <span>{comment.user.lastName}</span>
                 </Link>
                 {
-                    comment.created_at != comment.updated_at && <span className={'italic text-stone-500'}>изменен</span>
+                    (comment.created_at != comment.updated_at) &&
+                    <span className={'italic text-stone-500'}>изменен</span>
                 }
             </div>
             <div>

@@ -81,7 +81,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::prefix('{id}')->group(function () {
             Route::get('', [BlogPostController::class, 'getPostById'])->withoutMiddleware('auth:sanctum');
             Route::prefix('comments')->group(function () {
-                Route::get('list', [BlogPostController::class, 'getPostComments']);
+                Route::get('list', [BlogPostController::class, 'getPostComments'])->withoutMiddleware('auth:sanctum');
                 Route::put('create', [BlogPostController::class, 'createComment']);
                 Route::patch('update', [BlogPostController::class, 'editComment']);
                 Route::delete('delete', [BlogPostController::class, 'deleteComment']);
