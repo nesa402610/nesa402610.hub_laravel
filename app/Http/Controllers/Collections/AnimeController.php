@@ -92,8 +92,9 @@ class AnimeController extends Controller
 
     public function getAnimeVideos($id)
     {
-        $videos = HAnime::find($id)->links;
+        $videos = HAnime::find($id)->links()->orderBy('episode')->get();
         if ($videos->isEmpty()) return response(null);
+
         return response($videos);
     }
 
@@ -134,8 +135,8 @@ class AnimeController extends Controller
 
         if ($requestVideos) {
             foreach ($requestVideos as $video) {
-                if (isset($video['id'])) {
-                    $videoEdit = HLinks::find($video['id']);
+                $videoEdit = HLinks::find($video['id']);
+                if ($videoEdit) {
                     $videoEdit->link = $video['link'];
                     $videoEdit->platform = $video['platform'];
                     $videoEdit->iframe = $video['iframe'];
