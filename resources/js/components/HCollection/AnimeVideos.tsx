@@ -1,7 +1,9 @@
 import React, {FC, useState} from "react";
-import InfoBox from "../UI/InfoBox";
 import {useGetAnimeVideosQuery} from "../../services/Collections/AnimeService";
 import Loader from "../Loader";
+import Episodes from "./videos/Episodes";
+import NonVideosInfo from "./videos/NonVideosInfo";
+
 
 interface AnimeVideosProps {
     animeID: number;
@@ -22,31 +24,12 @@ const AnimeVideos: FC<AnimeVideosProps> = ({animeID, videosData}) => {
     };
 
     if (isLoading) return <Loader text={"Ищем видосы"}/>;
-    if (!videos) {
-        return (
-            <InfoBox title={"Причины отсутствия видео"}>
-                <ul className={"py-2 px-4 list-inside list-disc"}>
-                    <li>Я не нашел прямых ссылок на видео</li>
-                    <li>Мне могут дать пизды видео</li>
-                    <li>Мне дали пизды за видео</li>
-                    <li>Мне почти дали пизды за видео</li>
-                    <li>Мне лень было добавлять их ✨</li>
-                </ul>
-            </InfoBox>
-        );
-    }
+    if (!videos) return <NonVideosInfo/>
     return (
         <div className={"block--light gap-4 flex flex-col"}>
             <div className={"flex gap-4 justify-between md:flex-row xs:flex-col"}>
-                <div className={"md:gap-4 xs:gap-2 gap-2 flex overflow-scroll"}>
-                    {videos?.map((link) =>
-                        <div key={link.id} onClick={() => setEpisode(link.episode)}
-                             className={"flex whitespace-nowrap md:p-4 xs:p-2 rounded-lg " + (episode === link.episode ? "bg-neutral-900" : "bg-neutral-800")}>
-                            Серия {link.episode}
-                        </div>
-                    )}
-                </div>
-                <div className={"flex gap-4 items-start flex-1"}>
+                <Episodes videos={videos} episode={episode} setEpisode={setEpisode} animeID={animeID}/>
+                <div className={"flex gap-4 items-start flex-grow-1 basis-auto flex-shrink-0"}>
                     <div
                         className={"md:p-4 p-2 rounded-lg flex items-center " + (autoPlay ? "bg-lime-600" : "bg-red-800")}
                         onClick={autoplayHandler}
@@ -72,6 +55,7 @@ const AnimeVideos: FC<AnimeVideosProps> = ({animeID, videosData}) => {
                         height="640"
                         allow="autoplay; encrypted-media; fullscreen; picture-in-picture;"
                         frameBorder="0"
+                        key={videos[episode - 1].id}
                         className={"rounded-lg"}
                         allowFullScreen/>
             }
