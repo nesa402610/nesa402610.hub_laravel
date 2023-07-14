@@ -33,7 +33,7 @@ const AnimeListPage = () => {
             </div>
 
             {!isFetching ? data.map(anime =>
-                <HCollectionCard absPath collection={anime.anime} link hover/>
+                <HCollectionCard collection={anime.anime} link hover/>
             ) : <Loader/>}
             {(!data?.length && !isFetching) &&
                 <h2 className={'text-center font-bold text-2xl'}>

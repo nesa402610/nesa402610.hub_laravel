@@ -12,16 +12,15 @@ interface CollectionProps {
     collection: ICollection;
     hover?: boolean;
     link?: boolean;
-    absPath?: boolean
     admin?: boolean
 }
 
-const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, absPath = false, admin = false}) => {
+const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover = false, admin = false}) => {
     const {data: user} = useGetUserQuery();
     const [tagDropDown, setTagDropDown] = useState(false);
     const type = collection?.type === 0 ? 'ZERO' : 'ONE'
     if (!collection) return null;
-    const path = admin ? `${collection.id}` : `${absPath ? '/' : ''}NULL/unit/${type}/${collection.id}`
+    const path = admin ? `${collection.id}` : `/NULL/unit/${type}/${collection.id}`
     return (
         <div className={"bg-neutral-700 p-4 rounded-lg"}>
             <div className={"flex xs:flex-col md:flex-row gap-4"}>
@@ -33,7 +32,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover, 
                             src={collection.image}
                             alt="Изображение тайтла"/>
                     </Link>
-                    <CollectionStatus status={collection.status} animeID={collection.id}/>
+                    <CollectionStatus type={collection.type} status={collection.status} animeID={collection.id}/>
                 </div>
                 <div className={"flex flex-col"}>
                     <div className={'flex flex-col'}>
