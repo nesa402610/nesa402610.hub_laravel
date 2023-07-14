@@ -1,8 +1,8 @@
 import React, {FC, useEffect} from "react";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import HCollectionFilter from "../components/HCollection/HCollectionFilter";
 import {useAppDispatch} from "../hooks/redux";
 import {setFilterType} from "../store/reducers/collectionSlice";
+import Filter from "../components/HCollection/filter/Filter";
 
 export const filterCollection = (collections, filter) => {
     const filteredByTitle = collections?.data.filter(c => c.title_ru.toLowerCase().includes(filter.title.toLowerCase()));
@@ -31,7 +31,7 @@ const HHHPage: FC = () => {
                     Я не при делах если что. Все данные взяты с открытых источников.
                 </h3>
                 <div className={"flex flex-col gap-4"}>
-                    <HCollectionFilter/>
+                    <Filter/>
                     <Outlet/>
                 </div>
             </div>

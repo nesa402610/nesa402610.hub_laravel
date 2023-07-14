@@ -1,26 +1,27 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ICollection} from "../../types/types";
 
 const initialState: collectionSlice = {
     filter: {
         title: '',
         tags: [],
         type: 'anime',
-        rating: ''
+        rating: '',
+        IPP: 15
     },
-    filteredCollection: []
+    // filteredCollection: []
 }
 
 interface collectionSlice {
     filter: collectionFilter
-    filteredCollection: ICollection[]
+    // filteredCollection: ICollection[]
 }
 
 interface collectionFilter {
     title: string
     tags: string[]
-    type: string
+    type?: string
     rating: string
+    IPP: number
 }
 
 const collectionSlice = createSlice({
@@ -39,10 +40,20 @@ const collectionSlice = createSlice({
         setFilterRating(state, action: PayloadAction<string>) {
             state.filter.rating = action.payload
         },
+        setFilterIPP(state, action: PayloadAction<number>) {
+            state.filter.IPP = action.payload
+        },
+        setFilter(state, action: PayloadAction<collectionFilter>) {
+            state.filter.title = action.payload.title
+            state.filter.tags = action.payload.tags
+            state.filter.rating = action.payload.rating
+            state.filter.IPP = action.payload.IPP
+        },
         clearFilter(state) {
             state.filter.title = ''
             state.filter.tags = []
             state.filter.rating = ''
+            state.filter.IPP = 15
         },
         // setFilteredCollection(state, action) {
         //     const filteredByTitle = action.payload?.filter(c => c.title_ru.toLowerCase().includes(state.filter.title.toLowerCase()));
@@ -59,5 +70,7 @@ export const {
     setFilterTags,
     setFilterType,
     setFilterRating,
+    setFilterIPP,
+    setFilter,
     clearFilter,
 } = collectionSlice.actions

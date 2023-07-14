@@ -41,7 +41,7 @@ class AnimeController extends Controller
             $tags = $request->tags;
             $title = $request->title;
             $rating = $request->rating;
-            $APP = $request->APP ?? 15;
+            $IPP = $request->IPP;
 
             $query = HAnime::query();
 
@@ -62,7 +62,7 @@ class AnimeController extends Controller
                 $query->where('rating', $rating);
             }
             //сортируем Rx в конец, тип отвечает за аниме - 0 / мангу - 1
-            $collections = $query->orderBy('rating')->orderByDesc('created_at')->where('type', 0)->paginate($APP);
+            $collections = $query->orderBy('rating')->orderByDesc('created_at')->where('type', 0)->paginate($IPP);
 
             foreach ($collections as $collection) {
                 $collection->tags->makeHidden('pivot');
@@ -100,13 +100,7 @@ class AnimeController extends Controller
 
     public function deleteAnimeVideo($id)
     {
-
         $videos = HLinks::find($id)->delete();
-    }
-
-    public function addTitle()
-    {
-
     }
 
     public function setAnimeStatus(Request $request)
