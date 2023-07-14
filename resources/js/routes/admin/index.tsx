@@ -14,7 +14,7 @@ const Index: FC = () => {
     return (
         <div className={"flex gap-4"}>
             <AdminSidebar/>
-            <main className={"ml-[310px] bg-slate-800 flex-1 min-h-screen p-4 overflow-scroll"}>
+            <main className={"ml-[310px] bg-slate-800 flex-1 min-h-screen p-4"}>
                 <Outlet/>
             </main>
         </div>

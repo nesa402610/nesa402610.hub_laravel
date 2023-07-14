@@ -34,7 +34,7 @@ const Episodes: FC<EpisodesProps> = ({videos, setEpisode, episode, animeID}) => 
         setEpWatched(episodesWatched)
     }, []);
     return (
-        <div className={"md:gap-4 xs:gap-2 gap-2 flex overflow-scroll"}>
+        <div className={"md:gap-4 xs:gap-2 gap-2 flex overflow-x-scroll"}>
             {videos?.map((link) =>
                 <div key={link.id} onClick={() => setEpisode(link.episode)}
                      className={`${episode === link.episode ? "bg-red-700 cursor-default" : "bg-neutral-800 hover:bg-red-700 cursor-pointer"} items-center gap-1 flex whitespace-nowrap md:p-4 xs:p-2 rounded-lg `}>
