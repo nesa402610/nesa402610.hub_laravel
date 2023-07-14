@@ -6,20 +6,36 @@ import {GrClose} from "react-icons/gr";
 interface CollectionStatusProps {
     status: number
     animeID: number
+    type: number
 }
 
-const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID}) => {
+const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) => {
     const {data: user} = useGetUserQuery();
 
     const [setStatus] = useSetAnimeStatusMutation()
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const statuses = [
-        {status: 6, name: 'Просмотрено', color: 'bg-green-600', hover: 'hover:bg-green-600'},
+        {status: 6, name: `${!type ? 'Просмотрено' : 'Прочитано'}`, color: 'bg-green-600', hover: 'hover:bg-green-600'},
         {status: 1, name: 'Смотрю', color: 'bg-blue-600', hover: 'hover:bg-blue-600'},
-        {status: 2, name: 'Буду смотреть', color: 'bg-purple-600', hover: 'hover:bg-purple-600'},
-        {status: 3, name: 'Пересматриваю', color: 'bg-blue-600', hover: 'hover:bg-blue-600'},
+        {
+            status: 2,
+            name: `${!type ? 'Буду смотреть' : 'Буду читать'}`,
+            color: 'bg-purple-600',
+            hover: 'hover:bg-purple-600'
+        },
+        {
+            status: 3,
+            name: `${!type ? 'Пересматриваю' : 'Перечитываю'}`,
+            color: 'bg-blue-600',
+            hover: 'hover:bg-blue-600'
+        },
         {status: 0, name: 'Брошено', color: 'bg-red-600', hover: 'hover:bg-red-600'},
-        {status: 4, name: 'Не буду смотреть', color: 'bg-red-700', hover: 'hover:bg-red-700'},
+        {
+            status: 4,
+            name: `${!type ? 'Не буду смотреть' : 'Не буду читать'}`,
+            color: 'bg-red-700',
+            hover: 'hover:bg-red-700'
+        },
         {status: 5, name: 'Фу, какая гадость', color: 'bg-red-700', hover: 'hover:bg-red-700'},
     ]
     const setStatusHandler = (stat: number) => {
