@@ -6,9 +6,10 @@ import {useGetAnimeByIdQuery} from "../../../services/Collections/AnimeService";
 import AnimeVideos from "../../../components/HCollection/AnimeVideos";
 
 const HAnimeDetailedPage = () => {
-    const passkey = localStorage.getItem("passkey");
+    // const [passkey, setPasskey] = useState('');
+    // const passkey = localStorage.getItem("passkey");
     const {id} = useParams();
-    const {data, isLoading} = useGetAnimeByIdQuery({id, passkey});
+    const {data, isLoading} = useGetAnimeByIdQuery(id);
     useEffect(() => {
         if (isLoading) return
         document.title = `Смотреть аниме ${data?.title_ru} // n/esa | hub`
@@ -17,7 +18,6 @@ const HAnimeDetailedPage = () => {
         }
     }, [isLoading]);
     if (isLoading) return <Loader/>;
-
     return (
         <div className={"m-4 flex flex-col gap-4"}>
             <HCollectionCard collection={data}/>

@@ -44,24 +44,12 @@ export const AnimeAPI = createApi({
             query: ({page = 1, passkey, query = null}) => ({
                 url: "list?page=" + page,
                 method: "POST",
-                body: {passkey, ...query}
+                body: {...query}
             }),
             providesTags: (_) => ["animeList"]
         }),
-        // getAllAnimeQ: builder.mutation<withPaginate, getArgs>({
-        //     query: ({page = 1, passkey, query}) => ({
-        //         url: "list?page=" + page,
-        //         method: "POST",
-        //         body: {passkey, ...query}
-        //     }),
-        //     invalidatesTags: ["animeList"]
-        // }),
-        getAnimeById: builder.query<ICollection, getArgs>({
-            query: ({id, passkey}) => ({
-                url: id,
-                method: "POST",
-                body: {passkey}
-            }),
+        getAnimeById: builder.query<ICollection, string>({
+            query: (id) => id,
             providesTags: ["anime"]
         }),
         getAllAnimeNP: builder.query<ICollection[], void>({
@@ -71,8 +59,10 @@ export const AnimeAPI = createApi({
             }),
             providesTags: ["animeList"]
         }),
-        getAnimeVideos: builder.query<IAnimeVideos[], number | string>({
-            query: (id) => id + "/videos",
+        getAnimeVideos: builder.query<IAnimeVideos[], string | number>({
+            query: (id) => ({
+                url: id + "/videos",
+            }),
             providesTags: ["videos"]
         }),
         deleteAnimeVideo: builder.mutation({
@@ -127,7 +117,7 @@ export const AnimeAPI = createApi({
                 method: "PATCH",
                 body: {status, animeID}
             }),
-            invalidatesTags: ["animeList", 'UserAnimeList']
+            invalidatesTags: ["animeList", 'UserAnimeList', 'anime']
         }),
         getUserAnimeOverview: builder.query<AnimeListOverviewProps, string>({
             query: (userId) => `animeList/${userId}`,

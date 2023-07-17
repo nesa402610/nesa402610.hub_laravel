@@ -36,66 +36,60 @@ class AnimeController extends Controller
 
     public function getPaginatedAnime(Request $request)
     {
-        $exist = $this->checkPasskey($request);
-        if (count($exist) !== 0) {
-            $tags = $request->tags;
-            $title = $request->title;
-            $rating = $request->rating;
-            $IPP = $request->IPP;
+        $tags = $request->tags;
+        $title = $request->title;
+        $rating = $request->rating;
+        $IPP = $request->IPP;
 
-            $query = HAnime::query();
+        $query = HAnime::query();
 
-            if (!empty($title)) {
-                $query->where(function ($query) use ($title, $rating) {
-                    $query->where('title_ru', 'like', '%' . $title . '%')
-                        ->orWhere('title_en', 'like', '%' . $title . '%')
-                        ->orWhere('title_original', 'like', '%' . $title . '%');
-                });
-            }
-
-            if (!empty($tags)) {
-                $query->whereHas('tags', function ($query) use ($tags) {
-                    $query->whereIn('name', $tags);
-                }, '=', count($tags));
-            }
-            if (!empty($rating)) {
-                $query->where('rating', $rating);
-            }
-            //сортируем Rx в конец, тип отвечает за аниме - 0 / мангу - 1
-            $collections = $query->orderBy('rating')->orderByDesc('created_at')->where('type', 0)->paginate($IPP);
-
-            foreach ($collections as $collection) {
-                $collection->tags->makeHidden('pivot');
-                $collection->studios->makeHidden('pivot');
-                $collection->status = $collection->animeStatus();
-                $collection->videosCount = $collection->links()->count();
-            }
-            return response($collections, 200);
+        if (!empty($title)) {
+            $query->where(function ($query) use ($title, $rating) {
+                $query->where('title_ru', 'like', '%' . $title . '%')
+                    ->orWhere('title_en', 'like', '%' . $title . '%')
+                    ->orWhere('title_original', 'like', '%' . $title . '%');
+            });
         }
-        return response('Какая-то ошибка');
-    }
 
-    public function getAnimeById(Request $request, $id)
-    {
-        $exist = $this->checkPasskey($request);
-        if (count($exist) !== 0) {
-            $collection = HAnime::find($id);
+        if (!empty($tags)) {
+            $query->whereHas('tags', function ($query) use ($tags) {
+                $query->whereIn('name', $tags);
+            }, '=', count($tags));
+        }
+        if (!empty($rating)) {
+            $query->where('rating', $rating);
+        }
+        //сортируем Rx в конец, тип отвечает за аниме - 0 / мангу - 1
+        $collections = $query->orderBy('rating')->orderByDesc('created_at')->where('type', 0)->paginate($IPP);
+
+        foreach ($collections as $collection) {
             $collection->tags->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
             $collection->status = $collection->animeStatus();
             $collection->videosCount = $collection->links()->count();
-
-            return response($collection, 200);
         }
-        return response('Какая-то ошибка');
+        return response($collections, 200);
     }
 
-    public function getAnimeVideos($id)
+    public function getAnimeById($id)
     {
+        $collection = HAnime::find($id);
+        $collection->tags->makeHidden('pivot');
+        $collection->studios->makeHidden('pivot');
+        $collection->status = $collection->animeStatus();
+        $collection->videosCount = $collection->links()->count();
+
+        return response($collection, 200);
+    }
+
+    public function getAnimeVideos(Request $request, $id)
+    {
+//        $passkey = $this->checkPasskey($request);
+//        if ($passkey) {
         $videos = HAnime::find($id)->links()->orderBy('episode')->get();
         if ($videos->isEmpty()) return response(null);
-
         return response($videos);
+//        }
     }
 
     public function deleteAnimeVideo($id)
@@ -163,17 +157,18 @@ class AnimeController extends Controller
 
     public function checkPasskey(Request $request)
     {
-        if (Auth::check()) {
-            if (Auth::user()->id === 1)
-                return [1];
-        }
-        $exist = Passkey::where('passkey', str_replace(' ', '', $request->passkey))
-            ->get();
+//        if (Auth::check()) {
+//            if (Auth::user()->id === 1)
+//                return [1];
+//        }
+        $passkey = Passkey::where('passkey', str_replace(' ', '', $request->passkey))
+            ->first();
+        if ($passkey) return true;
+        return false;
 //
 //        if (count($exist) === 0) {
 //            return response(['msg' => 'Ключ не рабочий. Ключ можно получить только через меня или спроси у друга, пока я не пофиксил доступ'], 403);
 //        }
-        return $exist;
     }
 
     /**

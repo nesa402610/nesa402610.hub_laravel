@@ -41,19 +41,6 @@ Route::post('mail', function () {
     Mail::to('hentaitrap@icloud.com')->send(new PasswordReset());
 });
 
-Route::prefix('/anime')->group(function () {
-    Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
-    Route::post('{id}', [AnimeController::class, 'getAnimeById']);
-    Route::get('{id}/videos', [AnimeController::class, 'getAnimeVideos']);
-    Route::get('animeList/{userId}', [UserController::class, 'getUserAnimeOverview']);
-    Route::get('animeList/{userId}/{animeStatus}', [UserController::class, 'getUserAnimeList']);
-});
-Route::prefix('/manga')->group(function () {
-    Route::post('list', [MangaController::class, 'getPaginatedManga']);
-    Route::post('{id}', [MangaController::class, 'getMangaById']);
-});
-Route::get('/tags/list', [TagController::class, 'getAllTags']);
-
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::prefix('chat')->group(function () {
@@ -142,3 +129,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 });
 
+Route::prefix('/anime')->group(function () {
+    Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
+    Route::get('{id}', [AnimeController::class, 'getAnimeById']);
+    Route::get('{id}/videos', [AnimeController::class, 'getAnimeVideos']);
+    Route::get('animeList/{userId}', [UserController::class, 'getUserAnimeOverview']);
+    Route::get('animeList/{userId}/{animeStatus}', [UserController::class, 'getUserAnimeList']);
+});
+Route::prefix('/manga')->group(function () {
+    Route::post('list', [MangaController::class, 'getPaginatedManga']);
+    Route::post('{id}', [MangaController::class, 'getMangaById']);
+});
+Route::get('/tags/list', [TagController::class, 'getAllTags']);

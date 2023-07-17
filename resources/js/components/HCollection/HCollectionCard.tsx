@@ -18,8 +18,11 @@ interface CollectionProps {
 const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover = false, admin = false}) => {
     const {data: user} = useGetUserQuery();
     const [tagDropDown, setTagDropDown] = useState(false);
+
     const type = collection?.type === 0 ? 'ZERO' : 'ONE'
+
     if (!collection) return null;
+
     const path = admin ? `${collection.id}` : `/NULL/unit/${type}/${collection.id}`
     return (
         <div className={"bg-neutral-700 p-4 rounded-lg"}>
@@ -62,9 +65,10 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover =
                                 <span>{collection.episodes_released}</span>
                                 /
                                 <span>
-                                    {collection.episodes_total === 0 ? '?' : collection.episodes_total} {collection.videosCount ? `(${collection.videosCount} добавлено)` : ''}
-                                </span>
-                            </div>}
+                                {collection.episodes_total === 0 ? '?' : collection.episodes_total} {collection.videosCount ? `(${collection.videosCount} добавлено)` : ''}
+                            </span>
+                            </div>
+                            }
                             {collection.episode_time &&
                                 <div className={"flex"}>
                                     <h4>Длительность серии:&nbsp;</h4>
@@ -73,8 +77,8 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover =
                             }
                             {collection.studios &&
                                 <span>
-                                    Студия: {collection.studios.map(studio => studio.name)}
-                                </span>
+                                Студия: {collection.studios.map(studio => studio.name)}
+                            </span>
                             }
                             <span>Цензура: {collection.censure ? "С цензурой" : "Без цензуры"}</span>
                             <span>Рейтинг: {collection.rating}</span>

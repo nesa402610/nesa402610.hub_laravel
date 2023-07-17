@@ -11,7 +11,7 @@ const Anime = () => {
     return (
         <div className={"flex flex-col gap-4"}>
             <Link to={"new"}>создать</Link>
-            {data?.map(anime =>
+            {data.map(anime =>
                 <HCollectionCard admin key={anime.id} link collection={anime}/>
             )}
         </div>
