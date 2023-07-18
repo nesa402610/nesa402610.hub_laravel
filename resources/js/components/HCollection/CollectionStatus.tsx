@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {useSetAnimeStatusMutation} from "../../services/Collections/AnimeService";
 import {useGetUserQuery} from "../../services/userService";
-import {GrClose} from "react-icons/gr";
+import {IoCaretDown, IoCaretUp} from "react-icons/io5";
 
 interface CollectionStatusProps {
     status: number
@@ -51,13 +51,17 @@ const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) =>
     return (
         <div className={'relative cursor-pointer'}>
             <div className={'relative flex items-center'} onClick={() => setIsOpen(true)}>
-                {isOpen &&
+                {isOpen ?
                     <div className={'absolute right-2 z-[1000]'}
                          onClick={e => {
                              e.stopPropagation();
                              setIsOpen(false)
                          }}>
-                        <GrClose color={'white'}/>
+                        <IoCaretUp className={'text-xl'}/>
+                    </div>
+                    :
+                    <div className={'absolute right-2 z-[1000]'}>
+                        <IoCaretDown className={'text-xl'}/>
                     </div>
                 }
                 {!status && status !== 0 ?
