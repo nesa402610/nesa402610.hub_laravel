@@ -35,7 +35,7 @@ const HCollectionFilter: FC = () => {
 
     return (
         <div className={"flex sm:p-4 xs:p-2 flex-col gap-4"}>
-            <div className={'flex gap-4'}>
+            <div className={'flex gap-4 xs:flex-col sm:flex-row'}>
                 <label className={'flex flex-col w-full'}>
                     <span>Название</span>
                     <input type="text"
@@ -46,17 +46,19 @@ const HCollectionFilter: FC = () => {
                 <IPPField IPP={IPP} setIPP={setIPP}/>
             </div>
             <div className={"flex flex-col gap-4"}>
-                <div className={'flex gap-4'}>
-                    <div>
-                        <span className={'block'}>Тип</span>
-                        <select className={"bg-neutral-600 p-2 rounded-lg"}
-                                value={type}
-                                onChange={e => typeHandler(e)}>
-                            <option value="anime">Аниме</option>
-                            <option value="manga">Манга</option>
-                        </select>
+                <div className={'flex gap-4 xs:flex-col sm:flex-row'}>
+                    <div className={'flex gap-4'}>
+                        <div className={'flex flex-col flex-1'}>
+                            <span className={'block'}>Тип</span>
+                            <select className={"bg-neutral-600 p-2 rounded-lg"}
+                                    value={type}
+                                    onChange={e => typeHandler(e)}>
+                                <option value="anime">Аниме</option>
+                                <option value="manga">Манга</option>
+                            </select>
+                        </div>
+                        <RatingField rating={rating} setRating={setRating}/>
                     </div>
-                    <RatingField rating={rating} setRating={setRating}/>
                     <GenreField tags={tags} setTags={setTags}/>
                 </div>
                 <div className={'flex sm:flex-row xs:flex-col gap-4'}>

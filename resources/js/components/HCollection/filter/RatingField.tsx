@@ -7,7 +7,7 @@ interface RatingFieldProps {
 
 const RatingField: FC<RatingFieldProps> = ({rating, setRating}) => {
     return (
-        <div>
+        <div className={'flex flex-col flex-1'}>
             <span className={'block'}>Рейтинг</span>
             <select className={"bg-neutral-600 p-2 rounded-lg"}
                     value={rating}

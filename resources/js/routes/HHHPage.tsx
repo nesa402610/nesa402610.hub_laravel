@@ -26,10 +26,12 @@ const HHHPage: FC = () => {
     return (
         <div className={"m-4"}>
             <div className={"bg-neutral-800 rounded-lg pt-4 flex flex-col gap-4 mt-4"}>
-                <h1 className={"text-center font-bold text-2xl"}>Добро пожаловать в зону души!</h1>
-                <h3 className={"text-sm text-neutral-500 italic text-end mr-2"}>
-                    Я не при делах если что. Все данные взяты с открытых источников.
-                </h3>
+                <div className={'p-4'}>
+                    <h1 className={"text-center font-bold text-2xl"}>Добро пожаловать в зону души!</h1>
+                    <h3 className={"text-sm text-neutral-500 italic text-end mr-2"}>
+                        Я не при делах если что. Все данные взяты с открытых источников.
+                    </h3>
+                </div>
                 <div className={"flex flex-col gap-4"}>
                     <Filter/>
                     <Outlet/>
