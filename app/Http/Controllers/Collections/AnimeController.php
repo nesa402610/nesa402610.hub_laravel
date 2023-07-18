@@ -82,7 +82,7 @@ class AnimeController extends Controller
         return response($collection, 200);
     }
 
-    public function getAnimeVideos(Request $request, $id)
+    public function getAnimeVideos($id)
     {
 //        $passkey = $this->checkPasskey($request);
 //        if ($passkey) {
@@ -149,7 +149,7 @@ class AnimeController extends Controller
         $collection->tags()->attach($request->tagId);
     }
 
-    public function removeTag(Request $request)
+    public function removeTag(Request $request): void
     {
         $collection = HAnime::find($request->titleId);
         $collection->tags()->detach($request->tagId);
