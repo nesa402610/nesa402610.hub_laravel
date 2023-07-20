@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {useGetOverviewQuery} from "../../services/admin/dashboardService";
 import Loader from "../../components/Loader";
-import DashboardGraph from "./Dashboard/DashboardGraph";
 
 const Dashboard: FC = () => {
     const {data, isLoading} = useGetOverviewQuery()
+
     if (isLoading) return <Loader/>
     return (
         <div className={'flex flex-col gap-4'}>
@@ -14,22 +14,24 @@ const Dashboard: FC = () => {
                     <div
                         className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>
                         <div className={'flex flex-col'}>
-                            {/*<span>Всего аниме: {data.collection.anime.total}</span>*/}
-                            {/*<span>Rx: {data.collection.anime.rx}</span>*/}
-                            {/*<span>Family-friendly: {data.collection.anime.ff}</span>*/}
-                            {/*<AnimeChartPie total={total} rx={rx} ff={ff}/>*/}
-                            <DashboardGraph values={data}/>
+                            <span>Всего аниме: {data.collection.anime.total}</span>
+                            <span>Rx: {data.collection.anime.rx}</span>
+                            <span>Family-friendly: {data.collection.anime.ff}</span>
+                            {/*<AnimeChartPie total={data.collection} rx={rx} ff={ff}/>*/}
+                            {/*<DashboardGraph values={data}/>*/}
+                            {/*<ReactApexChart options={options} series={series} type="radar"*/}
+                            {/*                height={350}/>*/}
+                            <span>Всего студий: {data.collection.anime.studiosCount}</span>
                         </div>
-                        <span>Всего студий: {data.collection.anime.studiosCount}</span>
                     </div>
-                    {/*    <div*/}
-                    {/*        className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>*/}
-                    {/*        Всего манги: {data.collection.manga.total}*/}
-                    {/*    </div>*/}
-                    {/*    <div*/}
-                    {/*        className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>*/}
-                    {/*        Всего тегов: {data.collection.tagsCount}*/}
-                    {/*    </div>*/}
+                    <div
+                        className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>
+                        Всего манги: {data.collection.manga.total}
+                    </div>
+                    <div
+                        className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>
+                        Всего тегов: {data.collection.tagsCount}
+                    </div>
                 </div>
             </div>
             <div className={'flex gap-4 bg-slate-700 p-4 rounded-lg'}>
