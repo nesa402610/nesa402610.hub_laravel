@@ -7,7 +7,7 @@ const ProjectOverviewGithub: FC<IProjectProps> = ({project}) => {
     <>
       {project.github &&
         <a href={project.github} target={"_blank"}
-           onClick={e => e.preventDefault()}
+           onClick={e => e.stopPropagation()}
            className={"transition-all hover:scale-125 flex ml-2 hover:text-stone-400 ani"}>
             <BsGithub/>
         </a>
