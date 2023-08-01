@@ -14,6 +14,7 @@ const AdminSidebar = () => {
         {name: 'Аниме', to: 'anime'},
         {name: 'Аниме студии', to: 'anime/studios'},
         {name: 'DevProjects', to: 'projects'},
+        {name: 'Shikimori Anime', to: 'shikimori/anime'},
     ]
     return (
         <aside className={"fixed flex flex-col p-4 bg-slate-800 w-[300px] h-full"}>

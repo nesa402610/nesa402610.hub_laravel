@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
     Route::prefix('user')->group(function () {
         Route::get('', [AuthController::class, 'checkLogin']);
-        Route::get('list', [UserController::class, 'getAllUsers']);
+        Route::get('list', [UserController::class, 'getAllUsers'])->withoutMiddleware('auth:sanctum');
         Route::get('{username}', [UserController::class, 'getUser'])->withoutMiddleware('auth:sanctum');
         Route::prefix('edit')->group(function () {
             Route::post('account', [UserController::class, 'updateAccount']);
@@ -103,6 +103,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::prefix('anime')->group(function () {
             Route::get('all', [AnimeController::class, 'getAllAnime']);
             Route::put('new', [AnimeController::class, 'createAnime']);
+            Route::put('newByShiki', [AnimeController::class, 'createAnimeByShiki']);
             Route::patch('update', [AnimeController::class, 'updateAnime']);
             Route::put('/tags/add', [AnimeController::class, 'addTag']);
             Route::delete('/tags/remove', [AnimeController::class, 'removeTag']);

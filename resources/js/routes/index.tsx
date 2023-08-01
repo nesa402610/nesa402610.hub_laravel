@@ -34,6 +34,7 @@ import AnimeEdit from "./admin/anime/AnimeEdit";
 import Anime from "./admin/anime/Anime";
 import Dashboard from "./admin/Dashboard";
 import AnimeListPage from "./profile/AnimeListPage";
+import ShikimoriAnime from "./admin/anime/ShikimoriAnime";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -85,6 +86,7 @@ export const router = createBrowserRouter(
                     <Route path={":id"} element={<Manga/>}/>
                 </Route>
                 <Route path={"users"} element={<Users/>}/>
+                <Route path={"shikimori/anime"} element={<ShikimoriAnime/>}/>
                 <Route path={"tags"} element={<Tags/>}/>
                 <Route path={"projects"} element={<ProjectsPage/>}/>
             </Route>

@@ -12,6 +12,39 @@ use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
+    public function createAnimeByShiki(Request $request)
+    {
+//        return response($request);
+        $rating = '13+';
+        if ($request['rating'] === 'g') $rating = '0+';
+        elseif ($request['rating'] === 'pg') $rating = '6+';
+        elseif ($request['rating'] === 'pg_13') $rating = '13+';
+        elseif ($request['rating'] === 'r') $rating = '16+';
+        elseif ($request['rating'] === 'r_plus') $rating = '18+';
+        elseif ($request['rating'] === 'rx') $rating = 'Rx';
+        else $rating = '0+';
+        $anime = new HAnime();
+        $anime->title_ru = $request['russian'];
+        $anime->title_en = ' ';
+        $anime->title_original = $request['name'];
+        $anime->description = $request['description'];
+        $anime->description_short = $request['description_short'];
+        $anime->episode_time = $request['duration'];
+        $anime->censure = 0;
+        $anime->image = 'https://shikimori.me/' . $request['image']['preview'];
+        $anime->announce_date = $request['aired_on'];
+        $anime->release_date = $request['aired_on'];
+        $anime->episodes_released = $request['episodes'] - $request['episodes_aired'];
+        $anime->episodes_total = $request['episodes'];
+        $anime->author = null;
+        $anime->review = '';
+        $anime->rating = $rating;
+        $anime->style = 0;
+        $anime->type = 0;
+        $anime->save();
+//        return response($anime);
+    }
+
     public function createAnime(Request $request)
     {
         $anime = new HAnime();

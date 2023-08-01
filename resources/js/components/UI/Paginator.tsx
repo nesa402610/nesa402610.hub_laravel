@@ -11,7 +11,7 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
     if (totalPages === 1) return null;
     if (totalPages > 15) {
         const middle = () => {
-            if (currentPage < 4) return ['....']
+            if (currentPage < 4) return ['...']
             if (currentPage === 4) return [currentPage + 1, currentPage + 2, '...']
             if (currentPage === 5) return [currentPage, currentPage + 1, '...']
             if (currentPage === 6) return [currentPage - 1, currentPage, currentPage + 1, '...']
