@@ -9,7 +9,8 @@ const HAnimeDetailedPage = () => {
     // const [passkey, setPasskey] = useState('');
     // const passkey = localStorage.getItem("passkey");
     const {id} = useParams();
-    const {data, isLoading} = useGetAnimeByIdQuery(id);
+    const {data, isLoading} = useGetAnimeByIdQuery(id)
+
     useEffect(() => {
         if (isLoading) return
         document.title = `Смотреть аниме ${data?.title_ru} // n/esa | hub`

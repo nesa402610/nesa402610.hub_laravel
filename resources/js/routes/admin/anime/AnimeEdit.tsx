@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import {
-    useGetAllAnimeQuery,
+    useGetAnimeByIdQuery,
     useGetAnimeVideosQuery,
     useUpdateAnimeMutation
 } from "../../../services/Collections/AnimeService";
@@ -15,11 +15,7 @@ import {ICollection} from "../../../types/types";
 
 const AnimeEdit = () => {
     const {id} = useParams();
-    const {animeData} = useGetAllAnimeQuery(null, {
-        selectFromResult: ({data}) => ({
-            animeData: data?.data?.find((anime) => anime.id === +id),
-        }),
-    });
+    const {data: animeData, isLoading} = useGetAnimeByIdQuery(id)
     const videosResponse = useGetAnimeVideosQuery(id);
     const {data: videosData} = videosResponse;
     const [updateAnime] = useUpdateAnimeMutation();
@@ -34,7 +30,7 @@ const AnimeEdit = () => {
         setVideos(videosData);
     }, [videosData]);
 
-    if (!anime) return <Loader/>;
+    if (isLoading) return <Loader/>;
     return (
         <div className={"flex flex-col gap-4"}>
             <div className={"flex gap-4"}>
