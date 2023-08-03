@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import {
-    useGetAllAnimeNPQuery,
+    useGetAllAnimeQuery,
     useGetAnimeVideosQuery,
     useUpdateAnimeMutation
 } from "../../../services/Collections/AnimeService";
@@ -15,9 +15,9 @@ import {ICollection} from "../../../types/types";
 
 const AnimeEdit = () => {
     const {id} = useParams();
-    const {animeData} = useGetAllAnimeNPQuery(null, {
+    const {animeData} = useGetAllAnimeQuery(null, {
         selectFromResult: ({data}) => ({
-            animeData: data?.find((anime) => anime.id === +id),
+            animeData: data?.data?.find((anime) => anime.id === +id),
         }),
     });
     const videosResponse = useGetAnimeVideosQuery(id);
