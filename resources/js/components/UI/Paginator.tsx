@@ -5,10 +5,12 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
     const toPageHandler = (page) => {
         if (page > totalPages) return
         setCurrentPage(page)
-
     };
     let pages: any[] = Array.from({length: totalPages}, (v, k) => k + 1);
-    if (totalPages === 1) return null;
+    if (totalPages === 1) {
+        setCurrentPage(1)
+        return null;
+    }
     if (totalPages > 15) {
         const middle = () => {
             if (currentPage < 4) return ['...']
@@ -20,12 +22,12 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
             if (currentPage <= pages.at(-5)) return ['...', currentPage - 1, currentPage]
             return ['...']
         }
-        const start = [1, 2, 3, 4, ...middle()]
+        const start = [1, 2, 3, 4]
         const end = [pages.at(-4), pages.at(-3), pages.at(-2), pages.at(-1)]
-        pages = [...start, ...end]
+        pages = [...start, ...middle(), ...end]
     }
     return (
-        <div className={"flex gap-4 items-center justify-center"}>
+        <div className={"flex xs:gap-1 md:gap-4 items-center justify-center"}>
           <span onClick={() => toPageHandler(1)}
                 className={currentPage === 1 ? "text-neutral-500" : "cursor-pointer hover:text-neutral-500 text-neutral-300"}>
               <FaAngleDoubleLeft/>
