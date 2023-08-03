@@ -102,6 +102,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         });
         Route::prefix('anime')->group(function () {
             Route::get('all', [AnimeController::class, 'getAllAnime']);
+            Route::get('duplies', [AnimeController::class, 'getAnimeDuplies']);
+            Route::delete('duplies/delete', [AnimeController::class, 'deleteDupliesAnime']);
             Route::put('new', [AnimeController::class, 'createAnime']);
             Route::put('newByShiki', [AnimeController::class, 'createAnimeByShiki']);
             Route::patch('update', [AnimeController::class, 'updateAnime']);

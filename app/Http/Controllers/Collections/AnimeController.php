@@ -64,7 +64,25 @@ class AnimeController extends Controller
 
         }
         return response($anime, 200);
+    }
 
+    public function getAnimeDuplies()
+    {
+        $anime = HAnime::where('type', 0)->get();
+        $animeUniq = $anime->unique('title_original');
+        $duplies = $anime->diff($animeUniq);
+
+        return response($duplies);
+    }
+
+    public function deleteDupliesAnime(Request $request)
+    {
+        $anime = HAnime::where('type', 0)->get();
+        $animeUniq = $anime->unique('title_original');
+        $duplies = $anime->diff($animeUniq);
+        foreach ($duplies as $duplie) {
+            $duplie->delete();
+        }
     }
 
     public function getPaginatedAnime(Request $request)
@@ -72,12 +90,13 @@ class AnimeController extends Controller
         $tags = $request->tags;
         $title = $request->title;
         $rating = $request->rating;
-        $IPP = $request->IPP;
+        $IPP = $request->IPP ?? 15;
+        $sort = $request->sort ?? 'id';
 
         $query = HAnime::query();
 
         if (!empty($title)) {
-            $query->where(function ($query) use ($title, $rating) {
+            $query->where(function ($query) use ($title) {
                 $query->where('title_ru', 'like', '%' . $title . '%')
                     ->orWhere('title_en', 'like', '%' . $title . '%')
                     ->orWhere('title_original', 'like', '%' . $title . '%');
@@ -92,8 +111,15 @@ class AnimeController extends Controller
         if (!empty($rating)) {
             $query->where('rating', $rating);
         }
+        if (!empty($sort)) {
+            if ($sort === 'release_date') {
+                $query->orderByDesc($sort);
+            } else $query->orderBy($sort);
+        }
         //сортируем Rx в конец, тип отвечает за аниме - 0 / мангу - 1
-        $collections = $query->orderBy('rating')->orderByDesc('created_at')->where('type', 0)->paginate($IPP);
+        $query->where('type', 0);
+
+        $collections = $query->paginate($IPP);
 
         foreach ($collections as $collection) {
             $collection->tags->makeHidden('pivot');

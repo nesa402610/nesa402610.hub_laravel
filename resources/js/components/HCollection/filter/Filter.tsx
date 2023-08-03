@@ -1,10 +1,11 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
 import {clearFilter, setFilter, setFilterType} from "../../../store/reducers/collectionSlice";
 import GenreField from "./GenreField";
 import RatingField from "./RatingField";
 import IPPField from "./IPPField";
+import TitleField from "./TitleField";
 
 const HCollectionFilter: FC = () => {
     const dispatch = useAppDispatch()
@@ -13,6 +14,7 @@ const HCollectionFilter: FC = () => {
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState([]);
     const [rating, setRating] = useState('');
+    const [sort, setSort] = useState('id');
     const [IPP, setIPP] = useState(15);
 
     const clearFilterHandler = () => {
@@ -20,11 +22,9 @@ const HCollectionFilter: FC = () => {
         setTitle('')
         setTags([])
         setRating('')
-        setIPP(15)
     }
     const searchWithFilterHandler = async () => {
-        dispatch(setFilter({title, tags, rating, IPP}))
-
+        dispatch(setFilter({title, tags, rating, IPP, sort}))
     }
     const typeHandler = (e) => {
         dispatch(setFilterType(e.target.value))
@@ -32,17 +32,20 @@ const HCollectionFilter: FC = () => {
             nav('a')
         } else nav('m')
     }
+    useEffect(() => {
+        const memFilter = JSON.parse(localStorage.getItem('memFilter'))
+        setIPP(memFilter?.IPP ?? 15)
+        setSort(memFilter?.sort ?? 'id')
+    }, []);
+    useEffect(() => {
+        const memFilter = JSON.stringify({IPP, sort})
+        localStorage.setItem('memFilter', memFilter)
+    }, [IPP, sort]);
 
     return (
         <div className={"flex sm:p-4 xs:p-2 flex-col gap-4"}>
             <div className={'flex gap-4 xs:flex-col sm:flex-row'}>
-                <label className={'flex flex-col w-full'}>
-                    <span>Название</span>
-                    <input type="text"
-                           value={title}
-                           placeholder={'Мастер меча онлайн'}
-                           onChange={e => setTitle(e.target.value)}/>
-                </label>
+                <TitleField title={title} setTitle={setTitle}/>
                 <IPPField IPP={IPP} setIPP={setIPP}/>
             </div>
             <div className={"flex flex-col gap-4"}>
@@ -60,6 +63,17 @@ const HCollectionFilter: FC = () => {
                         <RatingField rating={rating} setRating={setRating}/>
                     </div>
                     <GenreField tags={tags} setTags={setTags}/>
+                </div>
+                <div>
+                    <span>Сортировка</span>
+                    <select className={'p-2 rounded-lg bg-neutral-600 w-full'}
+                            value={sort}
+                            onChange={e => setSort(e.target.value)}
+                    >
+                        <option value="id">По порядку</option>
+                        <option value="title_original">По алфавиту</option>
+                        <option value="release_date">по дате релиза</option>
+                    </select>
                 </div>
                 <div className={'flex sm:flex-row xs:flex-col gap-4'}>
                     <button onClick={searchWithFilterHandler} className={'bg-red-700 hover:bg-red-800'}>Поиск с фильтром

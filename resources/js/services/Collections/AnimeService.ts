@@ -59,6 +59,17 @@ export const AnimeAPI = createApi({
             }),
             providesTags: ["animeList"]
         }),
+        getAnimeDuplies: builder.query<ICollection[], void>({
+            query: () => ({
+                url: 'duplies'
+            }),
+        }),
+        deleteAnimeDuplies: builder.mutation<ICollection[], void>({
+            query: () => ({
+                url: 'duplies/delete',
+                method: 'delete',
+            }),
+        }),
         getAnimeVideos: builder.query<IAnimeVideos[], string | number>({
             query: (id) => ({
                 url: id + "/videos",
@@ -135,7 +146,9 @@ export const AnimeAPI = createApi({
 
 export const {
     useGetAllAnimeQuery,
+    useDeleteAnimeDupliesMutation,
     useLazyGetAllAnimeQuery,
+    useGetAnimeDupliesQuery,
     useSetAnimeStatusMutation,
     useGetAllAnimeNPQuery,
     useGetAnimeByIdQuery,
