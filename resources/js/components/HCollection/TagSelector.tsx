@@ -1,27 +1,27 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useMemo, useState} from "react";
 import Loader from "../Loader";
 import {useGetTagsQuery} from "../../services/Collections/TagService";
 import {ICollectionTag} from "../../types/Tag";
 import {useAddTagToAnimeMutation} from "../../services/Collections/AnimeService";
-import {ICollection} from "../../types/types";
 
 interface TagSelectorProps {
-    collection: ICollection;
+    collectionTags: ICollectionTag[];
+    collectionID: string | number
 }
 
-const TagSelector: FC<TagSelectorProps> = ({collection}) => {
+const TagSelector: FC<TagSelectorProps> = ({collectionTags, collectionID}) => {
     const {data: tags, isLoading} = useGetTagsQuery();
     const [freeTags, setFreeTags] = useState<ICollectionTag[]>([]);
     const [tagSearch, setTagSearch] = useState('');
     const [rxSearch, setRxSearch] = useState(2);
 
-    useEffect(() => {
+    useMemo(() => {
         if (!tags) return;
-        const itemTags = collection.tags;
+        const itemTags = collectionTags;
         const freeTags = tags.filter(tag => !itemTags?.map(itemTag => itemTag.name).includes(tag.name));
         const freeTagsWithSearch = freeTags.filter(tag => tag.name.toLowerCase().includes(tagSearch.toLowerCase()) && tag.type !== rxSearch)
         setFreeTags(freeTagsWithSearch);
-    }, [tags, collection, tagSearch, rxSearch]);
+    }, [tags, collectionTags, tagSearch, rxSearch]);
 
     const [addTag] = useAddTagToAnimeMutation();
     const addTagHandler = (titleId, tagId) => {
@@ -51,7 +51,7 @@ const TagSelector: FC<TagSelectorProps> = ({collection}) => {
                     </div>
                     <div className={'flex flex-col gap-2 overflow-scroll'}>
                         {freeTags.map((tag: { id: number, name: string }) =>
-                            <span key={tag.id} onClick={() => addTagHandler(collection.id, tag.id)}
+                            <span key={tag.id} onClick={() => addTagHandler(collectionID, tag.id)}
                                   className={"bg-neutral-700 rounded-full px-2 whitespace-nowrap text-center hover:bg-neutral-600 transition-all cursor-pointer"}>
                                 {tag.name}
                             </span>

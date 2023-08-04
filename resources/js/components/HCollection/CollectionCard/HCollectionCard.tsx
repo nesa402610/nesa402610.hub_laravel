@@ -1,23 +1,20 @@
-import React, {FC, useState} from "react";
-import {useGetUserQuery} from "../../services/userService";
-import TagSelector from "./TagSelector";
+import React, {FC} from "react";
+import {useGetUserQuery} from "../../../services/userService";
 import HCollectionTags from "./HCollectionTags";
-import {Link} from "react-router-dom";
 import Title from "./Title";
 import CollectionStatus from "./CollectionStatus";
-import {ICollection} from "../../types/types";
-
+import {ICollection} from "../../../types/types";
+import Image from "./Image";
 
 interface CollectionProps {
     collection: ICollection;
-    hover?: boolean;
     link?: boolean;
     admin?: boolean
+
 }
 
-const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover = false, admin = false}) => {
+const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin = false}) => {
     const {data: user} = useGetUserQuery();
-    const [tagDropDown, setTagDropDown] = useState(false);
 
     const type = collection?.type === 0 ? 'ZERO' : 'ONE'
 
@@ -28,38 +25,20 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, hover =
         <div className={"bg-neutral-700 p-4 rounded-lg"}>
             <div className={"flex xs:flex-col md:flex-row gap-4"}>
                 <div className={'flex-shrink-0 basis-auto flex flex-col gap-2'}>
-                    <Link className={'flex justify-center'}
-                          to={`${link ? path : ""}`}>
-                        <img
-                            className={"rounded-lg w-[200px] h-auto" + (hover ? " hover:scale-105 transition-all" : "cursor-default")}
-                            src={collection.image}
-                            alt="Изображение тайтла"/>
-                    </Link>
+                    <Image link={link} path={path} image={collection.image}/>
                     <CollectionStatus type={collection.type} status={collection.status} animeID={collection.id}/>
                 </div>
                 <div className={"flex flex-col"}>
                     <div className={'flex flex-col'}>
-                        <Title path={path} collection={collection} hover={!!link} link={!!link}/>
+                        <Title path={path} collection={collection} link/>
                         <span className={'text-sm italic text-neutral-400'}>{collection.title_en}</span>
                     </div>
                     <div className={"text-neutral-300"}>
                         <h3 className={"mt-4 font-bold"}>Информация</h3>
                         <div className={"flex flex-col"}>
                             <span>Год выхода: {collection.announce_date.slice(0, 4)}</span>
-                            <span className={"flex gap-1 md:flex-nowrap xs:flex-wrap"}>Жанры:
-                    <div className={"flex gap-1 flex-wrap"}>
-                      <HCollectionTags tags={collection.tags} collectionID={collection.id}/>
-                        {user?.role[0]?.name === 'Admin' &&
-                            <div onClick={() => setTagDropDown(prev => !prev)}
-                                 className={"bg-neutral-800 px-2 rounded-full relative"}>
-                                +
-                                {tagDropDown &&
-                                    <TagSelector collection={collection}/>
-                                }
-                            </div>
-                        }
-                    </div>
-                  </span>
+                            <HCollectionTags collection={collection} tags={collection.tags}
+                                             collectionID={collection.id}/>
                             {collection.episodes_released && <div className={"flex items-center"}>
                                 <h4>Эпизоды:&nbsp;</h4>
                                 <span>{collection.episodes_released}</span>

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {csrf_token} from "../../../mockData";
 
 const ShikimoriAnime: FC = () => {
@@ -34,11 +34,14 @@ const ShikimoriAnime: FC = () => {
         const lastId = JSON.parse(localStorage.getItem('usedId')) ?? 1
         setId(lastId)
     }, []);
-    const ref = useRef(null)
     const intervalFetch = () => {
-        clearInterval(timerID)
-        const timerId = setInterval(() => {
-            ref.current.click()
+        if (timerID) {
+            setTimerID(null)
+            clearInterval(timerID)
+            return
+        }
+        const timerId = setInterval(async () => {
+            await fetchAnime()
         }, 500)
         setTimerID(timerId)
     };
@@ -47,7 +50,7 @@ const ShikimoriAnime: FC = () => {
             <input type="text" value={id}
                    onChange={(e) => setId(+e.target.value)}/>
             <button onClick={() => setData([])}>clear data</button>
-            <button ref={ref} onClick={fetchAnime}>Fetch {id}</button>
+            <button onClick={fetchAnime}>Fetch {id}</button>
             <button onClick={intervalFetch}>set intervalFetch</button>
             {/*<button onClick={() => setId(1)}>setId 1</button>*/}
             <div className={'grid grid-cols-4'}>

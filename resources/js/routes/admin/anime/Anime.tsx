@@ -5,9 +5,9 @@ import {
     useGetAllAnimeQuery,
     useGetAnimeDupliesQuery
 } from "../../../services/Collections/AnimeService";
-import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
+import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";
 
 const Anime = () => {
     const [isDuplies, setIsDuplies] = useState(false);

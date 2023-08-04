@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {useParams} from "react-router";
 import {Link} from "react-router-dom";
-import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import Modal from "../../../components/UI/modal";
 import {useGetMangaByIdQuery} from "../../../services/Collections/MangaService";
+import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";
 
 const HMangaDetailedPage = () => {
     const passkey = localStorage.getItem("passkey");

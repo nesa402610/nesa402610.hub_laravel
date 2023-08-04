@@ -1,9 +1,9 @@
 import React, {FC, useState} from "react";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
-import HCollectionCard from "../../../components/HCollection/HCollectionCard";
 import {useGetAllAnimeQuery} from "../../../services/Collections/AnimeService";
 import {useAppSelector} from "../../../hooks/redux";
+import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";
 
 
 // interface HAnimePageProps {
@@ -39,7 +39,7 @@ const HAnimePage: FC = () => {
                 }
                 {data?.data?.map(collectionItem =>
                     <HCollectionCard key={collectionItem.id}
-                                     hover link
+                                     link
                                      collection={collectionItem}/>
                 )}
             </div>

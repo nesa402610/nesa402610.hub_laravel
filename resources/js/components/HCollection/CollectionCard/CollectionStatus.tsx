@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
-import {useSetAnimeStatusMutation} from "../../services/Collections/AnimeService";
-import {useGetUserQuery} from "../../services/userService";
+import {useSetAnimeStatusMutation} from "../../../services/Collections/AnimeService";
+import {useGetUserQuery} from "../../../services/userService";
 import {IoCaretDown, IoCaretUp} from "react-icons/io5";
 
 interface CollectionStatusProps {
