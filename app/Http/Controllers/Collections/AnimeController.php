@@ -7,6 +7,7 @@ use App\Models\AnimeUserStatus;
 use App\Models\HAnime;
 use App\Models\HLinks;
 use App\Models\Passkey;
+use App\Models\Tags;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,8 @@ class AnimeController extends Controller
         elseif ($request['rating'] === 'r_plus') $rating = '18+';
         elseif ($request['rating'] === 'rx') $rating = 'Rx';
         else $rating = '0+';
+        $genres = $request['genres'];
+
         $anime = new HAnime();
         $anime->title_ru = $request['russian'];
         $anime->title_en = ' ';
@@ -42,7 +45,13 @@ class AnimeController extends Controller
         $anime->style = 0;
         $anime->type = 0;
         $anime->save();
-//        return response($anime);
+
+        foreach ($genres as $genre) {
+            $tag = Tags::where('name', $genre['russian'])->first();
+            if ($tag) {
+                $anime->tags()->attach($tag->id);
+            }
+        }
     }
 
     public function createAnime(Request $request)
@@ -80,7 +89,13 @@ class AnimeController extends Controller
         $anime = HAnime::where('type', 0)->get();
         $animeUniq = $anime->unique('title_original');
         $duplies = $anime->diff($animeUniq);
+        $arrTags = [];
         foreach ($duplies as $duplie) {
+            $tags = $duplie->tags;
+            array_push($arrTags, $tags);
+            foreach ($tags as $tag) {
+                $duplie->tags()->detach($tag->id);
+            }
             $duplie->delete();
         }
     }
