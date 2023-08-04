@@ -1,9 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {csrf_token} from "../../../mockData";
 
 const ShikimoriAnime: FC = () => {
     const [data, setData] = useState([]);
     const [id, setId] = useState(1);
+    const [timerID, setTimerID] = useState(null);
     const saveAnimeToDB = (anime) => {
         fetch('/api/anime/newByShiki', {
             headers: {
@@ -22,21 +23,32 @@ const ShikimoriAnime: FC = () => {
                     setData(prev => [...prev, r])
                     saveAnimeToDB(r)
                 }
-            })
+            }).then(() => {
+            setId(prev => prev + 1)
+            localStorage.setItem('usedId', JSON.stringify(id + 1))
+        })
             .catch(e => console.error(e))
-        setId(prev => prev + 1)
-        localStorage.setItem('usedId', JSON.stringify(id + 1))
+
     }
     useEffect(() => {
         const lastId = JSON.parse(localStorage.getItem('usedId')) ?? 1
         setId(lastId)
     }, []);
+    const ref = useRef(null)
+    const intervalFetch = () => {
+        clearInterval(timerID)
+        const timerId = setInterval(() => {
+            ref.current.click()
+        }, 500)
+        setTimerID(timerId)
+    };
     return (
         <div>
             <input type="text" value={id}
                    onChange={(e) => setId(+e.target.value)}/>
             <button onClick={() => setData([])}>clear data</button>
-            <button onClick={fetchAnime}>Fetch {id}</button>
+            <button ref={ref} onClick={fetchAnime}>Fetch {id}</button>
+            <button onClick={intervalFetch}>set intervalFetch</button>
             {/*<button onClick={() => setId(1)}>setId 1</button>*/}
             <div className={'grid grid-cols-4'}>
                 {data.map(anime =>

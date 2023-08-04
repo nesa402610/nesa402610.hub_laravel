@@ -30,7 +30,7 @@ const AnimeEdit = () => {
         setVideos(videosData);
     }, [videosData]);
 
-    if (isLoading) return <Loader/>;
+    if (!anime) return <Loader/>;
     return (
         <div className={"flex flex-col gap-4"}>
             <div className={"flex gap-4"}>
