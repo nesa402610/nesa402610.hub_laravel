@@ -1,10 +1,11 @@
 import React, {FC} from "react";
 import {useGetUserQuery} from "../../../services/userService";
-import HCollectionTags from "./HCollectionTags";
 import Title from "./Title";
 import CollectionStatus from "./CollectionStatus";
 import {ICollection} from "../../../types/types";
 import Image from "./Image";
+import CollectionDescription from "./CollectionDescription";
+import CollectionInfo from "./CollectionInfo/CollectionInfo";
 
 interface CollectionProps {
     collection: ICollection;
@@ -33,38 +34,8 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin =
                         <Title path={path} collection={collection} link/>
                         <span className={'text-sm italic text-neutral-400'}>{collection.title_en}</span>
                     </div>
-                    <div className={"text-neutral-300"}>
-                        <h3 className={"mt-4 font-bold"}>Информация</h3>
-                        <div className={"flex flex-col"}>
-                            <span>Год выхода: {collection.announce_date.slice(0, 4)}</span>
-                            <HCollectionTags collection={collection} tags={collection.tags}
-                                             collectionID={collection.id}/>
-                            {collection.episodes_released && <div className={"flex items-center"}>
-                                <h4>Эпизоды:&nbsp;</h4>
-                                <span>{collection.episodes_released}</span>
-                                /
-                                <span>
-                                {collection.episodes_total === 0 ? '?' : collection.episodes_total} {collection.videosCount ? `(${collection.videosCount} добавлено)` : ''}
-                            </span>
-                            </div>
-                            }
-                            {collection.episode_time &&
-                                <div className={"flex"}>
-                                    <h4>Длительность серии:&nbsp;</h4>
-                                    <span>{collection.episode_time} мин.</span>
-                                </div>
-                            }
-                            {collection.studios &&
-                                <span>
-                                Студия: {collection.studios.map(studio => studio.name)}
-                            </span>
-                            }
-                            <span>Цензура: {collection.censure ? "С цензурой" : "Без цензуры"}</span>
-                            <span>Рейтинг: {collection.rating}</span>
-                        </div>
-                        <h3 className={"mt-4 font-bold"}>Описание</h3>
-                        <p>{collection.description}</p>
-                    </div>
+                    <CollectionInfo collection={collection}/>
+                    <CollectionDescription description={collection.description}/>
                 </div>
             </div>
         </div>
