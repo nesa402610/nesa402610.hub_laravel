@@ -1,5 +1,4 @@
 import React, {FC} from "react";
-import {useGetUserQuery} from "../../../services/userService";
 import Title from "./Title";
 import CollectionStatus from "./CollectionStatus";
 import {ICollection} from "../../../types/types";
@@ -15,8 +14,6 @@ interface CollectionProps {
 }
 
 const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin = false}) => {
-    const {data: user} = useGetUserQuery();
-
     const type = collection?.type === 0 ? 'ZERO' : 'ONE'
 
     if (!collection) return null;
