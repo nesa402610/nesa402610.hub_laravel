@@ -103,6 +103,7 @@ class UserController extends Controller
         foreach ($animeList as $anime) {
             $anime->anime;
             $anime->anime->tags;
+            $anime->anime->studios;
             $anime->anime->status = $anime->anime->animeStatus();
             $anime->anime->videosCount = $anime->anime->links()->count();
         }

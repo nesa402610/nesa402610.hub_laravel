@@ -38,10 +38,10 @@ const UserAnimeOverview: FC<UserAnimeOverviewProps> = ({userId}) => {
                       className={'transition-all hover:text-neutral-300 text-sm'}>Смотрю {animeData.watching}</Link>
                 <Link to={userId + '/animelist/dropped'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Брошено {animeData.dropped}</Link>
-                <Link to={userId + '/animelist/dropped'}
+                <Link to={userId + '/animelist/out'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Не буду
                     смотреть {animeData.out}</Link>
-                <Link to={userId + '/animelist/dropped'}
+                <Link to={userId + '/animelist/fuckout'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Фу, какая
                     гадость {animeData.fuckout}</Link>
             </div>
