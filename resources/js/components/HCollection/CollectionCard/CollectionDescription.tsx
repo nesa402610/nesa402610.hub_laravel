@@ -4,7 +4,7 @@ const CollectionDescription = ({description}) => {
     return (
         <div>
             <h3 className={"mt-4 font-bold"}>Описание</h3>
-            <p>{description}</p>
+            <p>{description ? description : 'Описание отсутствует...'}</p>
         </div>
     );
 };

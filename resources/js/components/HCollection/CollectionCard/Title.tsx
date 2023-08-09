@@ -1,28 +1,32 @@
 import React, {FC} from 'react';
 import {Link} from "react-router-dom";
-import {ICollection} from "../../../types/types";
 
 interface TitleProps {
     link?: boolean
-    collection: ICollection
+    RU: string
+    EN: string
+    ORIGINAL: string
     path: string
 }
 
-const Title: FC<TitleProps> = ({link, collection, path}) => {
+const Title: FC<TitleProps> = ({link, RU, EN, ORIGINAL, path}) => {
     return (
-        <Link
-            to={link ? path : ''}>
-            <div
-                className={`flex items-center flex-wrap ${link ? "hover:text-neutral-300 transition-all" : "cursor-default"}`}>
-                {collection.title_ru &&
-                    <>
-                        <span>{collection.title_ru}</span>
-                        <span>&nbsp;/&nbsp;</span>
-                    </>
-                }
-                <span>{collection.title_original}</span>
-            </div>
-        </Link>
+        <div className={'flex flex-col'}>
+            <Link
+                to={link ? path : ''}>
+                <div
+                    className={`flex items-center flex-wrap ${link ? "hover:text-neutral-300 transition-all" : "cursor-default"}`}>
+                    {RU &&
+                        <>
+                            <span>{RU}</span>
+                            <span>&nbsp;/&nbsp;</span>
+                        </>
+                    }
+                    <span>{ORIGINAL}</span>
+                </div>
+            </Link>
+            <span className={'text-sm italic text-neutral-400'}>{EN}</span>
+        </div>
     );
 };
 
