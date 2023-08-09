@@ -15,7 +15,8 @@ const ShikimoriAnime: FC = () => {
             body: JSON.stringify(anime),
         })
     }
-    const fetchAnime = () => {
+    const fetchAnime = (id: number) => {
+        let err = false
         fetch('https://shikimori.me/api/animes/' + id)
             .then(r => r.json())
             .then(r => {
@@ -23,34 +24,42 @@ const ShikimoriAnime: FC = () => {
                     setData(prev => [...prev, r])
                     saveAnimeToDB(r)
                 }
-            }).then(() => {
-            setId(prev => prev + 1)
-            localStorage.setItem('usedId', JSON.stringify(id + 1))
-        })
-            .catch(e => console.error(e))
-
+            })
+            .catch(e => console.error(e.code))
+        return
     }
     useEffect(() => {
         const lastId = JSON.parse(localStorage.getItem('usedId')) ?? 1
         setId(lastId)
     }, []);
     const intervalFetch = () => {
+        let ID = id
         if (timerID) {
             setTimerID(null)
             clearInterval(timerID)
+            setId(ID)
+            localStorage.setItem('usedId', String(ID))
             return
         }
-        const timerId = setInterval(async () => {
-            await fetchAnime()
-        }, 500)
+        const timerId = setInterval(() => {
+            fetchAnime(ID)
+            ID += 1
+            setId(ID)
+            localStorage.setItem('usedId', String(ID))
+        }, 700)
         setTimerID(timerId)
     };
+    useEffect(() => {
+        return () => {
+            clearInterval(timerID)
+        }
+    }, []);
     return (
         <div>
             <input type="text" value={id}
                    onChange={(e) => setId(+e.target.value)}/>
             <button onClick={() => setData([])}>clear data</button>
-            <button onClick={fetchAnime}>Fetch {id}</button>
+            {/*<button ref={ref} onClick={fetchAnime}>Fetch {id}</button>*/}
             <button onClick={intervalFetch}>set intervalFetch</button>
             {/*<button onClick={() => setId(1)}>setId 1</button>*/}
             <div className={'grid grid-cols-4'}>
