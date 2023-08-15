@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "./components/header";
 import "./App.css";
-import "./API/axios";
 import {Outlet} from "react-router";
 import {ScrollRestoration} from "react-router-dom";
 import {useGetUserQuery} from "./services/userService";

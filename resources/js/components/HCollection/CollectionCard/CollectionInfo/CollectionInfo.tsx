@@ -19,7 +19,7 @@ const CollectionInfo = ({collection}: { collection: ICollection }) => {
                     }
                 </InfoField>
                 <InfoField title={'Длительность серии:'} value={`${collection.episode_time} мин.`}/>
-                <InfoField title={'Студия:'} value={collection.studios.map(studio => studio.name)}/>
+                <InfoField title={'Студия:'} value={collection.studios?.map(studio => studio.name)}/>
                 <InfoField title={'Цензура:'} value={collection.censure ? "С цензурой" : "Без цензуры"}/>
                 <InfoField title={'Рейтинг:'} value={collection.rating}/>
             </div>

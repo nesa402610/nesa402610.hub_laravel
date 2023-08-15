@@ -26,7 +26,7 @@ class ProjectController extends Controller {
     }
 
     public function getAllProjects() {
-        $projects = Project::all();
+        $projects = Project::orderByDesc('id')->get();
         foreach ($projects as $project) {
             $ratings = Rating::where('project_id', $project->id)->get();
             $avRate = 0;
@@ -68,17 +68,18 @@ class ProjectController extends Controller {
      * @param $project
      * @return void
      */
-    public function extracted(Request $request, $project): void {
-        $project->name = $request->name;
-        $project->source = $request->source;
-        $project->sourceUrl = $request->sourceURL;
-        $project->previewURL = $request->previewURL;
-        $project->image = $request->image;
-        $project->status = $request->status;
-        $project->level = $request->level;
-        $project->framework = $request->framework;
-        $project->host = $request->host;
-        $project->github = $request->github;
+    public function extracted(Request $request, $project): void
+    {
+        $project->name = $request['name'];
+        $project->source = $request['source'];
+        $project->sourceUrl = $request['sourceURL'];
+        $project->previewURL = $request['previewURL'];
+        $project->image = $request['image'];
+        $project->status = $request['status'];
+        $project->level = $request['level'];
+        $project->framework = $request['framework'];
+        $project->host = $request['host'];
+        $project->github = $request['github'];
         $project->save();
     }
 }

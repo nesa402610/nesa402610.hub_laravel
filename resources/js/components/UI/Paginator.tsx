@@ -35,9 +35,9 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
             <span onClick={() => toPageHandler(currentPage - 1)}
                   className={currentPage === 1 ? "text-neutral-500" : "cursor-pointer hover:text-neutral-500 text-neutral-300"}><FaAngleLeft/></span>
             {pages.map(page =>
-                <span
-                    onClick={() => toPageHandler(page)}
-                    className={currentPage !== page ? "cursor-pointer hover:text-neutral-500 text-neutral-300" : "text-neutral-500"}>
+                <span key={page}
+                      onClick={() => toPageHandler(page)}
+                      className={currentPage !== page ? "cursor-pointer hover:text-neutral-500 text-neutral-300" : "text-neutral-500"}>
                       {page}
                     </span>
             )}
