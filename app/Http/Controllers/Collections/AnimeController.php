@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
+    public function getRandomAnime($limit)
+    {
+        $anime = HAnime::inRandomOrder()->limit($limit)->get();
+//        $anime = 1;
+
+        return response($anime, 200);
+    }
+
     public function createAnimeByShiki(Request $request)
     {
 //        return response($request);
@@ -107,6 +115,7 @@ class AnimeController extends Controller
         $rating = $request->rating;
         $IPP = $request->IPP ?? 15;
         $sort = $request->sort ?? 'id';
+        $years = $request->years;
 
         $query = HAnime::query();
 
@@ -117,7 +126,9 @@ class AnimeController extends Controller
                     ->orWhere('title_original', 'like', '%' . $title . '%');
             });
         }
-
+        if (!empty($years)) {
+            $query->whereYear('release_date', '>', $years['start'])->whereYear('release_date', '<', $years['end']);
+        }
         if (!empty($tags)) {
             $query->whereHas('tags', function ($query) use ($tags) {
                 $query->whereIn('name', $tags);

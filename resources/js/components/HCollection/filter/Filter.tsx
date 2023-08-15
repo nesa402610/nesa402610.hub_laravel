@@ -6,16 +6,18 @@ import GenreField from "./GenreField";
 import RatingField from "./RatingField";
 import IPPField from "./IPPField";
 import TitleField from "./TitleField";
+import YearsRange from "./YearsRange";
 
 const HCollectionFilter: FC = () => {
     const dispatch = useAppDispatch()
-    const {filter: {type}} = useAppSelector(state => state.collection)
+    const {filter: {type, years: yearsRange}} = useAppSelector(state => state.collection)
     const nav = useNavigate();
     const [title, setTitle] = useState('');
     const [tags, setTags] = useState([]);
     const [rating, setRating] = useState('');
     const [sort, setSort] = useState('id');
     const [IPP, setIPP] = useState(15);
+    const [years, setYears] = useState(yearsRange);
 
     const clearFilterHandler = () => {
         dispatch(clearFilter())
@@ -23,8 +25,9 @@ const HCollectionFilter: FC = () => {
         setTags([])
         setRating('')
     }
+
     const searchWithFilterHandler = async () => {
-        dispatch(setFilter({title, tags, rating, IPP, sort}))
+        dispatch(setFilter({title, tags, rating, IPP, sort, years}))
     }
     const typeHandler = (e) => {
         dispatch(setFilterType(e.target.value))
@@ -64,16 +67,19 @@ const HCollectionFilter: FC = () => {
                     </div>
                     <GenreField tags={tags} setTags={setTags}/>
                 </div>
-                <div>
-                    <span>Сортировка</span>
-                    <select className={'p-2 rounded-lg bg-neutral-600 w-full'}
-                            value={sort}
-                            onChange={e => setSort(e.target.value)}
-                    >
-                        <option value="id">По порядку</option>
-                        <option value="title_original">По алфавиту</option>
-                        <option value="release_date">по дате релиза</option>
-                    </select>
+                <div className={'flex gap-4 items-center xs:flex-col md:flex-row'}>
+                    <div className={'w-full'}>
+                        <span>Сортировка</span>
+                        <select className={'p-2 rounded-lg bg-neutral-600 w-full'}
+                                value={sort}
+                                onChange={e => setSort(e.target.value)}
+                        >
+                            <option value="id">По порядку</option>
+                            <option value="title_original">По алфавиту</option>
+                            <option value="release_date">по дате релиза</option>
+                        </select>
+                    </div>
+                    <YearsRange setYears={setYears}/>
                 </div>
                 <div className={'flex sm:flex-row xs:flex-col gap-4'}>
                     <button onClick={searchWithFilterHandler} className={'bg-red-700 hover:bg-red-800'}>Поиск с фильтром
