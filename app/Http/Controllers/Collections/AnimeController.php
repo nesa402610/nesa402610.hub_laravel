@@ -127,7 +127,7 @@ class AnimeController extends Controller
             });
         }
         if (!empty($years)) {
-            $query->whereYear('release_date', '>', $years['start'])->whereYear('release_date', '<', $years['end']);
+            $query->whereYear('release_date', '>=', $years['start'])->whereYear('release_date', '<=', $years['end']);
         }
         if (!empty($tags)) {
             $query->whereHas('tags', function ($query) use ($tags) {
