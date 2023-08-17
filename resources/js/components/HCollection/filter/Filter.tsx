@@ -26,7 +26,7 @@ const HCollectionFilter: FC = () => {
         setRating('')
     }
 
-    const searchWithFilterHandler = async () => {
+    const searchWithFilterHandler = () => {
         dispatch(setFilter({title, tags, rating, IPP, sort, years}))
     }
     const typeHandler = (e) => {
@@ -48,7 +48,7 @@ const HCollectionFilter: FC = () => {
     return (
         <div className={"flex sm:p-4 xs:p-2 flex-col gap-4"}>
             <div className={'flex gap-4 xs:flex-col sm:flex-row'}>
-                <TitleField title={title} setTitle={setTitle}/>
+                <TitleField title={title} setTitle={setTitle} searchFn={searchWithFilterHandler}/>
                 <IPPField IPP={IPP} setIPP={setIPP}/>
             </div>
             <div className={"flex flex-col gap-4"}>
