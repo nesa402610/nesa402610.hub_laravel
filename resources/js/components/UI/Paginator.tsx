@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight} from "react-icons/fa";
 
 const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
@@ -7,10 +7,7 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
         setCurrentPage(page)
     };
     let pages: any[] = Array.from({length: totalPages}, (v, k) => k + 1);
-    if (totalPages === 1) {
-        setCurrentPage(1)
-        return null;
-    }
+
     if (totalPages > 15) {
         const middle = () => {
             if (currentPage < 4) return ['...']
@@ -26,6 +23,12 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
         const end = [pages.at(-4), pages.at(-3), pages.at(-2), pages.at(-1)]
         pages = [...start, ...middle(), ...end]
     }
+
+    useEffect(() => {
+        if (totalPages < currentPage) {
+            setCurrentPage(totalPages)
+        }
+    }, [totalPages]);
     return (
         <div className={"flex xs:gap-1 md:gap-4 items-center justify-center"}>
           <span onClick={() => toPageHandler(1)}
