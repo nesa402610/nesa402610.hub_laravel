@@ -1,22 +1,22 @@
 import React from "react";
 
 export const parseBbCode = (text) => {
-    const BOLD = /\[b\](.*?)\[\/b\]/g
+    const BOLD = /\[b](.*?)\[\/b]/g
     const BOLD_TAG = '<strong>$1</strong>'
 
-    const ITALIC = /\[em\](.*?)\[\/em\]/g
+    const ITALIC = /\[em](.*?)\[\/em]/g
     const ITALIC_TAG = '<em>$1</em>'
 
-    const UNDERLINE = /\[u\](.*?)\[\/u\]/g
+    const UNDERLINE = /\[u](.*?)\[\/u]/g
     const UNDERLINE_TAG = '<u>$1</u>'
 
-    const SHIKI_CHAR = /\[character=(.*?)\](.*?)\[\/character\]/g
+    const SHIKI_CHAR = /\[character=(.*?)](.*?)\[\/character]/g
     const SHIKI_CHAR_TAG = '<a href="https://shikimori.me/characters/$1" style="font-weight: bold; text-decoration: underline" target="_blank">$2</a>'
 
-    const COLOR = /\[color=(.*?)\](.*?)\[\/color\]/g
+    const COLOR = /\[color=(.*?)](.*?)\[\/color]/g
     const COLOR_TAG = '<span style="color: $1">$2</span>'
 
-    const SPOILER = /\[spoiler\](.*?)\[\/spoiler\]/g
+    const SPOILER = /\[spoiler](.*?)\[\/spoiler]/g
     const SPOILER_TAG = '<span>$1</span>'
 
 
