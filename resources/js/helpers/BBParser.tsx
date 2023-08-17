@@ -1,6 +1,8 @@
 import React from "react";
 
 export const parseBbCode = (text) => {
+
+
     const BOLD = /\[b](.*?)\[\/b]/g
     const BOLD_TAG = '<strong>$1</strong>'
 
@@ -17,7 +19,7 @@ export const parseBbCode = (text) => {
     const COLOR_TAG = '<span style="color: $1">$2</span>'
 
     const SPOILER = /\[spoiler](.*?)\[\/spoiler]/g
-    const SPOILER_TAG = '<span>$1</span>'
+    const SPOILER_TAG = '<span style="filter: blur(3px)" onclick="this.style.filter = `blur(0px)`">$1</span>'
 
 
     const html = text
