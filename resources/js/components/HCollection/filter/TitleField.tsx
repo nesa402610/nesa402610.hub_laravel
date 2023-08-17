@@ -11,7 +11,7 @@ const TitleField: FC<TitleFieldProps> = ({title, setTitle, searchFn}) => {
     return (
         <label className={'flex flex-col w-full'}>
             <span>Название</span>
-            <input type="text" onKeyPress={e => {
+            <input type="text" onKeyDown={e => {
                 if (e.key === 'Enter') searchFn()
             }}
                    value={title}
