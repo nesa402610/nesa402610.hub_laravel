@@ -21,14 +21,16 @@ export const parseBbCode = (text) => {
     const SPOILER = /\[spoiler](.*?)\[\/spoiler]/g
     const SPOILER_TAG = '<span style="filter: blur(3px)" onclick="this.style.filter = `blur(0px)`">$1</span>'
 
+    if (text) {
+        console.log(text)
+        const html = text
+            .replace(BOLD, BOLD_TAG)
+            .replace(ITALIC, ITALIC_TAG)
+            .replace(UNDERLINE, UNDERLINE_TAG)
+            .replace(SHIKI_CHAR, SHIKI_CHAR_TAG)
+            .replace(COLOR, COLOR_TAG)
+            .replace(SPOILER, SPOILER_TAG)
 
-    const html = text
-        .replace(BOLD, BOLD_TAG)
-        .replace(ITALIC, ITALIC_TAG)
-        .replace(UNDERLINE, UNDERLINE_TAG)
-        .replace(SHIKI_CHAR, SHIKI_CHAR_TAG)
-        .replace(COLOR, COLOR_TAG)
-        .replace(SPOILER, SPOILER_TAG)
-
-    return <div dangerouslySetInnerHTML={{__html: html}}/>;
+        return <div dangerouslySetInnerHTML={{__html: html}}/>;
+    } else return 'Описания почему-то нет....'
 };
