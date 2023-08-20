@@ -1,16 +1,15 @@
 import React, {FC, useRef, useState} from 'react';
 import {useGetUserQuery} from "services/userService";
 import {useCreateCommentMutation} from "services/postService";
-import BBCode from "../../components/UI/BBCode";
+import BBCode from "components/UI/BBCode";
 
 interface CreateCommentProps {
-    handler?: any
     postId: number
 }
 
-const CreateComment: FC<CreateCommentProps> = ({postId}) => {
-    const {data: isAuth} = useGetUserQuery(null)
-    const [createComment, {}] = useCreateCommentMutation()
+const CreateComment: FC<CreateCommentProps> = ({postId,}) => {
+    const {data: isAuth} = useGetUserQuery()
+    const [createComment] = useCreateCommentMutation()
     const [comment, setComment] = useState('');
     const ref = useRef(null)
 
