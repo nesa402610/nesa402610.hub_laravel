@@ -11,8 +11,9 @@ const UserAnimeOverview: FC<UserAnimeOverviewProps> = ({userId}) => {
     const {data: animeData, isLoading} = useGetUserAnimeOverviewQuery(userId)
 
     if (isLoading) return <Loader text={'Смотрим, что там по аниме...'}/>
-    const watchedPercent = (animeData.watched / animeData.count * 100).toFixed(0)
-    const unwatchedPercent = (100 - +watchedPercent)
+    const watchedPercent = +(animeData.watched / animeData.count * 100).toFixed(0) || 50
+    const unwatchedPercent = (100 - +watchedPercent) || 50
+    console.log(watchedPercent, unwatchedPercent)
 
     return (
         <div className="block--light flex flex-col gap-2">
