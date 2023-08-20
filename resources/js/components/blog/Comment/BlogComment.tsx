@@ -1,8 +1,8 @@
 import React, {FC, useState} from 'react';
-import CommentEdit from "../Comment__edit";
 import {Link} from "react-router-dom";
-import Comment from "./Comment/Comment";
 import {IComment} from "types/Post";
+import Comment from 'components/blog/Comment/Comment'
+import CommentEdit from "components/blog/Comment/Comment__edit";
 
 interface BlogCommentProps {
     comment: IComment
