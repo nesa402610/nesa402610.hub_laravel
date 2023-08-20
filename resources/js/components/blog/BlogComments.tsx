@@ -1,24 +1,23 @@
 import React, {FC} from 'react';
-import BlogComment from "./BlogComment";
 import {useGetPostCommentsQuery} from "services/postService";
-import CreateComment from "../../routes/Blog/CreateComment";
-import Loader from "../Loader";
+import Loader from "components/Loader";
+import BlogComment from "components/blog/Comment/BlogComment";
+import CreateComment from "components/blog/CreateComment";
 
 interface BlogCommentsProps {
     postId: number
 }
 
 const BlogComments: FC<BlogCommentsProps> = ({postId}) => {
-    const {data: comments, isLoading} = useGetPostCommentsQuery(postId)
+    const {data: comments, isLoading, isFetching} = useGetPostCommentsQuery(postId)
     if (isLoading) return <Loader/>
     return (
         <>
-            {comments?.map(comment =>
+            {comments.map(comment =>
                 <BlogComment key={comment.id} comment={comment}/>
             )}
-            <CreateComment
-                postId={postId}
-            />
+            {(isFetching) && <Loader/>}
+            <CreateComment postId={postId}/>
         </>
     );
 };
