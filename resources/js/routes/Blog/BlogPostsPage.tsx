@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import PostCard from "../../components/blog/PostCard";
 import PostForm from "../../components/admin/PostForm";
-import {useGetUserQuery} from "../../services/userService";
-import {useGetPostsQuery} from "../../services/postService";
+import {useGetUserQuery} from "services/userService";
+import {useGetPostsQuery} from "services/postService";
 import Loader from "../../components/Loader";
 
 const BlogPostsPage = () => {

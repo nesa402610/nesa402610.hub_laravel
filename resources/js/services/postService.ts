@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {csrf_token} from "../mockData";
-import {IComment, IPost} from "../types/Post";
+import {IComment, IPost} from "types/Post";
 
 export const postAPI = createApi({
     reducerPath: 'postApi',

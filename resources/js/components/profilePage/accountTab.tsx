@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
-import {useUpdateAccountMutation} from "../../services/userService";
-import {IUser} from "../../types/User";
+import {useUpdateAccountMutation} from "services/userService";
+import {IUser} from "types/User";
 
 
 interface accountTabProps {

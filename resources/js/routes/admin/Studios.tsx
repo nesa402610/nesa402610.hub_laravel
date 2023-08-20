@@ -3,7 +3,7 @@ import {
     useCreateStudioMutation,
     useGetAllStudiosQuery,
     useUpdateStudioMutation
-} from "../../services/Collections/StudioService";
+} from "services/Collections/StudioService";
 import List from "../../components/admin/List";
 import QuickAdder from "../../components/admin/QuickAdder";
 

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Column} from "@ant-design/charts";
-import {IOverview} from "../../../services/admin/dashboardService";
+import {IOverview} from "services/admin/dashboardService";
 
 interface DashboardGraphProps {
     values: IOverview

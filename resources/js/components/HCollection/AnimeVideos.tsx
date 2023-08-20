@@ -1,5 +1,5 @@
 import React, {FC, useState} from "react";
-import {useGetAnimeVideosQuery} from "../../services/Collections/AnimeService";
+import {useGetAnimeVideosQuery} from "services/Collections/AnimeService";
 import Loader from "../Loader";
 import Episodes from "./videos/Episodes";
 import NonVideosInfo from "./videos/NonVideosInfo";

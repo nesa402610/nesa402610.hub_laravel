@@ -22,7 +22,6 @@ export const parseBbCode = (text) => {
     const SPOILER_TAG = '<span style="filter: blur(3px)" onclick="this.style.filter = `blur(0px)`">$1</span>'
 
     if (text) {
-        console.log(text)
         const html = text
             .replace(BOLD, BOLD_TAG)
             .replace(ITALIC, ITALIC_TAG)

@@ -1,6 +1,6 @@
 import React from 'react';
 import HCollectionTags from "./../HCollectionTags";
-import {ICollection} from "../../../../types/types";
+import {ICollection} from "types/types";
 import InfoField from "./InfoField";
 
 const CollectionInfo = ({collection}: { collection: ICollection }) => {

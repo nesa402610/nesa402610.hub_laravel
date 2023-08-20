@@ -1,6 +1,7 @@
-import React, {FC, useState} from 'react';
-import {useGetUserQuery} from "../../services/userService";
-import {useCreateCommentMutation} from "../../services/postService";
+import React, {FC, useRef, useState} from 'react';
+import {useGetUserQuery} from "services/userService";
+import {useCreateCommentMutation} from "services/postService";
+import BBCode from "../../components/UI/BBCode";
 
 interface CreateCommentProps {
     handler?: any
@@ -11,6 +12,7 @@ const CreateComment: FC<CreateCommentProps> = ({postId}) => {
     const {data: isAuth} = useGetUserQuery(null)
     const [createComment, {}] = useCreateCommentMutation()
     const [comment, setComment] = useState('');
+    const ref = useRef(null)
 
     const createCommentHandler = (e) => {
         e.preventDefault()
@@ -23,13 +25,15 @@ const CreateComment: FC<CreateCommentProps> = ({postId}) => {
         <>
             {isAuth &&
                 <div className={'block--light flex gap-4 sm:flex-col'}>
-                   <textarea
-                       className={'invalid:border-red-700 invalid:border p-4 bg-neutral-500 rounded-lg w-full outline-none'}
-                       minLength={10}
-                       placeholder={'Оставить комментарий'}
-                       onChange={e => setComment(e.target.value)}
-                       value={comment}
-                   />
+                    <BBCode refer={ref} setComment={setComment}/>
+                    <textarea
+                        className={'invalid:border-red-700 invalid:border p-4 bg-neutral-500 rounded-lg w-full outline-none'}
+                        ref={ref}
+                        minLength={10}
+                        placeholder={'Оставить комментарий'}
+                        onChange={e => setComment(e.target.value)}
+                        value={comment}
+                    />
                     <button className={'self-end px-6'}
                             onClick={createCommentHandler}
                     >Отправить

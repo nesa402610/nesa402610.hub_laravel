@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import Rating from "./Rating";
-import {IProjectProps} from "../../types/Project";
+import {IProjectProps} from "types/Project";
 
 const ProjectInfo: FC<IProjectProps> = ({project}) => {
     return (

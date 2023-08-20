@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import {useParams} from "react-router";
 import Loader from "../../../components/Loader";
-import {useGetAnimeByIdQuery} from "../../../services/Collections/AnimeService";
+import {useGetAnimeByIdQuery} from "services/Collections/AnimeService";
 import AnimeVideos from "../../../components/HCollection/AnimeVideos";
 import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";
 

@@ -1,7 +1,7 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../../mockData";
-import {IAnimeVideos} from "../../types/Anime";
-import {ICollection} from "../../types/types";
+import {IAnimeVideos} from "types/Anime";
+import {ICollection} from "types/types";
 
 interface getArgs {
     page?: number;

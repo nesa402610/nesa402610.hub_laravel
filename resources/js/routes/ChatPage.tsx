@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {Link} from "react-router-dom";
-import {useGetUserQuery} from "../services/userService";
-import {useGetMessagesQuery, useSendMessageMutation} from "../services/chatService";
+import {useGetUserQuery} from "services/userService";
+import {useGetMessagesQuery, useSendMessageMutation} from "services/chatService";
 import Loader from "../components/Loader";
 
 const ChatPage: FC = () => {

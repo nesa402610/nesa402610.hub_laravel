@@ -3,7 +3,7 @@ import AccountTab from "../components/profilePage/accountTab";
 import ProfileTab from "../components/profilePage/profileTab";
 import SecurityTab from "../components/profilePage/securityTab";
 import Tabs from "../components/UI/Tabs";
-import {useGetUserQuery} from "../services/userService";
+import {useGetUserQuery} from "services/userService";
 import Loader from "../components/Loader";
 
 const ProfileEditPage: FC = () => {

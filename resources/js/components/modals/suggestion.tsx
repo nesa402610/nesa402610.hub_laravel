@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useAddTaskMutation, useUpdateTaskMutation} from "../../services/tasksService";
+import {useAddTaskMutation, useUpdateTaskMutation} from "services/tasksService";
 
 const Suggestion = ({closeHandler}) => {
     const [newTask, setNewTask] = useState({

@@ -1,5 +1,5 @@
 import React from "react";
-import {useCreateTagMutation, useGetTagsQuery, useUpdateTagMutation} from "../../services/Collections/TagService";
+import {useCreateTagMutation, useGetTagsQuery, useUpdateTagMutation} from "services/Collections/TagService";
 import List from "../../components/admin/List";
 import QuickAdder from "../../components/admin/QuickAdder";
 import Loader from "../../components/Loader";

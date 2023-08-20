@@ -1,9 +1,9 @@
 import React, {FC, useEffect} from "react";
 import {useParams} from "react-router";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import {useGetMangaByIdQuery} from "../../../services/Collections/MangaService";
-import {useAppDispatch} from "../../../hooks/redux";
-import {setHeaderType} from "../../../store/reducers/appSlice";
+import {useGetMangaByIdQuery} from "services/Collections/MangaService";
+import {useAppDispatch} from "hooks/redux";
+import {setHeaderType} from "store/reducers/appSlice";
 
 const HReader: FC = () => {
     const {id} = useParams();

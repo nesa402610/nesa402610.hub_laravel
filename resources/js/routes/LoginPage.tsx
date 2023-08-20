@@ -1,9 +1,9 @@
 import React, {FC, useEffect, useState} from 'react';
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
-import {login} from "../store/reducers/authSlice";
-import {useAppDispatch} from "../hooks/redux";
-import {useGetUserQuery} from "../services/userService";
+import {login} from "store/reducers/authSlice";
+import {useAppDispatch} from "hooks/redux";
+import {useGetUserQuery} from "services/userService";
 
 
 interface userProps {

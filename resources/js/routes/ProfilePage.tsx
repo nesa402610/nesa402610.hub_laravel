@@ -1,6 +1,6 @@
 import React from "react";
 import {useParams} from "react-router";
-import {useGetUserQuery} from "../services/userService";
+import {useGetUserQuery} from "services/userService";
 import Loader from "../components/Loader";
 import UserOverview from "../components/profilePage/profile/UserOverview";
 import UserAnimeOverview from "../components/profilePage/profile/UserAnimeOverview";

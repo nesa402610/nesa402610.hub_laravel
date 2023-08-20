@@ -1,6 +1,6 @@
 import React, {useState} from "react";
-import {useGetUserQuery} from "../../../services/userService";
-import {useRemoveTagMutation} from "../../../services/Collections/AnimeService";
+import {useGetUserQuery} from "services/userService";
+import {useRemoveTagMutation} from "services/Collections/AnimeService";
 import TagSelector from "../TagSelector";
 
 const HCollectionTags = ({tags, collectionID, collection}) => {

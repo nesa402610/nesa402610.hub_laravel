@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {Outlet, useNavigate} from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
-import {useGetUserQuery} from "../../services/userService";
+import {useGetUserQuery} from "services/userService";
 import Loader from "../../components/Loader";
 
 const Index: FC = () => {

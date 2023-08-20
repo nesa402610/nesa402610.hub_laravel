@@ -2,7 +2,7 @@ import React, {FC, useState} from "react";
 import {NavLink} from "react-router-dom";
 import MyLinkItem from "./UI/myLinkItem";
 import {IoBookmarks, IoChatbox, IoHome, IoNewspaper, IoPerson} from "react-icons/io5";
-import {useGetUserQuery} from "../services/userService";
+import {useGetUserQuery} from "services/userService";
 import Modal from "./UI/modal";
 import ProjectModal from "./admin/ProjectModal";
 import {links} from "../mockData";

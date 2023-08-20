@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useRef} from 'react';
-import {useGetTagsQuery} from "../../../services/Collections/TagService";
+import {useGetTagsQuery} from "services/Collections/TagService";
 
 interface GenreFieldProps {
     tags: string[]

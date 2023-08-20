@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {Link} from "react-router-dom";
-import {useGetAllUsersQuery} from "../services/userService";
+import {useGetAllUsersQuery} from "services/userService";
 import Loader from "../components/Loader";
 import Error from '../components/Error'
 

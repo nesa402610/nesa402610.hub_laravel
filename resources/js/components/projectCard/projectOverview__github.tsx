@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {BsGithub} from "react-icons/bs";
-import {IProjectProps} from "../../types/Project";
+import {IProjectProps} from "types/Project";
 
 const ProjectOverviewGithub: FC<IProjectProps> = ({project}) => {
   return (

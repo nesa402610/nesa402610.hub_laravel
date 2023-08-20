@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ITask} from "../../types/Task";
+import {ITask} from "types/Task";
 
 const initialState: homePageProps = {
   tasks: [],

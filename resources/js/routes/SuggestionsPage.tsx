@@ -3,8 +3,8 @@ import Suggestion from "../components/modals/suggestion";
 import moment from "moment";
 import Task__actions from "../components/admin/Task__actions";
 import {Link} from "react-router-dom";
-import {useGetUserQuery} from "../services/userService";
-import {useGetTasksQuery} from "../services/tasksService";
+import {useGetUserQuery} from "services/userService";
+import {useGetTasksQuery} from "services/tasksService";
 import Modal from "../components/UI/modal";
 import Loader from "../components/Loader";
 

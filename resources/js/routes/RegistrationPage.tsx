@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
-import {useGetUserQuery} from "../services/userService";
+import {useGetUserQuery} from "services/userService";
 
 interface userProps {
     name: string;

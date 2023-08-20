@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Link} from "react-router-dom";
 import {IoSettingsSharp} from "react-icons/io5";
 import moment from "moment/moment";
-import {IUser} from "../../../types/User";
+import {IUser} from "types/User";
 
 interface UserOverviewProps {
     user: IUser

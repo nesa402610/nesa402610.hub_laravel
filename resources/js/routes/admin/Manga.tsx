@@ -1,5 +1,5 @@
 import React from "react";
-import {useGetAllMangaNPQuery} from "../../services/Collections/MangaService";
+import {useGetAllMangaNPQuery} from "services/Collections/MangaService";
 import HCollectionCard from "../../components/HCollection/CollectionCard/HCollectionCard";
 
 const Manga = () => {

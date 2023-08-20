@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {useGetMangaByIdQuery} from "../../services/Collections/MangaService";
+import {useGetMangaByIdQuery} from "services/Collections/MangaService";
 import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 

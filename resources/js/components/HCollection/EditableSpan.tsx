@@ -1,16 +1,16 @@
 import React, {FC, useEffect, useState} from "react";
-import {useUpdateTitleMutation} from "../../services/Collections/HCollectionService";
-import {useGetUserQuery} from "../../services/userService";
-import {ICollection} from "../../types/types";
+import {useUpdateTitleMutation} from "services/Collections/HCollectionService";
+import {useGetUserQuery} from "services/userService";
+import {ICollection} from "types/types";
 
 
 interface EditableSpanProps {
-  data: ICollection
-  datakey: Exclude<keyof ICollection, 'tags' | 'links' | 'id' | 'censure' | 'studios'>
+    data: ICollection
+    datakey: Exclude<keyof ICollection, 'tags' | 'links' | 'id' | 'censure' | 'studios'>
 }
 
 const EditableSpan: FC<EditableSpanProps> = ({data, datakey}) => {
-  const {data: user} = useGetUserQuery()
+    const {data: user} = useGetUserQuery()
     const [updateTitle] = useUpdateTitleMutation()
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState(data[datakey]);

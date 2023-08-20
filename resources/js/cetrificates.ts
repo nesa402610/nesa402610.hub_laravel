@@ -10,7 +10,7 @@ import SBER_JS_BASIC from './img/sertificates/SBER-JS-base.webp';
 import SBER_JS_BASIC2 from './img/sertificates/SBER-JS-base-2.webp';
 // @ts-ignore
 import SBER_JS_DOM from './img/sertificates/SBER_JS_DOM.webp';
-import {ICert} from "./types/Project";
+import {ICert} from "types/Project";
 
 export const certificates: ICert[] = [
     {

@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
-import {useGetAllMangaQuery} from "../../../services/Collections/MangaService";
+import {useGetAllMangaQuery} from "services/Collections/MangaService";
 import {filterCollection} from "../../HHHPage";
-import {useAppSelector} from "../../../hooks/redux";
+import {useAppSelector} from "hooks/redux";
 import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";
 
 

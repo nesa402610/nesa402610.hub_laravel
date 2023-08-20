@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {useGetOverviewQuery} from "../../services/admin/dashboardService";
+import {useGetOverviewQuery} from "services/admin/dashboardService";
 import Loader from "../../components/Loader";
 
 const Dashboard: FC = () => {

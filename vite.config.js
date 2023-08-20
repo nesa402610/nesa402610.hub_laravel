@@ -1,8 +1,21 @@
 import {defineConfig} from "vite";
 import laravel from 'laravel-vite-plugin';
 import react from "@vitejs/plugin-react";
+import path from 'path';
+
 
 export default defineConfig({
+    resolve: {
+        alias: {
+            'components': path.resolve(__dirname, 'resources/js/components'),
+            'types': path.resolve(__dirname, 'resources/js/types'),
+            'store': path.resolve(__dirname, 'resources/js/store'),
+            'services': path.resolve(__dirname, 'resources/js/services'),
+            'routes': path.resolve(__dirname, 'resources/js/routes'),
+            'hooks': path.resolve(__dirname, 'resources/js/hooks'),
+
+        },
+    },
     plugins: [
         laravel({
             input: [

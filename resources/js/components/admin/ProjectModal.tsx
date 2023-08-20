@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import ProjectForm from "./ProjectForm";
-import {useCreateProjectMutation, useGetProjectsQuery, useUpdateProjectMutation} from "../../services/projectService";
-import {IProject} from "../../types/Project";
+import {useCreateProjectMutation, useGetProjectsQuery, useUpdateProjectMutation} from "services/projectService";
+import {IProject} from "types/Project";
 
 interface ProjectModalProps {
     closeModalHandler: () => void

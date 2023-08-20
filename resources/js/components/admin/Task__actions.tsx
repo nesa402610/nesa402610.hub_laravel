@@ -2,19 +2,19 @@ import React, {FC} from "react";
 import {IoIosHeart, IoIosHeartDislike} from "react-icons/io";
 import {BsQuestionCircleFill} from "react-icons/bs";
 import {IoTrashBin} from "react-icons/io5";
-import {useGetUserQuery} from "../../services/userService";
-import {useSetTaskStatusMutation} from "../../services/tasksService";
-import {ITask} from "../../types/Task";
+import {useGetUserQuery} from "services/userService";
+import {useSetTaskStatusMutation} from "services/tasksService";
+import {ITask} from "types/Task";
 
 interface TaskActionsProps {
-  task: ITask;
-  hover: number;
+    task: ITask;
+    hover: number;
 }
 
 const TaskActions: FC<TaskActionsProps> = ({task, hover}) => {
-  const {data: user} = useGetUserQuery();
+    const {data: user} = useGetUserQuery();
     const [setStatus, {}] = useSetTaskStatusMutation();
-  const setStatusHandler = (e: React.MouseEvent<HTMLSpanElement>, id: number, status: number) => {
+    const setStatusHandler = (e: React.MouseEvent<HTMLSpanElement>, id: number, status: number) => {
     e.preventDefault();
     setStatus({id, status});
   };

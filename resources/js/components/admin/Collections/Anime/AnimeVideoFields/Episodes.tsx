@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {IAnimeVideos} from "../../../../../types/Anime";
+import {IAnimeVideos} from "types/Anime";
 
 interface episodesProps {
     videos: IAnimeVideos[]

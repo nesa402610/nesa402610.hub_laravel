@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../../mockData";
-import {IAnimeStudio} from "../../types/Anime";
+import {IAnimeStudio} from "types/Anime";
 
 export const StudioAPI = createApi({
   reducerPath: "StudioAPI",

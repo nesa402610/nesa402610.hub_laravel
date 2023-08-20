@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import BlogComment from "./BlogComment";
-import {useGetPostCommentsQuery} from "../../services/postService";
+import {useGetPostCommentsQuery} from "services/postService";
 import CreateComment from "../../routes/Blog/CreateComment";
 import Loader from "../Loader";
 

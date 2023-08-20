@@ -1,18 +1,18 @@
 import modalSlice from "./reducers/modalSlice";
-import {userAPI} from "../services/userService";
+import {userAPI} from "services/userService";
 import {configureStore} from "@reduxjs/toolkit";
-import {projectAPI} from "../services/projectService";
-import {postAPI} from "../services/postService";
-import {taskAPI} from "../services/tasksService";
-import {chatAPI} from "../services/chatService";
-import {CollectionsAPI} from "../services/Collections/HCollectionService";
-import {TagAPI} from "../services/Collections/TagService";
-import {AnimeAPI} from "../services/Collections/AnimeService";
-import {MangaAPI} from "../services/Collections/MangaService";
-import {StudioAPI} from "../services/Collections/StudioService";
+import {projectAPI} from "services/projectService";
+import {postAPI} from "services/postService";
+import {taskAPI} from "services/tasksService";
+import {chatAPI} from "services/chatService";
+import {CollectionsAPI} from "services/Collections/HCollectionService";
+import {TagAPI} from "services/Collections/TagService";
+import {AnimeAPI} from "services/Collections/AnimeService";
+import {MangaAPI} from "services/Collections/MangaService";
+import {StudioAPI} from "services/Collections/StudioService";
 import collectionSlice from "./reducers/collectionSlice";
 import appSlice from "./reducers/appSlice";
-import {dashboardAPI} from "../services/admin/dashboardService";
+import {dashboardAPI} from "services/admin/dashboardService";
 
 export const store = configureStore({
     reducer: {

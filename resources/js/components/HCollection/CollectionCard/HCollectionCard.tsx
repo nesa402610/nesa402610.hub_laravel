@@ -1,11 +1,11 @@
 import React, {FC} from "react";
 import Title from "./Title";
 import CollectionStatus from "./CollectionStatus";
-import {ICollection} from "../../../types/types";
+import {ICollection} from "types/types";
 import Image from "./Image";
 import CollectionDescription from "./CollectionDescription";
 import CollectionInfo from "./CollectionInfo/CollectionInfo";
-import {useGetUserQuery} from "../../../services/userService";
+import {useGetUserQuery} from "services/userService";
 import {FiEdit} from "react-icons/fi";
 import {Link} from "react-router-dom";
 

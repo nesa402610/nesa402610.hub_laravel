@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import SiteCard from './UI/siteCard';
-import {useGetProjectsQuery} from "../services/projectService";
+import {useGetProjectsQuery} from "services/projectService";
 import Loader from "./Loader";
 
 

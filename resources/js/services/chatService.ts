@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../mockData";
-import {IUser} from "../types/User";
+import {IUser} from "types/User";
 
 interface IChat {
     id: number

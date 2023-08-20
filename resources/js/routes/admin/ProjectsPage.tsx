@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectCard from "../../components/admin/ProjectCard";
-import {useGetProjectsQuery} from "../../services/projectService";
+import {useGetProjectsQuery} from "services/projectService";
 
 const ProjectsPage = () => {
     const {data: projects} = useGetProjectsQuery()

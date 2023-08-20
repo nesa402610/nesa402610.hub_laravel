@@ -1,8 +1,8 @@
 import React, {FC, useState} from "react";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
-import {useGetAllAnimeQuery} from "../../../services/Collections/AnimeService";
-import {useAppSelector} from "../../../hooks/redux";
+import {useGetAllAnimeQuery} from "services/Collections/AnimeService";
+import {useAppSelector} from "hooks/redux";
 import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";
 
 

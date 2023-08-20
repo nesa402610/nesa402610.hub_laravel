@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {GiFlowerTwirl, GiHalfHeart, GiMoebiusTrefoil} from "react-icons/gi";
 import {FaCalendarAlt} from "react-icons/fa";
-import {IProjectProps} from "../../types/Project";
+import {IProjectProps} from "types/Project";
 
 const SiteOverviewState: FC<IProjectProps> = ({project}) => {
     const statuses = [

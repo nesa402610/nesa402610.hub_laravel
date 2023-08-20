@@ -1,7 +1,7 @@
 import React from 'react';
 import {RiDeleteBin6Fill, RiEditFill} from "react-icons/ri";
 import {MdVisibility, MdVisibilityOff} from "react-icons/md";
-import {useChangeVisibilityMutation, useDeletePostMutation} from "../../services/postService";
+import {useChangeVisibilityMutation, useDeletePostMutation} from "services/postService";
 
 const PostCardAdmin = ({post, setIsModal}) => {
   const [deletePost, {}] = useDeletePostMutation()

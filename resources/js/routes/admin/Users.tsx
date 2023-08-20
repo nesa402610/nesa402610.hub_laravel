@@ -1,6 +1,6 @@
 import React from "react";
-import {IUser} from "../../types/User";
-import {useGetAllUsersQuery} from "../../services/userService";
+import {IUser} from "types/User";
+import {useGetAllUsersQuery} from "services/userService";
 
 const Users = () => {
     const {data} = useGetAllUsersQuery();

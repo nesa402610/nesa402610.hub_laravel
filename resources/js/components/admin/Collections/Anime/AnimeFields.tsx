@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction} from "react";
-import {ICollection} from "../../../../types/types";
+import {ICollection} from "types/types";
 
 interface AnimeFieldsProps {
     anime: ICollection;

@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from "react";
 import {Outlet, useLocation, useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../hooks/redux";
-import {setFilterType} from "../store/reducers/collectionSlice";
+import {useAppDispatch} from "hooks/redux";
+import {setFilterType} from "store/reducers/collectionSlice";
 import Filter from "../components/HCollection/filter/Filter";
 
 export const filterCollection = (collections, filter) => {

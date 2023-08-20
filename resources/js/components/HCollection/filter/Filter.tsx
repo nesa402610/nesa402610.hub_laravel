@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import {clearFilter, setFilter, setFilterType} from "../../../store/reducers/collectionSlice";
+import {useAppDispatch, useAppSelector} from "hooks/redux";
+import {clearFilter, setFilter, setFilterType} from "store/reducers/collectionSlice";
 import GenreField from "./GenreField";
 import RatingField from "./RatingField";
 import IPPField from "./IPPField";

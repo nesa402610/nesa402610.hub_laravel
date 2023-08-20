@@ -1,13 +1,13 @@
 import React from "react";
 import axios from "axios";
 import {GiCheerful} from "react-icons/gi";
-import {rated} from "../../store/reducers/authSlice";
-import {useAppDispatch} from "../../hooks/redux";
-import {setRating} from "../../store/reducers/homePageSlice";
-import {useGetUserQuery} from "../../services/userService";
+import {rated} from "store/reducers/authSlice";
+import {useAppDispatch} from "hooks/redux";
+import {setRating} from "store/reducers/homePageSlice";
+import {useGetUserQuery} from "services/userService";
 
 const Rating = ({project}) => {
-  const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
     const {data: user} = useGetUserQuery();
     const setRatingHandle = (e, value) => {
         if (project.status !== "Planned" &&

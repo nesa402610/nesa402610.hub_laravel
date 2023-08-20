@@ -4,7 +4,7 @@ import {
     useDeleteAnimeDupliesMutation,
     useGetAllAnimeQuery,
     useGetAnimeDupliesQuery
-} from "../../../services/Collections/AnimeService";
+} from "services/Collections/AnimeService";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
 import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";

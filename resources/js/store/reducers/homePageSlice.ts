@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ICert, IProject} from "../../types/Project";
+import {ICert, IProject} from "types/Project";
 
 const initialState: homePageProps = {
     projects: [],

@@ -2,7 +2,7 @@ import React from 'react';
 import {useParams} from "react-router";
 import moment from "moment";
 import {BiTime} from "react-icons/bi";
-import {useGetPostByIdQuery} from "../../services/postService";
+import {useGetPostByIdQuery} from "services/postService";
 import BlogComments from "../../components/blog/BlogComments";
 import Loader from "../../components/Loader";
 

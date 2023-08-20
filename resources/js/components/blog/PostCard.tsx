@@ -4,8 +4,8 @@ import {BiTime} from "react-icons/bi";
 import PostCardAdmin from "./PostCard__admin";
 import {Link} from "react-router-dom";
 import PostForm from "../admin/PostForm";
-import {IPost} from "../../types/Post";
-import {IUser} from "../../types/User";
+import {IPost} from "types/Post";
+import {IUser} from "types/User";
 
 interface PostCardProps {
     post: IPost

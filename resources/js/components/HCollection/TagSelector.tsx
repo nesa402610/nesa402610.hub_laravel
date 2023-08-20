@@ -1,8 +1,8 @@
 import React, {FC, useMemo, useState} from "react";
 import Loader from "../Loader";
-import {useGetTagsQuery} from "../../services/Collections/TagService";
-import {ICollectionTag} from "../../types/Tag";
-import {useAddTagToAnimeMutation} from "../../services/Collections/AnimeService";
+import {useGetTagsQuery} from "services/Collections/TagService";
+import {ICollectionTag} from "types/Tag";
+import {useAddTagToAnimeMutation} from "services/Collections/AnimeService";
 
 interface TagSelectorProps {
     collectionTags: ICollectionTag[];

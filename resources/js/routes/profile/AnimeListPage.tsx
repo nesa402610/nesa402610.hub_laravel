@@ -1,6 +1,6 @@
 import React from 'react';
 import {useParams} from "react-router";
-import {useGetUserAnimeListQuery, useGetUserAnimeOverviewQuery} from "../../services/Collections/AnimeService";
+import {useGetUserAnimeListQuery, useGetUserAnimeOverviewQuery} from "services/Collections/AnimeService";
 import Loader from "../../components/Loader";
 import {Link} from "react-router-dom";
 import HCollectionCard from "../../components/HCollection/CollectionCard/HCollectionCard";

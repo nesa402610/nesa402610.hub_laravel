@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {SiNetlify} from "react-icons/si";
-import {IProjectProps} from "../../types/Project";
+import {IProjectProps} from "types/Project";
 
 const SiteOverviewHost: FC<IProjectProps> = ({project}) => {
   return (

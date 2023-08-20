@@ -1,7 +1,7 @@
 import React, {Dispatch, FC, SetStateAction, useState} from "react";
 import {RxCross2} from "react-icons/rx";
-import {useDeleteAnimeVideoMutation} from "../../../../services/Collections/AnimeService";
-import {IAnimeVideos} from "../../../../types/Anime";
+import {useDeleteAnimeVideoMutation} from "services/Collections/AnimeService";
+import {IAnimeVideos} from "types/Anime";
 import Episodes from "./AnimeVideoFields/Episodes";
 
 interface AnimeVideoFieldsProps {

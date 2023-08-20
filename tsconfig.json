@@ -6,6 +6,27 @@
         "lib": [
             "ES2022",
             "DOM"
-        ]
+        ],
+        "baseUrl": "./resources/js",
+        "paths": {
+            "types/*": [
+                "types/*"
+            ],
+            "components/*": [
+                "components/*"
+            ],
+            "store/*": [
+                "store/*"
+            ],
+            "services/*": [
+                "services/*"
+            ],
+            "routes/*": [
+                "routes/*"
+            ],
+            "hooks/*": [
+                "hooks/*"
+            ]
+        }
     }
 }

@@ -3,7 +3,7 @@ import ProjectOverview from "../projectCard/projectOverview";
 import ProjectInfo from "../projectCard/projectInfo";
 // @ts-ignore
 import noImage from "../../img/noimage.png";
-import {IProjectProps} from "../../types/Project";
+import {IProjectProps} from "types/Project";
 
 const SiteCard: FC<IProjectProps> = ({project}) => {
     const openPageHandler = () => {

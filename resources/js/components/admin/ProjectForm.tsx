@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {IProject} from "../../types/Project";
+import {IProject} from "types/Project";
 
 interface createProjectFormProps {
   project?: IProject,
