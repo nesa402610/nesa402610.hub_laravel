@@ -105,7 +105,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             Route::get('duplies', [AnimeController::class, 'getAnimeDuplies']);
             Route::delete('duplies/delete', [AnimeController::class, 'deleteDupliesAnime']);
             Route::put('new', [AnimeController::class, 'createAnime']);
-            Route::put('newByShiki', [AnimeController::class, 'createAnimeByShiki']);
+            Route::post('newByShiki', [AnimeController::class, 'createAnimeByShiki']);
             Route::patch('update', [AnimeController::class, 'updateAnime']);
             Route::put('/tags/add', [AnimeController::class, 'addTag']);
             Route::delete('/tags/remove', [AnimeController::class, 'removeTag']);

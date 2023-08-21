@@ -24,7 +24,7 @@ class AnimeController extends Controller
     public function createAnimeByShiki(Request $request)
     {
 //        return response($request);
-        $rating = '13+';
+        $rating = '';
         if ($request['rating'] === 'g') $rating = '0+';
         elseif ($request['rating'] === 'pg') $rating = '6+';
         elseif ($request['rating'] === 'pg_13') $rating = '13+';
@@ -34,9 +34,16 @@ class AnimeController extends Controller
         else $rating = '0+';
         $genres = $request['genres'];
 
-        $anime = new HAnime();
+        $animeTitle_ru = $request['russian'];
+
+        $anime = HAnime::where('title_ru', $animeTitle_ru)->first();
+
+//        return response($anime);
+        if (!$anime) {
+            $anime = new HAnime();
+        }
         $anime->title_ru = $request['russian'];
-        $anime->title_en = ' ';
+        $anime->title_en = $request['english'][0] ?? ' ';
         $anime->title_original = $request['name'];
         $anime->description = $request['description'];
         $anime->description_short = $request['description_short'];
@@ -45,7 +52,7 @@ class AnimeController extends Controller
         $anime->image = 'https://shikimori.me/' . $request['image']['preview'];
         $anime->announce_date = $request['aired_on'];
         $anime->release_date = $request['aired_on'];
-        $anime->episodes_released = $request['episodes'] - $request['episodes_aired'];
+        $anime->episodes_released = ($request['episodes'] ?? $request['episodes_aired']) - $request['episodes_aired'];
         $anime->episodes_total = $request['episodes'];
         $anime->author = null;
         $anime->review = '';
@@ -116,6 +123,7 @@ class AnimeController extends Controller
         $IPP = $request->IPP ?? 15;
         $sort = $request->sort ?? 'id';
         $years = $request->years;
+        $kind = $request->kind;
 
         $query = HAnime::query();
 
@@ -142,7 +150,9 @@ class AnimeController extends Controller
                 $query->orderByDesc($sort);
             } else $query->orderBy($sort);
         }
-        //сортируем Rx в конец, тип отвечает за аниме - 0 / мангу - 1
+        //тип сортировки
+        $query->where('kind', $kind);
+        //тип отвечает за аниме - 0 / мангу - 1
         $query->where('type', 0);
 
         $collections = $query->paginate($IPP);
@@ -275,6 +285,7 @@ class AnimeController extends Controller
         $anime->release_date = $request['release_date'];
         $anime->episodes_released = $request['episodes_released'];
         $anime->episodes_total = $request['episodes_total'];
+        $anime->kind = $request['kind'];
         $anime->author = $request['author'];
         $anime->review = $request['review'];
         $anime->rating = $request['rating'];

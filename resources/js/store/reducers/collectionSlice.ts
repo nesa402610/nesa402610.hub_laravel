@@ -6,6 +6,7 @@ const initialState: collectionSlice = {
         tags: [],
         type: 'anime',
         rating: '',
+        kind: 'tv',
         IPP: JSON.parse(localStorage.getItem('memFilter'))?.IPP ?? 15,
         sort: JSON.parse(localStorage.getItem('memFilter'))?.sort ?? 'id',
         years: {start: 2010, end: new Date().getFullYear()}
@@ -25,6 +26,7 @@ interface collectionFilter {
     rating: string
     IPP: number
     sort: string
+    kind: string
     years: { start: number, end: number }
 }
 
@@ -36,13 +38,14 @@ const collectionSlice = createSlice({
             state.filter.type = action.payload
         },
         setFilter(state, action: PayloadAction<collectionFilter>) {
-            const {title, tags, type, sort, IPP, rating, years} = action.payload
+            const {title, tags, type, kind, sort, IPP, rating, years} = action.payload
             state.filter.title = title
             state.filter.tags = tags
             state.filter.rating = rating
             state.filter.IPP = IPP
             state.filter.sort = sort
             state.filter.years = years
+            state.filter.kind = kind
 
         },
         clearFilter(state) {

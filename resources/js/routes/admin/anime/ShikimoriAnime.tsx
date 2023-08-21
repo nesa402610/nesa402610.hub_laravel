@@ -11,12 +11,13 @@ const ShikimoriAnime: FC = () => {
                 'X-CSRF-TOKEN': csrf_token,
                 'Content-Type': 'application/json'
             },
-            method: 'put',
+            method: 'post',
             body: JSON.stringify(anime),
         })
     }
     const fetchAnime = (id: number) => {
         let err = false
+        setId(prev => prev + 1)
         fetch('https://shikimori.me/api/animes/' + id)
             .then(r => r.json())
             .then(r => {
@@ -59,7 +60,7 @@ const ShikimoriAnime: FC = () => {
             <input type="text" value={id}
                    onChange={(e) => setId(+e.target.value)}/>
             <button onClick={() => setData([])}>clear data</button>
-            {/*<button ref={ref} onClick={fetchAnime}>Fetch {id}</button>*/}
+            <button onClick={() => fetchAnime(id)}>Fetch {id}</button>
             <button onClick={intervalFetch}>set intervalFetch</button>
             {/*<button onClick={() => setId(1)}>setId 1</button>*/}
             <div className={'grid grid-cols-4'}>

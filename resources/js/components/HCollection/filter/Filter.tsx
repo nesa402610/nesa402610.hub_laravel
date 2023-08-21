@@ -18,16 +18,18 @@ const HCollectionFilter: FC = () => {
     const [sort, setSort] = useState('id');
     const [IPP, setIPP] = useState(15);
     const [years, setYears] = useState(yearsRange);
+    const [kind, setKind] = useState('tv');
 
     const clearFilterHandler = () => {
         dispatch(clearFilter())
         setTitle('')
         setTags([])
         setRating('')
+        setYears(yearsRange)
     }
 
     const searchWithFilterHandler = () => {
-        dispatch(setFilter({title, tags, rating, IPP, sort, years}))
+        dispatch(setFilter({title, tags, rating, IPP, sort, years, kind}))
     }
     const typeHandler = (e) => {
         dispatch(setFilterType(e.target.value))
@@ -50,6 +52,19 @@ const HCollectionFilter: FC = () => {
             <div className={'flex gap-4 xs:flex-col sm:flex-row'}>
                 <TitleField title={title} setTitle={setTitle} searchFn={searchWithFilterHandler}/>
                 <IPPField IPP={IPP} setIPP={setIPP}/>
+                <label>
+                    Тип
+                    <select value={kind} onChange={e => setKind(e.target.value)}
+                            className={'p-2 mt-1 rounded-lg bg-neutral-600'}
+                    >
+                        <option value="tv">ТВ</option>
+                        <option value="ova">OVA</option>
+                        <option value="ona">ONA</option>
+                        <option value="movie">Фильм</option>
+                        <option value="special">Спешл</option>
+                        <option value="music">Клип</option>
+                    </select>
+                </label>
             </div>
             <div className={"flex flex-col gap-4"}>
                 <div className={'flex gap-4 xs:flex-col sm:flex-row'}>
