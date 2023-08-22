@@ -10,22 +10,21 @@ import YearsRange from "./YearsRange";
 
 const HCollectionFilter: FC = () => {
     const dispatch = useAppDispatch()
-    const {filter: {type, years: yearsRange}} = useAppSelector(state => state.collection)
+    const {filter} = useAppSelector(state => state.collection)
     const nav = useNavigate();
-    const [title, setTitle] = useState('');
-    const [tags, setTags] = useState([]);
-    const [rating, setRating] = useState('');
-    const [sort, setSort] = useState('id');
-    const [IPP, setIPP] = useState(15);
-    const [years, setYears] = useState(yearsRange);
-    const [kind, setKind] = useState('tv');
+    const [title, setTitle] = useState(filter.title);
+    const [tags, setTags] = useState(filter.tags);
+    const [rating, setRating] = useState(filter.rating);
+    const [sort, setSort] = useState(filter.sort);
+    const [IPP, setIPP] = useState(filter.IPP);
+    const [years, setYears] = useState(filter.years);
+    const [kind, setKind] = useState(filter.kind);
 
     const clearFilterHandler = () => {
         dispatch(clearFilter())
-        setTitle('')
-        setTags([])
-        setRating('')
-        setYears(yearsRange)
+        setTitle(filter.title)
+        setTags(filter.tags)
+        setRating(filter.rating)
     }
 
     const searchWithFilterHandler = () => {
@@ -34,8 +33,8 @@ const HCollectionFilter: FC = () => {
     const typeHandler = (e) => {
         dispatch(setFilterType(e.target.value))
         if (e.target.value === 'anime') {
-            nav('a')
-        } else nav('m')
+            nav('unit/ZERO')
+        } else nav('unit/ONE')
     }
     useEffect(() => {
         const memFilter = JSON.parse(localStorage.getItem('memFilter'))
@@ -72,7 +71,7 @@ const HCollectionFilter: FC = () => {
                         <div className={'flex flex-col flex-1'}>
                             <span className={'block'}>Тип</span>
                             <select className={"bg-neutral-600 p-2 rounded-lg"}
-                                    value={type}
+                                    value={filter.type}
                                     onChange={e => typeHandler(e)}>
                                 <option value="anime">Аниме</option>
                                 <option value="manga">Манга</option>

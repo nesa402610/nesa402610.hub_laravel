@@ -47,7 +47,7 @@ const ShikimoriAnime: FC = () => {
             ID += 1
             setId(ID)
             localStorage.setItem('usedId', String(ID))
-        }, 700)
+        }, 1000)
         setTimerID(timerId)
     };
     useEffect(() => {

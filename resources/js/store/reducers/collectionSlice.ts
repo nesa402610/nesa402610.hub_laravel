@@ -52,7 +52,7 @@ const collectionSlice = createSlice({
             state.filter.title = ''
             state.filter.tags = []
             state.filter.rating = ''
-            state.filter.years = {start: 1900, end: 2040}
+            state.filter.years = {start: 1910, end: 2023}
         },
     },
 })
