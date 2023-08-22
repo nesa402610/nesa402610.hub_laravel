@@ -9,7 +9,8 @@ use App\Models\Passkey;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class MangaController extends Controller {
+class MangaController extends Controller
+{
 //    public function addTagToCollection(Request $request) {
 //        $collection = HCollection::find($request->titleId);
 //        $collection->tags()->attach($request->tagId);
@@ -39,7 +40,8 @@ class MangaController extends Controller {
 //        }
 //    }
 
-    public function getAllManga(Request $request) {
+    public function getAllManga(Request $request)
+    {
         $manga = HManga::where('type', 1)->get();
         foreach ($manga as $collection) {
             $collection->tags;
@@ -49,50 +51,47 @@ class MangaController extends Controller {
         return response($manga, 200);
     }
 
-    public function getPaginatedManga(Request $request) {
-        $exist = $this->checkPasskey($request);
-        if (count($exist) !== 0) {
-            $collections = HManga::where('type', 1)->paginate(5);
-            foreach ($collections as $collection) {
-                $collection->tags;
+    public function getPaginatedManga(Request $request)
+    {
+        $collections = HManga::where('type', 1)->paginate(5);
+        foreach ($collections as $collection) {
+            $collection->tags;
 //                    $collection->links->makeHidden('pivot');
 //                    $collection->studios->makeHidden('pivot');
-            }
-            return response($collections, 200);
         }
-        return response('Какая-то ошибка');
+        return response($collections, 200);
     }
 
-    public function getMangaById(Request $request, $id) {
-        $exist = $this->checkPasskey($request);
-        if (count($exist) !== 0) {
-            $collection = HManga::find($id);
-            $files = Storage::files('m/' . $collection->id);
-            $pages = [];
-            $i = 1;
-            foreach ($files as $file) {
-                $pages[] = [
-                    'file_link' => Storage::temporaryUrl($file, now()->addHour(6)),
-                    'pageNumber' => $i++
-                ];
-            }
-            $collection->pages = $pages;
-            return response($collection, 200);
+    public function getMangaById(Request $request, $id)
+    {
+        $collection = HManga::find($id);
+        $files = Storage::files('m/' . $collection->id);
+        $pages = [];
+        $i = 1;
+        foreach ($files as $file) {
+            $pages[] = [
+                'file_link' => Storage::temporaryUrl($file, now()->addHour(6)),
+                'pageNumber' => $i++
+            ];
+        }
+        $collection->pages = $pages;
+        return response($collection, 200);
 //            return response(['msg' => 'Ключ рабочий, наслаждайся', 'status' => 'valid', '1' => $exist], 200);
-        }
-        return response('Какая-то ошибка');
     }
 
-    public function addTag(Request $request) {
+    public function addTag(Request $request)
+    {
         $collection = HAnime::find($request->titleId);
         $collection->tags()->attach($request->tagId);
     }
 
-    public function getMangaPages(Request $request) {
+    public function getMangaPages(Request $request)
+    {
 
     }
 
-    public function addTitle() {
+    public function addTitle()
+    {
 
     }
 
@@ -107,7 +106,8 @@ class MangaController extends Controller {
 //        return response($collection, 201);
 //    }
 
-    public function checkPasskey(Request $request) {
+    public function checkPasskey(Request $request)
+    {
         $exist = Passkey::where('passkey', str_replace(' ', '', $request->passkey))->get();
 
         return $exist;
