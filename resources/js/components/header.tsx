@@ -15,7 +15,7 @@ const Header: FC = () => {
     return (
         <>
             <Modal title={"Добавление проекта"} isOpen={isModal} onClose={setIsModal}>
-                <ProjectModal type={"create"} closeModalHandler={() => setIsModal(false)}/>
+                <ProjectModal type={"create"} closeModalHandler={setIsModal}/>
             </Modal>
             <header className={"bg-neutral-800 w-[80px] fixed z-50 h-full top-0 left-0"}>
                 <div className={"flex flex-col items-center gap-2 justify-between py-4 px-2"}>

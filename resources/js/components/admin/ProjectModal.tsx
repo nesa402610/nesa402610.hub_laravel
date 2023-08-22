@@ -1,10 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
 import ProjectForm from "./ProjectForm";
 import {useCreateProjectMutation, useGetProjectsQuery, useUpdateProjectMutation} from "services/projectService";
 import {IProject} from "types/Project";
 
 interface ProjectModalProps {
-    closeModalHandler: () => void
+    closeModalHandler: Dispatch<SetStateAction<boolean>>
     type: 'create' | 'edit'
     id?: number
 }
@@ -36,12 +36,12 @@ const ProjectModal: FC<ProjectModalProps> = ({closeModalHandler, type, id}) => {
     const createProjectHandler = (e) => {
         e.preventDefault()
         createProject(project)
-        closeModalHandler()
+        closeModalHandler(false)
     }
     const editProjectHandler = (e) => {
         e.preventDefault()
         updateProject({project, id})
-        closeModalHandler()
+        closeModalHandler(false)
     }
     return (
         <div className={'block--light'}>
