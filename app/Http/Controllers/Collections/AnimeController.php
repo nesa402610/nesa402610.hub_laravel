@@ -45,6 +45,7 @@ class AnimeController extends Controller
         $anime->title_ru = $request['russian'];
         $anime->title_en = $request['english'][0] ?? ' ';
         $anime->title_original = $request['name'];
+        $anime->kind = $request['kind'];
         $anime->description = $request['description'];
         $anime->description_short = $request['description_short'];
         $anime->episode_time = $request['duration'];
@@ -61,9 +62,13 @@ class AnimeController extends Controller
         $anime->type = 0;
         $anime->save();
 
+        if ($request['rating'] !== 'rx') {
+            $anime->tags()->detach();
+        }
         foreach ($genres as $genre) {
             $tag = Tags::where('name', $genre['russian'])->first();
-            if ($tag) {
+            $addedTags = $anime->tags;
+            if ($tag && !$addedTags->contains('name', $genre['russian'])) {
                 $anime->tags()->attach($tag->id);
             }
         }
