@@ -48,7 +48,7 @@ const Header: FC = () => {
                         {/*  <IoGrid/>*/}
                         {/*  Apps*/}
                         {/*</NavLink>    */}
-                        <NavLink className={"nav-link"} to={"/NULL/a"}>
+                        <NavLink className={"nav-link"} to={"/NULL/unit/ZERO"}>
                             <GiCentaurHeart size={"2rem"}/>
                         </NavLink>
                     </nav>

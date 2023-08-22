@@ -15,10 +15,10 @@ const HHHPage: FC = () => {
     const dispatch = useAppDispatch()
     const nav = useNavigate();
     useEffect(() => {
-        if (/m$/.test(location.pathname)) {
+        if (/unit\/ONE$/.test(location.pathname)) {
             dispatch(setFilterType('manga'))
         } else {
-            nav("a", {replace: true});
+            nav("/NULL/unit/ZERO", {replace: true});
             dispatch(setFilterType('anime'))
         }
     }, []);
