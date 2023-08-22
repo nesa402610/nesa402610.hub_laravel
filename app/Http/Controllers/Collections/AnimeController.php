@@ -131,7 +131,6 @@ class AnimeController extends Controller
         $kind = $request->kind;
 
         $query = HAnime::query();
-
         if (!empty($title)) {
             $query->where(function ($query) use ($title) {
                 $query->where('title_ru', 'like', '%' . $title . '%')
@@ -156,7 +155,9 @@ class AnimeController extends Controller
             } else $query->orderBy($sort);
         }
         //тип сортировки
-        $query->where('kind', $kind);
+        if ($kind) {
+            $query->where('kind', $kind);
+        }
         //тип отвечает за аниме - 0 / мангу - 1
         $query->where('type', 0);
 
