@@ -6,10 +6,10 @@ const initialState: collectionSlice = {
         tags: [],
         type: 'anime',
         rating: '',
-        kind: 'tv',
+        kind: null,
         IPP: JSON.parse(localStorage.getItem('memFilter'))?.IPP ?? 15,
         sort: JSON.parse(localStorage.getItem('memFilter'))?.sort ?? 'id',
-        years: {start: 2010, end: new Date().getFullYear()}
+        years: {start: 1910, end: new Date().getFullYear() + 5}
     },
     // filteredCollection: []
 }
@@ -52,7 +52,8 @@ const collectionSlice = createSlice({
             state.filter.title = ''
             state.filter.tags = []
             state.filter.rating = ''
-            state.filter.years = {start: 1910, end: 2023}
+            state.filter.years = {start: 1910, end: new Date().getFullYear() + 5}
+            state.filter.kind = null
         },
     },
 })
