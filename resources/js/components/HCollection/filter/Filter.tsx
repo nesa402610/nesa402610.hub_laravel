@@ -56,6 +56,8 @@ const HCollectionFilter: FC = () => {
                     <select value={kind} onChange={e => setKind(e.target.value)}
                             className={'p-2 mt-1 rounded-lg bg-neutral-600'}
                     >
+
+                        <option value={null}>Все</option>
                         <option value="tv">ТВ</option>
                         <option value="ova">OVA</option>
                         <option value="ona">ONA</option>
