@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 
 const YearsRange = ({setYears}) => {
     const currentYear = new Date().getFullYear()
-    const maxYear = currentYear + 5
-    const [start, setStart] = useState(2010);
-    const [end, setEnd] = useState(currentYear);
-    const yearsHandler = (e, min = false) => {
-        if (min) setStart(Number(e.target.value))
+    const [minYear, maxYear] = [1910, currentYear + 5]
+    const [start, setStart] = useState(1910);
+    const [end, setEnd] = useState(currentYear + 5);
+    const yearsHandler = (e: React.ChangeEvent<HTMLInputElement>, start: boolean) => {
+        if (start) setStart(Number(e.target.value))
         else setEnd(Number(e.target.value))
         setYears({start, end})
     }
@@ -15,17 +15,17 @@ const YearsRange = ({setYears}) => {
             <span>По годам</span>
             <div className={'flex gap-4 w-full'}>
                 <div className={'relative w-full'}>
-                    <input type="number" min={1910} max={end - 1}
+                    <input type="number" min={minYear} max={end - 1}
                            value={start} className={'m-0'}
                            onChange={e => yearsHandler(e, true)}/>
-                    <input type="range" min={1910} max={end - 1} value={start} onChange={e => yearsHandler(e, true)}
+                    <input type="range" min={minYear} max={end - 1} value={start} onChange={e => yearsHandler(e, true)}
                            className={'absolute left-0 -bottom-3'}/>
                 </div>
                 <div className={'relative w-full'}>
                     <input type="number" min={start + 1} max={maxYear}
                            value={end} className={'m-0'}
-                           onChange={e => yearsHandler(e)}/>
-                    <input type="range" min={start + 1} max={maxYear} value={end} onChange={e => yearsHandler(e)}
+                           onChange={e => yearsHandler(e, false)}/>
+                    <input type="range" min={start + 1} max={maxYear} value={end} onChange={e => yearsHandler(e, false)}
                            className={'absolute left-0 -bottom-3'}/>
                 </div>
             </div>
