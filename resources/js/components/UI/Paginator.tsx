@@ -1,10 +1,13 @@
 import React, {useEffect} from "react";
 import {FaAngleDoubleLeft, FaAngleDoubleRight, FaAngleLeft, FaAngleRight} from "react-icons/fa";
+import {useSearchParams} from "react-router-dom";
 
 const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
+    let [searchParams, setSearchParams] = useSearchParams();
     const toPageHandler = (page) => {
         if (page > totalPages) return
         setCurrentPage(page)
+        setSearchParams({page: page})
     };
     let pages: any[] = Array.from({length: totalPages}, (v, k) => k + 1);
 
@@ -23,7 +26,15 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
         const end = [pages.at(-4), pages.at(-3), pages.at(-2), pages.at(-1)]
         pages = [...start, ...middle(), ...end]
     }
-
+    // useEffect(() => {
+    //     setSearchParams({page: currentPage})
+    //     console.log(currentPage)
+    // }, [currentPage]);
+    useEffect(() => {
+        const currentPage_search = searchParams.get('page')
+        setCurrentPage(currentPage_search)
+        console.log(currentPage, currentPage_search)
+    }, []);
     useEffect(() => {
         if (totalPages < currentPage) {
             setCurrentPage(totalPages)
@@ -37,8 +48,8 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
           </span>
             <span onClick={() => toPageHandler(currentPage - 1)}
                   className={currentPage === 1 ? "text-neutral-500" : "cursor-pointer hover:text-neutral-500 text-neutral-300"}><FaAngleLeft/></span>
-            {pages.map(page =>
-                <span key={page}
+            {pages.map((page, index) =>
+                <span key={index}
                       onClick={() => toPageHandler(page)}
                       className={currentPage !== page ? "cursor-pointer hover:text-neutral-500 text-neutral-300" : "text-neutral-500"}>
                       {page}
