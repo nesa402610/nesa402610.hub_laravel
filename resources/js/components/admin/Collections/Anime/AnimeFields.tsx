@@ -8,7 +8,7 @@ interface AnimeFieldsProps {
 
 const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
 
-    const setHandler = (e, field) => {
+    const setHandler = (e: React.ChangeEvent<any>, field: string) => {
         if (field === "censure") {
             setAnime({...anime, censure: e.target.checked});
         } else {
@@ -73,6 +73,18 @@ const AnimeFields: FC<AnimeFieldsProps> = ({anime, setAnime}) => {
                     <option value="16+">16+</option>
                     <option value="18+">18+</option>
                     <option value="Rx">Rx</option>
+                </select>
+            </label>
+            <label className={'flex flex-col'}>
+                <span>Тип</span>
+                <select className={'bg-neutral-600 p-2 rounded-lg'} value={anime.kind}
+                        onChange={e => setHandler(e, "rating")}>
+                    <option value="tv">ТВ</option>
+                    <option value="OVA">OVA</option>
+                    <option value="ONA">ONA</option>
+                    <option value="music">Клип</option>
+                    <option value="movie">Фильм</option>
+                    <option value="special">Спешл</option>
                 </select>
             </label>
             <label>

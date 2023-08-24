@@ -23,6 +23,7 @@ const AnimeCreate = () => {
         episodes_released: 0,
         episodes_total: 0,
         id: 0,
+        kind: 'tv',
         image: "",
         origins: "",
         release_date: "",
