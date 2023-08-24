@@ -18,7 +18,6 @@ const HHHPage: FC = () => {
         if (/unit\/ONE$/.test(location.pathname)) {
             dispatch(setFilterType('manga'))
         } else {
-            nav("/NULL/unit/ZERO", {replace: true});
             dispatch(setFilterType('anime'))
         }
     }, []);

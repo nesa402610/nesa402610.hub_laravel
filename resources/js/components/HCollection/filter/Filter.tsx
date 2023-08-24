@@ -33,8 +33,8 @@ const HCollectionFilter: FC = () => {
     const typeHandler = (e) => {
         dispatch(setFilterType(e.target.value))
         if (e.target.value === 'anime') {
-            nav('unit/ZERO')
-        } else nav('unit/ONE')
+            nav('ZERO')
+        } else nav('ONE')
     }
     useEffect(() => {
         const memFilter = JSON.parse(localStorage.getItem('memFilter'))
