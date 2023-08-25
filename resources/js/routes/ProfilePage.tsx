@@ -14,7 +14,6 @@ const ProfilePage = () => {
             user: authedUser?.id === +userId ? authedUser : data,
         }),
     })
-    console.log(authedUser?.id === +userId ? {authedUser} : {user})
 
     if (!user) return <Loader/>;
 

@@ -13,11 +13,10 @@ const UserAnimeOverview: FC<UserAnimeOverviewProps> = ({userId}) => {
     if (isLoading) return <Loader text={'Смотрим, что там по аниме...'}/>
     const watchedPercent = +(animeData.watched / animeData.count * 100).toFixed(0) || 50
     const unwatchedPercent = (100 - +watchedPercent) || 50
-    console.log(watchedPercent, unwatchedPercent)
 
     return (
         <div className="block--light flex flex-col gap-2">
-            <Link to={userId + '/animelist/watching'}
+            <Link to={`animelist/watching`}
                   className={'text-lg font-bold hover:text-neutral-300 transition-all'}>Список аниме</Link>
             {/*{animeList.map(i => <span>{i.animeList.}</span>)}*/}
             <div className={'flex rounded-lg overflow-hidden'}>
@@ -31,18 +30,18 @@ const UserAnimeOverview: FC<UserAnimeOverviewProps> = ({userId}) => {
                 </div>
             </div>
             <div className={'flex gap-2 xs:flex-wrap'}>
-                <Link to={userId + '/animelist/planned'}
+                <Link to={'animelist/planned'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Запланировано {animeData.planned}</Link>
-                <Link to={userId + '/animelist/watched'}
+                <Link to={'animelist/watched'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Просмотрено {animeData.watched}</Link>
-                <Link to={userId + '/animelist/watching'}
+                <Link to={'animelist/watching'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Смотрю {animeData.watching}</Link>
-                <Link to={userId + '/animelist/dropped'}
+                <Link to={'animelist/dropped'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Брошено {animeData.dropped}</Link>
-                <Link to={userId + '/animelist/out'}
+                <Link to={'animelist/out'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Не буду
                     смотреть {animeData.out}</Link>
-                <Link to={userId + '/animelist/fuckout'}
+                <Link to={'animelist/fuckout'}
                       className={'transition-all hover:text-neutral-300 text-sm'}>Фу, какая
                     гадость {animeData.fuckout}</Link>
             </div>
