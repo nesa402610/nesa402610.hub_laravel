@@ -156,7 +156,7 @@ class AnimeController extends Controller
         }
         //тип сортировки
         if ($kind) {
-            $query->where('kind', $kind);
+            $query->where('kind', 'like', $kind);
         }
         //тип отвечает за аниме - 0 / мангу - 1
         $query->where('type', 0);
