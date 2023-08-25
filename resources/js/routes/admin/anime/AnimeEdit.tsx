@@ -25,7 +25,7 @@ const AnimeEdit = () => {
     useEffect(() => {
         setVideos(videosData);
     }, [videosData]);
-
+    console.log(animeData.description, anime.description)
     if (!anime) return <Loader/>;
     return (
         <div className={"flex flex-col gap-4"}>
