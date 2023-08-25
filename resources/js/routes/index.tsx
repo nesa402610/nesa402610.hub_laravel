@@ -49,13 +49,12 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         path: ':username',
-                        element: <ProfilePage/>,
+                        children: [
+                            {path: '', element: <ProfilePage/>},
+                            {path: 'edit', element: <ProfileEditPage/>},
+                            {path: 'animelist/:animestatus', element: <AnimeListPage/>}
+                        ],
                     },
-                    {path: 'edit', element: <ProfileEditPage/>},
-                    {
-                        path: ':username/animelist/:animestatus',
-                        element: <AnimeListPage/>
-                    }
                 ]
             },
             {
