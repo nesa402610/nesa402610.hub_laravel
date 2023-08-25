@@ -5,10 +5,10 @@ import InfoField from "./InfoField";
 
 const CollectionInfo = ({collection}: { collection: ICollection }) => {
     let colKind = collection.kind.toUpperCase()
-    if (/tv/g.test(colKind)) colKind = 'ТВ'
-    else if (colKind === 'special') colKind = 'Спешл'
-    else if (colKind === 'music') colKind = 'Клип'
-    else if (colKind === 'movie') colKind = 'Фильм'
+    if (/TV/g.test(colKind)) colKind = 'ТВ'
+    else if (colKind === 'SPECIAL') colKind = 'Спешл'
+    else if (colKind === 'MUSIC') colKind = 'Клип'
+    else if (colKind === 'MOVIE') colKind = 'Фильм'
 
     return (
         <div className={"text-neutral-300"}>
