@@ -4,19 +4,18 @@ import {ICollection} from "types/types";
 import InfoField from "./InfoField";
 
 const CollectionInfo = ({collection}: { collection: ICollection }) => {
-    let kind
-    const colKind = collection.kind
-    if (/tv/g.test(colKind)) kind = 'ТВ'
-    else if (colKind === 'special') kind = 'Спешл'
-    else if (colKind === 'music') kind = 'Клип'
-    else if (colKind === 'movie') kind = 'Фильм'
+    let colKind = collection.kind.toUpperCase()
+    if (/tv/g.test(colKind)) colKind = 'ТВ'
+    else if (colKind === 'special') colKind = 'Спешл'
+    else if (colKind === 'music') colKind = 'Клип'
+    else if (colKind === 'movie') colKind = 'Фильм'
 
     return (
         <div className={"text-neutral-300"}>
             <h3 className={"mt-4 font-bold"}>Информация</h3>
             <div className={"flex flex-col"}>
                 <InfoField title={'Дата: '} value={collection.announce_date.slice(0, 4)}/>
-                <InfoField title={'Тип: '} value={kind}/>
+                <InfoField title={'Тип: '} value={colKind}/>
                 <HCollectionTags collection={collection} tags={collection.tags}
                                  collectionID={collection.id}/>
                 <InfoField title={'Эпизоды: '}>
