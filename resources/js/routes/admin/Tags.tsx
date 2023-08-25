@@ -11,7 +11,7 @@ const Tags = () => {
     if (isLoading) return <Loader/>
     const RxData = data.filter(tag => tag.type === 1)
     const FFData = data.filter(tag => tag.type === 0)
-    console.log(RxData)
+
     return (
         <div className={"flex flex-col gap-4"}>
             <QuickAdder createFn={createTag} error={error} length={data?.length} tag/>

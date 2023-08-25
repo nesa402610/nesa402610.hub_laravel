@@ -9,7 +9,6 @@ interface BbCodeProps {
 const BbCode: FC<BbCodeProps> = ({refer, setComment}) => {
     const style = 'bg-neutral-600 px-2 flex items-center justify-center w-[30px] h-[30px] hover:bg-neutral-500 transition-all cursor-pointer rounded-lg'
     const getSelectedText = () => {
-        console.log(refer, 'bb')
         const start = refer.current.selectionStart;
         const end = refer.current.selectionEnd;
 

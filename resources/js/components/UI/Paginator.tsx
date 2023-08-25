@@ -33,7 +33,6 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
     useEffect(() => {
         const currentPage_search = searchParams.get('page')
         setCurrentPage(currentPage_search)
-        console.log(currentPage, currentPage_search)
     }, []);
     useEffect(() => {
         if (totalPages < currentPage) {
