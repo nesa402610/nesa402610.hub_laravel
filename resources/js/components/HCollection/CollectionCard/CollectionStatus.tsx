@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {useSetAnimeStatusMutation} from "services/Collections/AnimeService";
 import {useGetUserQuery} from "services/userService";
 import {IoCaretDown, IoCaretUp} from "react-icons/io5";
@@ -38,19 +38,38 @@ const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) =>
         },
         {status: 5, name: 'Фу, какая гадость', color: 'bg-red-700', hover: 'hover:bg-red-700'},
     ]
-    const setStatusHandler = (stat: number) => {
-        if (stat === status) {
+    const ref = useRef(null)
+    const setStatusHandler = (statusId: number) => {
+        if (statusId === status) {
             return setIsOpen(false)
         }
-        setStatus({status: stat, animeID})
+        setStatus({status: statusId, animeID})
             .unwrap()
             .catch(err => console.error(err))
             .finally(() => setIsOpen(false))
     }
+    const handleOutsideClick = (event) => {
+        if (ref.current && !ref.current.contains(event.target) && isOpen) {
+            setIsOpen(false);
+            console.log(ref.current, !ref.current.contains(event.target), isOpen)
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('click', handleOutsideClick);
+
+        return () => {
+            window.removeEventListener('click', handleOutsideClick);
+        };
+    }, [isOpen]);
+
     if (!user) return null;
     return (
-        <div className={'relative cursor-pointer'}>
-            <div className={'relative flex items-center'} onClick={() => setIsOpen(true)}>
+        <div className={'relative cursor-pointer'} ref={ref}>
+            <div className={'relative flex items-center'} onClick={(e) => {
+                e.stopPropagation()
+                setIsOpen(true)
+            }}>
                 {isOpen ?
                     <div className={'absolute right-2 z-[1000]'}
                          onClick={e => {
@@ -75,7 +94,8 @@ const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) =>
                 }
             </div>
             {isOpen &&
-                <div className={'absolute top-0 z-[50] left-0 bg-neutral-800 flex flex-col gap-2 rounded-lg w-full'}>
+                <div className={'absolute top-0 z-[50] left-0 bg-neutral-800 flex flex-col gap-2 rounded-lg w-full'}
+                >
                     {statuses.map(({status: stat, name, color, hover}) =>
                         <span key={name}
                               className={`flex-1 cursor-pointer rounded-lg p-2 transition-all ${stat === status ? `${color}` : `${hover}`}`}
