@@ -60,7 +60,7 @@ const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) =>
                         <IoCaretUp className={'text-xl'}/>
                     </div>
                     :
-                    <div className={'absolute right-2 z-[1000]'}>
+                    <div className={'absolute right-2 z-[40]'}>
                         <IoCaretDown className={'text-xl'}/>
                     </div>
                 }
@@ -75,7 +75,7 @@ const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) =>
                 }
             </div>
             {isOpen &&
-                <div className={'absolute top-0 z-50 left-0 bg-neutral-800 flex flex-col gap-2 rounded-lg w-full'}>
+                <div className={'absolute top-0 z-[50] left-0 bg-neutral-800 flex flex-col gap-2 rounded-lg w-full'}>
                     {statuses.map(({status: stat, name, color, hover}) =>
                         <span key={name}
                               className={`flex-1 cursor-pointer rounded-lg p-2 transition-all ${stat === status ? `${color}` : `${hover}`}`}
