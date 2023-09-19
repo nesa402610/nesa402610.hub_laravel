@@ -18,7 +18,7 @@ const RegistrationPage: FC = () => {
 
     const registrationHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        axios.post<userProps>('/registration',
+        axios.post<userProps>('/api/registration',
             {
                 name: user.name,
                 password: user.password,

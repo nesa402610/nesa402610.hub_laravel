@@ -8,6 +8,7 @@ import CollectionInfo from "./CollectionInfo/CollectionInfo";
 import {useGetUserQuery} from "services/userService";
 import {FiEdit} from "react-icons/fi";
 import {Link} from "react-router-dom";
+import CollectionRating from "components/HCollection/CollectionCard/CollectionRating";
 
 interface CollectionProps {
     collection: ICollection;
@@ -36,6 +37,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin =
             <div className={"flex xs:flex-col md:flex-row gap-4"}>
                 <div className={'flex-shrink-0 basis-auto flex flex-col gap-2'}>
                     <Image link={link} path={path} image={collection.image}/>
+                    <CollectionRating/>
                     <CollectionStatus type={collection.type} status={collection.status} animeID={collection.id}/>
                 </div>
                 <div className={"flex flex-col"}>

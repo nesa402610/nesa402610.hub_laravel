@@ -29,7 +29,7 @@ const LoginPage: FC = () => {
         if (!user.email || !user.password) {
             return setErrors({email: user.email, password: user.password});
         }
-        axios.post('/login',
+        axios.post('/api/login',
             {
                 password: user.password,
                 email: user.email

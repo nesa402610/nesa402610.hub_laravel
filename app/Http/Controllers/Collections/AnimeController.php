@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 
 class AnimeController extends Controller
 {
+    public function setRating(Request $request)
+    {
+        $anime = HAnime::find($request->id);
+
+    }
     public function getRandomAnime($limit)
     {
         $anime = HAnime::inRandomOrder()->limit($limit)->get();
@@ -177,6 +182,7 @@ class AnimeController extends Controller
         $collection = HAnime::find($id);
         $collection->tags->makeHidden('pivot');
         $collection->studios->makeHidden('pivot');
+        $collection->ratings = $collection->ratings();
         $collection->status = $collection->animeStatus();
         $collection->videosCount = $collection->links()->count();
 

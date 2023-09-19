@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import PostForm from "../admin/PostForm";
 import {IPost} from "types/Post";
 import {IUser} from "types/User";
+import ContextMenu from "components/UI/ContextMenu";
 
 interface PostCardProps {
     post: IPost
@@ -14,11 +15,20 @@ interface PostCardProps {
 
 const PostCard: FC<PostCardProps> = ({post, user}) => {
     const [isModal, setIsModal] = useState<boolean>(false);
+    const [isContextMenu, setIsContextMenu] = useState(false);
+    const [cursorPosition, setCursorPosition] = useState(null);
+    const dropdownHandle = (e) => {
+        e.preventDefault()
+        setCursorPosition({x: e.clientX, y: e.clientY});
+        setIsContextMenu(true)
+    }
 
     return (
         <>
             <PostForm isModal={isModal} setIsModal={setIsModal} post={post}/>
-            <Link to={`${post.id}`} key={post.id}>
+            <ContextMenu isContextMenu={isContextMenu} setIsContextMenu={setIsContextMenu}
+                         cursorPosition={cursorPosition}/>
+            <Link to={`${post.id}`} key={post.id} onContextMenu={e => dropdownHandle(e)}>
                 <div
                     className={'flex h-[250px] transition-all cursor-pointer hover:-translate-y-2 drop-shadow-xl flex-col xs:justify-start' + (post.visibility ? ' brightness-150 block--dark opacity-30' : ' block--light')}>
                     {user?.id == 1 &&

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Auth;
+use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -94,5 +95,11 @@ class HAnime extends Model
         if (!Auth::check()) return null;
 
         return $this->hasOne(AnimeUserStatus::class, 'anime_id')->where('user_id', Auth::user()->id)->value('status');
+    }
+
+    public function ratings()
+    {
+        $ratings = DB::table('collection_ratings')->where('anime_id', $this->id)->pluck('rating');
+        return $ratings->sum() / $ratings->count();
     }
 }
