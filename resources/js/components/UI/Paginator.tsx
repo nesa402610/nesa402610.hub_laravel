@@ -26,10 +26,7 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
         const end = [pages.at(-4), pages.at(-3), pages.at(-2), pages.at(-1)]
         pages = [...start, ...middle(), ...end]
     }
-    // useEffect(() => {
-    //     setSearchParams({page: currentPage})
-    //     console.log(currentPage)
-    // }, [currentPage]);
+
     useEffect(() => {
         const currentPage_search = searchParams.get('page')
         setCurrentPage(currentPage_search)

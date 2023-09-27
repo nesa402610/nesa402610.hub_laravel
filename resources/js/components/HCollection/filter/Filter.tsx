@@ -2,11 +2,12 @@ import React, {FC, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "hooks/redux";
 import {clearFilter, setFilter, setFilterType} from "store/reducers/collectionSlice";
-import GenreField from "./GenreField";
 import RatingField from "./RatingField";
 import IPPField from "./IPPField";
 import TitleField from "./TitleField";
 import YearsRange from "./YearsRange";
+import Selector from "components/UI/Selector";
+import {useGetTagsQuery} from "services/Collections/TagService";
 
 const HCollectionFilter: FC = () => {
     const dispatch = useAppDispatch()
@@ -81,7 +82,8 @@ const HCollectionFilter: FC = () => {
                         </div>
                         <RatingField rating={rating} setRating={setRating}/>
                     </div>
-                    <GenreField tags={tags} setTags={setTags}/>
+                    {/*<GenreField tags={tags} setTags={setTags}/>*/}
+                    <Selector placeholder={'Жанры'} values={useGetTagsQuery()} selected={tags} setSelected={setTags}/>
                 </div>
                 <div className={'flex gap-4 items-center xs:flex-col md:flex-row'}>
                     <div className={'w-full'}>

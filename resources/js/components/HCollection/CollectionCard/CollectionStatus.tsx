@@ -1,7 +1,8 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC} from 'react';
 import {useSetAnimeStatusMutation} from "services/Collections/AnimeService";
 import {useGetUserQuery} from "services/userService";
 import {IoCaretDown, IoCaretUp} from "react-icons/io5";
+import useClickOutside from "hooks/useClickOutside";
 
 interface CollectionStatusProps {
     status: number
@@ -11,9 +12,7 @@ interface CollectionStatusProps {
 
 const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) => {
     const {data: user} = useGetUserQuery();
-
     const [setStatus] = useSetAnimeStatusMutation()
-    const [isOpen, setIsOpen] = useState<boolean>(false);
     const statuses = [
         {status: 6, name: `${!type ? 'Просмотрено' : 'Прочитано'}`, color: 'bg-green-600', hover: 'hover:bg-green-600'},
         {status: 1, name: 'Смотрю', color: 'bg-blue-600', hover: 'hover:bg-blue-600'},
@@ -38,7 +37,7 @@ const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) =>
         },
         {status: 5, name: 'Фу, какая гадость', color: 'bg-red-700', hover: 'hover:bg-red-700'},
     ]
-    const ref = useRef(null)
+    const {setIsOpen, isOpen, ref} = useClickOutside()
     const setStatusHandler = (statusId: number) => {
         if (statusId === status) {
             return setIsOpen(false)
@@ -48,20 +47,6 @@ const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) =>
             .catch(err => console.error(err))
             .finally(() => setIsOpen(false))
     }
-    const handleOutsideClick = (event) => {
-        if (ref.current && !ref.current.contains(event.target) && isOpen) {
-            setIsOpen(false);
-            console.log(ref.current, !ref.current.contains(event.target), isOpen)
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener('click', handleOutsideClick);
-
-        return () => {
-            window.removeEventListener('click', handleOutsideClick);
-        };
-    }, [isOpen]);
 
     if (!user) return null;
     return (

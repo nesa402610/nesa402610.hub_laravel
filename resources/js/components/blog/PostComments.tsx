@@ -8,7 +8,7 @@ interface BlogCommentsProps {
     postId: number
 }
 
-const BlogComments: FC<BlogCommentsProps> = ({postId}) => {
+const PostComments: FC<BlogCommentsProps> = ({postId}) => {
     const {data: comments, isLoading, isFetching} = useGetPostCommentsQuery(postId)
     if (isLoading) return <Loader/>
     return (
@@ -22,4 +22,4 @@ const BlogComments: FC<BlogCommentsProps> = ({postId}) => {
     );
 };
 
-export default BlogComments;
+export default PostComments;
