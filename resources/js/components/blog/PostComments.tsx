@@ -13,9 +13,12 @@ const PostComments: FC<BlogCommentsProps> = ({postId}) => {
     if (isLoading) return <Loader/>
     return (
         <>
-            {comments.map(comment =>
-                <BlogComment key={comment.id} comment={comment}/>
-            )}
+            {(comments.length && !isLoading) ? comments.map(comment =>
+                    <BlogComment key={comment.id} comment={comment}/>
+                ) :
+                <h3 className={'font-bold text-center text-neutral-300'}>Кажется, комментариев нет. Может будешь
+                    первым?</h3>
+            }
             {(isFetching) && <Loader/>}
             <CreateComment postId={postId}/>
         </>

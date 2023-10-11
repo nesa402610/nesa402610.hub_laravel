@@ -4,30 +4,38 @@ import Portal from "components/UI/Portal";
 import CopyURL from "components/UI/ContextMenu/CopyURL";
 import Delete from "components/UI/ContextMenu/Delete";
 import {useGetUserQuery} from "services/userService";
+import AdminChecker from "components/AdminChecker";
 
 interface ContextMenuProps {
     children?: React.ReactNode
-    contextMenu: { isOpen: boolean, link: null | string }
-    setContextMenu: React.Dispatch<SetStateAction<{ isOpen: boolean, link: null | string }>>
+    contextMenu: boolean
+    setContextMenu: React.Dispatch<SetStateAction<boolean>>
+    link?: string
     position: any
     cancel?: boolean
-    deleteFn?: () => void | null
+    adminOnly?: boolean
+    deleteFn?: () => void
 }
 
-const ContextMenu: FC<ContextMenuProps> = ({children, setContextMenu, contextMenu, position, cancel = false, deleteFn = null}) => {
-    const {data: user} = useGetUserQuery()
-    const {ref, isOpen, setIsOpen} = useClickOutside()
+const ContextMenu: FC<ContextMenuProps> = ({
+                                               children,
+                                               setContextMenu,
+                                               link,
+                                               contextMenu,
+                                               position,
+                                               cancel = false,
+                                               deleteFn = null,
+                                               adminOnly = false
+                                           }) => {
+    const {ref, isOpen, setIsOpen} = useClickOutside(contextMenu)
+    const {data} = useGetUserQuery()
 
     useEffect(() => {
-        if (contextMenu.isOpen && !isOpen) {
-            setIsOpen(true)
-        } else {
-            setContextMenu({...contextMenu, isOpen: false})
-        }
-    }, [contextMenu.isOpen, isOpen]);
+        setContextMenu(isOpen)
+    }, [isOpen]);
 
-
-    if (isOpen) return (
+    if (adminOnly && data?.role[0].name !== 'Admin') return null
+    return (
         <Portal>
             <div ref={ref} className={'bg-neutral-900 min-w-[180px] rounded-lg z-50 overflow-hidden'}
                  style={{
@@ -36,12 +44,18 @@ const ContextMenu: FC<ContextMenuProps> = ({children, setContextMenu, contextMen
                      top: position.y + 'px',
                  }}>
                 <ul className={'contextMenu'}>
-                    <div className={'custom'}>
-                        {children}
-                    </div>
-                    <div className={'mt-2 default'}>
-                        <CopyURL link={contextMenu.link} setIsOpen={setIsOpen}/>
-                        {(deleteFn && user?.role[0].name === 'Admin') && <Delete deleteFn={deleteFn}/>}
+                    {children &&
+                        <div className={'custom mb-2'}>
+                            {children}
+                        </div>
+                    }
+                    <div className={'default'}>
+                        <CopyURL link={link} setIsOpen={setIsOpen}/>
+                        {deleteFn &&
+                            <AdminChecker>
+                                <Delete deleteFn={deleteFn}/>
+                            </AdminChecker>
+                        }
                         {cancel && <li onClick={() => setIsOpen(false)}>Отмена</li>}
                     </div>
                 </ul>

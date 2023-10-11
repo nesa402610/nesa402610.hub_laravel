@@ -23,7 +23,7 @@ const CreateComment: FC<CreateCommentProps> = ({postId,}) => {
     return (
         <>
             {isAuth &&
-                <div className={'block--light flex gap-4 sm:flex-col'}>
+                <div className={'block--light flex gap-4 flex-col'}>
                     <BBCode refer={ref} setComment={setComment}/>
                     <textarea
                         className={'invalid:border-red-700 invalid:border p-4 bg-neutral-500 rounded-lg w-full outline-none'}

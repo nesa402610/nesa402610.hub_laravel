@@ -15,17 +15,17 @@ const YearsRange = ({setYears}) => {
             <span>По годам</span>
             <div className={'flex gap-4 w-full'}>
                 <div className={'relative w-full'}>
-                    <input type="number" min={minYear} max={end - 1}
+                    <input type="number" min={minYear} max={end}
                            value={start} className={'m-0'}
                            onChange={e => yearsHandler(e, true)}/>
-                    <input type="range" min={minYear} max={end - 1} value={start} onChange={e => yearsHandler(e, true)}
+                    <input type="range" min={minYear} max={end} value={start} onChange={e => yearsHandler(e, true)}
                            className={'absolute left-0 -bottom-3'}/>
                 </div>
                 <div className={'relative w-full'}>
-                    <input type="number" min={start + 1} max={maxYear}
+                    <input type="number" min={start} max={maxYear}
                            value={end} className={'m-0'}
                            onChange={e => yearsHandler(e, false)}/>
-                    <input type="range" min={start + 1} max={maxYear} value={end} onChange={e => yearsHandler(e, false)}
+                    <input type="range" min={start} max={maxYear} value={end} onChange={e => yearsHandler(e, false)}
                            className={'absolute left-0 -bottom-3'}/>
                 </div>
             </div>
