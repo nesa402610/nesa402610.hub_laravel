@@ -19,7 +19,7 @@ const ProfilePage = () => {
 
     return (
         <div className={"p-4 flex flex-col gap-4"}>
-            <UserOverview user={user} userId={userId} authedUserId={authedUser.id}/>
+            <UserOverview user={user} userId={userId} authedUserId={authedUser?.id}/>
             <UserAnimeOverview userId={userId}/>
         </div>
     );
