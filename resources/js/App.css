@@ -6,10 +6,9 @@ html, body {
   @apply bg-neutral-900 text-neutral-100 h-full
 }
 
-input {
+input, textarea {
   @apply w-full p-2 bg-neutral-600 focus-visible:outline-neutral-400 focus-visible:outline focus-visible:outline-2 autofill:bg-neutral-600 rounded-lg mt-1
 }
-
 button {
   @apply p-2 rounded-lg transition-all
 }

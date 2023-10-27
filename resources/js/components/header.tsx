@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import {NavLink} from "react-router-dom";
 import MyLinkItem from "./UI/myLinkItem";
 import {IoBookmarks, IoChatbox, IoHome, IoNewspaper, IoPerson} from "react-icons/io5";
@@ -12,12 +12,17 @@ import {GiCentaurHeart} from "react-icons/gi";
 const Header: FC = () => {
     const [isModal, setIsModal] = useState<boolean>(false);
     const {data, error, isLoading} = useGetUserQuery();
+    const [start, setStart] = useState(true);
+    useEffect(() => {
+        setTimeout(() => setStart(false), 100)
+    }, []);
     return (
         <>
             <Modal title={"Добавление проекта"} isOpen={isModal} onClose={setIsModal}>
                 <ProjectModal type={"create"} closeModalHandler={setIsModal}/>
             </Modal>
-            <header className={"bg-neutral-800 w-[80px] fixed z-50 h-full top-0 left-0"}>
+            <header
+                className={`transition-all bg-neutral-800 w-[80px] fixed z-50 h-full top-0 ${start ? 'left-[-80px]' : 'left-0'}`}>
                 <div className={"flex flex-col items-center gap-2 justify-between py-4 px-2"}>
                     <nav className="flex flex-col gap-4 lg:basis-auto">
                         <NavLink className={"nav-link"} to="/">

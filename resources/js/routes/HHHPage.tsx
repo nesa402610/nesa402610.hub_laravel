@@ -1,5 +1,5 @@
 import React, {FC, useEffect} from "react";
-import {Outlet, useLocation, useNavigate} from "react-router-dom";
+import {Outlet, useLocation} from "react-router-dom";
 import {useAppDispatch} from "hooks/redux";
 import {setFilterType} from "store/reducers/collectionSlice";
 import Filter from "../components/HCollection/filter/Filter";
@@ -13,7 +13,6 @@ export const filterCollection = (collections, filter) => {
 const HHHPage: FC = () => {
     const location = useLocation();
     const dispatch = useAppDispatch()
-    const nav = useNavigate();
     useEffect(() => {
         if (/unit\/ONE$/.test(location.pathname)) {
             dispatch(setFilterType('manga'))

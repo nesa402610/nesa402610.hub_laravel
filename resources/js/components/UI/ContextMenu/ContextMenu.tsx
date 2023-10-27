@@ -33,7 +33,12 @@ const ContextMenu: FC<ContextMenuProps> = ({
     useEffect(() => {
         setContextMenu(isOpen)
     }, [isOpen]);
-
+    useEffect(() => {
+        document.body.style.overflow = 'hidden'
+        return () => {
+            document.body.style.overflow = 'auto'
+        }
+    }, []);
     if (adminOnly && data?.role[0].name !== 'Admin') return null
     return (
         <Portal>

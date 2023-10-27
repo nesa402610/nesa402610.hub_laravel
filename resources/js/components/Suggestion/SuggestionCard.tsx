@@ -10,7 +10,7 @@ import {BsQuestionCircleFill} from "react-icons/bs";
 import AdminChecker from "components/AdminChecker";
 
 const SuggestionCard = ({task}) => {
-    const {isOpen, setIsOpen, toggleHandle, nav, pos} = useDropdown(false, true)
+    const {isOpen, setIsOpen, toggleHandle, nav, pos} = useDropdown(false)
     const [setStatus, {}] = useSetTaskStatusMutation();
 
     const setStatusHandle = (id: number, status: number) => {
@@ -19,8 +19,12 @@ const SuggestionCard = ({task}) => {
             .then(() => setIsOpen(false))
     }
 
+
     return (
-        <div key={task.id} onContextMenu={toggleHandle}
+        <div key={task.id}
+             onContextMenu={toggleHandle}
+             onTouchStart={toggleHandle}
+             onTouchEnd={() => setIsOpen(false)}
              className={"block--light flex md:flex-row xs:flex-col justify-between relative border-2 " + (task.status === 1 ? "border-green-600 border-2" : task.status === 2 ? "opacity-60 border-red-700 " : task.status === 3 ? "border-amber-700 border-2" : "border-0")}>
             {isOpen &&
                 <ContextMenu contextMenu={isOpen} setContextMenu={setIsOpen} position={pos}

@@ -14,10 +14,10 @@ import HCollectionCard from "../../../components/HCollection/CollectionCard/HCol
 
 const HAnimePage: FC = () => {
     const {filter} = useAppSelector(state => state.collection)
-    const passkey = localStorage.getItem("passkey");
+    // const passkey = localStorage.getItem("passkey");
     const [page, setPage] = useState(1);
     const {data, isLoading, isFetching} = useGetAllAnimeQuery({
-        passkey,
+        passkey: null,
         page,
         query: filter
     });

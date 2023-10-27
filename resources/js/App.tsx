@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./App.css";
 import {Outlet} from "react-router";
 import {ScrollRestoration} from "react-router-dom";
@@ -11,11 +11,15 @@ import Header from "components/header";
 const App = () => {
     const {isFetching, error} = useGetUserQuery()
     const {headerType} = useAppSelector(state => state.app)
+    const [start, setStart] = useState(true);
+    useEffect(() => {
+        setTimeout(() => setStart(false), 1000)
+    }, []);
     if (isFetching && !error) return <Loader/>
     return (
         <>
             {headerType ? <MangaHeader/> : <Header/>}
-            <main className={"ml-[80px]"}>
+            <main className={`${start ? 'ml-0' : 'ml-[80px]'} transition-all`}>
                 <Outlet/>
                 <ScrollRestoration/>
             </main>

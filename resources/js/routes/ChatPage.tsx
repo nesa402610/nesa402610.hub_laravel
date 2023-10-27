@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {useGetUserQuery} from "services/userService";
 import {useGetMessagesQuery, useSendMessageMutation} from "services/chatService";
 import Loader from "../components/Loader";
+import Message from "components/Chat/Message";
 
 const ChatPage: FC = () => {
     const {data: user} = useGetUserQuery()
@@ -14,7 +15,7 @@ const ChatPage: FC = () => {
     const [message, setMessage] = useState('');
     const [timer, setTimer] = useState(false);
 
-    const sendMessageHandler = (e) => {
+    const sendMessageHandler = (e: React.KeyboardEvent) => {
         if (message.length > 0 && e.key === 'Enter' && !timer) {
             setTimer(true)
             setMessage('')
@@ -29,26 +30,11 @@ const ChatPage: FC = () => {
         <div className={'ml-4 block--dark flex gap-4 justify-between h-screen flex-col'}>
             <div className={'h-full overflow-auto'}>
                 {!isLoading ? messages.map(msg =>
-                    <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center flex-col xs:items-start'}>
-                        {/*<div className={'w-[40px]'}>*/}
-                        {/*    {msg.id}*/}
-                        {/*</div>*/}
-                        <div className={'flex items-center'}>
-                            <div className={'w-[40px] mr-2 rounded-full overflow-hidden'}>
-                                <img src={msg.user.avatar} alt=""/>
-                            </div>
-                            <div>
-                                {msg.user.name}: &nbsp;
-                            </div>
-                        </div>
-                        <div>
-                            {msg.message}
-                        </div>
-                    </div>
+                    <Message message={msg}/>
                 ) : <Loader/>}
             </div>
             {user ? <input type="text"
-                           onKeyPress={sendMessageHandler}
+                           onKeyUp={sendMessageHandler}
                            onChange={e => setMessage(e.target.value)}
                            placeholder={!timer ? 'Сообщение...' : 'Таймаут...'}
                            value={message}
