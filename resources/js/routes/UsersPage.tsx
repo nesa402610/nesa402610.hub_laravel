@@ -11,15 +11,14 @@ const UsersPage: FC = () => {
     if (isError) return <Error/>
     return (
         <div className={"m-4"}>
-            <div className={"flex flex-wrap gap-4"}>
+            <div className={"grid grid-cols-3 gap-4"}>
                 {users.map(u =>
-                    <Link to={`/profile/${u.id}`} className={"block--dark flex-1"}>
-                        <div className={'h-[75px] flex rounded-lg overflow-hidden'}>
-                            <img src={u.avatar} alt="аватар"/>
+                    <Link to={`/profile/${u.id}`} className={`block--dark flex flex-row gap-4 justify-between`}>
+                        <div className={'flex flex-col gap-2'}>
+                            <span>{u.name} {u.lastName}</span>
+                            <span className={'text-justify'}>{u.about}</span>
                         </div>
-                        <div>
-                            {u.name} {u.lastName}
-                        </div>
+                        <div><img className={'min-w-[150px] w-[150px]'} src={u.avatar ?? ''}/></div>
                     </Link>
                 )}
             </div>

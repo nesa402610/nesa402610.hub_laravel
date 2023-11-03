@@ -18,7 +18,7 @@ button {
 }
 
 .block--dark {
-  @apply bg-neutral-800 sm:p-4 xs:p-2 rounded-lg
+    @apply bg-neutral-800 sm:p-4 xs:p-2 rounded-lg hover:bg-neutral-700 transition-all
 }
 .block--dark button {
   @apply bg-neutral-700 hover:bg-neutral-600
