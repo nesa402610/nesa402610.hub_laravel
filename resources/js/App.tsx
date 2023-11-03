@@ -12,9 +12,12 @@ const App = () => {
     const {isFetching, error} = useGetUserQuery()
     const {headerType} = useAppSelector(state => state.app)
     const [start, setStart] = useState(true);
+
     useEffect(() => {
-        setTimeout(() => setStart(false), 1000)
-    }, []);
+        if (!isFetching) setTimeout(() => setStart(false), 100)
+
+    }, [isFetching]);
+
     if (isFetching && !error) return <Loader/>
     return (
         <>
