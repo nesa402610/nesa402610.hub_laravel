@@ -66,9 +66,9 @@ class UserController extends Controller
         return response($user, 200);
     }
 
-    public function getAllUsers()
+    public function getAllUsers(Request $request)
     {
-        $users = User::all();
+        $users = User::where('name', 'like', '%' . $request->userName . '%')->orWhere('lastName', 'like', '%' . $request->userName . '%')->limit(21)->get();
         return response($users, 200);
     }
 

@@ -33,8 +33,12 @@ export const userAPI = createApi({
             }),
             invalidatesTags: ["User"]
         }),
-        getAllUsers: builder.query<IUser[], void>({
-            query: () => `list`,
+        getAllUsers: builder.query<IUser[], string | number>({
+            query: (userName) => ({
+                url: 'list',
+                method: 'POST',
+                body: {userName}
+            }),
             providesTags: ["User"]
         }),
         login: builder.mutation({

@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
     Route::prefix('user')->group(function () {
         Route::get('', [AuthController::class, 'checkLogin']);
-        Route::get('list', [UserController::class, 'getAllUsers'])->withoutMiddleware('auth:sanctum');
+        Route::post('list', [UserController::class, 'getAllUsers'])->withoutMiddleware('auth:sanctum');
         Route::get('{username}', [UserController::class, 'getUser'])->withoutMiddleware('auth:sanctum');
         Route::prefix('edit')->group(function () {
             Route::post('account', [UserController::class, 'updateAccount']);
