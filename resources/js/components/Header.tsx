@@ -54,7 +54,7 @@ const Header: FC = () => {
                         {/*  Apps*/}
                         {/*</NavLink>    */}
                         <NavLink className={"nav-link"} to={"/NULL/unit/ZERO"}>
-                            <GiCentaurHeart size={"2rem"}/>
+                            <GiCentaurHeart size={'1.5rem'}/>
                             <span>Аниме</span>
                         </NavLink>
                     </nav>
