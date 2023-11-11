@@ -278,6 +278,18 @@ class AnimeController extends Controller
 //        }
     }
 
+    public function shikimoriHostUpdate(Request $request)
+    {
+        $newHost = $request->newHost;
+        $curHost = $request->currentHost;
+        $allCollections = HAnime::all();
+        foreach ($allCollections as $collection) {
+            $collection->image = str_replace($curHost, $newHost, $collection->image);
+            $collection->save();
+        }
+        return ['ok'];
+    }
+
     /**
      * @param Request $request
      * @param HAnime $anime

@@ -6,7 +6,8 @@ interface NavGroupProps {
     title: string
     items: {
         name: string
-        to: string
+        to?: string
+        callback?(): void
     }[]
 }
 
@@ -26,9 +27,18 @@ const NavGroup: FC<NavGroupProps> = ({title, items}) => {
             </span>
             <div
                 className={`${open ? 'max-h-[300px] pt-2' : 'max-h-0'} ease-out duration-200 overflow-y-clip transition-all] flex flex-col gap-2`}>
-                {items.map(({to, name}) => (
-                    <NavItem key={name} to={to} name={name}/>
-                ))}
+                {items.map(({to, name, callback}) => (
+                        <>
+                            {callback ?
+                                <div
+                                    className={"p-2 rounded-lg bg-slate-800 hover:scale-105 hover:bg-slate-900 transition-all"}
+                                    onClick={callback}>{name}</div>
+                                :
+                                <NavItem key={name} to={to} name={name}/>
+                            }
+                        </>
+                    )
+                )}
             </div>
         </div>
     );

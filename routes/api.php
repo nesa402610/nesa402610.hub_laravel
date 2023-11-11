@@ -116,6 +116,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
                 Route::put('/create', [StudioController::class, 'createStudio']);
                 Route::patch('/update', [StudioController::class, 'updateStudio']);
             });
+            Route::post('shikimori/hostfix', [AnimeController::class, 'shikimoriHostUpdate']);
         });
         Route::prefix('manga')->group(function () {
             Route::get('all', [MangaController::class, 'getAllManga']);

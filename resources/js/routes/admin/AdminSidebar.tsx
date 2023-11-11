@@ -16,6 +16,7 @@ const AdminSidebar = () => {
                 {name: 'Аниме студии', to: 'anime/studios'},
                 {name: 'Манга', to: 'manga'},
                 {name: 'Shikimori Anime', to: 'shikimori/anime'},
+                {name: 'Shikimori хост', to: 'shikimori/hostfix'},
             ]
         },
         {
@@ -26,6 +27,14 @@ const AdminSidebar = () => {
                 {name: 'DevProjects', to: 'projects'},
             ]
         },
+        {
+            groupName: 'Массовая рассылка',
+            items: [
+                {name: 'Тестовый email', callback: sendMail},
+                {name: 'Уведомить всех об обновлении сайта'},
+                {name: 'Обновление сайта'},
+            ],
+        }
     ]
     return (
         <aside className={"fixed flex flex-col p-4 bg-slate-800 w-[300px] h-full"}>
@@ -35,10 +44,6 @@ const AdminSidebar = () => {
                 {NavLinks.map(({groupName, items}) =>
                     <NavGroup key={groupName} items={items} title={groupName}/>
                 )}
-                <span onClick={sendMail}
-                      className={" p-2 rounded-lg bg-slate-700 hover:scale-105 hover:bg-slate-600 transition-all"}>
-                      Тестовый email
-                </span>
             </menu>
         </aside>
     )
