@@ -55,6 +55,7 @@ const Header: FC = () => {
                         {/*</NavLink>    */}
                         <NavLink className={"nav-link"} to={"/NULL/unit/ZERO"}>
                             <GiCentaurHeart size={"2rem"}/>
+                            <span>Аниме</span>
                         </NavLink>
                     </nav>
                     <hr className={"bg-neutral-400 h-[2px]  w-full"}/>
