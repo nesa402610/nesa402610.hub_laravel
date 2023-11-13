@@ -1,5 +1,5 @@
 import React from 'react';
-import HCollectionGenres from "../HCollectionGenres";
+import HCollectionGenres from "./HCollectionGenres";
 import {ICollection} from "types/types";
 import InfoField from "./InfoField";
 

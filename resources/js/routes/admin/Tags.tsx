@@ -8,16 +8,20 @@ const Tags = () => {
     const {data, isLoading} = useGetTagsQuery();
     const [createTag, {error}] = useCreateTagMutation();
     const [updateTag] = useUpdateTagMutation();
-    if (isLoading) return <Loader/>
-    const RxData = data.filter(tag => tag.type === 1)
-    const FFData = data.filter(tag => tag.type === 0)
 
+    if (isLoading) return <Loader/>
+    const FFDataTags = data.filter(tag => tag.type === 0)
+    const RxDataTags = data.filter(tag => tag.type === 1)
+    const RxDataGenres = data.filter(tag => tag.type === 2)
+    const FFDataGenres = data.filter(tag => tag.type === 3)
     return (
         <div className={"flex flex-col gap-4"}>
             <QuickAdder createFn={createTag} error={error} length={data?.length} tag/>
             <div className={'flex gap-4 justify-between'}>
-                <List data={RxData} updateFn={updateTag}/>
-                <List data={FFData} updateFn={updateTag}/>
+                <List title={'Rx теги'} data={RxDataTags} updateFn={updateTag}/>
+                <List title={'FF теги'} data={FFDataTags} updateFn={updateTag}/>
+                <List title={'Rx жанры'} data={RxDataGenres} updateFn={updateTag}/>
+                <List title={'FF жанры'} data={FFDataGenres} updateFn={updateTag}/>
             </div>
         </div>
     );

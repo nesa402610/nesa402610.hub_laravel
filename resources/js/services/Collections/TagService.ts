@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../../mockData";
-import {ICollectionTag} from "types/Tag";
+import {ICollectionTag, ITags} from "types/Tag";
 
 export const TagAPI = createApi({
   reducerPath: "TagAPI",
@@ -13,7 +13,7 @@ export const TagAPI = createApi({
   }),
   tagTypes: ["tag"],
   endpoints: build => ({
-    getTags: build.query<ICollectionTag[], void>({
+      getTags: build.query<ITags[], void>({
         query: () => "list",
         providesTags: ["tag"]
     }),

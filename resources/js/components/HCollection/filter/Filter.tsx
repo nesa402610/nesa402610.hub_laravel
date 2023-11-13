@@ -83,7 +83,8 @@ const HCollectionFilter: FC = () => {
                         <RatingField rating={rating} setRating={setRating}/>
                     </div>
                     {/*<GenreField tags={tags} setTags={setTags}/>*/}
-                    <Selector placeholder={'Жанры'} values={useGetTagsQuery()} selected={tags} setSelected={setTags}/>
+                    <Selector placeholder={'Жанры и теги'} values={useGetTagsQuery()} selected={tags}
+                              setSelected={setTags}/>
                 </div>
                 <div className={'flex gap-4 items-center xs:flex-col md:flex-row'}>
                     <div className={'w-full'}>

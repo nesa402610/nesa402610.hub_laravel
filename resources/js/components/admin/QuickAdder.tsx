@@ -13,10 +13,10 @@ interface QuickAdderProps {
 
 const QuickAdder: FC<QuickAdderProps> = ({error, createFn, length, tag}) => {
     const [value, setValue] = useState('');
-    const [rx, setRx] = useState(false);
+    const [type, setType] = useState('0');
     const [errorValue, setErrorValue] = useState('');
     const createHandler = () => {
-        createFn({name: value, type: rx})
+        createFn({name: value, type})
             .unwrap()
             .then(() => {
                 setValue('')
@@ -29,17 +29,19 @@ const QuickAdder: FC<QuickAdderProps> = ({error, createFn, length, tag}) => {
         <div className={"flex flex-col"}>
             <div className={"flex gap-4"}>
                 <div className={'flex gap-2 flex-1'}>
-                    <input type="text" className={'w-full'}
+                    <input type="text" className={'w-full mt-0'}
                            placeholder={"Название тега"}
                            autoComplete={"false"}
                            value={value}
                            onChange={e => setValue(e.target.value)}/>
                     {tag &&
-                        <label className={'flex items-center gap-2'}>
-                            Rx?
-                            <input type="checkbox" checked={rx}
-                                   onChange={e => (setRx(e.target.checked))}/>
-                        </label>
+                        <select value={type} className={'bg-slate-600 rounded-lg px-2'}
+                                onChange={e => setType(e.target.value)}>
+                            <option value='0'>FF тег</option>
+                            <option value='1'>Rx тег</option>
+                            <option value='2'>Rx жанр</option>
+                            <option value='3'>FF жанр</option>
+                        </select>
                     }
                 </div>
                 <button className={"bg-slate-700 px-8"} onClick={createHandler}>Добавить</button>

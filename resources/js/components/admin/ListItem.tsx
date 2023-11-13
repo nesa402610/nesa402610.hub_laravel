@@ -24,12 +24,14 @@ const ListItem = ({id, name, updateFn, tag: type}) => {
                        autoFocus
                        onChange={e => setNewName(e.target.value)}
                        onKeyUp={e => updateHandler(e)}/>
-                {(type === 0 || type === 1) &&
-                    <label className={'flex items-center gap-2'}>
-                        Rx?
-                        <input type="checkbox" checked={newType}
-                               onChange={e => (setNewType(e.target.checked))}/>
-                    </label>
+                {typeof type === 'number' &&
+                    <select value={newType} className={'bg-slate-600 rounded-lg px-2'}
+                            onChange={e => setNewType(+e.target.value)}>
+                        <option value='0'>FF тег</option>
+                        <option value='1'>Rx тег</option>
+                        <option value='2'>Rx жанр</option>
+                        <option value='3'>FF жанр</option>
+                    </select>
                 }
             </div>
         );

@@ -257,12 +257,26 @@ class AnimeController extends Controller
     public function addTag(Request $request)
     {
         $tagType = $request->tagType;
-        $collection = HAnime::find($request->titleId);
-        if ($tagType === 'genre') $collection->genres()->attach($request->tagId);
-        else $collection->tags()->attach($request->tagId);
+        $titleId = $request->titleId;
+        $collection = HAnime::find($titleId);
+        $tagId = $request->tagId;
+//return [$collection->tags, $collection->genres];
+        if ($tagType === 'genre') {
+            if ($collection->tags->contains('tag_id', $tagId)) {
+                $collection->tags()->detach($tagId);
+            }
+            $collection->genres()->attach($tagId);
+        } else {
+            if ($collection->genres->contains('tag_id', $tagId)) {
+                $collection->genres()->detach($tagId);
+            }
+            $collection->tags()->attach($tagId);
+//            return [$collection->genres->contains('id', '=', $tagId)];
+        }
     }
 
-    public function removeTag(Request $request)
+    public
+    function removeTag(Request $request)
     {
         $collection = HAnime::find($request->titleId);
         $tagType = $request->tagType;
@@ -270,7 +284,8 @@ class AnimeController extends Controller
         else $collection->tags()->detach($request->tagId);
     }
 
-    public function checkPasskey(Request $request)
+    public
+    function checkPasskey(Request $request)
     {
 //        if (Auth::check()) {
 //            if (Auth::user()->id === 1)
@@ -286,7 +301,8 @@ class AnimeController extends Controller
 //        }
     }
 
-    public function shikimoriHostUpdate(Request $request)
+    public
+    function shikimoriHostUpdate(Request $request)
     {
         $newHost = $request->newHost;
         $curHost = $request->currentHost;
@@ -303,7 +319,8 @@ class AnimeController extends Controller
      * @param HAnime $anime
      * @return void
      */
-    public function animeFields($request, HAnime $anime): void
+    public
+    function animeFields($request, HAnime $anime): void
     {
         $anime->title_ru = $request['title_ru'];
         $anime->title_en = $request['title_en'];

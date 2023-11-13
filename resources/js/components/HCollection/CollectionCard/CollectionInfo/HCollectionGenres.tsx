@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {useGetUserQuery} from "services/userService";
 import {useRemoveTagMutation} from "services/Collections/AnimeService";
-import TagSelector from "../TagSelector";
 import {ICollectionTag} from "types/Tag";
+import TagSelector from "components/HCollection/TagSelector";
 
 const HCollectionGenres = ({genres, collectionID, collection}) => {
     const {data: user} = useGetUserQuery();
@@ -10,7 +10,7 @@ const HCollectionGenres = ({genres, collectionID, collection}) => {
 
     const [tagDropDown, setTagDropDown] = useState(false);
     const deleteTagHandler = (titleId, tagId) => {
-        removeTag({titleId, tagId, tagtype: 'genre'});
+        removeTag({titleId, tagId, tagType: 'genre'});
     };
     return (
         <span className={"flex gap-1 md:flex-nowrap xs:flex-wrap"}>
@@ -34,7 +34,7 @@ const HCollectionGenres = ({genres, collectionID, collection}) => {
                         +
                         {tagDropDown &&
                             <TagSelector tagType={'genre'} collectionID={collectionID}
-                                         collectionTags={collection.tags}/>
+                                         collectionTags={collection.genres}/>
                         }
                     </div>
                 }

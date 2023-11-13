@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC} from "react";
 import Title from "./Title";
 import CollectionStatus from "./CollectionStatus";
 import {ICollection} from "types/types";
@@ -8,8 +8,7 @@ import CollectionInfo from "./CollectionInfo/CollectionInfo";
 import {useGetUserQuery} from "services/userService";
 import {FiEdit} from "react-icons/fi";
 import {Link} from "react-router-dom";
-import TagSelector from "components/HCollection/TagSelector";
-import {useRemoveTagMutation} from "services/Collections/AnimeService";
+import HCollectionTags from "components/HCollection/CollectionCard/HCollectionTags";
 
 interface CollectionProps {
     collection: ICollection;
@@ -23,13 +22,6 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin =
     const type = collection?.type === 0 ? 'ZERO' : 'ONE'
 
     if (!collection) return null;
-
-    const [removeTag] = useRemoveTagMutation();
-
-    const [tagDropDown, setTagDropDown] = useState(false);
-    const deleteTagHandler = (titleId, tagId) => {
-        removeTag({titleId, tagId, tagType: 'tag'});
-    };
 
     const path = admin ? `${collection.id}` : `/NULL/unit/${type}/${collection.id}`
     return (
@@ -58,21 +50,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin =
                         <CollectionDescription description={collection.description}/>
                     </div>
                 </div>
-                <div className={'text-sm text-neutral-400 flex flex-wrap gap-x-1'}>
-                    <span>Теги:&nbsp;</span>
-                    {collection.tags.map(tag => <span onClick={() => deleteTagHandler(collection.id, tag.tag_id)}
-                                                      key={tag.tag_id}>{tag.name}</span>)}
-                    {isAdmin &&
-                        <div onClick={() => setTagDropDown(prev => !prev)}
-                             className={"bg-neutral-800 px-2 rounded-full relative"}>
-                            +
-                            {tagDropDown &&
-                                <TagSelector tagType={'tag'} collectionID={collection.id}
-                                             collectionTags={collection.tags}/>
-                            }
-                        </div>
-                    }
-                </div>
+                <HCollectionTags collectionID={collection.id} collectionTags={collection.tags}/>
             </div>
         </div>
     );
