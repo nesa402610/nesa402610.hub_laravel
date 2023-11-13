@@ -9,6 +9,21 @@ interface profileTabProps {
 const ProfileTab: FC<profileTabProps> = ({user}) => {
     const [updateProfile, {}] = useUpdateProfileMutation()
     const [userData, setUserData] = useState<IUser>(user);
+    const [errors, setErrors] = useState(
+        {avatar: null}
+    );
+
+    const setUserAvatar = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const regex = /^https:\/\//g
+        const avatarLink = e.target.value
+        if (!regex.test(avatarLink)) {
+            setErrors({...errors, avatar: 'Некорректно введена ссылка на изображение'})
+        } else {
+            setErrors({...errors, avatar: null})
+        }
+        setUserData({...userData, avatar: e.target.value})
+
+    }
     return (
         <div className={'block--dark sm:flex-col'}>
             <h2 className={'text-center text-xl'}>Профиль</h2>
@@ -56,11 +71,17 @@ const ProfileTab: FC<profileTabProps> = ({user}) => {
                            type={'date'}/>
                 </label>
                 <label>
-                    Изображение профиля <span className={'text-sm italic text-neutral-400'}>Изображение должно быть квадратным</span>
+                    Изображение профиля
+                    <span className={'text-sm italic text-neutral-400'}>
+                        &nbsp;Изображение должно быть квадратным
+                    </span>
                     <input className={'bg-neutral-700'}
-                           onChange={e => setUserData({...userData, avatar: e.target.value})}
+                           onChange={setUserAvatar}
                            value={userData.avatar}
-                           type={'text'}/>
+                           type={'text'}
+
+                    />
+                    {errors.avatar && <span className={'text-sm text-red-600'}>{errors.avatar}</span>}
                 </label>
                 <button className={'bg-neutral-700'} onClick={() => updateProfile(userData)}>Обновить данные</button>
             </div>

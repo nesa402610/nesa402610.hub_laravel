@@ -7,9 +7,10 @@ import {useAddTagToAnimeMutation} from "services/Collections/AnimeService";
 interface TagSelectorProps {
     collectionTags: ICollectionTag[];
     collectionID: string | number
+    tagType: 'genre' | 'tag'
 }
 
-const TagSelector: FC<TagSelectorProps> = ({collectionTags, collectionID}) => {
+const TagSelector: FC<TagSelectorProps> = ({collectionTags, collectionID, tagType = 'tag'}) => {
     const {data: tags, isLoading} = useGetTagsQuery();
     const [freeTags, setFreeTags] = useState<ICollectionTag[]>([]);
     const [tagSearch, setTagSearch] = useState('');
@@ -24,13 +25,13 @@ const TagSelector: FC<TagSelectorProps> = ({collectionTags, collectionID}) => {
     }, [tags, collectionTags, tagSearch, rxSearch]);
 
     const [addTag] = useAddTagToAnimeMutation();
-    const addTagHandler = (titleId, tagId) => {
-        addTag({titleId, tagId});
+    const addTagHandler = (titleId: string | number, tagId: number) => {
+        addTag({titleId, tagId, tagType});
     };
     return (
         <div onClick={e => e.stopPropagation()}
              placeholder={'Школа'}
-             className={"absolute p-2 rounded-lg min-w-[250px] h-[300px] overflow-hidden bg-neutral-800 flex flex-col gap-2 right-0"}>
+             className={"absolute p-2 rounded-lg min-w-[250px] h-[300px] overflow-hidden bg-neutral-800 flex flex-col gap-2 right-0 z-50 left-0 text-base text-white"}>
             {isLoading ? <Loader/> :
                 <>
                     <div className={'flex flex-col gap-2 bg-neutral-900 p-2 rounded-lg'}>

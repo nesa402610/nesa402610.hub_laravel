@@ -10,6 +10,7 @@ import {IAnimeStudio} from "./Anime";
 
 
 export interface ICollection {
+    genres: ICollectionTag[];
     kind: string;
     videosCount: number;
     type: number

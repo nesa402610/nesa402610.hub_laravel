@@ -1,5 +1,5 @@
 export interface ICollectionTag {
-  id: number;
+    tag_id: number;
   name: string;
   type: number
 }

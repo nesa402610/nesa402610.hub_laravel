@@ -80,9 +80,14 @@ class HAnime extends Model
         return $this->belongsToMany(Studios::class, 'studio_collection', 'collection_id', 'studio_id');
     }
 
-    public function tags()
+    public function genres()
     {
         return $this->belongsToMany(Tags::class, 'tag_collection', 'collection_id', 'tag_id')->select(['tag_id', 'name']);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class, 'collection_tags', 'collection_id', 'tag_id')->select(['tag_id', 'name']);
     }
 
     public function links()
@@ -100,6 +105,6 @@ class HAnime extends Model
     public function ratings()
     {
         $ratings = DB::table('collection_ratings')->where('anime_id', $this->id)->pluck('rating');
-        return $ratings->sum() / $ratings->count();
+        return $ratings->sum() / $ratings->count() ?? 0;
     }
 }

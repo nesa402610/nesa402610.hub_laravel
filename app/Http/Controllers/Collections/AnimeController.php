@@ -18,6 +18,7 @@ class AnimeController extends Controller
         $anime = HAnime::find($request->id);
 
     }
+
     public function getRandomAnime($limit)
     {
         $anime = HAnime::inRandomOrder()->limit($limit)->get();
@@ -68,13 +69,13 @@ class AnimeController extends Controller
         $anime->save();
 
         if ($request['rating'] !== 'rx') {
-            $anime->tags()->detach();
+            $anime->genres()->detach();
         }
         foreach ($genres as $genre) {
             $tag = Tags::where('name', $genre['russian'])->first();
             $addedTags = $anime->tags;
             if ($tag && !$addedTags->contains('name', $genre['russian'])) {
-                $anime->tags()->attach($tag->id);
+                $anime->genres()->attach($tag->id);
             }
         }
     }
@@ -92,6 +93,7 @@ class AnimeController extends Controller
         $anime = HAnime::where('type', 0)->get();
         foreach ($anime as $collection) {
             $collection->tags->makeHidden('pivot');
+            $collection->genres->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
             $collection->status = $collection->animeStatus();
             $collection->videosCount = $collection->links()->count();
@@ -119,7 +121,7 @@ class AnimeController extends Controller
             $tags = $duplie->tags;
             array_push($arrTags, $tags);
             foreach ($tags as $tag) {
-                $duplie->tags()->detach($tag->id);
+                $duplie->genres()->detach($tag->id);
             }
             $duplie->delete();
         }
@@ -170,6 +172,7 @@ class AnimeController extends Controller
 
         foreach ($collections as $collection) {
             $collection->tags->makeHidden('pivot');
+            $collection->genres->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
             $collection->status = $collection->animeStatus();
             $collection->videosCount = $collection->links()->count();
@@ -181,8 +184,9 @@ class AnimeController extends Controller
     {
         $collection = HAnime::find($id);
         $collection->tags->makeHidden('pivot');
+        $collection->genres->makeHidden('pivot');
         $collection->studios->makeHidden('pivot');
-        $collection->ratings = $collection->ratings();
+//        $collection->ratings = $collection->ratings();
         $collection->status = $collection->animeStatus();
         $collection->videosCount = $collection->links()->count();
 
@@ -252,14 +256,18 @@ class AnimeController extends Controller
 
     public function addTag(Request $request)
     {
+        $tagType = $request->tagType;
         $collection = HAnime::find($request->titleId);
-        $collection->tags()->attach($request->tagId);
+        if ($tagType === 'genre') $collection->genres()->attach($request->tagId);
+        else $collection->tags()->attach($request->tagId);
     }
 
-    public function removeTag(Request $request): void
+    public function removeTag(Request $request)
     {
         $collection = HAnime::find($request->titleId);
-        $collection->tags()->detach($request->tagId);
+        $tagType = $request->tagType;
+        if ($tagType === 'genre') $collection->genres()->detach($request->tagId);
+        else $collection->tags()->detach($request->tagId);
     }
 
     public function checkPasskey(Request $request)

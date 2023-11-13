@@ -82,7 +82,7 @@ class MangaController extends Controller
     public function addTag(Request $request)
     {
         $collection = HAnime::find($request->titleId);
-        $collection->tags()->attach($request->tagId);
+        $collection->genres()->attach($request->tagId);
     }
 
     public function getMangaPages(Request $request)

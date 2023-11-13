@@ -1,5 +1,5 @@
 import React from 'react';
-import HCollectionTags from "./../HCollectionTags";
+import HCollectionGenres from "../HCollectionGenres";
 import {ICollection} from "types/types";
 import InfoField from "./InfoField";
 
@@ -16,8 +16,8 @@ const CollectionInfo = ({collection}: { collection: ICollection }) => {
             <div className={"flex flex-col"}>
                 <InfoField title={'Дата: '} value={collection.announce_date.slice(0, 4)}/>
                 <InfoField title={'Тип: '} value={colKind}/>
-                <HCollectionTags collection={collection} tags={collection.tags}
-                                 collectionID={collection.id}/>
+                <HCollectionGenres collection={collection} genres={collection.genres}
+                                   collectionID={collection.id}/>
                 <InfoField title={'Эпизоды: '}>
                     {collection.episodes_total ?
                         `${collection.episodes_released} / ${collection.episodes_total}
