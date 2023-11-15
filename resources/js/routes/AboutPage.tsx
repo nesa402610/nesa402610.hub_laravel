@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import Tabs from "../components/UI/Tabs";
 import AboutStudy from "../components/about/AboutStudy";
-import AboutSkills from "../components/about/AboutSkills";
+import AboutSkills from "../components/about/AboutSkills/AboutSkills";
 
 const AboutPage: FC = () => {
     const [tab, setTab] = useState(0);

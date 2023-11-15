@@ -5,17 +5,19 @@ import {BiTime} from "react-icons/bi";
 import {useGetPostByIdQuery} from "services/postService";
 import PostComments from "components/blog/PostComments";
 import Loader from "components/Loader";
+import usePageTitle from "hooks/usePageTitle";
 
 const BlogPostPage = () => {
     const {id} = useParams()
     const {data: post, isLoading} = useGetPostByIdQuery(id)
 
+    usePageTitle(post?.title)
     if (isLoading) return <Loader/>
 
     return (
         <div className={'m-4 flex flex-col gap-4'}>
             <div className={'block--light sm:flex-col'}>
-                <div>{post?.title}</div>
+                <h1 className={'font-bold'}>{post?.title}</h1>
                 <div>
                     {post?.body}
                 </div>

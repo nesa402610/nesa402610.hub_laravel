@@ -116,12 +116,11 @@ class AnimeController extends Controller
         $anime = HAnime::where('type', 0)->get();
         $animeUniq = $anime->unique('title_original');
         $duplies = $anime->diff($animeUniq);
-        $arrTags = [];
         foreach ($duplies as $duplie) {
             $tags = $duplie->tags;
-            array_push($arrTags, $tags);
             foreach ($tags as $tag) {
                 $duplie->genres()->detach($tag->id);
+                $duplie->tags()->detach($tag->id);
             }
             $duplie->delete();
         }
@@ -164,6 +163,11 @@ class AnimeController extends Controller
         //тип сортировки
         if ($kind) {
             $query->where('kind', 'like', $kind);
+        }
+        $userBirthday = Auth::user()->birthday;
+        $userOld = date('Y') - date('Y', strtotime($userBirthday));
+        if ($userOld < 18) {
+            $query->where('rating', '!=', 'Rx');
         }
         //тип отвечает за аниме - 0 / мангу - 1
         $query->where('type', 0);

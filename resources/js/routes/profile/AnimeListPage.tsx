@@ -7,7 +7,7 @@ import HCollectionCard from "../../components/HCollection/CollectionCard/HCollec
 
 const AnimeListPage = () => {
     const {animestatus, username} = useParams()
-    const {data, isFetching} = useGetUserAnimeListQuery({userId: username, animestatus})
+    const {data, isFetching, isLoading} = useGetUserAnimeListQuery({userId: username, animestatus})
     const {data: animeOverview} = useGetUserAnimeOverviewQuery(username)
     const statusList = [
         {name: 'watched', text: 'Просмотренные', count: animeOverview?.watched},
@@ -32,7 +32,7 @@ const AnimeListPage = () => {
                 )}
             </div>
 
-            {!isFetching ? data.map(anime =>
+            {!isLoading ? data.map(anime =>
                 <HCollectionCard collection={anime.anime} link/>
             ) : <Loader/>}
             {(!data?.length && !isFetching) &&

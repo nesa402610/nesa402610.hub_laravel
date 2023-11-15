@@ -21,7 +21,7 @@ const HCollectionTags: FC<HCollectionTagsProps> = ({collectionTags, collectionID
     return (
         <div className={'text-sm text-neutral-400 flex flex-wrap gap-x-1'}>
             <span>Теги:&nbsp;</span>
-            {collectionTags.map((tag) =>
+            {collectionTags?.map((tag) =>
                 (
                     <span onClick={() => deleteTagHandler(collectionID, tag.tag_id)}
                           className={'px-2 bg-neutral-800 rounded-full'}

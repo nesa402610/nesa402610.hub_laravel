@@ -1,54 +1,55 @@
 import React, {FC} from 'react';
 import {IoLogoCss3, IoLogoHtml5, IoLogoJavascript, IoLogoLaravel, IoLogoReact} from "react-icons/io5";
 import {SiPhp, SiRedux, SiTailwindcss, SiTypescript} from "react-icons/si";
+import AboutSkillsGroup from "components/about/AboutSkills/AboutSkillsGroup";
 
 const AboutSkills: FC = () => {
     const nativeSkills = [
         {
             name: 'JavaScript',
-            progress: 'w-[75%]',
+            progress: '75%',
             logo: <IoLogoJavascript className={'text-5xl'}/>
         },
         {
             name: 'HTML5',
-            progress: 'w-[93%]',
+            progress: '93%',
             logo: <IoLogoHtml5 className={'text-5xl'}/>
         },
         {
             name: 'CSS3',
-            progress: 'w-[88%]',
+            progress: '88%',
             logo: <IoLogoCss3 className={'text-5xl'}/>
         },
         {
             name: 'PHP',
-            progress: 'w-[30%]',
+            progress: '15%',
             logo: <SiPhp className={'text-5xl'}/>
         }
     ];
     const frameworks = [
         {
             name: 'ReactJS',
-            progress: 'w-[85%]',
+            progress: '65%',
             logo: <IoLogoReact className={'text-5xl'}/>
         },
         {
             name: 'Laravel',
-            progress: 'w-[20%]',
+            progress: '20%',
             logo: <IoLogoLaravel className={'text-5xl'}/>
         },
         {
             name: 'TailwindCSS',
-            progress: 'w-[60%]',
+            progress: '60%',
             logo: <SiTailwindcss className={'text-5xl'}/>
         },
         {
             name: 'Redux (RTK)',
-            progress: 'w-[70%]',
+            progress: '50%',
             logo: <SiRedux className={'text-5xl'}/>
         },
         {
             name: 'TypeScript',
-            progress: 'w-[30%]',
+            progress: '20%',
             logo: <SiTypescript className={'text-5xl'}/>
         }
     ]
@@ -57,31 +58,13 @@ const AboutSkills: FC = () => {
             <div>
                 <h2 className={'text-center font-bold text-2xl'}>Нативные знания</h2>
                 <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
-                    {nativeSkills.map(skill =>
-                        <div key={skill.name} className={'flex block--light flex-col items-center flex-1'}>
-                            {skill.logo}
-                            <span className={'font-bold'}>{skill.name}</span>
-                            <div className={'w-full bg-zinc-400 h-[8px] rounded-full overflow-hidden'}>
-                                <div className={`bg-rose-400 h-full ${skill.progress}`}/>
-                            </div>
-                            {skill.progress.substring(3, 6)}
-                        </div>
-                    )}
+                    <AboutSkillsGroup skillsArray={nativeSkills}/>
                 </div>
             </div>
             <div>
                 <h2 className={'text-center font-bold text-2xl'}>Знания фреймворков</h2>
                 <div className={'flex xs:flex-col sm:flex-row gap-4 mt-4 justify-center'}>
-                    {frameworks.map(skill =>
-                        <div key={skill.name} className={'flex block--light flex-col items-center flex-1'}>
-                            {skill.logo}
-                            <span className={'font-bold'}>{skill.name}</span>
-                            <div className={'w-full bg-zinc-400 h-[8px] rounded-full overflow-hidden'}>
-                                <div className={`bg-rose-400 h-full ${skill.progress}`}/>
-                            </div>
-                            {skill.progress.substring(3, 6)}
-                        </div>
-                    )}
+                    <AboutSkillsGroup skillsArray={frameworks}/>
                 </div>
             </div>
         </div>
