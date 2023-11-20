@@ -14,7 +14,7 @@ export interface ICollection {
     kind: string;
     videosCount: number;
     type: number
-    rating: number;
+    rating: string;
     style: number;
     review: string;
     status: number
@@ -37,6 +37,12 @@ export interface ICollection {
     origins: string;
     author: string;
     created_at: string;
+}
+
+export interface paginatedData<T> {
+    data: T,
+    current_page: number;
+    last_page: number;
 }
 
 
