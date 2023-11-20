@@ -35,7 +35,7 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
         if (totalPages < currentPage) {
             setCurrentPage(totalPages)
         }
-    }, [totalPages]);
+    }, [totalPages, currentPage]);
     return (
         <div className={"flex xs:gap-1 md:gap-4 items-center justify-center"}>
           <span onClick={() => toPageHandler(1)}
