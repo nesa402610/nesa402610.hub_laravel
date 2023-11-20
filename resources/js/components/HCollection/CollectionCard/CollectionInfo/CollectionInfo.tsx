@@ -9,7 +9,6 @@ const CollectionInfo = ({collection}: { collection: ICollection }) => {
     else if (colKind === 'SPECIAL') colKind = 'Спешл'
     else if (colKind === 'MUSIC') colKind = 'Клип'
     else if (colKind === 'MOVIE') colKind = 'Фильм'
-
     return (
         <div className={"text-neutral-300"}>
             <h3 className={"mt-4 font-bold"}>Информация</h3>
@@ -27,7 +26,9 @@ const CollectionInfo = ({collection}: { collection: ICollection }) => {
                 </InfoField>
                 <InfoField title={'Длительность серии:'} value={`${collection.episode_time} мин.`}/>
                 <InfoField title={'Студия:'} value={collection.studios?.map(studio => studio.name)}/>
-                <InfoField title={'Цензура:'} value={collection.censure ? "С цензурой" : "Без цензуры"}/>
+                <InfoField title={'Цензура:'} hidden={collection.rating !== 'Rx'}>
+                    {collection.censure ? "С цензурой" : "Без цензуры"}
+                </InfoField>
                 <InfoField title={'Рейтинг:'} value={collection.rating}/>
             </div>
 
