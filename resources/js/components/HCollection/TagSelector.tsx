@@ -19,7 +19,6 @@ const TagSelector: FC<TagSelectorProps> = ({collectionTags, collectionID, tagTyp
     useMemo(() => {
         if (!tags) return;
         const itemTags = collectionTags;
-        console.log(itemTags)
         const freeTags = tags.filter(tag => !itemTags?.map(itemTag => itemTag.name).includes(tag.name));
         const freeTagsWithSearch = freeTags.filter(tag => tag.name.toLowerCase().includes(tagSearch.toLowerCase()) && tag.type !== rxSearch)
         setFreeTags(freeTagsWithSearch);
