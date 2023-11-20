@@ -4,21 +4,15 @@ import Paginator from "../../../components/UI/Paginator";
 import {useGetAllAnimeQuery} from "services/Collections/AnimeService";
 import {useAppSelector} from "hooks/redux";
 import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";
-
-
-// interface HAnimePageProps {
-//   filteredCollection?: ICollection[];
-//   setCollections?: Dispatch<any>;
-//   setError?(data: {}): any
-// }
+import {useSearchParams} from "react-router-dom";
 
 const HAnimePage: FC = () => {
     const {filter} = useAppSelector(state => state.collection)
-    // const passkey = localStorage.getItem("passkey");
-    const [page, setPage] = useState(1);
+    const [params, setParams] = useSearchParams();
+    const [page, setPage] = useState(params.get('page') || 1);
     const {data, isLoading, isFetching} = useGetAllAnimeQuery({
         passkey: null,
-        page,
+        page: +page,
         query: filter
     });
 
