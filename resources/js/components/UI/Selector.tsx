@@ -32,7 +32,7 @@ const Selector: FC<SelectorProps> = ({values, children, placeholder, selected, s
     return (
         <div className={'flex flex-col w-full'}>
             <span>{placeholder}</span>
-            <div className={"h-full relative bg-neutral-600 p-2 rounded-lg"}
+            <div className={"relative bg-neutral-600 p-2 rounded-lg min-h-[35px]"}
                  onClick={e => dropdownHandler(e)}
             >
                 <div className={'flex flex-wrap gap-1'}>
