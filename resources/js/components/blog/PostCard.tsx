@@ -37,7 +37,7 @@ const PostCard: FC<PostCardProps> = ({post, user}) => {
             <div onClick={() => nav(`${post.id}`)} key={post.id}
                  onContextMenu={(e) => toggleHandle(e, `${post.id}`)}>
                 <div
-                    className={'flex h-[250px] transition-all cursor-pointer hover:-translate-y-2 drop-shadow-xl group flex-col xs:justify-start' + (post.visibility ? ' brightness-150 block--dark opacity-30' : ' block--light')}>
+                    className={'flex h-[230px] transition-all cursor-pointer hover:-translate-y-2 drop-shadow-xl group flex-col xs:justify-start' + (post.visibility ? ' brightness-150 block--dark opacity-30' : ' block--light')}>
                     <div className={'flex justify-between gap-2'}>
                         <span className={'font-bold overflow-hidden overflow-ellipsis whitespace-nowrap'}>
                     {post.title}

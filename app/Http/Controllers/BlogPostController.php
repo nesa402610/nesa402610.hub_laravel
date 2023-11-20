@@ -11,7 +11,7 @@ class BlogPostController extends Controller
 {
     public function getAllPosts()
     {
-        $posts = BlogPost::orderBy('id', 'desc')->get();
+        $posts = BlogPost::orderBy('id', 'desc')->paginate(12);
 
         return response($posts, 200);
     }
