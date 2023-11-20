@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class SuggestionController extends Controller {
     public function getAllTasks() {
-        $all = Suggestion::orderBy('id', 'desc')->get();
+        $notCompleted = Suggestion::where('status', '!=', 4)->get();
+
+        $completed = Suggestion::where('status', 4)->get();
+        $all = $notCompleted->concat($completed);
         foreach ($all as $item) {
             $item->user;
         }
+
         return response($all);
     }
 
