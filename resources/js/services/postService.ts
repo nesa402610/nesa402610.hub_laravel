@@ -1,6 +1,7 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {csrf_token} from "../mockData";
 import {IComment, IPost} from "types/Post";
+import {paginatedData} from "types/types";
 
 export const postAPI = createApi({
     reducerPath: 'postApi',
@@ -13,8 +14,12 @@ export const postAPI = createApi({
     }),
     tagTypes: ['Post', 'CommentList', 'PostList'],
     endpoints: (builder) => ({
-        getPosts: builder.query<IPost[], void>({
-            query: () => ``,
+        getPosts: builder.query<paginatedData<IPost[]>, string | number>({
+            query: (page) => (
+                {
+                    url: '',
+                    params: {page}
+                }),
             providesTags: ['PostList']
         }),
         getPostById: builder.query<IPost, string>({

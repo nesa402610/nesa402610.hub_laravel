@@ -1,19 +1,13 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {csrf_token} from "../../mockData";
 import {IAnimeVideos} from "types/Anime";
-import {ICollection} from "types/types";
+import {ICollection, paginatedData} from "types/types";
 
 interface getArgs {
     page?: number;
     id?: string;
     passkey?: string;
     query?: any
-}
-
-interface withPaginate {
-    data: ICollection[];
-    current_page: number;
-    last_page: number;
 }
 
 interface AnimeListOverviewProps {
@@ -40,7 +34,7 @@ export const AnimeAPI = createApi({
     }),
     tagTypes: ["anime", "videos", "animeList", 'UserAnimeList'],
     endpoints: (builder) => ({
-        getAllAnime: builder.query<withPaginate, getArgs>({
+        getAllAnime: builder.query<paginatedData<ICollection[]>, getArgs>({
             query: ({page = 1, passkey, query = null}) => ({
                 url: "list?page=" + page,
                 method: "POST",
