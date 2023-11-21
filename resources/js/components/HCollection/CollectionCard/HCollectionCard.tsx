@@ -8,7 +8,7 @@ import CollectionInfo from "./CollectionInfo/CollectionInfo";
 import {useGetUserQuery} from "services/userService";
 import {FiEdit} from "react-icons/fi";
 import {Link} from "react-router-dom";
-import HCollectionTags from "components/HCollection/CollectionCard/HCollectionTags";
+import HCollectionTags from "components/HCollection/CollectionCard/HCollectionTags/HCollectionTags";
 
 interface CollectionProps {
     collection: ICollection;

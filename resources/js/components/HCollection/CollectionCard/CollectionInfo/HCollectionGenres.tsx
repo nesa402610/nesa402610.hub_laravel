@@ -1,15 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import {useGetUserQuery} from "services/userService";
 import {useRemoveTagMutation} from "services/Collections/AnimeService";
 import {ICollectionTag} from "types/Tag";
-import TagSelector from "components/HCollection/TagSelector";
+import AdminTagSelector from "components/HCollection/CollectionCard/AdminTagSelector";
 
-const HCollectionGenres = ({genres, collectionID, collection}) => {
+const HCollectionGenres = ({genres, collectionID}) => {
     const {data: user} = useGetUserQuery();
     const [removeTag] = useRemoveTagMutation();
 
-    const [tagDropDown, setTagDropDown] = useState(false);
-    const deleteTagHandler = (titleId, tagId) => {
+    const deleteTagHandler = (titleId: number, tagId: number) => {
         removeTag({titleId, tagId, tagType: 'genre'});
     };
     return (
@@ -28,16 +27,7 @@ const HCollectionGenres = ({genres, collectionID, collection}) => {
                         }
                     </div>
                 )}
-                {user?.role[0]?.name === 'Admin' &&
-                    <div onClick={() => setTagDropDown(prev => !prev)}
-                         className={"bg-neutral-800 px-2 rounded-full relative"}>
-                        +
-                        {tagDropDown &&
-                            <TagSelector tagType={'genre'} collectionID={collectionID}
-                                         collectionTags={collection.genres}/>
-                        }
-                    </div>
-                }
+                <AdminTagSelector collectionID={collectionID} items={genres}/>
                 </div>
         </span>
     );
