@@ -9,7 +9,7 @@ interface PortalProps {
 const Portal: FC<PortalProps> = ({children, variant = 'fullscreen'}) => {
     const variants = {
         fullscreen: 'inset-0',
-        cetner: '',
+        center: 'justify-center',
     }
     return (
         createPortal(
