@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {FaStar} from 'react-icons/fa';
 
-const CollectionRating = () => {
+const CollectionScore = () => {
     const [rating, setRating] = useState(null);
 
     const ratings = [1, 2, 3, 4, 5]
@@ -17,4 +17,4 @@ const CollectionRating = () => {
     );
 };
 
-export default CollectionRating;
+export default CollectionScore;

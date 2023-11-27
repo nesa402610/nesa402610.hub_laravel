@@ -1,11 +1,16 @@
-import React from "react";
-import {useGetUserQuery} from "services/userService";
+import React, {FC} from "react";
 import {useRemoveTagMutation} from "services/Collections/AnimeService";
 import {ICollectionTag} from "types/Tag";
 import AdminTagSelector from "components/HCollection/CollectionCard/AdminTagSelector";
+import AdminChecker from "components/AdminChecker";
 
-const HCollectionGenres = ({genres, collectionID}) => {
-    const {data: user} = useGetUserQuery();
+interface HCollectionGenresProps {
+    genres: ICollectionTag[]
+    collectionID: number
+}
+
+
+const HCollectionGenres: FC<HCollectionGenresProps> = ({genres, collectionID}) => {
     const [removeTag] = useRemoveTagMutation();
 
     const deleteTagHandler = (titleId: number, tagId: number) => {
@@ -19,12 +24,12 @@ const HCollectionGenres = ({genres, collectionID}) => {
                     <div key={genre.tag_id}
                          className={(genre.name === "Золото" ? "bg-amber-400 text-neutral-600" : genre.name === "Серебро" ? "bg-zinc-500" : genre.name === "Медь" ? "bg-amber-700" : "bg-neutral-800") + "  px-2 rounded-full flex items-center"}>
                         <span className={"whitespace-nowrap"}>{genre.name}</span>
-                        {user?.role[0]?.name === 'Admin' &&
+                        <AdminChecker>
                             <span onClick={() => deleteTagHandler(collectionID, genre.tag_id)}
                                   className={"cursor-pointer ml-2 px-1 bg-neutral-700 text-white rounded-full leading-none text-inherit"}>
                                   -
                             </span>
-                        }
+                        </AdminChecker>
                     </div>
                 )}
                 <AdminTagSelector collectionID={collectionID} items={genres}/>
