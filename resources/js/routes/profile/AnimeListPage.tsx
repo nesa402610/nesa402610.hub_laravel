@@ -32,9 +32,9 @@ const AnimeListPage = () => {
                 )}
             </div>
 
-            {!isLoading ? data.map(anime =>
-                <HCollectionCard collection={anime.anime} link/>
-            ) : <Loader/>}
+            {isLoading ? <Loader/> : data.map(anime =>
+                <HCollectionCard key={anime.anime.id} collection={anime.anime} link/>
+            )}
             {(!data?.length && !isFetching) &&
                 <h2 className={'text-center font-bold text-2xl'}>
                     Кажется этот список пуст -_-
