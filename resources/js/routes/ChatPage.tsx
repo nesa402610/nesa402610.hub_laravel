@@ -5,7 +5,11 @@ import {useGetMessagesQuery, useSendMessageMutation} from "services/chatService"
 import Loader from "../components/Loader";
 import Message from "components/Chat/Message";
 
-const ChatPage: FC = () => {
+interface ChatPageProps {
+    height?: string
+}
+
+const ChatPage: FC<ChatPageProps> = ({height}) => {
     const {data: user} = useGetUserQuery()
     const {
         data: messages,
@@ -27,7 +31,7 @@ const ChatPage: FC = () => {
     }
 
     return (
-        <div className={'ml-4 block--dark flex gap-4 justify-between h-screen flex-col'}>
+        <div className={`ml-4 block--dark flex gap-4 justify-between ${height || 'h-screen'} flex-col`}>
             <div className={'h-full overflow-auto'}>
                 {!isLoading ? messages.map(msg =>
                     <Message message={msg}/>

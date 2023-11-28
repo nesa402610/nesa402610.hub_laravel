@@ -102,6 +102,19 @@ class AnimeController extends Controller
         return response($anime, 200);
     }
 
+    public function getRandomAnimeList()
+    {
+        $anime = HAnime::where('type', 0)->where('rating', '!=', 'Rx')->inRandomOrder()->limit(10)->get();
+        foreach ($anime as $collection) {
+            $collection->tags->makeHidden('pivot');
+            $collection->genres->makeHidden('pivot');
+            $collection->studios->makeHidden('pivot');
+            $collection->status = $collection->animeStatus();
+            $collection->videosCount = $collection->links()->count();
+        }
+        return response($anime, 200);
+    }
+
     public function getAnimeDuplies()
     {
         $anime = HAnime::where('type', 0)->get();

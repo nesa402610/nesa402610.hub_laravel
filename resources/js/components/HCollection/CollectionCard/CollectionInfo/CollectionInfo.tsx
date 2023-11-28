@@ -3,18 +3,18 @@ import HCollectionGenres from "./HCollectionGenres";
 import {ICollection} from "types/types";
 import InfoField from "./InfoField";
 
-enum kind {
+export enum collectionKind {
     TV = 'ТВ',
     SPECIAL = 'Спешл',
     MUSIC = 'Клип',
     MOVIE = 'Фильм',
-    OVA = 'OVA'
-
+    OVA = 'OVA',
+    ONA = 'ONA'
 }
 
 const CollectionInfo = ({collection}: { collection: ICollection }) => {
     let colKind = collection.kind.toUpperCase()
-    colKind = kind[colKind]
+    colKind = collectionKind[colKind]
     return (
         <div className={"text-neutral-300"}>
             <h3 className={"mt-4 font-bold"}>Информация</h3>

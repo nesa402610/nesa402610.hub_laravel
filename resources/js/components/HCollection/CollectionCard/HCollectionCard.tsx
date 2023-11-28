@@ -14,9 +14,10 @@ interface CollectionProps {
     collection: ICollection;
     link?: boolean;
     admin?: boolean
+    description?: boolean
 }
 
-const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin = false}) => {
+const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin = false, description = true}) => {
     const {data: user} = useGetUserQuery()
     const isAdmin = user?.role[0].name === 'Admin'
     const type = collection?.type === 0 ? 'ZERO' : 'ONE'
@@ -47,7 +48,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin =
                                EN={collection.title_en}
                                ORIGINAL={collection.title_original}/>
                         <CollectionInfo collection={collection}/>
-                        <CollectionDescription description={collection.description}/>
+                        {description && <CollectionDescription description={collection.description}/>}
                     </div>
                 </div>
                 <HCollectionTags collectionID={collection.id} collectionTags={collection.tags}/>

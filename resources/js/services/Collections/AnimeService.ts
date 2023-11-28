@@ -32,7 +32,7 @@ export const AnimeAPI = createApi({
             return headers;
         },
     }),
-    tagTypes: ["anime", "videos", "animeList", 'UserAnimeList'],
+    tagTypes: ["anime", "videos", "animeList", 'UserAnimeList', 'AnimeListRandom'],
     endpoints: (builder) => ({
         getAllAnime: builder.query<paginatedData<ICollection[]>, getArgs>({
             query: ({page = 1, passkey, query = null}) => ({
@@ -135,6 +135,10 @@ export const AnimeAPI = createApi({
             query: ({userId, animestatus}) => `animeList/${userId}/${animestatus}`,
             providesTags: ['UserAnimeList'],
         }),
+        getRandomAnimeList: builder.query<ICollection[], void>({
+            query: () => `list/random`,
+            providesTags: ['AnimeListRandom'],
+        }),
     }),
 });
 
@@ -154,5 +158,6 @@ export const {
     useDeleteAnimeMutation,
     useDeleteAnimeVideoMutation,
     useGetUserAnimeOverviewQuery,
-    useGetUserAnimeListQuery
+    useGetUserAnimeListQuery,
+    useGetRandomAnimeListQuery
 } = AnimeAPI;

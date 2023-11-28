@@ -3,17 +3,16 @@ import moment from "moment/moment";
 import {BiTime} from "react-icons/bi";
 import PostForm from "../admin/PostForm";
 import {IPost} from "types/Post";
-import {IUser} from "types/User";
 import ContextMenu from "components/UI/ContextMenu/ContextMenu";
 import {useChangeVisibilityMutation, useDeletePostMutation} from "services/postService";
 import useDropdown from "hooks/useDropdown";
+import AdminChecker from "components/AdminChecker";
 
 interface PostCardProps {
     post: IPost
-    user: IUser
 }
 
-const PostCard: FC<PostCardProps> = ({post, user}) => {
+const PostCard: FC<PostCardProps> = ({post}) => {
     const [deletePost, {}] = useDeletePostMutation()
     const [changeVisibility, {}] = useChangeVisibilityMutation()
     const {isOpen, toggleHandle, setIsOpen, nav, pos, link} = useDropdown()
@@ -26,12 +25,10 @@ const PostCard: FC<PostCardProps> = ({post, user}) => {
                 <ContextMenu contextMenu={isOpen} setContextMenu={setIsOpen} position={pos}
                              deleteFn={() => deletePost(post.id)} link={link}
                 >
-                    {user?.role[0].name === 'Admin' &&
-                        <>
-                            <li onClick={() => setIsModal(true)}>Редактировать</li>
-                            <li onClick={() => changeVisibility(post.id)}>{post.visibility ? 'Показать пост' : 'Скрыть пост'}</li>
-                        </>
-                    }
+                    <AdminChecker>
+                        <li onClick={() => setIsModal(true)}>Редактировать</li>
+                        <li onClick={() => changeVisibility(post.id)}>{post.visibility ? 'Показать пост' : 'Скрыть пост'}</li>
+                    </AdminChecker>
                 </ContextMenu>
             }
             <div onClick={() => nav(`${post.id}`)} key={post.id}

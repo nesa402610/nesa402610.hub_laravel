@@ -14,7 +14,7 @@ export const postAPI = createApi({
     }),
     tagTypes: ['Post', 'CommentList', 'PostList'],
     endpoints: (builder) => ({
-        getPosts: builder.query<paginatedData<IPost[]>, string | number>({
+        getPosts: builder.query<paginatedData<IPost[]>, number | string>({
             query: (page) => (
                 {
                     url: '',
@@ -80,8 +80,8 @@ export const postAPI = createApi({
             }),
             invalidatesTags: ['CommentList']
         }),
-        deleteComment: builder.mutation({
-            query: ({postId, id}) => ({
+        deleteComment: builder.mutation<IComment[], { id: string | number }>({
+            query: ({id}) => ({
                 url: `${id}/comments/delete`,
                 method: 'DELETE',
                 body: {id}

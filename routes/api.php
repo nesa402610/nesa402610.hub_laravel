@@ -135,6 +135,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 Route::prefix('/anime')->group(function () {
     Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
+    Route::get('list/random', [AnimeController::class, 'getRandomAnimeList']);
     Route::get('{id}', [AnimeController::class, 'getAnimeById']);
     Route::get('{id}/videos', [AnimeController::class, 'getAnimeVideos']);
     Route::get('animeList/{userId}', [UserController::class, 'getUserAnimeOverview']);
