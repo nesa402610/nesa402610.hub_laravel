@@ -33,6 +33,11 @@ import AnimeListPage from "./profile/AnimeListPage";
 import ShikimoriAnime from "./admin/anime/ShikimoriAnime";
 import ShikimoriHostfix from "routes/admin/anime/ShikimoriHostfix";
 
+export const routerPaths = {
+    ANIME: '/NULL/unit/ZERO',
+    MANGA: '/NULL/unit/ONE',
+    BLOG: '/blog'
+}
 export const router = createBrowserRouter([
     {
         path: "/",

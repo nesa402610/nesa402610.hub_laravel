@@ -104,15 +104,29 @@ class AnimeController extends Controller
 
     public function getRandomAnimeList()
     {
-        $anime = HAnime::where('type', 0)->where('rating', '!=', 'Rx')->inRandomOrder()->limit(10)->get();
-        foreach ($anime as $collection) {
-            $collection->tags->makeHidden('pivot');
-            $collection->genres->makeHidden('pivot');
-            $collection->studios->makeHidden('pivot');
-            $collection->status = $collection->animeStatus();
-            $collection->videosCount = $collection->links()->count();
+        $query = HAnime::query();
+        $query->where('type', 0)->inRandomOrder();
+
+        $userBirthday = Auth::user()->birthday;
+        $userOld = date('Y') - date('Y', strtotime($userBirthday));
+        if ($userOld < 18) {
+            $query->where('rating', '!=', 'Rx');
         }
-        return response($anime, 200);
+//        $query->whereDoesntHave('status', function ($query) {
+//           $query->whereIn('status', 4);
+//        });
+
+        $anime = $query->limit(10)->get();
+
+        foreach ($anime as $collection) {
+//            $collection->tags->makeHidden('pivot');
+//            $collection->genres->makeHidden('pivot');
+//            $collection->studios->makeHidden('pivot');
+            $collection->status = $collection->animeStatus();
+//            $collection->videosCount = $collection->links()->count();
+        }
+
+        return response($anime);
     }
 
     public function getAnimeDuplies()

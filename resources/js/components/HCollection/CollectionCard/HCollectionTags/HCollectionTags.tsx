@@ -19,7 +19,7 @@ const HCollectionTags: FC<HCollectionTagsProps> = ({collectionTags, collectionID
             {collectionTags?.map((tag) =>
                 <TagItem isAdmin={isAdmin} collectionID={collectionID} id={tag.tag_id} name={tag.name}/>
             )}
-            <AdminTagSelector collectionID={collectionID} items={collectionTags}/>
+            <AdminTagSelector type={'tag'} collectionID={collectionID} items={collectionTags}/>
         </div>
     );
 };

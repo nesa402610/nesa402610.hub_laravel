@@ -7,11 +7,11 @@ import ContextMenu from "components/UI/ContextMenu/ContextMenu";
 import {useChangeVisibilityMutation, useDeletePostMutation} from "services/postService";
 import useDropdown from "hooks/useDropdown";
 import AdminChecker from "components/AdminChecker";
+import {routerPaths} from "routes/index";
 
 interface PostCardProps {
     post: IPost
 }
-
 const PostCard: FC<PostCardProps> = ({post}) => {
     const [deletePost, {}] = useDeletePostMutation()
     const [changeVisibility, {}] = useChangeVisibilityMutation()
@@ -31,7 +31,7 @@ const PostCard: FC<PostCardProps> = ({post}) => {
                     </AdminChecker>
                 </ContextMenu>
             }
-            <div onClick={() => nav(`${post.id}`)} key={post.id}
+            <div onClick={() => nav(`${routerPaths.BLOG}/${post.id}`)} key={post.id}
                  onContextMenu={(e) => toggleHandle(e, `${post.id}`)}>
                 <div
                     className={'flex h-[230px] transition-all cursor-pointer hover:-translate-y-2 drop-shadow-xl group flex-col xs:justify-start' + (post.visibility ? ' brightness-150 block--dark opacity-30' : ' block--light')}>
