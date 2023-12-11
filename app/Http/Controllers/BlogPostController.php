@@ -77,7 +77,7 @@ class BlogPostController extends Controller
     {
         $post = BlogPost::find($request->id);
         $post->title = $request->title;
-        $post->body = $request->comment;
+        $post->body = $request->body;
         $post->save();
         $post->comments;
         foreach ($post->comments as $comment) {

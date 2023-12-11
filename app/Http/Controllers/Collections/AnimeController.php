@@ -107,8 +107,10 @@ class AnimeController extends Controller
         $query = HAnime::query();
         $query->where('type', 0)->inRandomOrder();
 
-        $userBirthday = Auth::user()->birthday;
-        $userOld = date('Y') - date('Y', strtotime($userBirthday));
+        $currentYear = date('Y');
+        $userBirthday = Auth::user()->birthday ?? $currentYear;
+        $userYear = date('Y', strtotime($userBirthday));
+        $userOld = $currentYear - $userYear;
         if ($userOld < 18) {
             $query->where('rating', '!=', 'Rx');
         }
@@ -191,8 +193,11 @@ class AnimeController extends Controller
         if ($kind) {
             $query->where('kind', 'like', $kind);
         }
-        $userBirthday = Auth::user()->birthday;
-        $userOld = date('Y') - date('Y', strtotime($userBirthday));
+
+        $currentYear = date('Y');
+        $userBirthday = Auth::user()->birthday ?? $currentYear;
+        $userYear = date('Y', strtotime($userBirthday));
+        $userOld = $currentYear - $userYear;
         if ($userOld < 18) {
             $query->where('rating', '!=', 'Rx');
         }

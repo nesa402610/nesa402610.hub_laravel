@@ -86,16 +86,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/update', [SuggestionController::class, 'updateSuggestion']);
         Route::post('/setStatus', [SuggestionController::class, 'setStatus'])->middleware(AdminProof::class);
     });
-//    Route::prefix('manga')->group(function () {
-//        Route::middleware([AdminProof::class])->group(function () {
-//            Route::patch('/update', [MangaController::class, 'updateTitle']);
-//            Route::patch('/add', [MangaController::class, 'addTitle']);
-//            Route::put('/passkey', [MangaController::class, 'generatePasskey']);
-//            Route::get('/passkeys', [MangaController::class, 'getAllPasskeys']);
-//            Route::put('/tags/add', [MangaController::class, 'addTagToCollection']);
-//            Route::delete('/tags/remove', [MangaController::class, 'deleteTagFromCollection']);
-//        });
-//    });
+
     Route::middleware([AdminProof::class])->group(function () {
         Route::prefix('dashboard')->group(function () {
             Route::get('', [adminPanelController::class, 'getOverview']);
@@ -120,10 +111,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         });
         Route::prefix('manga')->group(function () {
             Route::get('all', [MangaController::class, 'getAllManga']);
-            Route::get('list', [AnimeController::class, 'getAllAnime']);
-            Route::get('list', [AnimeController::class, 'getAllAnime']);
-            Route::get('list', [AnimeController::class, 'getAllAnime']);
-            Route::get('list', [AnimeController::class, 'getAllAnime']);
         });
         Route::prefix('tags')->group(function () {
             Route::post('new', [TagController::class, 'createTag']);

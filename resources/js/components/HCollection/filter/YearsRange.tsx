@@ -5,10 +5,14 @@ const YearsRange = ({setYears}) => {
     const [minYear, maxYear] = [1910, currentYear + 5]
     const [start, setStart] = useState(1910);
     const [end, setEnd] = useState(currentYear + 5);
-    const yearsHandler = (e: React.ChangeEvent<HTMLInputElement>, start: boolean) => {
-        if (start) setStart(Number(e.target.value))
-        else setEnd(Number(e.target.value))
+    const yearsHandler = (e: React.ChangeEvent<HTMLInputElement>, startPos: boolean) => {
+        if (startPos) {
+            setStart(+e.target.value)
+        } else {
+            setEnd(+e.target.value)
+        }
         setYears({start, end})
+
     }
     return (
         <div className={'w-full'}>
