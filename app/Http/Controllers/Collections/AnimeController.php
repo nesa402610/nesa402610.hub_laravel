@@ -179,7 +179,10 @@ class AnimeController extends Controller
         if (!empty($tags)) {
             $query->whereHas('tags', function ($query) use ($tags) {
                 $query->whereIn('name', $tags);
-            }, '=', count($tags));
+            })
+                ->orWhereHas('genres', function ($query) use ($tags) {
+                    $query->whereIn('name', $tags);
+                });
         }
         if (!empty($rating)) {
             $query->where('rating', $rating);
@@ -189,7 +192,7 @@ class AnimeController extends Controller
                 $query->orderByDesc($sort);
             } else $query->orderBy($sort);
         }
-        //тип сортировки
+        //тип сортировки OVA, TV, MUSIC ...
         if ($kind) {
             $query->where('kind', 'like', $kind);
         }
