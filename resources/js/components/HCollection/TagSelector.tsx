@@ -14,15 +14,22 @@ const TagSelector: FC<TagSelectorProps> = ({collectionTags, collectionID, tagTyp
     const {data: tags, isLoading} = useGetTagsQuery();
     const [freeTags, setFreeTags] = useState([]);
     const [tagSearch, setTagSearch] = useState('');
-    const [rxSearch, setRxSearch] = useState(null);
+    const [type, setType] = useState(666);
 
     useMemo(() => {
         if (!tags) return;
         const itemTags = collectionTags;
         const freeTags = tags.filter(tag => !itemTags?.map(itemTag => itemTag.name).includes(tag.name));
-        const freeTagsWithSearch = freeTags.filter(tag => tag.name.toLowerCase().includes(tagSearch.toLowerCase()) && tag.type !== rxSearch)
-        setFreeTags(freeTagsWithSearch);
-    }, [tags, collectionTags, tagSearch, rxSearch]);
+        const freeTagsWithSearch = freeTags.filter(tag => tag.name.toLowerCase().includes(tagSearch.toLowerCase()))
+        const freeTagsWithSearchAndType = freeTagsWithSearch.filter(tag => {
+            if (type === 666) return true
+            else return tag.type === type
+            // if(tagType === 'genre' && (tag.type === 2 || tag.type === 3)) {
+            //     return tag.type === type
+            // }
+        })
+        setFreeTags(freeTagsWithSearchAndType);
+    }, [tags, collectionTags, tagSearch, type]);
 
     const [addTag] = useAddTagToAnimeMutation();
     const addTagHandler = (titleId: string | number, tagId: number) => {
@@ -39,14 +46,23 @@ const TagSelector: FC<TagSelectorProps> = ({collectionTags, collectionID, tagTyp
                                onChange={e => setTagSearch(e.target.value)}
                                className={'w-full py-0'}/>
                         <div className={'flex items-center gap-2'}>
-                            <span>Rx теги?</span>
+                            <span>Сортировка</span>
                             <select className={'bg-neutral-600 rounded-lg flex-1'}
-                                    value={rxSearch}
-                                    onChange={e => setRxSearch(+e.target.value)}
+                                    value={type}
+                                    onChange={e => setType(+e.target.value)}
                             >
-                                <option value={null}>Все теги</option>
-                                <option value="0">Rx теги</option>
-                                <option value="1">FF теги</option>
+                                <option value={'all'}>Все {tagType === 'tag' ? 'теги' : 'жанры'}</option>
+                                {tagType === 'tag' ?
+                                    <>
+                                        <option value="0">FF теги</option>
+                                        <option value="1">Rx теги</option>
+                                    </>
+                                    :
+                                    <>
+                                        <option value="3">FF жанры</option>
+                                        <option value="2">Rx жанры</option>
+                                    </>
+                                }
                             </select>
                         </div>
                     </div>
