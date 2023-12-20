@@ -7,6 +7,9 @@ import Modal from "./UI/modal";
 import ProjectModal from "./admin/ProjectModal";
 import {links} from "../mockData";
 import {GiCentaurHeart} from "react-icons/gi";
+import {MdMovieFilter} from "react-icons/md";
+import {routerPaths} from "routes/index";
+import AdminChecker from "components/AdminChecker";
 
 
 const Header: FC = () => {
@@ -53,10 +56,16 @@ const Header: FC = () => {
                         {/*  <IoGrid/>*/}
                         {/*  Apps*/}
                         {/*</NavLink>    */}
-                        <NavLink className={"nav-link"} to={"/NULL/unit/ZERO"}>
+                        <NavLink className={"nav-link"} to={routerPaths.ANIME}>
                             <GiCentaurHeart size={'1.5rem'}/>
                             <span>Аниме</span>
                         </NavLink>
+                        <AdminChecker>
+                            <NavLink className={"nav-link"} to={routerPaths.KINOPOISK}>
+                                <MdMovieFilter size={'1.5rem'}/>
+                                <span>Фильмы</span>
+                            </NavLink>
+                        </AdminChecker>
                     </nav>
                     <hr className={"bg-neutral-400 h-[2px]  w-full"}/>
                     <div className={"flex flex-col gap-4 lg:basis-1/3 justify-center items-center"}>
@@ -81,12 +90,12 @@ const Header: FC = () => {
                             </>
 
                         }
-                        {(data?.id === 1 || data?.id === 3) &&
+                        <AdminChecker>
                             <>
                                 <NavLink className={"flex items-center hover:text-neutral-400 transition-colors"}
                                          to={"/admin/"}>dashboard</NavLink>
                             </>
-                        }
+                        </AdminChecker>
                     </div>
                     <hr className={"bg-neutral-400 h-[2px]  w-full"}/>
 

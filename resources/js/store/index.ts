@@ -13,6 +13,7 @@ import {StudioAPI} from "services/Collections/StudioService";
 import collectionSlice from "./reducers/collectionSlice";
 import appSlice from "./reducers/appSlice";
 import {dashboardAPI} from "services/admin/dashboardService";
+import {kinopoiskAPI} from "services/Kinopoisk";
 
 export const store = configureStore({
     reducer: {
@@ -30,6 +31,7 @@ export const store = configureStore({
         [StudioAPI.reducerPath]: StudioAPI.reducer,
         [MangaAPI.reducerPath]: MangaAPI.reducer,
         [dashboardAPI.reducerPath]: dashboardAPI.reducer,
+        [kinopoiskAPI.reducerPath]: kinopoiskAPI.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat([
@@ -44,6 +46,7 @@ export const store = configureStore({
             MangaAPI.middleware,
             TagAPI.middleware,
             dashboardAPI.middleware,
+            kinopoiskAPI.middleware,
         ])
 });
 

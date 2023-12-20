@@ -29,6 +29,7 @@ const Selector: FC<SelectorProps> = ({values, children, placeholder, selected, s
         const freeItems = values?.data?.filter(tag => !selected.map(itemTag => itemTag).includes(tag.name))
         setFreeItems(freeItems)
     }, [values, selected]);
+    // console.log(values)
     return (
         <div className={'flex flex-col w-full'}>
             <span>{placeholder}</span>

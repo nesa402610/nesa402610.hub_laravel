@@ -3,12 +3,13 @@ import React, {FC} from 'react';
 interface InfoFieldProps {
     title: string
     value?: any
-    children?: any
+    children?: React.ReactNode
     hidden?: boolean
 }
 
 const InfoField: FC<InfoFieldProps> = ({title, value, children, hidden}) => {
     if (hidden) return null
+    console.log(value, children)
     return (
         <div className={'flex gap-1'}>
             <h4>{title}</h4>

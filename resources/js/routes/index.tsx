@@ -32,11 +32,13 @@ import Dashboard from "./admin/Dashboard";
 import AnimeListPage from "./profile/AnimeListPage";
 import ShikimoriAnime from "./admin/anime/ShikimoriAnime";
 import ShikimoriHostfix from "routes/admin/anime/ShikimoriHostfix";
+import Kinopoisk from "routes/Kinopoisk/Kinopoisk";
 
 export const routerPaths = {
     ANIME: '/NULL/unit/ZERO',
     MANGA: '/NULL/unit/ONE',
-    BLOG: '/blog'
+    BLOG: '/blog',
+    KINOPOISK: '/kinopoisk'
 }
 export const router = createBrowserRouter([
     {
@@ -50,6 +52,7 @@ export const router = createBrowserRouter([
             {path: 'users', element: <UsersPage/>},
             {path: 'suggestions', element: <SuggestionsPage/>},
             {path: 'chat', element: <ChatPage/>},
+            {path: routerPaths.KINOPOISK, element: <Kinopoisk/>},
             {
                 path: 'profile',
                 children: [
