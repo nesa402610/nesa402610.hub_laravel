@@ -159,9 +159,11 @@ const KinopoiskFilter: FC<KinopiskFilterProps> = ({setParams, getByName}) => {
     }
     const applyFiltersHandle = () => {
         if (filters.name) {
-            getByName(filters.name)
+            console.log('name')
+            // getByName(filters.name)
         } else {
-            setParams(filters)
+            console.log('other')
+            // setParams(filters)
         }
     }
     useEffect(() => {
@@ -181,37 +183,41 @@ const KinopoiskFilter: FC<KinopiskFilterProps> = ({setParams, getByName}) => {
                 <div className={'flex gap-4'}>
                     <label>
                         Рейтинг кинопоиска (7 или 5-10)
-                        <input type="text" value={filters['rating.kp']}
+                        <input disabled={!!filters.name} type="text" value={filters['rating.kp']}
                                onChange={e => setFiltersHandle(e, 'rating.kp')}/>
                     </label>
                     <label>
                         Возрастной рейтинг
-                        <input type="text" onChange={e => setFiltersHandle(e, 'ageRating')} value={filters.ageRating}/>
+                        <input disabled={!!filters.name} type="text" onChange={e => setFiltersHandle(e, 'ageRating')}
+                               value={filters.ageRating}/>
                     </label>
                     <label>
                         Год (прим., "2020" или "2005-2020")
-                        <input type="text" onChange={e => setFiltersHandle(e, 'year')} value={filters.year}/>
+                        <input disabled={!!filters.name} type="text" onChange={e => setFiltersHandle(e, 'year')}
+                               value={filters.year}/>
                     </label>
                     <label>
                         Длительность (100-120)
-                        <input type="text" onChange={e => setFiltersHandle(e, 'movieLength')}
+                        <input disabled={!!filters.name} type="text" onChange={e => setFiltersHandle(e, 'movieLength')}
                                value={filters['movieLength']}/>
                     </label>
                 </div>
                 <div className={'flex gap-4 items-center'}>
                     <label>
                         Отображать за раз
-                        <input type="text" onChange={e => setFiltersHandle(e, 'limit')} value={filters.limit}/>
+                        <input disabled={!!filters.name} type="text" onChange={e => setFiltersHandle(e, 'limit')}
+                               value={filters.limit}/>
                     </label>
                     <label>
                         Сериал
-                        <input type="checkbox"
+                        <input disabled={!!filters.name} type="checkbox"
                                onChange={e => setFilters(prev => ({...prev, isSeries: e.target.checked}))}
                                checked={filters.isSeries}/>
                     </label>
                     <label className={'flex flex-col'}>
                         Сортировка по
-                        <select value={filters.sortField} onChange={e => setFiltersHandle(e, 'sortField')}
+                        <select disabled={!!filters.name} value={filters.sortField}
+                                onChange={e => setFiltersHandle(e, 'sortField')}
                                 className={'bg-neutral-600 text-white p-2 rounded-lg'}>
                             <option value="name">По названию</option>
                             <option value="year">По годам</option>
@@ -220,7 +226,7 @@ const KinopoiskFilter: FC<KinopiskFilterProps> = ({setParams, getByName}) => {
                     </label>
                     <label className={'flex flex-col'}>
                         Тип
-                        <select onChange={e => setFilters({...filters, type: e.target.value})}
+                        <select disabled={!!filters.name} onChange={e => setFilters({...filters, type: e.target.value})}
                                 className={'bg-neutral-600 text-white p-2 rounded-lg'}>
                             <option value="movie">Фильм</option>
                             <option value="tv-series">Сериал</option>
@@ -238,7 +244,7 @@ const KinopoiskFilter: FC<KinopiskFilterProps> = ({setParams, getByName}) => {
                     {/*          setSelected={setSelectedGenres}/>*/}
                     <label className={'flex flex-col'}>
                         Жанры
-                        <select onChange={e => setFiltersHandle(e, 'genres.name')}
+                        <select disabled={!!filters.name} onChange={e => setFiltersHandle(e, 'genres.name')}
                                 className={'bg-neutral-600 text-white p-2 rounded-lg'}>
                             {genres?.map(genre =>
                                 <option value={genre.name}>{genre.name}</option>

@@ -28,11 +28,9 @@ const HomePage: FC = () => {
             </div>
             <div className={'block--dark'}>
                 <h3 className={'font-bold mb-4'}>Новости сайта</h3>
-                <div className={'flex flex-wrap justify-between gap-4 '}>
+                <div className={'grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'}>
                     {posts?.data.map(post =>
-                        <div className={'lg:basis-1/5 flex-1 lg:w-1/5 xs:basis-1/3 xs:w-1/3'}>
                             <PostCard post={post}/>
-                        </div>
                     )}
                 </div>
             </div>

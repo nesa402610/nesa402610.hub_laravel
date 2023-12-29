@@ -9,6 +9,10 @@ html, body {
 input, textarea {
   @apply w-full p-2 bg-neutral-600 focus-visible:outline-neutral-400 focus-visible:outline focus-visible:outline-2 autofill:bg-neutral-600 rounded-lg mt-1
 }
+
+input:disabled, textarea:disabled, select:disabled {
+    @apply opacity-60
+}
 button {
   @apply p-2 rounded-lg transition-all
 }
