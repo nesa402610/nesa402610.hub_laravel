@@ -159,11 +159,9 @@ const KinopoiskFilter: FC<KinopiskFilterProps> = ({setParams, getByName}) => {
     }
     const applyFiltersHandle = () => {
         if (filters.name) {
-            console.log('name')
-            // getByName(filters.name)
+            getByName(filters.name)
         } else {
-            console.log('other')
-            // setParams(filters)
+            setParams(filters)
         }
     }
     useEffect(() => {

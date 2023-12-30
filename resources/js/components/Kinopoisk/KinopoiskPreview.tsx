@@ -2,22 +2,29 @@ import React, {Dispatch, FC, SetStateAction} from 'react';
 import InfoField from "components/HCollection/CollectionCard/CollectionInfo/InfoField";
 import CollectionDescription from "components/HCollection/CollectionCard/CollectionDescription";
 import {IKinopoiskItem} from "services/Kinopoisk";
+import {FaExternalLinkAlt} from 'react-icons/fa';
 
 interface KinopoiskPreviewProps {
     item: IKinopoiskItem
     setPreview: Dispatch<SetStateAction<boolean>>
+
+    clickToWatch(): void
 }
 
-const KinopoiskPreview: FC<KinopoiskPreviewProps> = ({item, setPreview}) => {
+const KinopoiskPreview: FC<KinopoiskPreviewProps> = ({item, setPreview, clickToWatch}) => {
 
     return (
         <div className={'relative col-span-full col-start-1 bg-neutral-700 p-4 rounded-lg'}>
-            <span className={'absolute right-4 top-4'} onClick={() => setPreview(false)}>X</span>
+            <span className={'cursor-pointer absolute right-4 top-4'} onClick={() => setPreview(false)}>X</span>
             <div className={'flex gap-4'}>
                 <img className={'h-[400px] rounded-lg'} src={item.poster.previewUrl} alt=""/>
                 <div>
                     <div>
-                        <h2>{item.name}</h2>
+                        <h2 className={'cursor-pointer transition hover:text-orange-200 font-bold text-lg flex gap-1 items-center'}
+                            onClick={clickToWatch}>
+                            {item.name}
+                            <FaExternalLinkAlt size={'13px'}/>
+                        </h2>
                         <h3>{item.enName}</h3>
                     </div>
                     <div>
