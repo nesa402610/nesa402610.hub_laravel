@@ -2,7 +2,6 @@ import React from "react";
 
 export const parseBbCode = (text) => {
 
-
     const BOLD = /\[b](.*?)\[\/b]/g
     const BOLD_TAG = '<strong>$1</strong>'
 
@@ -20,9 +19,19 @@ export const parseBbCode = (text) => {
 
     const SPOILER = /\[spoiler](.*?)\[\/spoiler]/g
     const SPOILER_TAG = '<span style="filter: blur(3px)" onclick="this.style.filter = `blur(0px)`">$1</span>'
+    const whitelistTags = ['b', 'em', 'u', 'character', 'color', 'spoiler'];
 
     if (text) {
-        const html = text
+        const sanitizedHtml = text
+            .replace(/<([^>]+)>/g, (match, tag) => {
+                if (whitelistTags.includes(tag.split(' ')[0])) {
+                    return match;
+                } else {
+                    return tag
+                }
+            })
+
+        const html = sanitizedHtml
             .replace(BOLD, BOLD_TAG)
             .replace(ITALIC, ITALIC_TAG)
             .replace(UNDERLINE, UNDERLINE_TAG)
