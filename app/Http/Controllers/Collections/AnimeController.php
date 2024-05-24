@@ -42,7 +42,7 @@ class AnimeController extends Controller
 
         $animeTitle_ru = $request['russian'];
 
-        $anime = HAnime::where('title_ru', $animeTitle_ru)->first();
+        $anime = HAnime::where('title_ru', $animeTitle_ru)->orWhere('title_original', $request['name'])->first();
 
 //        return response($anime);
         if (!$anime) {
@@ -59,7 +59,7 @@ class AnimeController extends Controller
         $anime->image = 'https://shikimori.me/' . $request['image']['preview'];
         $anime->announce_date = $request['aired_on'];
         $anime->release_date = $request['aired_on'];
-        $anime->episodes_released = ($request['episodes'] ?? $request['episodes_aired']) - $request['episodes_aired'];
+        $anime->episodes_released = ($request['episodes'] ?? $request['episodes_aired']);
         $anime->episodes_total = $request['episodes'];
         $anime->author = null;
         $anime->review = '';
