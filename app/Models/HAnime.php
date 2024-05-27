@@ -72,6 +72,8 @@ use Illuminate\Database\Eloquent\Model;
 class HAnime extends Model
 {
     protected $table = 'h_collections';
+    protected $appends = ['score', 'userScore'];
+
 
     use HasFactory;
 
@@ -102,9 +104,26 @@ class HAnime extends Model
         return $this->hasOne(AnimeUserStatus::class, 'anime_id')->where('user_id', Auth::user()->id)->value('status');
     }
 
-    public function ratings()
+    public function getScores()
     {
-        $ratings = DB::table('collection_ratings')->where('anime_id', $this->id)->pluck('rating');
-        return $ratings->sum() / $ratings->count() ?? 0;
+        $scores = DB::table('collection_scores')->where('anime_id', $this->id)->pluck('score');
+        return $scores->sum() ? $scores->sum() / $scores->count() : 0;
+    }
+
+    public function getUserScore()
+    {
+        $userScore = CollectionScore::where('user_id', Auth::user()->id)->where('anime_id', $this->id)->value('score');
+        return $userScore;
+    }
+
+    public function getScoreAttribute(): int
+    {
+        return $this->getScores();
+    }
+
+    public function getUserScoreAttribute()
+    {
+        $userScoreValue = $this->getUserScore();
+        return $userScoreValue;
     }
 }

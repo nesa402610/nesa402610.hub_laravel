@@ -14,7 +14,7 @@ const HomePage: FC = () => {
                 <div className={'col-span-3  block--dark'}>
                     <div className={'flex justify-between'}>
                         <h2 className={'font-bold'}>Случайные аниме</h2>
-                        <span onClick={refetch}>Обновить</span>
+                        <span onClick={refetch} className={'cursor-pointer'}>Обновить</span>
                     </div>
                     <div className={'grid md:grid-cols-5 xs:grid-cols-2 sm:grid-cols-4 gap-4 mt-4'}>
                         {randomList?.map(anime =>

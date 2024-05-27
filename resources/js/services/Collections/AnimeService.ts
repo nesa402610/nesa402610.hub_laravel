@@ -139,6 +139,14 @@ export const AnimeAPI = createApi({
             query: () => `list/random`,
             providesTags: ['AnimeListRandom'],
         }),
+        setScoreToAnime: builder.mutation<null, { id: number, score: number }>({
+            query: ({id, score}) => ({
+                url: `${id}/score`,
+                method: "POST",
+                body: {id, score}
+            }),
+            invalidatesTags: ["anime", "animeList", 'UserAnimeList']
+        }),
     }),
 });
 
@@ -159,5 +167,6 @@ export const {
     useDeleteAnimeVideoMutation,
     useGetUserAnimeOverviewQuery,
     useGetUserAnimeListQuery,
-    useGetRandomAnimeListQuery
+    useGetRandomAnimeListQuery,
+    useSetScoreToAnimeMutation
 } = AnimeAPI;

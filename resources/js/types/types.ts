@@ -10,6 +10,8 @@ import {IAnimeStudio} from "./Anime";
 
 
 export interface ICollection {
+    userScore: number;
+    score: number | null;
     genres: ICollectionTag[];
     kind: string;
     videosCount: number;

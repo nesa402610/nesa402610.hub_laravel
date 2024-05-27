@@ -125,6 +125,7 @@ Route::prefix('/anime')->group(function () {
     Route::get('list/random', [AnimeController::class, 'getRandomAnimeList']);
     Route::get('{id}', [AnimeController::class, 'getAnimeById']);
     Route::get('{id}/videos', [AnimeController::class, 'getAnimeVideos']);
+    Route::post('{id}/score', [AnimeController::class, 'setAnimeScore']);
     Route::get('animeList/{userId}', [UserController::class, 'getUserAnimeOverview']);
     Route::get('animeList/{userId}/{animeStatus}', [UserController::class, 'getUserAnimeList']);
 });

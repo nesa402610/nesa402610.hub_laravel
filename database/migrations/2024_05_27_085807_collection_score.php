@@ -10,11 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('collection_ratings', function (Blueprint $table) {
+        Schema::create('collection_scores', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('anime_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('rating');
+            $table->integer('score');
 
             $table->foreign('anime_id')->references('id')->on('h_collections')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -27,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('collection_ratings');
+        //
     }
 };

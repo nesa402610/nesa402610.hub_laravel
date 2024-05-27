@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Collections;
 
 use App\Http\Controllers\Controller;
 use App\Models\AnimeUserStatus;
+use App\Models\CollectionScore;
 use App\Models\HAnime;
 use App\Models\HLinks;
 use App\Models\Passkey;
@@ -340,8 +341,23 @@ class AnimeController extends Controller
 //        }
     }
 
-    public
-    function shikimoriHostUpdate(Request $request)
+    public function setAnimeScore(Request $request)
+    {
+        $userScore = CollectionScore::where('user_id', Auth::user()->id)->where('anime_id', $request->id)->first();
+        if ($userScore) {
+            $userScore->score = $request->score;
+            $userScore->save();
+        } else {
+            $newScore = new CollectionScore();
+            $newScore->anime_id = $request->id;
+            $newScore->user_id = Auth::user()->id;
+            $newScore->score = $request->score;
+            $newScore->save();
+        }
+
+    }
+
+    public function shikimoriHostUpdate(Request $request)
     {
         $newHost = $request->newHost;
         $curHost = $request->currentHost;
