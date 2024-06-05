@@ -1,8 +1,10 @@
 import React, {FC} from 'react';
-import {useSetAnimeStatusMutation} from "services/Collections/AnimeService";
+import {AnimeAPI, useSetAnimeStatusMutation} from "services/Collections/AnimeService";
 import {useGetUserQuery} from "services/userService";
 import {IoCaretDown, IoCaretUp} from "react-icons/io5";
 import useClickOutside from "hooks/useClickOutside";
+import {useAppDispatch, useAppSelector} from "hooks/redux";
+import {useSearchParams} from "react-router-dom";
 
 interface CollectionStatusProps {
     status: number
@@ -38,6 +40,10 @@ const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) =>
         {status: 5, name: 'Фу, какая гадость', color: 'bg-red-700', hover: 'hover:bg-red-700'},
     ]
     const {setIsOpen, isOpen, ref} = useClickOutside()
+
+    const dispatch = useAppDispatch()
+    const {filter} = useAppSelector(state => state.collection)
+    const [params] = useSearchParams();
     const setStatusHandler = (statusId: number) => {
         if (statusId === status) {
             return setIsOpen(false)
@@ -45,7 +51,21 @@ const CollectionStatus: FC<CollectionStatusProps> = ({status, animeID, type}) =>
         setStatus({status: statusId, animeID})
             .unwrap()
             .catch(err => console.error(err))
-            .finally(() => setIsOpen(false))
+            .finally(() => {
+                setIsOpen(false)
+                dispatch(
+                    AnimeAPI.util.updateQueryData('getAllAnime', {
+                        page: +params.get('page') || 1,
+                        query: filter,
+                        passkey: null
+                    }, (draft) => {
+                        const anime = draft.data.find(a => a.id === animeID);
+                        if (anime) {
+                            anime.status = statusId;
+                        }
+                    }),
+                )
+            })
     }
 
     if (!user) return null;

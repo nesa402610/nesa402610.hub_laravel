@@ -40,7 +40,7 @@ export const AnimeAPI = createApi({
                 method: "POST",
                 body: {...query}
             }),
-            providesTags: (_) => ["animeList"]
+            providesTags: ['animeList'],
         }),
         getAnimeById: builder.query<ICollection, string>({
             query: (id) => id,
@@ -116,13 +116,25 @@ export const AnimeAPI = createApi({
             }),
             invalidatesTags: ["animeList", 'UserAnimeList']
         }),
-        setAnimeStatus: builder.mutation<ICollection[], { status: number, animeID: number }>({
+        setAnimeStatus: builder.mutation<{ status: number }, { status: number, animeID: number }>({
             query: ({status, animeID}) => ({
                 url: "status",
                 method: "PATCH",
                 body: {status, animeID}
             }),
-            invalidatesTags: ["animeList", 'UserAnimeList', 'anime']
+            async onQueryStarted({animeID, status}, {dispatch, queryFulfilled}) {
+                try {
+                    const {data: updatedStatus} = await queryFulfilled
+                    dispatch(
+                        AnimeAPI.util.updateQueryData('getAnimeById', String(animeID), (draft) => {
+                            Object.assign(draft, updatedStatus)
+                        })
+                    )
+                } catch (error) {
+                    console.error("Failed to update status:", error);
+                }
+            },
+            // invalidatesTags: ["animeList", 'UserAnimeList', 'anime']
         }),
         getUserAnimeOverview: builder.query<AnimeListOverviewProps, string>({
             query: (userId) => `animeList/${userId}`,

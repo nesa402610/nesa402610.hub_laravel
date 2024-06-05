@@ -261,6 +261,8 @@ class AnimeController extends Controller
         $animeUserStatus->status = $request->status;
         $animeUserStatus->save();
 
+        return response($animeUserStatus);
+
     }
 
     public function updateAnime(Request $request)
