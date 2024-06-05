@@ -14,8 +14,8 @@ const CollectionScore: FC<CollectionScoresProps> = ({collectionId, score, userSc
 
     const scores = [1, 2, 3, 4, 5]
 
-    const setScoreHandle = () => {
-        setScore({id: collectionId, score: selectedScore})
+    const setScoreHandle = (score: number) => {
+        setScore({id: collectionId, score})
     }
 
     useEffect(() => {
@@ -27,10 +27,12 @@ const CollectionScore: FC<CollectionScoresProps> = ({collectionId, score, userSc
         <div className={'flex justify-between'}>
             {scores.map(num =>
                 <FaStar key={num} size={'1.5rem'}
-                        className={`${num <= selectedScore ? 'fill-amber-400' : 'fill-neutral-300'}`}
+                        className={`select-none ${num <= selectedScore ? 'fill-amber-400' : 'fill-neutral-300'}`}
                         onMouseEnter={() => setSelectedScore(num)}
                         onMouseLeave={() => setSelectedScore(userScore)}
-                        onClick={setScoreHandle}/>
+                    // onTouchStart={() => setSelectedScore(num)}
+                    // onTouchEnd={() => setSelectedScore(userScore)}
+                        onClick={() => setScoreHandle(num)}/>
             )}
             <span>{score}</span>
         </div>
