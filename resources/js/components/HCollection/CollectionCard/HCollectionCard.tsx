@@ -1,15 +1,13 @@
 import React, {FC} from "react";
 import Title from "./Title";
-import CollectionStatus from "./CollectionStatus";
 import {ICollection} from "types/types";
-import Image from "./Image";
 import CollectionDescription from "./CollectionDescription";
 import CollectionInfo from "./CollectionInfo/CollectionInfo";
 import {useGetUserQuery} from "services/userService";
 import {FiEdit} from "react-icons/fi";
 import {Link} from "react-router-dom";
 import HCollectionTags from "components/HCollection/CollectionCard/HCollectionTags/HCollectionTags";
-import CollectionScore from "components/HCollection/CollectionCard/CollectionScore";
+import CollectionUserStatus from "components/HCollection/CollectionCard/CollectionUserStatus";
 
 interface CollectionProps {
     collection: ICollection;
@@ -38,12 +36,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin =
             }
             <div className={"flex flex-col gap-4"}>
                 <div className={'flex xs:flex-col md:flex-row gap-4'}>
-                    <div className={'flex-shrink-0 basis-auto flex flex-col gap-2'}>
-                        <Image link={link} path={path} image={collection.image}/>
-                        <CollectionScore userScore={collection.userScore} collectionId={collection.id}
-                                         score={collection.score}/>
-                        <CollectionStatus type={collection.type} status={collection.status} animeID={collection.id}/>
-                    </div>
+                    <CollectionUserStatus link={link} path={path} collection={collection}/>
                     <div className={"flex flex-col"}>
                         <Title path={path} link
                                RU={collection.title_ru}

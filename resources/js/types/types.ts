@@ -10,7 +10,9 @@ import {IAnimeStudio} from "./Anime";
 
 
 export interface ICollection {
+    watchedEpisodes: number;
     userScore: number;
+    shiki_score: number
     score: number | null;
     genres: ICollectionTag[];
     kind: string;

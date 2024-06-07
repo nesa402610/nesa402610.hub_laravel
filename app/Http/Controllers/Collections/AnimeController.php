@@ -59,22 +59,22 @@ class AnimeController extends Controller
         $anime->censure = 0;
         $anime->image = 'https://shikimori.me/' . $request['image']['preview'];
         $anime->announce_date = $request['aired_on'];
-        $anime->release_date = $request['aired_on'];
-        $anime->episodes_released = ($request['episodes'] ?? $request['episodes_aired']);
+        $anime->release_date = $request['released_on'];
+        $anime->episodes_released = $request['episodes_aired'] === 0 ? $request['episodes'] : $request['episodes_aired'];
         $anime->episodes_total = $request['episodes'];
         $anime->author = null;
+        $anime->mal_id = $request['myanimelist_id'];
+        $anime->shiki_id = $request['id'];
+        $anime->shiki_score = $request['score'];
         $anime->review = '';
         $anime->rating = $rating;
         $anime->style = 0;
         $anime->type = 0;
         $anime->save();
 
-        if ($request['rating'] !== 'rx') {
-            $anime->genres()->detach();
-        }
         foreach ($genres as $genre) {
             $tag = Tags::where('name', $genre['russian'])->first();
-            $addedTags = $anime->tags;
+            $addedTags = $anime->genres;
             if ($tag && !$addedTags->contains('name', $genre['russian'])) {
                 $anime->genres()->attach($tag->id);
             }
@@ -227,6 +227,7 @@ class AnimeController extends Controller
         $collection->genres->makeHidden('pivot');
         $collection->studios->makeHidden('pivot');
 //        $collection->ratings = $collection->ratings();
+
         $collection->status = $collection->animeStatus();
         $collection->videosCount = $collection->links()->count();
 
@@ -317,13 +318,44 @@ class AnimeController extends Controller
         }
     }
 
-    public
-    function removeTag(Request $request)
+    public function removeTag(Request $request)
     {
         $collection = HAnime::find($request->titleId);
         $tagType = $request->tagType;
         if ($tagType === 'genre') $collection->genres()->detach($request->tagId);
         else $collection->tags()->detach($request->tagId);
+    }
+
+    public function setWatchedEpisode($id, $symbol)
+    {
+        $anime = HAnime::find($id);
+        $totalEp = $anime->episodes_total;
+        $userWatchedEps = $anime->userWatchedEpisodes->watched_episodes;
+        $status = $anime->animeStatus();
+        if ($symbol === 'plus') {
+            if ($totalEp > $userWatchedEps) {
+                $anime->userWatchedEpisodes->watched_episodes += 1;
+            }
+            if (!$anime->animeStatus()) {
+                $status = 1;
+            }
+            if ($totalEp === $userWatchedEps + 1) {
+                $status = 6;
+            }
+        } else {
+            if ($userWatchedEps >= 1) {
+                $anime->userWatchedEpisodes->watched_episodes -= 1;
+            }
+            if ($userWatchedEps - 1 !== $totalEp) {
+                $status = 1;
+            }
+            if ($userWatchedEps - 1 === 0) {
+                $status = 2;
+            }
+        }
+        $anime->userWatchedEpisodes->save();
+        $this->setAnimeStatus(new Request(['animeID' => $id, 'status' => $status]));
+        return ['watchedEpisodes' => $anime->userWatchedEpisodes->watched_episodes, 'status' => $anime->animeStatus()];
     }
 
     public

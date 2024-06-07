@@ -122,7 +122,7 @@ export const AnimeAPI = createApi({
                 method: "PATCH",
                 body: {status, animeID}
             }),
-            async onQueryStarted({animeID, status}, {dispatch, queryFulfilled}) {
+            async onQueryStarted({animeID}, {dispatch, queryFulfilled}) {
                 try {
                     const {data: updatedStatus} = await queryFulfilled
                     dispatch(
@@ -159,6 +159,25 @@ export const AnimeAPI = createApi({
             }),
             invalidatesTags: ["anime", "animeList", 'UserAnimeList']
         }),
+        setWatchedEpisode: builder.mutation<number, { id: number, plusOrMinus: 'plus' | 'minus' }>({
+            query: ({id, plusOrMinus = 'plus'}) => ({
+                url: `${id}/watchedEpisodes/${plusOrMinus}`,
+                method: "POST",
+            }),
+            // invalidatesTags: ["anime", "animeList", 'UserAnimeList'],
+            async onQueryStarted({id}, {dispatch, queryFulfilled}) {
+                try {
+                    const {data: updatedEpisodes} = await queryFulfilled
+                    dispatch(
+                        AnimeAPI.util.updateQueryData('getAnimeById', String(id), (draft) => {
+                            Object.assign(draft, updatedEpisodes)
+                        })
+                    )
+                } catch (error) {
+                    console.error("Failed to update status:", error);
+                }
+            },
+        }),
     }),
 });
 
@@ -180,5 +199,6 @@ export const {
     useGetUserAnimeOverviewQuery,
     useGetUserAnimeListQuery,
     useGetRandomAnimeListQuery,
-    useSetScoreToAnimeMutation
+    useSetScoreToAnimeMutation,
+    useSetWatchedEpisodeMutation
 } = AnimeAPI;

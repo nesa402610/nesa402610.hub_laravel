@@ -63,6 +63,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|HManga whereStyle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HManga whereTotalPages($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HManga whereType($value)
+ * @property string $kind
+ * @property float|null $shiki_score
+ * @property int $shiki_id
+ * @property int $mal_id
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereKind($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereMalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereShikiId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HManga whereShikiScore($value)
  * @mixin \Eloquent
  */
 class HManga extends Model {

@@ -67,12 +67,24 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereStyle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereTotalPages($value)
  * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereType($value)
+ * @property string $kind
+ * @property float|null $shiki_score
+ * @property int $shiki_id
+ * @property int $mal_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tags> $genres
+ * @property-read int|null $genres_count
+ * @property-read int $score
+ * @property-read mixed $user_score
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereKind($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereMalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereShikiId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|HAnime whereShikiScore($value)
  * @mixin \Eloquent
  */
 class HAnime extends Model
 {
     protected $table = 'h_collections';
-    protected $appends = ['score', 'userScore'];
+    protected $appends = ['score', 'userScore', 'watchedEpisodes'];
 
 
     use HasFactory;
@@ -116,9 +128,25 @@ class HAnime extends Model
         return $userScore;
     }
 
-    public function getScoreAttribute(): int
+    public function userWatchedEpisodes()
     {
-        return $this->getScores();
+        return $this->hasOne(WatchedEpisode::class, 'collection_id');
+    }
+
+    public function watchedEpisodes()
+    {
+        $watched = DB::table('watched_episodes')->where('collection_id', $this->id)->where('user_id', Auth::user()->id)->value('watched_episodes');
+        return $watched;
+    }
+
+    public function getWatchedEpisodesAttribute()
+    {
+        return $this->watchedEpisodes();
+    }
+
+    public function getScoreAttribute(): float
+    {
+        return round($this->getScores(), 2);
     }
 
     public function getUserScoreAttribute()
