@@ -37,7 +37,7 @@ const HCollectionCard: FC<CollectionProps> = ({collection, link = false, admin =
             <div className={"flex flex-col gap-4"}>
                 <div className={'flex xs:flex-col md:flex-row gap-4'}>
                     <CollectionUserStatus link={link} path={path} collection={collection}/>
-                    <div className={"flex flex-col"}>
+                    <div className={"flex flex-col w-full"}>
                         <Title path={path} link
                                RU={collection.title_ru}
                                EN={collection.title_en}

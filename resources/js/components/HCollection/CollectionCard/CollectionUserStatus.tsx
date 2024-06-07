@@ -30,7 +30,7 @@ const CollectionUserStatus: FC<CollectionUserStatusProps> = ({link, path, collec
                           }))}><FaMinus
                         className={'leading-5 transition hover:scale-[115%] hover:fill-green-400'}/></span>
                 }
-                <span>{collection.watchedEpisodes} / {collection.episodes_total}</span>
+                <span>{collection.watchedEpisodes || 0} / {collection.episodes_total}</span>
                 {
                     !(collection.watchedEpisodes === collection.episodes_total) &&
                     <span className={'cursor-pointer'} onClick={() => (updateWatchedEpisode({

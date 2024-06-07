@@ -44,7 +44,7 @@ const CollectionInfo = ({collection}: { collection: ICollection }) => {
                 <h2 className={'font-bold text-lg uppercase text-center'}>Рейтинг</h2>
                 <Bauble className={'w-36 flex justify-between'}>
                     <span>Шикимори</span>
-                    <span>{collection.shiki_score}</span>
+                    <span>{collection.shiki_score || '-'}</span>
                 </Bauble>
                 <Bauble className={'w-36 flex justify-between'}>
                     <span>hub.n/esa</span>
