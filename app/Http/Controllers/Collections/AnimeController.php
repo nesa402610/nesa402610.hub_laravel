@@ -9,6 +9,7 @@ use App\Models\HAnime;
 use App\Models\HLinks;
 use App\Models\Passkey;
 use App\Models\Tags;
+use App\Models\WatchedEpisode;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -330,27 +331,43 @@ class AnimeController extends Controller
     {
         $anime = HAnime::find($id);
         $totalEp = $anime->episodes_total;
-        $userWatchedEps = $anime->userWatchedEpisodes->watched_episodes;
+        $userWatchedEps = $anime->userWatchedEpisodes->watched_episodes ?? 0;
         $status = $anime->animeStatus();
+
         if ($symbol === 'plus') {
+            if (is_null($anime->userWatchedEpisodes)) {
+                $watchedEpisode = new WatchedEpisode();
+                $watchedEpisode->collection_id = $id;
+                $watchedEpisode->user_id = Auth::user()->id;
+                $watchedEpisode->watched_episodes = 1;
+                $watchedEpisode->save();
+                $this->setAnimeStatus(new Request(['animeID' => $id, 'status' => 1]));
+                return ['watchedEpisodes' => 1, 'status' => $anime->animeStatus()];
+            }
             if ($totalEp > $userWatchedEps) {
                 $anime->userWatchedEpisodes->watched_episodes += 1;
             }
-            if (!$anime->animeStatus()) {
-                $status = 1;
+            if ($status !== 0) {
+                if (!$anime->animeStatus() || $userWatchedEps - 1 !== $totalEp) {
+                    $status = 1;
+                }
+                if ($totalEp === $userWatchedEps + 1) {
+                    $status = 6;
+                }
             }
-            if ($totalEp === $userWatchedEps + 1) {
-                $status = 6;
-            }
+
         } else {
             if ($userWatchedEps >= 1) {
                 $anime->userWatchedEpisodes->watched_episodes -= 1;
             }
-            if ($userWatchedEps - 1 !== $totalEp) {
-                $status = 1;
-            }
-            if ($userWatchedEps - 1 === 0) {
-                $status = 2;
+            if ($status !== 0) {
+
+                if ($userWatchedEps - 1 !== $totalEp) {
+                    $status = 1;
+                }
+                if ($userWatchedEps - 1 === 0) {
+                    $status = 2;
+                }
             }
         }
         $anime->userWatchedEpisodes->save();

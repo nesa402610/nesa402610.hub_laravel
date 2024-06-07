@@ -109,6 +109,12 @@ class HAnime extends Model
         return $this->belongsToMany(HLinks::class, 'link_collection', 'collection_id', 'link_id');
     }
 
+    public function statuses()
+    {
+        return $this->hasMany(AnimeUserStatus::class, 'anime_id');
+
+    }
+
     public function animeStatus()
     {
         if (!Auth::check()) return null;

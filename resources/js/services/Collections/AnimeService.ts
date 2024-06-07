@@ -40,7 +40,7 @@ export const AnimeAPI = createApi({
                 method: "POST",
                 body: {...query}
             }),
-            providesTags: ['animeList'],
+            providesTags: ['animeList']
         }),
         getAnimeById: builder.query<ICollection, string>({
             query: (id) => id,
@@ -140,7 +140,7 @@ export const AnimeAPI = createApi({
             query: (userId) => `animeList/${userId}`,
             providesTags: ['UserAnimeList']
         }),
-        getUserAnimeList: builder.query<{ anime: ICollection, status: number }[], {
+        getUserAnimeList: builder.query<ICollection[], {
             userId: string,
             animestatus: string
         }>({

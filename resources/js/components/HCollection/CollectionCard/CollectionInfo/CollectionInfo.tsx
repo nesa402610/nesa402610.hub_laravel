@@ -28,7 +28,7 @@ const CollectionInfo = ({collection}: { collection: ICollection }) => {
                     <InfoField title={'Эпизоды: '}>
                         {collection.episodes_total ?
                             `${collection.episodes_released} / ${collection.episodes_total}
-                         ${collection.videosCount ? `${collection.videosCount} добавлено)` : ''}`
+                         ${collection.videosCount ? `(${collection.videosCount} добавлено)` : ''}`
                             : 0
                         }
                     </InfoField>

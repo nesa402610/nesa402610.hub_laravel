@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AnimeUserStatus;
+use App\Models\HAnime;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,14 +100,14 @@ class UserController extends Controller
             default:
                 $animeStatus = 6;
         }
-        $animeList = AnimeUserStatus::where('user_id', $userId)->where('status', $animeStatus)->get();
+        $animeList = HAnime::whereHas('statuses', function ($query) use ($userId, $animeStatus) {
+            $query->where('user_id', $userId)
+                ->where('status', $animeStatus);
+        })->get();
+
+//        $animeList = AnimeUserStatus::where('user_id', $userId)->where('status', $animeStatus)->get();
         foreach ($animeList as $anime) {
-            $anime->anime;
-            $anime->anime->tags;
-            $anime->anime->genres;
-            $anime->anime->studios;
-            $anime->anime->status = $anime->anime->animeStatus();
-            $anime->anime->videosCount = $anime->anime->links()->count();
+            $anime->status = $anime->animeStatus();
         }
         return $animeList;
 
