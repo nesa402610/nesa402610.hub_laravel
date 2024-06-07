@@ -7,7 +7,6 @@ import Loader from "components/Loader";
 
 const Kinopoisk = () => {
     const [page, setPage] = useState(1);
-    // const params = new URLSearchParams()
     const [params, setParams] = useState({
         page,
         limit: '250',
@@ -18,7 +17,7 @@ const Kinopoisk = () => {
         sortType: '-1',
         ageRating: '0-18',
         type: 'movie',
-        movieLength: '30-400',
+        // movieLength: '30-400',
         'rating.kp': '0-10',
     });
 
