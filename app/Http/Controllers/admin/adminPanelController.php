@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anime;
 use App\Models\Chat;
-use App\Models\HAnime;
-use App\Models\HManga;
-use App\Models\Project;
+use App\Models\Genre;
+use App\Models\MyWork;
 use App\Models\Studios;
-use App\Models\Tags;
+use App\Models\Tag;
 use App\Models\User;
 
 class adminPanelController extends Controller
 {
     public function getAllAnime()
     {
-        return response(HAnime::all());
+        return response(Anime::all());
     }
 
     public function getAllModels()
@@ -32,42 +32,38 @@ class adminPanelController extends Controller
 
     public function getOverview()
     {
-        $animeCount = HAnime::where('type', 0)->count();
-        $rxCount = HAnime::where('type', 0)->where('rating', '=', 'Rx')->count();
-        $ffCount = HAnime::where('type', 0)->where('rating', '!=', 'Rx')->count();
+        $animeCount = Anime::count();
+        $rxCount = Anime::where('rating', '=', 'Rx')->count();
+        $ffCount = Anime::where('rating', '!=', 'Rx')->count();
         $animeStudiosCount = Studios::count();
 
-        $mangaCount = HManga::where('type', 1)->count();
-        $tagsCount = Tags::count();
+        $tagsCount = Tag::count();
+        $genresCount = Genre::count();
 
         $usersCount = User::count();
 
         $messagesCount = Chat::count();
 
-        $projectsCount = Project::count();
-        $completedProjectsCount = Project::where('status', 'Completed')->count();
-        $plannedProjectsCount = Project::where('status', 'Planned')->count();
-        $droppedProjectsCount = Project::where('status', 'Dropped')->count();
+        $worksCount = MyWork::count();
+        $completedWorksCount = MyWork::where('status', 'Completed')->count();
+        $plannedWorksCount = MyWork::where('status', 'Planned')->count();
+        $droppedWorksCount = MyWork::where('status', 'Dropped')->count();
         return response([
-            'collection' => [
-                'anime' => [
-                    'total' => $animeCount,
-                    'rx' => $rxCount,
-                    'ff' => $ffCount,
-                    'studiosCount' => $animeStudiosCount,
-                ],
-                'manga' => [
-                    'total' => $mangaCount,
-                ],
+            'anime' => [
+                'total' => $animeCount,
+                'rx' => $rxCount,
+                'ff' => $ffCount,
+                'studiosCount' => $animeStudiosCount,
                 'tagsCount' => $tagsCount,
+                'genresCount' => $genresCount,
             ],
             'usersCount' => $usersCount,
             'messagesCount' => $messagesCount,
-            'projects' => [
-                'completed' => $completedProjectsCount,
-                'planned' => $plannedProjectsCount,
-                'dropped' => $droppedProjectsCount,
-                'total' => $projectsCount,
+            'works' => [
+                'completed' => $completedWorksCount,
+                'planned' => $plannedWorksCount,
+                'dropped' => $droppedWorksCount,
+                'total' => $worksCount,
 
             ]
         ]);

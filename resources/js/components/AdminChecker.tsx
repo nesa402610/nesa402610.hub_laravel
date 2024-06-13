@@ -7,7 +7,7 @@ interface AdminCheckerProps {
 
 const AdminChecker: FC<AdminCheckerProps> = ({children}) => {
     const {data} = useGetUserQuery()
-    if (data?.role[0].name === 'Admin')
+    if (data?.role[0]?.name === 'Admin')
         return (
             <>
                 {children}

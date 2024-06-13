@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {useGetRandomAnimeListQuery} from "services/Collections/AnimeService";
-import HCollectionCardMini from "components/HCollection/CollectionCard/HCollectionCardMini";
+import AnimeCard_mini from "components/Anime/AnimeCard/AnimeCard_mini";
 import ChatPage from "routes/ChatPage";
-import {useGetPostsQuery} from "services/postService";
-import PostCard from "components/blog/PostCard";
+import {useGetPostsQuery} from "services/NewsService";
+import NewsCard from "components/News/NewsCard";
 
 const HomePage: FC = () => {
     const {data: randomList, refetch} = useGetRandomAnimeListQuery();
@@ -18,7 +18,7 @@ const HomePage: FC = () => {
                     </div>
                     <div className={'grid md:grid-cols-5 xs:grid-cols-2 sm:grid-cols-4 gap-4 mt-4'}>
                         {randomList?.map(anime =>
-                            <HCollectionCardMini anime={anime}/>
+                            <AnimeCard_mini anime={anime}/>
                         )}
                     </div>
                 </div>
@@ -30,7 +30,7 @@ const HomePage: FC = () => {
                 <h3 className={'font-bold mb-4'}>Новости сайта</h3>
                 <div className={'grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'}>
                     {posts?.data.map(post =>
-                            <PostCard post={post}/>
+                        <NewsCard post={post}/>
                     )}
                 </div>
             </div>

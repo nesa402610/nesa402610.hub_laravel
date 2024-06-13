@@ -35,7 +35,7 @@ export const AnimeAPI = createApi({
     tagTypes: ["anime", "videos", "animeList", 'UserAnimeList', 'AnimeListRandom'],
     endpoints: (builder) => ({
         getAllAnime: builder.query<paginatedData<ICollection[]>, getArgs>({
-            query: ({page = 1, passkey, query = null}) => ({
+            query: ({page = 1, query = null}) => ({
                 url: "list?page=" + page,
                 method: "POST",
                 body: {...query}
@@ -116,7 +116,7 @@ export const AnimeAPI = createApi({
             }),
             invalidatesTags: ["animeList", 'UserAnimeList']
         }),
-        setAnimeStatus: builder.mutation<{ status: number }, { status: number, animeID: number }>({
+        setAnimeStatus: builder.mutation<{ userStatus: { status: number } }, { status: number, animeID: number }>({
             query: ({status, animeID}) => ({
                 url: "status",
                 method: "PATCH",

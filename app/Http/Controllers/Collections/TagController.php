@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Collections;
 
 use App\Http\Controllers\Controller;
-use App\Models\Tags;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
     public function getAllTags()
     {
-        $tags = Tags::orderBy('name')->get();
+        $tags = Tag::orderBy('name')->get();
 
         return response($tags, 200);
     }
@@ -26,7 +26,7 @@ class TagController extends Controller
 ////            return response()->json(['errors' => $validator->errors()], 422);
 ////        }
 ///
-        $tag = new Tags();
+        $tag = new Tag();
         $tag->name = $request->name;
         $tag->type = $request->type;
         $tag->save();
@@ -34,7 +34,7 @@ class TagController extends Controller
 
     public function updateTag(Request $request)
     {
-        $tag = Tags::find($request->id);
+        $tag = Tag::find($request->id);
         $tag->name = $request->name;
         $tag->type = $request->type;
         $tag->save();
@@ -42,7 +42,7 @@ class TagController extends Controller
 
     public function deleteTag(Request $request)
     {
-        $tag = Tags::find($request->id)->delete();
+        $tag = Tag::find($request->id)->delete();
     }
 
 }

@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\HAnime;
+use App\Models\Anime;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -18,7 +18,7 @@ class SyncAnimeWithShiki implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(HAnime $HAnime)
+    public function __construct(Anime $HAnime)
     {
         //
     }

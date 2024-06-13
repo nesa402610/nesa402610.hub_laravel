@@ -14,7 +14,6 @@ const AdminSidebar = () => {
                 {name: 'Аниме', to: 'anime'},
                 {name: 'Тэги', to: 'tags'},
                 {name: 'Аниме студии', to: 'anime/studios'},
-                {name: 'Манга', to: 'manga'},
                 {name: 'Shikimori Anime', to: 'shikimori/anime'},
                 {name: 'Shikimori хост', to: 'shikimori/hostfix'},
             ]

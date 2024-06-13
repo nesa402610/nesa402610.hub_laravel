@@ -2,23 +2,17 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 import {csrf_token} from "../../mockData";
 
 export interface IOverview {
-    collection: {
-        anime: {
-            total: number
-            rx: number
-            ff: number
-            studiosCount: number
-        },
-        manga: {
-            total: number
-            rx: null
-            ff: null
-        }
+    anime: {
+        genresCount: number;
         tagsCount: number
+        total: number
+        rx: number
+        ff: number
+        studiosCount: number
     }
     messagesCount: number
     usersCount: number
-    projects: {
+    works: {
         completed: number
         planned: number
         dropped: number

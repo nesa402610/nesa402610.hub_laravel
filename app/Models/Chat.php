@@ -22,11 +22,17 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Chat whereUserId($value)
+ * @property string $body
+ * @property string|null $image
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat whereImage($value)
  * @mixin \Eloquent
  */
 class Chat extends Model
 {
     use HasFactory;
+
+    protected $table = 'chat';
 
     public function user() {
         return $this->belongsTo(User::class)->select('id', 'name', 'avatar');

@@ -1,10 +1,10 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import Modal from "../UI/modal";
-import {useCreatePostMutation, useUpdatePostMutation} from "services/postService";
-import {IPost} from "types/Post";
+import {useCreatePostMutation, useUpdatePostMutation} from "services/NewsService";
+import {INews} from "types/Post";
 
 interface PostFormProps {
-    post?: IPost
+    post?: INews
     isModal: boolean
     setIsModal: Dispatch<SetStateAction<boolean>>
 }
@@ -12,7 +12,7 @@ interface PostFormProps {
 const PostForm: FC<PostFormProps> = ({post, isModal, setIsModal}) => {
     const [createPost, {}] = useCreatePostMutation()
     const [updatePost, {}] = useUpdatePostMutation()
-    const [data, setData] = useState<IPost>(post || {title: '', body: '', image: ''});
+    const [data, setData] = useState<INews>(post || {title: '', body: '', image: ''});
     const createPostHandler = (e) => {
         e.preventDefault()
         createPost(data)

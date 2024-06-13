@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import PostCard from "components/blog/PostCard";
+import NewsCard from "components/News/NewsCard";
 import PostForm from "components/admin/PostForm";
 import {useGetUserQuery} from "services/userService";
-import {useGetPostsQuery} from "services/postService";
+import {useGetPostsQuery} from "services/NewsService";
 import Loader from "components/Loader";
 import Paginator from "components/UI/Paginator";
 
@@ -28,7 +28,7 @@ const BlogPostsPage = () => {
                         </div>
                     }
                     {data.data?.map(post => (post.visibility === 0 || user?.id === 1) &&
-                        <PostCard key={post.id} post={post}/>
+                        <NewsCard key={post.id} post={post}/>
                     )}
                 </div>
             </div>

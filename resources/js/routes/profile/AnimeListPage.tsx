@@ -3,7 +3,7 @@ import {useParams} from "react-router";
 import {useGetUserAnimeListQuery, useGetUserAnimeOverviewQuery} from "services/Collections/AnimeService";
 import Loader from "../../components/Loader";
 import {Link} from "react-router-dom";
-import HCollectionCard from "../../components/HCollection/CollectionCard/HCollectionCard";
+import AnimeCard from "components/Anime/AnimeCard/AnimeCard";
 
 const AnimeListPage = () => {
     const {animestatus, username} = useParams()
@@ -33,7 +33,7 @@ const AnimeListPage = () => {
             </div>
 
             {isLoading ? <Loader/> : data.map(anime =>
-                <HCollectionCard key={anime.id} collection={anime} link/>
+                <AnimeCard key={anime.id} collection={anime} link/>
             )}
             {(!data?.length && !isFetching) &&
                 <h2 className={'text-center font-bold text-2xl'}>

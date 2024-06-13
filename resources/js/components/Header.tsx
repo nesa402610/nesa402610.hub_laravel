@@ -14,7 +14,7 @@ import AdminChecker from "components/AdminChecker";
 
 const Header: FC = () => {
     const [isModal, setIsModal] = useState<boolean>(false);
-    const {data, error, isLoading} = useGetUserQuery();
+    const {data} = useGetUserQuery();
     const [start, setStart] = useState(true);
     useEffect(() => {
         setTimeout(() => setStart(false), 100)
@@ -36,7 +36,7 @@ const Header: FC = () => {
                             <IoBookmarks/>
                             Задачи
                         </NavLink>
-                        <NavLink className={"nav-link"} to={"/blog"}>
+                        <NavLink className={"nav-link"} to={"/News"}>
                             <IoNewspaper/>
                             Блог
                         </NavLink>

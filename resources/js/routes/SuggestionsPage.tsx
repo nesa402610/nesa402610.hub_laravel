@@ -4,7 +4,7 @@ import {useGetUserQuery} from "services/userService";
 import {useGetTasksQuery} from "services/tasksService";
 import Modal from "../components/UI/modal";
 import Loader from "../components/Loader";
-import SuggestionCard from "components/Suggestion/SuggestionCard";
+import TaskCard from "components/Tasks/TaskCard";
 
 
 const SuggestionsPage: FC = () => {
@@ -12,7 +12,6 @@ const SuggestionsPage: FC = () => {
     const {data: tasks, isLoading} = useGetTasksQuery();
 
     const [isModal, setIsModal] = useState(false);
-    const [hover, setHover] = useState(0);
 
 
     const addNewIdea = () => {
@@ -37,7 +36,7 @@ const SuggestionsPage: FC = () => {
                     </div>
                 }
                 {tasks.map(task =>
-                    <SuggestionCard key={task.id} task={task}/>
+                    <TaskCard key={task.id} task={task}/>
                 )}
             </div>
         </>

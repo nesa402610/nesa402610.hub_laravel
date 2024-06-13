@@ -2,8 +2,8 @@ import React from 'react';
 import {useParams} from "react-router";
 import moment from "moment";
 import {BiTime} from "react-icons/bi";
-import {useGetPostByIdQuery} from "services/postService";
-import PostComments from "components/blog/PostComments";
+import {useGetPostByIdQuery} from "services/NewsService";
+import NewsComments from "components/News/NewsComments";
 import Loader from "components/Loader";
 import usePageTitle from "hooks/usePageTitle";
 
@@ -29,7 +29,7 @@ const BlogPostPage = () => {
                 </div>
             </div>
             <h2 className={'text-xl font-bold text-center'}>Комментарии</h2>
-            <PostComments postId={+id}/>
+            <NewsComments postId={+id}/>
         </div>
     );
 };

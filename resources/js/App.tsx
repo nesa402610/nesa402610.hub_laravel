@@ -4,13 +4,10 @@ import {Outlet} from "react-router";
 import {ScrollRestoration} from "react-router-dom";
 import {useGetUserQuery} from "services/userService";
 import Loader from "components/Loader";
-import {useAppSelector} from "hooks/redux";
-import MangaHeader from "./components/HManga/MangaHeader";
 import Header from "components/Header";
 
 const App = () => {
     const {isFetching, error} = useGetUserQuery()
-    const {headerType} = useAppSelector(state => state.app)
     const [start, setStart] = useState(true);
 
     useEffect(() => {
@@ -21,7 +18,7 @@ const App = () => {
     if (isFetching && !error) return <Loader/>
     return (
         <>
-            {headerType ? <MangaHeader/> : <Header/>}
+            <Header/>
             <main className={`${start ? 'ml-0' : 'ml-[80px]'} transition-all`}>
                 <Outlet/>
                 <ScrollRestoration/>

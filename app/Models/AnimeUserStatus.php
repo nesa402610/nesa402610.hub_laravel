@@ -23,13 +23,24 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereUserId($value)
- * @property-read \App\Models\HAnime $anime
+ * @property-read \App\Models\Anime $anime
+ * @property int|null $watched_episodes
+ * @property string|null $note
+ * @property int|null $score
+ * @property int $favorite
+ * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereFavorite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereNote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereScore($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AnimeUserStatus whereWatchedEpisodes($value)
  * @mixin \Eloquent
  */
 class AnimeUserStatus extends Model
 {
-    protected $table = 'anime_user_status';
     use HasFactory;
+
+    protected $table = 'anime_user_status';
+    protected $fillable = ['status', 'watched_episodes'];
+
 
     protected $hidden = [
         'id',
@@ -41,7 +52,7 @@ class AnimeUserStatus extends Model
 
     public function anime()
     {
-        return $this->belongsTo(HAnime::class);
+        return $this->belongsTo(Anime::class);
     }
 
 }

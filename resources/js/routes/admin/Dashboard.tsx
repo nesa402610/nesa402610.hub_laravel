@@ -14,31 +14,28 @@ const Dashboard: FC = () => {
                     <div
                         className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>
                         <div className={'flex flex-col'}>
-                            <span>Всего аниме: {data.collection.anime.total}</span>
-                            <span>Rx: {data.collection.anime.rx}</span>
-                            <span>Family-friendly: {data.collection.anime.ff}</span>
-                            {/*<AnimeChartPie total={data.collection} rx={rx} ff={ff}/>*/}
+                            <span>Всего аниме: {data.anime.total}</span>
+                            <span>Rx: {data.anime.rx}</span>
+                            <span>Family-friendly: {data.anime.ff}</span>
+                            {/*<AnimeChartPie total={data} rx={rx} ff={ff}/>*/}
                             {/*<DashboardGraph values={data}/>*/}
                             {/*<ReactApexChart options={options} series={series} type="radar"*/}
                             {/*                height={350}/>*/}
-                            <span>Всего студий: {data.collection.anime.studiosCount}</span>
+                            <span>Всего студий: {data.anime.studiosCount}</span>
                         </div>
                     </div>
                     <div
                         className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>
-                        Всего манги: {data.collection.manga.total}
-                    </div>
-                    <div
-                        className={'bg-slate-800 p-4 rounded-lg flex flex-col items-center justify-center flex-1 gap-2'}>
-                        Всего тегов: {data.collection.tagsCount}
+                        <span>Всего жанров: {data.anime.genresCount}</span>
+                        <span>Всего тегов: {data.anime.tagsCount}</span>
                     </div>
                 </div>
             </div>
             <div className={'flex gap-4 bg-slate-700 p-4 rounded-lg'}>
-                <span>Всего проект я сделал: {data.projects.total}</span>
-                <span>Завершил: {data.projects.completed}</span>
-                <span>Бросил: {data.projects.dropped}</span>
-                <span>Запланировал: {data.projects.planned}</span>
+                <span>Всего проект я сделал: {data.works.total}</span>
+                <span>Завершил: {data.works.completed}</span>
+                <span>Бросил: {data.works.dropped}</span>
+                <span>Запланировал: {data.works.planned}</span>
             </div>
             <div className={'bg-slate-700 p-4 rounded-lg'}>
                 Всего пользователей: {data.usersCount}

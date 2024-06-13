@@ -1,7 +1,7 @@
 import {IUser} from "./User";
 
 
-export interface IPost {
+export interface INews {
   id?: number;
   userId?: number;
   title: string;

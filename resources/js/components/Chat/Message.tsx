@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Link} from "react-router-dom";
+import {IChat} from "services/chatService";
 
-const Message = ({message: msg}) => {
+
+interface MessageProps {
+    message: IChat
+}
+
+const Message: FC<MessageProps> = ({message: msg}) => {
     return (
         <div key={msg.id} className={'flex sm:flex-row mb-2 sm:items-center flex-col xs:items-start'}>
             {/*<div className={'w-[40px]'}>*/}
@@ -16,7 +22,7 @@ const Message = ({message: msg}) => {
                 </div>
             </Link>
             <div>
-                {msg.message}
+                {msg.body}
             </div>
         </div>
     );

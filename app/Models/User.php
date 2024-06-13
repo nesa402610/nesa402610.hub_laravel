@@ -28,7 +28,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string|null $about
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Rating[] $rates
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\MyWorkScore[] $rates
  * @property-read int|null $rates_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
@@ -65,6 +65,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $anime_list_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Role> $role
  * @property-read int|null $role_count
+ * @property string|null $last_name
+ * @property string|null $middle_name
+ * @property int $clown
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereClown($value)
  * @mixin \Eloquent
  */
 class User extends Authenticatable
@@ -103,7 +107,7 @@ class User extends Authenticatable
 
     public function rates()
     {
-        return $this->hasMany(Rating::class);
+        return $this->hasMany(MyWorkScore::class);
     }
 
     public function role()

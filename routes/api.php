@@ -2,14 +2,13 @@
 
 use App\Http\Controllers\admin\adminPanelController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\Collections\AnimeController;
-use App\Http\Controllers\Collections\MangaController;
 use App\Http\Controllers\Collections\StudioController;
 use App\Http\Controllers\Collections\TagController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\SuggestionController;
+use App\Http\Controllers\MyWorkController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminProof;
 use App\Mail\PasswordReset;
@@ -34,9 +33,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/registration', 'registration');
     Route::post('/login', 'login')->name('login');
 });
-Route::get('/projects', [ProjectController::class, 'getAllProjects']);
-Route::get('/suggestions', [SuggestionController::class, 'getAllTasks']);
-Route::post('/setRating', [ProjectController::class, 'setRating']);
+Route::get('/projects', [MyWorkController::class, 'getAllProjects']);
+Route::get('/suggestions', [TaskController::class, 'getAllTasks']);
+Route::post('/setRating', [MyWorkController::class, 'setRating']);
 Route::post('mail', function () {
     Mail::to('hentaitrap@icloud.com')->send(new PasswordReset());
 });
@@ -59,32 +58,32 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         });
     });
     Route::prefix('admin')->middleware(AdminProof::class)->group(function () {
-        Route::post('/createProject', [ProjectController::class, 'createProject']);
-        Route::get('/editProject/{id}', [ProjectController::class, 'editProject']);
-        Route::patch('/updateProject/{id}', [ProjectController::class, 'updateProject']);
+        Route::post('/createProject', [MyWorkController::class, 'createProject']);
+        Route::get('/editProject/{id}', [MyWorkController::class, 'editProject']);
+        Route::patch('/updateProject/{id}', [MyWorkController::class, 'updateProject']);
     });
-    Route::prefix('blog')->group(function () {
-        Route::get('', [BlogPostController::class, 'getAllPosts'])->withoutMiddleware('auth:sanctum');
+    Route::prefix('News')->group(function () {
+        Route::get('', [NewsController::class, 'getAllPosts'])->withoutMiddleware('auth:sanctum');
         Route::prefix('{id}')->group(function () {
-            Route::get('', [BlogPostController::class, 'getPostById'])->withoutMiddleware('auth:sanctum');
+            Route::get('', [NewsController::class, 'getNewsById'])->withoutMiddleware('auth:sanctum');
             Route::prefix('comments')->group(function () {
-                Route::get('list', [BlogPostController::class, 'getPostComments'])->withoutMiddleware('auth:sanctum');
-                Route::put('create', [BlogPostController::class, 'createComment']);
-                Route::patch('update', [BlogPostController::class, 'editComment']);
-                Route::delete('delete', [BlogPostController::class, 'deleteComment']);
+                Route::get('list', [NewsController::class, 'getNewsComments'])->withoutMiddleware('auth:sanctum');
+                Route::put('create', [NewsController::class, 'createComment']);
+                Route::patch('update', [NewsController::class, 'editComment']);
+                Route::delete('delete', [NewsController::class, 'deleteComment']);
             });
         });
         Route::middleware([AdminProof::class])->group(function () {
-            Route::put('/create', [BlogPostController::class, 'createPost']);
-            Route::delete('/delete', [BlogPostController::class, 'deletePost']);
-            Route::patch('/visibility', [BlogPostController::class, 'visibility']);
-            Route::patch('/update', [BlogPostController::class, 'updatePost']);
+            Route::put('/create', [NewsController::class, 'createNews']);
+            Route::delete('/delete', [NewsController::class, 'deleteNews']);
+            Route::patch('/visibility', [NewsController::class, 'visibility']);
+            Route::patch('/update', [NewsController::class, 'updateNews']);
         });
     });
     Route::prefix('suggestions')->group(function () {
-        Route::post('/add', [SuggestionController::class, 'createSuggestion']);
-        Route::post('/update', [SuggestionController::class, 'updateSuggestion']);
-        Route::post('/setStatus', [SuggestionController::class, 'setStatus'])->middleware(AdminProof::class);
+        Route::post('/add', [TaskController::class, 'createSuggestion']);
+        Route::post('/update', [TaskController::class, 'updateSuggestion']);
+        Route::post('/setStatus', [TaskController::class, 'setStatus'])->middleware(AdminProof::class);
     });
 
     Route::middleware([AdminProof::class])->group(function () {

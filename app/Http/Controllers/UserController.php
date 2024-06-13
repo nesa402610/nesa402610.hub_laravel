@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anime;
 use App\Models\AnimeUserStatus;
-use App\Models\HAnime;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +27,8 @@ class UserController extends Controller
         $user = Auth::user();
 
         $user->name = $request->name;
-        $user->middleName = $request->middleName;
-        $user->lastName = $request->lastName;
+        $user->middle_name = $request->middle_name;
+        $user->last_name = $request->last_name;
         $user->birthday = $request->birthday;
         $user->avatar = $request->avatar;
         $user->status = $request->status;
@@ -69,7 +69,7 @@ class UserController extends Controller
 
     public function getAllUsers(Request $request)
     {
-        $users = User::where('name', 'like', '%' . $request->userName . '%')->orWhere('lastName', 'like', '%' . $request->userName . '%')->limit(21)->get();
+        $users = User::where('name', 'like', '%' . $request->userName . '%')->orWhere('last_name', 'like', '%' . $request->userName . '%')->limit(21)->get();
         return response($users, 200);
     }
 
@@ -100,15 +100,11 @@ class UserController extends Controller
             default:
                 $animeStatus = 6;
         }
-        $animeList = HAnime::whereHas('statuses', function ($query) use ($userId, $animeStatus) {
+        $animeList = Anime::whereHas('animeStatus', function ($query) use ($userId, $animeStatus) {
             $query->where('user_id', $userId)
                 ->where('status', $animeStatus);
         })->get();
 
-//        $animeList = AnimeUserStatus::where('user_id', $userId)->where('status', $animeStatus)->get();
-        foreach ($animeList as $anime) {
-            $anime->status = $anime->animeStatus();
-        }
         return $animeList;
 
     }

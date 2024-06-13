@@ -7,13 +7,13 @@ import {
 } from "services/Collections/AnimeService";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
-import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";
+import AnimeCard from "components/Anime/AnimeCard/AnimeCard";
 
 const Anime = () => {
     const [isDuplies, setIsDuplies] = useState(false);
     const [page, setPage] = useState(1);
     const {data, isLoading, isFetching} = useGetAllAnimeQuery({page, query: {IPP: 50}})
-    const [animes, lastPage, currentPage] = [data?.data, data?.last_page, data?.current_page]
+    const [animes, lastPage] = [data?.data, data?.last_page, data?.current_page]
     const {data: duples, isLoading: isLoadingDuplies} = useGetAnimeDupliesQuery()
     const [deleteDuplies] = useDeleteAnimeDupliesMutation()
 
@@ -24,7 +24,7 @@ const Anime = () => {
                 <button onClick={() => setIsDuplies(false)}>Скрыть дубли</button>
                 <button onClick={() => deleteDuplies()}>Удалить дубли</button>
                 {duples.map(anime =>
-                    <HCollectionCard admin key={anime.id} link collection={anime}/>
+                    <AnimeCard admin key={anime.id} link collection={anime}/>
                 )}
             </div>
         )
@@ -41,7 +41,7 @@ const Anime = () => {
                 <button onClick={() => setIsDuplies(true)}>Показать дубли</button>
             </div>
             {animes.map(anime =>
-                <HCollectionCard admin key={anime.id} link collection={anime}/>
+                <AnimeCard admin key={anime.id} link collection={anime}/>
             )}
             <Paginator currentPage={page} totalPages={lastPage} setCurrentPage={setPage}/>
         </div>

@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $body
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\BlogPost $post
+ * @property-read \App\Models\News $post
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Comment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Comment newQuery()
@@ -25,17 +25,21 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Comment wherePostId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Comment whereUserId($value)
+ * @property int|null $news_id
+ * @property int|null $anime_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereAnimeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Comment whereNewsId($value)
  * @mixin \Eloquent
  */
 class Comment extends Model {
     use HasFactory;
 
     public function post() {
-        return $this->belongsTo(BlogPost::class);
+        return $this->belongsTo(News::class);
     }
 
     public function user() {
-        return $this->belongsTo(User::class)->select('name', 'lastName');
+        return $this->belongsTo(User::class)->select('name', 'last_name');
     }
 
 }

@@ -24,7 +24,7 @@ const TaskActions: FC<TaskActionsProps> = ({task, hover}) => {
   //     setTask(tasks.filter(i => i.id === id))
   //     dispatch(setModal({
   //         title: 'Редактирование предложения',
-  //         children: <Suggestion task={taskEdit}/>
+    //         children: <Task task={taskEdit}/>
   //     }))
   //};
   return (

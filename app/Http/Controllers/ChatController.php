@@ -24,7 +24,7 @@ class ChatController extends Controller
     {
         $chat = new Chat;
         $chat->user_id = Auth::user()->id;
-        $chat->message = $request->message;
+        $chat->body = $request->message;
         $chat->user;
         $chat->save();
         return response($chat, 201);

@@ -4,12 +4,15 @@ import {useAddAnimeMutation} from "services/Collections/AnimeService";
 import AnimeFields from "components/admin/Collections/Anime/AnimeFields";
 import Loader from "components/Loader";
 import {ICollection} from "types/types";
-import HCollectionCard from "components/HCollection/CollectionCard/HCollectionCard";
+import AnimeCard from "components/Anime/AnimeCard/AnimeCard";
 
 const AnimeCreate = () => {
     const [createAnime, {isLoading}] = useAddAnimeMutation();
     const nav = useNavigate();
     const [anime, setAnime] = useState<ICollection>({
+        genres: [],
+        score: undefined,
+        shiki_score: 0,
         announce_date: "",
         author: "",
         videosCount: 0,
@@ -34,7 +37,7 @@ const AnimeCreate = () => {
         title_original: "",
         title_ru: "",
         status: 0,
-        rating: 0,
+        rating: '',
         style: 0
 
     });
@@ -51,7 +54,7 @@ const AnimeCreate = () => {
         <div className={"flex flex-col gap-4"}>
             <button onClick={createAnimeHandler}>Создать</button>
             <AnimeFields anime={anime} setAnime={setAnime}/>
-            <HCollectionCard collection={anime}/>
+            <AnimeCard collection={anime}/>
         </div>
     );
 };

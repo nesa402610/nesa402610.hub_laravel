@@ -5,13 +5,13 @@ import {IAnimeVideos} from "types/Anime";
 import Loader from "../../../components/Loader";
 import AnimeFields from "../../../components/admin/Collections/Anime/AnimeFields";
 import AnimeVideoFields from "../../../components/admin/Collections/Anime/AnimeVideoFields";
-import AnimeVideos from "../../../components/HCollection/AnimeVideos";
+import AnimeVideos from "components/Anime/AnimeVideos";
 import {ICollection} from "types/types";
-import HCollectionCard from "../../../components/HCollection/CollectionCard/HCollectionCard";
+import AnimeCard from "components/Anime/AnimeCard/AnimeCard";
 
 const AnimeEdit = () => {
     const {id} = useParams();
-    const {data: animeData, isLoading} = useGetAnimeByIdQuery(id)
+    const {data: animeData} = useGetAnimeByIdQuery(id)
     const videosResponse = useGetAnimeVideosQuery(id);
     const {data: videosData} = videosResponse;
     const [updateAnime] = useUpdateAnimeMutation();
@@ -49,7 +49,7 @@ const AnimeEdit = () => {
             <AnimeVideoFields setVideos={setVideos} videos={videos}/>
             {preview &&
                 <>
-                    <HCollectionCard collection={anime}/>
+                    <AnimeCard collection={anime}/>
                     <AnimeVideos animeID={anime.id} videosData={{...videosResponse, data: videos}}/>
                 </>
             }

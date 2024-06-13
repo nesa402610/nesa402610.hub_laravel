@@ -13,17 +13,11 @@ import AboutPage from "./AboutPage";
 import SuggestionsPage from "./SuggestionsPage";
 import UsersPage from "./UsersPage";
 import NotFound from "./errors/NotFound";
-import HHHPage from "./HHHPage";
+import AnimePage from "./AnimePage";
 import App from "../App";
-import HAnimePage from "./HCollection/HAnime/HAnimePage";
-import HMangaPage from "./HCollection/HManga/HMangaPage";
-import HMangaDetailedPage from "./HCollection/HManga/HMangaDetailedPage";
-import HReader from "./HCollection/HManga/HReader";
-import HAnimeDetailedPage from "./HCollection/HAnime/HAnimeDetailedPage";
 import IndexAdmin from "../routes/admin/index";
 import Users from "./admin/Users";
 import Tags from "./admin/Tags";
-import Manga from "./admin/Manga";
 import Studios from "./admin/Studios";
 import AnimeCreate from "./admin/anime/AnimeCreate";
 import AnimeEdit from "./admin/anime/AnimeEdit";
@@ -33,11 +27,11 @@ import AnimeListPage from "./profile/AnimeListPage";
 import ShikimoriAnime from "./admin/anime/ShikimoriAnime";
 import ShikimoriHostfix from "routes/admin/anime/ShikimoriHostfix";
 import Kinopoisk from "routes/Kinopoisk/Kinopoisk";
+import AnimeDetailedPage from "routes/Anime/AnimeDetailedPage";
 
 export const routerPaths = {
     ANIME: '/NULL/unit/ZERO',
-    MANGA: '/NULL/unit/ONE',
-    BLOG: '/blog',
+    BLOG: '/News',
     KINOPOISK: '/kinopoisk'
 }
 export const router = createBrowserRouter([
@@ -67,7 +61,7 @@ export const router = createBrowserRouter([
                 ]
             },
             {
-                path: 'blog',
+                path: 'News',
                 children: [
                     {path: '', element: <BlogPostsPage/>},
                     {path: ':id', element: <BlogPostPage/>},
@@ -78,22 +72,10 @@ export const router = createBrowserRouter([
 
                 path: 'NULL/unit',
                 children: [
-                    {path: 'ZERO/:id', element: <HAnimeDetailedPage/>},
-                    {path: 'ONE/:id', element: <HMangaDetailedPage/>},
-                    {path: 'ONE/:id/read', element: <HReader/>},
+                    {path: 'ZERO/:id', element: <AnimeDetailedPage/>},
                     {
-                        path: '',
-                        element: <HHHPage/>,
-                        children: [
-                            {
-                                path: 'ZERO',
-                                element: <HAnimePage/>,
-                            },
-                            {
-                                path: 'ONE',
-                                element: <HMangaPage/>,
-                            },
-                        ]
+                        path: 'ZERO',
+                        element: <AnimePage/>,
                     },
                 ]
             },
@@ -110,12 +92,6 @@ export const router = createBrowserRouter([
                     {path: 'studios', element: <Studios/>},
                     {path: 'new', element: <AnimeCreate/>},
                     {path: ':id', element: <AnimeEdit/>},
-                ]
-            },
-            {
-                path: 'manga', children: [
-                    {path: '', element: <Manga/>},
-                    {path: ':id', element: <Manga/>},
                 ]
             },
             {path: 'users', element: <Users/>},
