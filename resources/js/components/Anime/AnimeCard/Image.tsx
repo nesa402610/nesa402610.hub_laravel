@@ -12,7 +12,7 @@ const Image: FC<ImageProps> = ({link = false, path, image}) => {
         <Link className={'flex justify-center'}
               to={`${link ? path : ""}`}>
             <img
-                className={`rounded-lg min-h-[150px] w-[200px] h-auto ${link ? 'hover:scale-105 transition-all' : 'cursor-default'}`}
+                className={`rounded-lg min-h-[150px] w-[225px] h-auto ${link ? 'hover:scale-105 transition-all' : 'cursor-default'}`}
                 src={image}
                 alt="Изображение тайтла"/>
         </Link>

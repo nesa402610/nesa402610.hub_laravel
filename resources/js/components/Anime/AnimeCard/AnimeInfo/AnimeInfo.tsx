@@ -24,7 +24,7 @@ const AnimeInfo = ({collection}: { collection: ICollection }) => {
                     <InfoField title={'Дата: '} value={collection.announce_date.slice(0, 4)}/>
                     <InfoField title={'Тип: '} value={colKind}/>
                     <AnimeGenres genres={collection.genres}
-                                 collectionID={collection.id}/>
+                                 animeID={collection.id}/>
                     <InfoField title={'Эпизоды: '}>
                         {collection.episodes_total ?
                             `${collection.episodes_released} / ${collection.episodes_total}

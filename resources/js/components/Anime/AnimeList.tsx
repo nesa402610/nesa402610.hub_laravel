@@ -11,7 +11,6 @@ const AnimeList: FC = () => {
     const [params] = useSearchParams();
     const [page, setPage] = useState(params.get('page') || 1);
     const {data, isLoading, isFetching} = useGetAllAnimeQuery({
-        passkey: null,
         page: +page,
         query: filter
     });

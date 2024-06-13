@@ -49,21 +49,23 @@ const AnimeStatus: FC<CollectionStatusProps> = ({status, animeID}) => {
         }
         setStatus({status: statusId, animeID})
             .unwrap()
-            .catch(err => console.error(err))
-            .finally(() => {
-                setIsOpen(false)
+            .then(r => {
                 dispatch(
                     AnimeAPI.util.updateQueryData('getAllAnime', {
                         page: +params.get('page') || 1,
                         query: filter,
-                        passkey: null
                     }, (draft) => {
                         const anime = draft.data.find(a => a.id === animeID);
                         if (anime) {
-                            anime.userStatus.status = statusId;
+                            Object.assign(anime, r)
                         }
                     }),
                 )
+            })
+            .catch(err => console.error(err))
+            .finally(() => {
+                setIsOpen(false)
+
             })
     }
 
@@ -80,11 +82,12 @@ const AnimeStatus: FC<CollectionStatusProps> = ({status, animeID}) => {
                              e.stopPropagation();
                              setIsOpen(false)
                          }}>
-                        <IoCaretUp className={'text-xl'}/>
+                        <IoCaretUp className={'text-2xl fill-neutral-300 hover:fill-white transition hover:scale-110'}/>
                     </div>
                     :
                     <div className={'absolute right-2 z-[40]'}>
-                        <IoCaretDown className={'text-xl'}/>
+                        <IoCaretDown
+                            className={'text-2xl fill-neutral-300 hover:fill-white transition hover:scale-110'}/>
                     </div>
                 }
                 {!status && status !== 0 ?

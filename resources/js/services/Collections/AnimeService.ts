@@ -116,26 +116,6 @@ export const AnimeAPI = createApi({
             }),
             invalidatesTags: ["animeList", 'UserAnimeList']
         }),
-        setAnimeStatus: builder.mutation<{ userStatus: { status: number } }, { status: number, animeID: number }>({
-            query: ({status, animeID}) => ({
-                url: "status",
-                method: "PATCH",
-                body: {status, animeID}
-            }),
-            async onQueryStarted({animeID}, {dispatch, queryFulfilled}) {
-                try {
-                    const {data: updatedStatus} = await queryFulfilled
-                    dispatch(
-                        AnimeAPI.util.updateQueryData('getAnimeById', String(animeID), (draft) => {
-                            Object.assign(draft, updatedStatus)
-                        })
-                    )
-                } catch (error) {
-                    console.error("Failed to update status:", error);
-                }
-            },
-            // invalidatesTags: ["animeList", 'UserAnimeList', 'anime']
-        }),
         getUserAnimeOverview: builder.query<AnimeListOverviewProps, string>({
             query: (userId) => `animeList/${userId}`,
             providesTags: ['UserAnimeList']
@@ -151,15 +131,47 @@ export const AnimeAPI = createApi({
             query: () => `list/random`,
             providesTags: ['AnimeListRandom'],
         }),
-        setScoreToAnime: builder.mutation<null, { id: number, score: number }>({
+        setScoreToAnime: builder.mutation<any, { id: number, score: number }>({
             query: ({id, score}) => ({
                 url: `${id}/score`,
                 method: "POST",
                 body: {id, score}
             }),
-            invalidatesTags: ["anime", "animeList", 'UserAnimeList']
+            async onQueryStarted({id}, {dispatch, queryFulfilled}) {
+                try {
+                    const {data: updatedScore} = await queryFulfilled
+                    dispatch(
+                        AnimeAPI.util.updateQueryData('getAnimeById', String(id), (draft) => {
+                            Object.assign(draft, updatedScore)
+
+                        })
+                    )
+                } catch (error) {
+                    console.error("Failed to update status:", error);
+                }
+            },
         }),
-        setWatchedEpisode: builder.mutation<number, { id: number, plusOrMinus: 'plus' | 'minus' }>({
+        setAnimeStatus: builder.mutation<any, { status: number, animeID: number }>({
+            query: ({status, animeID}) => ({
+                url: "status",
+                method: "PATCH",
+                body: {status, animeID}
+            }),
+            async onQueryStarted({animeID, status}, {dispatch, queryFulfilled}) {
+                try {
+                    const {data: updatedStatus} = await queryFulfilled
+                    dispatch(
+                        AnimeAPI.util.updateQueryData('getAnimeById', String(animeID), (draft) => {
+                            Object.assign(draft, updatedStatus)
+                        })
+                    )
+                } catch (error) {
+                    console.error("Failed to update status:", error);
+                }
+            },
+            // invalidatesTags: ["animeList", 'UserAnimeList', 'anime']
+        }),
+        setWatchedEpisode: builder.mutation<any, { id: number, plusOrMinus: 'plus' | 'minus' }>({
             query: ({id, plusOrMinus = 'plus'}) => ({
                 url: `${id}/watchedEpisodes/${plusOrMinus}`,
                 method: "POST",
@@ -171,6 +183,7 @@ export const AnimeAPI = createApi({
                     dispatch(
                         AnimeAPI.util.updateQueryData('getAnimeById', String(id), (draft) => {
                             Object.assign(draft, updatedEpisodes)
+
                         })
                     )
                 } catch (error) {

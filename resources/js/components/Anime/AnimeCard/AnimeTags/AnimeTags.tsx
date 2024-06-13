@@ -17,7 +17,7 @@ const AnimeTags: FC<HCollectionTagsProps> = ({collectionTags, collectionID}) => 
         <div className={'text-sm text-neutral-400 flex flex-wrap gap-x-1'}>
             <span>Теги:&nbsp;</span>
             {collectionTags?.map((tag) =>
-                <TagItem isAdmin={isAdmin} collectionID={collectionID} id={tag.tag_id} name={tag.name}/>
+                <TagItem key={tag.name} isAdmin={isAdmin} collectionID={collectionID} id={tag.tag_id} name={tag.name}/>
             )}
             <AdminTagSelector type={'tag'} collectionID={collectionID} items={collectionTags}/>
         </div>

@@ -35,7 +35,7 @@ const AnimeCard: FC<CollectionProps> = ({collection, link = false, admin = false
             }
             <div className={"flex flex-col gap-4"}>
                 <div className={'flex xs:flex-col md:flex-row gap-4'}>
-                    <AnimeUserStatus link={link} path={path} collection={collection}/>
+                    <AnimeUserStatus link={link} path={path} anime={collection}/>
                     <div className={"flex flex-col w-full"}>
                         <Title path={path} link
                                RU={collection.title_ru}

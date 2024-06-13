@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Auth;
-use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -121,7 +120,7 @@ class Anime extends Model
 
     public function getScores()
     {
-        $scores = DB::table('anime_score')->where('anime_id', $this->id)->pluck('score');
+        $scores = $this->animeStatus()->where('anime_id', $this->id)->pluck('score');
         return $scores->sum() ? $scores->sum() / $scores->count() : 0;
     }
 
@@ -147,9 +146,9 @@ class Anime extends Model
 //        return $this->watchedEpisodes();
 //    }
 
-    public function getScoreAttribute(): float
+    public function getScoreAttribute()
     {
-        return round($this->getScores(), 2);
+        return round($this->getScores(), 2) * 2;
     }
 
     public function getUserStatusAttribute()

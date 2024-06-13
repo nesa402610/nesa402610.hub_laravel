@@ -1,13 +1,15 @@
 import React, {FC, useEffect, useState} from 'react';
 import {FaStar} from 'react-icons/fa';
-import {useSetScoreToAnimeMutation} from "services/Collections/AnimeService";
+import {AnimeAPI, useSetScoreToAnimeMutation} from "services/Collections/AnimeService";
+import {useAppDispatch, useAppSelector} from "hooks/redux";
+import {useSearchParams} from "react-router-dom";
 
 interface CollectionScoresProps {
-    collectionId: number
+    animeId: number
     score: number
 }
 
-enum Scores {
+enum ScoresName {
     'ужасно' = 1,
     'плохо',
     'сердне',
@@ -15,14 +17,31 @@ enum Scores {
     'отлично'
 }
 
-const AnimeScore: FC<CollectionScoresProps> = ({collectionId, score}) => {
+const AnimeScore: FC<CollectionScoresProps> = ({animeId, score}) => {
     const [selectedScore, setSelectedScore] = useState(score);
     const [setScore] = useSetScoreToAnimeMutation()
 
     const scores = [1, 2, 3, 4, 5]
 
+    const dispatch = useAppDispatch()
+    const {filter} = useAppSelector(state => state.collection)
+    const [params] = useSearchParams();
     const setScoreHandle = (score: number) => {
-        setScore({id: collectionId, score})
+        setScore({id: animeId, score})
+            .unwrap()
+            .then((r) => {
+                dispatch(
+                    AnimeAPI.util.updateQueryData('getAllAnime', {
+                        page: +params.get('page') || 1,
+                        query: filter,
+                    }, (draft) => {
+                        const anim = draft.data.find(a => a.id === animeId);
+                        if (anim) {
+                            Object.assign(anim, r)
+                        }
+                    }),
+                )
+            })
     }
 
     useEffect(() => {
@@ -41,9 +60,9 @@ const AnimeScore: FC<CollectionScoresProps> = ({collectionId, score}) => {
                     // onTouchEnd={() => setSelectedScore(userScore)}
                         onClick={() => setScoreHandle(num)}/>
             )}
-            <div className={'flex flex-col items-center self-end'}>
+            <div className={'flex flex-col items-center self-end w-12'}>
                 <span className={'font-bold text-xl'}>{score}</span>
-                <span className={'text-[12px]'}>{Scores[score]}</span>
+                <span className={'text-[12px]'}>{ScoresName[score]}</span>
             </div>
         </div>
     );

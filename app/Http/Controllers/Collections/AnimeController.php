@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Anime;
 use App\Models\AnimeUserStatus;
 use App\Models\AnimeVideo;
-use App\Models\Passkey;
 use App\Models\Tag;
 use Auth;
 use Illuminate\Http\Request;
@@ -65,10 +64,8 @@ class AnimeController extends Controller
         $anime->mal_id = $request['myanimelist_id'];
         $anime->shiki_id = $request['id'];
         $anime->shiki_score = $request['score'];
-        $anime->review = '';
         $anime->rating = $rating;
         $anime->style = 0;
-        $anime->type = 0;
         $anime->save();
 
         foreach ($genres as $genre) {
@@ -257,7 +254,7 @@ class AnimeController extends Controller
         $animeUserStatus->status = $request->status;
         $animeUserStatus->save();
 
-        return response($animeUserStatus);
+        return response(['userStatus' => $animeUserStatus]);
 
     }
 
@@ -300,7 +297,7 @@ class AnimeController extends Controller
         $tagId = $request->tagId;
 //return [$collection->tags, $collection->genres];
         if ($tagType === 'genre') {
-            if ($collection->tags->contains('tag_id', $tagId)) {
+            if ($collection->tags->contains('genre_id', $tagId)) {
                 $collection->tags()->detach($tagId);
             }
             $collection->genres()->attach($tagId);
@@ -335,19 +332,22 @@ class AnimeController extends Controller
                 $newStatus->anime_id = $id;
                 $newStatus->user_id = Auth::user()->id;
                 $newStatus->watched_episodes = 1;
-                $newStatus->status = 1;
+                if ($totalEp === 1) {
+                    $newStatus->status = 6;
+                } else $newStatus->status = 1;
                 $newStatus->save();
-//                return $anime->animeStatus();
-            }
-            if ($totalEp > $userWatchedEps) {
-                $animeStatus->watched_episodes += 1;
-            }
-            if ($status !== 0) {
-                if (!$anime->animeStatus() || $userWatchedEps - 1 !== $totalEp) {
-                    $animeStatus->status = 1;
+                return ['userStatus' => $newStatus];
+            } else {
+                if ($totalEp > $userWatchedEps) {
+                    $animeStatus->watched_episodes += 1;
                 }
-                if ($totalEp === $userWatchedEps + 1) {
-                    $animeStatus->status = 6;
+                if ($status !== 0) {
+                    if (!$anime->animeStatus() || $userWatchedEps - 1 !== $totalEp) {
+                        $animeStatus->status = 1;
+                    }
+                    if ($totalEp === $userWatchedEps + 1) {
+                        $animeStatus->status = 6;
+                    }
                 }
             }
 
@@ -371,23 +371,6 @@ class AnimeController extends Controller
         return ['userStatus' => $animeStatus];
     }
 
-    public
-    function checkPasskey(Request $request)
-    {
-//        if (Auth::check()) {
-//            if (Auth::user()->id === 1)
-//                return [1];
-//        }
-        $passkey = Passkey::where('passkey', str_replace(' ', '', $request->passkey))
-            ->first();
-        if ($passkey) return true;
-        return false;
-//
-//        if (count($exist) === 0) {
-//            return response(['msg' => 'Ключ не рабочий. Ключ можно получить только через меня или спроси у друга, пока я не пофиксил доступ'], 403);
-//        }
-    }
-
     public function setAnimeScore(Request $request)
     {
         $userScore = AnimeUserStatus::where('user_id', Auth::user()->id)->where('anime_id', $request->id)->first();
@@ -401,7 +384,7 @@ class AnimeController extends Controller
             $newScore->score = $request->score;
             $newScore->save();
         }
-
+        return ['userStatus' => $userScore];
     }
 
     public function shikimoriHostUpdate(Request $request)

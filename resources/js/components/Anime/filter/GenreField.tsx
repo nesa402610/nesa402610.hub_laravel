@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction, useRef} from 'react';
+import React, {Dispatch, FC, SetStateAction} from 'react';
 import {useGetTagsQuery} from "services/Collections/TagService";
 
 interface GenreFieldProps {
@@ -8,7 +8,6 @@ interface GenreFieldProps {
 
 const GenreField: FC<GenreFieldProps> = ({tags, setTags}) => {
     const {data: dataTags} = useGetTagsQuery()
-    const ref = useRef()
 
     return (
         <div className={'w-full'}>
