@@ -1,11 +1,11 @@
-export interface ICollectionTag {
+export interface IAnimeTag {
     tag_id: number;
     name: string;
-    type: number
+    rx: number
 }
 
 export interface ITags {
+    rx: boolean;
     id: number
     name: string
-    type: number
 }

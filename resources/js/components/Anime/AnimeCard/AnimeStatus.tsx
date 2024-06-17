@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {AnimeAPI, useSetAnimeStatusMutation} from "services/Collections/AnimeService";
+import {AnimeAPI, useSetAnimeStatusMutation} from "services/Anime/AnimeService";
 import {useGetUserQuery} from "services/userService";
 import {IoCaretDown, IoCaretUp} from "react-icons/io5";
 import useClickOutside from "hooks/useClickOutside";
@@ -47,6 +47,7 @@ const AnimeStatus: FC<CollectionStatusProps> = ({status, animeID}) => {
         if (statusId === status) {
             return setIsOpen(false)
         }
+        console.log(filter, +params.get('page'))
         setStatus({status: statusId, animeID})
             .unwrap()
             .then(r => {

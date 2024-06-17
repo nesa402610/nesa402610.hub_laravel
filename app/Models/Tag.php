@@ -29,7 +29,11 @@ class Tag extends Model
 {
     use HasFactory;
 
-//    public function collections() {
-//        return $this->belongsToMany(AnimeCard::class, 'tag_collection', 'tag_id');
-//    }
+    protected $fillable = ['name', 'rx'];
+
+
+    public function animes()
+    {
+        return $this->belongsToMany(Anime::class, 'anime_tags');
+    }
 }

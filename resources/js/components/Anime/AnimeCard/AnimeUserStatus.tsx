@@ -4,7 +4,7 @@ import AnimeScore from "components/Anime/AnimeCard/AnimeScore";
 import AnimeStatus from "components/Anime/AnimeCard/AnimeStatus";
 import {FaMinus, FaPlus} from "react-icons/fa";
 import {ICollection} from "types/types";
-import {AnimeAPI, useSetWatchedEpisodeMutation} from "services/Collections/AnimeService";
+import {AnimeAPI, useSetWatchedEpisodeMutation} from "services/Anime/AnimeService";
 import {useAppDispatch, useAppSelector} from "hooks/redux";
 import {useSearchParams} from "react-router-dom";
 import {useGetUserQuery} from "services/userService";
@@ -44,8 +44,8 @@ const AnimeUserStatus: FC<CollectionUserStatusProps> = ({link, path, anime}) => 
                     }, (draft) => {
                         const anime = draft.find((anime) => anime.id === anime.id);
                         if (anime) {
-                            anime.userStatus.status = r.userStatus.status
-                            anime.userStatus.watched_episodes = r.userStatus.watched_episodes
+                            Object.assign(anime, r)
+
                         }
                     }),
                 )

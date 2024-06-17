@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
+import {useAppSelector} from "hooks/redux";
 
 const YearsRange = ({setYears}) => {
+    const {filter} = useAppSelector(state => state.collection)
+
     const currentYear = new Date().getFullYear()
     const [minYear, maxYear] = [1910, currentYear + 5]
-    const [start, setStart] = useState(1910);
-    const [end, setEnd] = useState(currentYear + 5);
+    const [start, setStart] = useState(filter.years.start);
+    const [end, setEnd] = useState(currentYear);
     const yearsHandler = (e: React.ChangeEvent<HTMLInputElement>, startPos: boolean) => {
         if (startPos) {
             setStart(+e.target.value)

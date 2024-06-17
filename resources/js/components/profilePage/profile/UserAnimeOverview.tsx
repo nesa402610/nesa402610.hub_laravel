@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Link} from "react-router-dom";
-import {useGetUserAnimeOverviewQuery} from "services/Collections/AnimeService";
+import {useGetUserAnimeOverviewQuery} from "services/Anime/AnimeService";
 import Loader from "../../Loader";
 
 interface UserAnimeOverviewProps {

@@ -13,10 +13,11 @@ interface QuickAdderProps {
 
 const QuickAdder: FC<QuickAdderProps> = ({error, createFn, length, tag}) => {
     const [value, setValue] = useState('');
-    const [type, setType] = useState('0');
+    const [type, setType] = useState('tag');
+    const [rx, setRx] = useState(false);
     const [errorValue, setErrorValue] = useState('');
     const createHandler = () => {
-        createFn({name: value, type})
+        createFn({name: value, rx, type})
             .unwrap()
             .then(() => {
                 setValue('')
@@ -34,15 +35,20 @@ const QuickAdder: FC<QuickAdderProps> = ({error, createFn, length, tag}) => {
                            autoComplete={"false"}
                            value={value}
                            onChange={e => setValue(e.target.value)}/>
-                    {tag &&
-                        <select value={type} className={'bg-slate-600 rounded-lg px-2'}
-                                onChange={e => setType(e.target.value)}>
-                            <option value='0'>FF тег</option>
-                            <option value='1'>Rx тег</option>
-                            <option value='2'>Rx жанр</option>
-                            <option value='3'>FF жанр</option>
-                        </select>
-                    }
+                    <div className={'flex gap-2'}>
+                        {tag &&
+                            <select value={type} className={'bg-slate-600 rounded-lg p-2'}
+                                    onChange={e => setType(e.target.value)}>
+                                <option value='tag'>Тег</option>
+                                <option value='genre'>Жанр</option>
+                            </select>
+                        }
+                        <label className={'flex items-center gap-2'}>
+                            <input type="checkbox" onChange={() => setRx(prevState => !prevState)}
+                            />
+                            RX
+                        </label>
+                    </div>
                 </div>
                 <button className={"bg-slate-700 px-8"} onClick={createHandler}>Добавить</button>
             </div>

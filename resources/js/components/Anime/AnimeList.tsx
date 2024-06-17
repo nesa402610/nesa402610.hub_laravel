@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
 import Loader from "components/Loader";
 import Paginator from "components/UI/Paginator";
-import {useGetAllAnimeQuery} from "services/Collections/AnimeService";
+import {useGetAllAnimeQuery} from "services/Anime/AnimeService";
 import {useAppSelector} from "hooks/redux";
 import AnimeCard from "components/Anime/AnimeCard/AnimeCard";
 import {useSearchParams} from "react-router-dom";

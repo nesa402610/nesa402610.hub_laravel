@@ -105,6 +105,11 @@ class UserController extends Controller
                 ->where('status', $animeStatus);
         })->get();
 
+        foreach ($animeList as $item) {
+            $item->tags->makeHidden('pivot');
+            $item->genres->makeHidden('pivot');
+        }
+
         return $animeList;
 
     }

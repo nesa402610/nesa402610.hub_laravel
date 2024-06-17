@@ -108,13 +108,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
             });
             Route::post('shikimori/hostfix', [AnimeController::class, 'shikimoriHostUpdate']);
         });
-        Route::prefix('manga')->group(function () {
-            Route::get('all', [MangaController::class, 'getAllManga']);
-        });
         Route::prefix('tags')->group(function () {
-            Route::post('new', [TagController::class, 'createTag']);
+            Route::get('', [TagController::class, 'getAllTags']);
+            Route::put('new', [TagController::class, 'createTag']);
             Route::patch('update', [TagController::class, 'updateTag']);
-            Route::patch('delete', [TagController::class, 'deleteTag']);
+            Route::delete('delete', [TagController::class, 'deleteTag']);
         });
     });
 });
@@ -123,14 +121,11 @@ Route::prefix('/anime')->group(function () {
     Route::post('list', [AnimeController::class, 'getPaginatedAnime']);
     Route::get('list/random', [AnimeController::class, 'getRandomAnimeList']);
     Route::get('{id}', [AnimeController::class, 'getAnimeById']);
+    Route::get('{id}/recommendations', [AnimeController::class, 'getRecommendations']);
     Route::get('{id}/videos', [AnimeController::class, 'getAnimeVideos']);
     Route::post('{id}/score', [AnimeController::class, 'setAnimeScore']);
     Route::post('{id}/watchedEpisodes/{symbol}', [AnimeController::class, 'setWatchedEpisode']);
     Route::get('animeList/{userId}', [UserController::class, 'getUserAnimeOverview']);
     Route::get('animeList/{userId}/{animeStatus}', [UserController::class, 'getUserAnimeList']);
 });
-Route::prefix('/manga')->group(function () {
-    Route::post('list', [MangaController::class, 'getPaginatedManga']);
-    Route::post('{id}', [MangaController::class, 'getMangaById']);
-});
-Route::get('/tags/list', [TagController::class, 'getAllTags']);
+Route::get('/tags/list', [TagController::class, 'getGenresAndTags']);

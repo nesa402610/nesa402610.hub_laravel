@@ -1,12 +1,12 @@
 import React, {FC} from "react";
-import {useRemoveTagMutation} from "services/Collections/AnimeService";
-import {ICollectionTag} from "types/Tag";
+import {useRemoveTagMutation} from "services/Anime/AnimeService";
+import {IAnimeTag} from "types/Tag";
 import AdminTagSelector from "components/Anime/AnimeCard/AdminTagSelector";
 import AdminChecker from "components/AdminChecker";
 import Bauble from "components/UI/Bauble";
 
 interface HCollectionGenresProps {
-    genres: ICollectionTag[]
+    genres: IAnimeTag[]
     animeID: number
 }
 
@@ -21,7 +21,7 @@ const AnimeGenres: FC<HCollectionGenresProps> = ({genres, animeID}) => {
         <span className={"flex gap-1 md:flex-nowrap xs:flex-wrap"}>
             Жанры:
             <div className={"flex gap-1 flex-wrap"}>
-                {genres?.map((genre: ICollectionTag) =>
+                {genres?.map((genre) =>
                     <Bauble key={genre.name}
                             className={(genre.name === "Золото" ? "bg-amber-400 text-neutral-600" : genre.name === "Серебро" ? "bg-zinc-500" : genre.name === "Медь" ? "bg-amber-700" : "bg-neutral-800") + " rounded-full flex items-center"}>
                         <span className={"whitespace-nowrap"}>{genre.name}</span>

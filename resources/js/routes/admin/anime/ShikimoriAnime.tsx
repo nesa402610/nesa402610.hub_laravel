@@ -18,7 +18,7 @@ const ShikimoriAnime: FC = () => {
     const fetchAnime = (id: number) => {
         let err = false
         setId(prev => prev + 1)
-        fetch('https://shikimori.me/api/animes/' + id)
+        fetch('https://shikimori.one/api/animes/' + id)
             .then(r => r.json())
             .then(r => {
                 if (r.id) {

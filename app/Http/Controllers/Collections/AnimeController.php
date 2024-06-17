@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Anime;
 use App\Models\AnimeUserStatus;
 use App\Models\AnimeVideo;
-use App\Models\Tag;
+use App\Models\Genre;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -69,10 +69,10 @@ class AnimeController extends Controller
         $anime->save();
 
         foreach ($genres as $genre) {
-            $tag = Tag::where('name', $genre['russian'])->first();
+            $genre = Genre::where('name', $genre['russian'])->first();
             $addedTags = $anime->genres;
-            if ($tag && !$addedTags->contains('name', $genre['russian'])) {
-                $anime->genres()->attach($tag->id);
+            if ($genre && !$addedTags->contains('name', $genre['russian'])) {
+                $anime->genres()->attach($genre->id);
             }
         }
     }
@@ -252,6 +252,9 @@ class AnimeController extends Controller
             $animeUserStatus->user_id = Auth::user()->id;
         }
         $animeUserStatus->status = $request->status;
+        if ($request->status === 6) {
+            $animeUserStatus->watched_episodes = $animeUserStatus->anime->episodes_total;
+        }
         $animeUserStatus->save();
 
         return response(['userStatus' => $animeUserStatus]);
@@ -385,6 +388,27 @@ class AnimeController extends Controller
             $newScore->save();
         }
         return ['userStatus' => $userScore];
+    }
+
+    public function getRecommendations($animeId)
+    {
+        $anime = Anime::with(['genres', 'tags'])->findOrFail($animeId);
+        $genreIds = $anime->genres->pluck('id');
+        $tagIds = $anime->tags->pluck('id');
+
+        $recommendedAnimes = Anime::where('id', '!=', $anime->id)->where('rating', $anime->rating)
+            ->withCount(['genres' => function ($query) use ($genreIds) {
+                $query->whereIn('genres.id', $genreIds);
+            }])
+            ->withCount(['tags' => function ($query) use ($tagIds) {
+                $query->whereIn('tags.id', $tagIds);
+            }])
+            ->orderByDesc('genres_count')
+            ->orderByDesc('tags_count')
+            ->limit(7)
+            ->get();
+
+        return response()->json($recommendedAnimes);
     }
 
     public function shikimoriHostUpdate(Request $request)

@@ -1,9 +1,5 @@
 import React from "react";
-import {
-    useCreateStudioMutation,
-    useGetAllStudiosQuery,
-    useUpdateStudioMutation
-} from "services/Collections/StudioService";
+import {useCreateStudioMutation, useGetAllStudiosQuery, useUpdateStudioMutation} from "services/Anime/StudioService";
 import List from "../../components/admin/List";
 import QuickAdder from "../../components/admin/QuickAdder";
 

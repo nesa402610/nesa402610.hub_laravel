@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
-import {useGetRandomAnimeListQuery} from "services/Collections/AnimeService";
+import {useGetRandomAnimeListQuery} from "services/Anime/AnimeService";
 import AnimeCard_mini from "components/Anime/AnimeCard/AnimeCard_mini";
 import ChatPage from "routes/ChatPage";
 import {useGetPostsQuery} from "services/NewsService";
 import NewsCard from "components/News/NewsCard";
+import {Link} from "react-router-dom";
 
 const HomePage: FC = () => {
     const {data: randomList, refetch} = useGetRandomAnimeListQuery();
@@ -27,10 +28,10 @@ const HomePage: FC = () => {
                 </div>
             </div>
             <div className={'block--dark'}>
-                <h3 className={'font-bold mb-4'}>Новости сайта</h3>
-                <div className={'grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'}>
+                <Link to={'news'} className={'font-bold hover:text-neutral-300'}>Новости сайта</Link>
+                <div className={'grid xs:grid-cols-1 mt-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'}>
                     {posts?.data.map(post =>
-                        <NewsCard post={post}/>
+                        <NewsCard key={post.id} post={post}/>
                     )}
                 </div>
             </div>

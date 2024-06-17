@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {useRemoveTagMutation} from "services/Collections/AnimeService";
+import {useRemoveTagMutation} from "services/Anime/AnimeService";
 import Bauble from "components/UI/Bauble";
 
 interface TagItemProps {

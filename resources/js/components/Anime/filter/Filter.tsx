@@ -6,7 +6,6 @@ import IPPField from "./IPPField";
 import TitleField from "./TitleField";
 import YearsRange from "./YearsRange";
 import Selector from "components/UI/Selector";
-import {useGetTagsQuery} from "services/Collections/TagService";
 
 const HCollectionFilter: FC = () => {
     const dispatch = useAppDispatch()
@@ -54,7 +53,7 @@ const HCollectionFilter: FC = () => {
                                     className={'p-2 rounded-lg bg-neutral-600'}
                             >
 
-                                <option value={null}>Все</option>
+                                <option value={''}>Все</option>
                                 <option value="tv">ТВ</option>
                                 <option value="ova">OVA</option>
                                 <option value="ona">ONA</option>
@@ -66,7 +65,7 @@ const HCollectionFilter: FC = () => {
                         <RatingField rating={rating} setRating={setRating}/>
                     </div>
                     {/*<GenreField tags={tags} setTags={setTags}/>*/}
-                    <Selector placeholder={'Жанры и теги'} values={useGetTagsQuery()} selected={tags}
+                    <Selector placeholder={'Жанры и теги'} selected={tags}
                               setSelected={setTags}/>
                 </div>
                 <div className={'flex gap-4 items-center xs:flex-col md:flex-row'}>

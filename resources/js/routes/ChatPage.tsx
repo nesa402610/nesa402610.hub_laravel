@@ -34,7 +34,7 @@ const ChatPage: FC<ChatPageProps> = ({height}) => {
         <div className={`ml-4 block--dark flex gap-4 justify-between ${height || 'h-screen'} flex-col`}>
             <div className={'h-full overflow-auto'}>
                 {!isLoading ? messages.map(msg =>
-                    <Message message={msg}/>
+                    <Message key={msg.id} message={msg}/>
                 ) : <Loader/>}
             </div>
             {user ? <input type="text"

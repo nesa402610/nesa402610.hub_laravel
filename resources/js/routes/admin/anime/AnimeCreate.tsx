@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useAddAnimeMutation} from "services/Collections/AnimeService";
+import {useAddAnimeMutation} from "services/Anime/AnimeService";
 import AnimeFields from "components/admin/Collections/Anime/AnimeFields";
 import Loader from "components/Loader";
 import {ICollection} from "types/types";

@@ -4,18 +4,22 @@ import ListItem from "./ListItem";
 interface ListProps {
     data: any[];
     title?: string
+    type?: 'tag' | 'genre'
 
-    updateFn(name, id): any;
+    updateFn(name, id): void;
+
+    deleteFn(id, type): void
 }
 
-const List: FC<ListProps> = ({data, updateFn, title}) => {
+const List: FC<ListProps> = ({data, updateFn, deleteFn, title, type}) => {
     if (!data) return null;
     return (
         <div className={'flex flex-col gap-4 flex-1'}>
             {title && <h2>{title}</h2>}
             {
-                data?.map(({name, id, type}) =>
-                    <ListItem name={name} id={id} key={id} updateFn={updateFn} tag={type}/>
+                data?.map(({name, id, rx}) =>
+                    <ListItem deleteFn={deleteFn} type={type} name={name} id={id} key={name} updateFn={updateFn}
+                              isRx={rx}/>
                 )
             }
         </div>

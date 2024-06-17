@@ -1,5 +1,5 @@
 import React, {Dispatch, FC, SetStateAction} from 'react';
-import {useGetTagsQuery} from "services/Collections/TagService";
+import {useGetTagsQuery} from "services/Anime/TagService";
 
 interface GenreFieldProps {
     tags: string[]

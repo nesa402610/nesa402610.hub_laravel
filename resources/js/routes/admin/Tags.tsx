@@ -1,27 +1,31 @@
 import React from "react";
-import {useCreateTagMutation, useGetTagsQuery, useUpdateTagMutation} from "services/Collections/TagService";
+import {
+    useCreateTagMutation,
+    useDeleteTagMutation,
+    useGetAdminTagsQuery,
+    useUpdateTagMutation
+} from "services/Anime/TagService";
 import List from "../../components/admin/List";
 import QuickAdder from "../../components/admin/QuickAdder";
 import Loader from "../../components/Loader";
 
 const Tags = () => {
-    const {data, isLoading} = useGetTagsQuery();
+    const {data, isLoading} = useGetAdminTagsQuery();
     const [createTag, {error}] = useCreateTagMutation();
     const [updateTag] = useUpdateTagMutation();
+    const [deleteTag] = useDeleteTagMutation()
 
     if (isLoading) return <Loader/>
-    const FFDataTags = data.filter(tag => tag.type === 0)
-    const RxDataTags = data.filter(tag => tag.type === 1)
-    const RxDataGenres = data.filter(tag => tag.type === 2)
-    const FFDataGenres = data.filter(tag => tag.type === 3)
     return (
         <div className={"flex flex-col gap-4"}>
-            <QuickAdder createFn={createTag} error={error} length={data?.length} tag/>
+            <QuickAdder createFn={createTag} error={error} length={data.total} tag/>
             <div className={'flex gap-4 justify-between'}>
-                <List title={'Rx теги'} data={RxDataTags} updateFn={updateTag}/>
-                <List title={'FF теги'} data={FFDataTags} updateFn={updateTag}/>
-                <List title={'Rx жанры'} data={RxDataGenres} updateFn={updateTag}/>
-                <List title={'FF жанры'} data={FFDataGenres} updateFn={updateTag}/>
+                <List deleteFn={deleteTag} type={'tag'} title={'Rx теги'} data={data.tags.rx} updateFn={updateTag}/>
+                <List deleteFn={deleteTag} type={'tag'} title={'FF теги'} data={data.tags.ff} updateFn={updateTag}/>
+                <List deleteFn={deleteTag} type={'genre'} title={'Rx жанры'} data={data.genres.rx}
+                      updateFn={updateTag}/>
+                <List deleteFn={deleteTag} type={'genre'} title={'FF жанры'} data={data.genres.ff}
+                      updateFn={updateTag}/>
             </div>
         </div>
     );

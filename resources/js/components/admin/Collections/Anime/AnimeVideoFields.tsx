@@ -1,6 +1,6 @@
 import React, {Dispatch, FC, SetStateAction, useState} from "react";
 import {RxCross2} from "react-icons/rx";
-import {useDeleteAnimeVideoMutation} from "services/Collections/AnimeService";
+import {useDeleteAnimeVideoMutation} from "services/Anime/AnimeService";
 import {IAnimeVideos} from "types/Anime";
 import Episodes from "./AnimeVideoFields/Episodes";
 

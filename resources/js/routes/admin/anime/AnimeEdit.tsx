@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
-import {useGetAnimeByIdQuery, useGetAnimeVideosQuery, useUpdateAnimeMutation} from "services/Collections/AnimeService";
+import {useGetAnimeByIdQuery, useGetAnimeVideosQuery, useUpdateAnimeMutation} from "services/Anime/AnimeService";
 import {IAnimeVideos} from "types/Anime";
 import Loader from "../../../components/Loader";
 import AnimeFields from "../../../components/admin/Collections/Anime/AnimeFields";

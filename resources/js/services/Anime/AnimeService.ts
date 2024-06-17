@@ -191,6 +191,12 @@ export const AnimeAPI = createApi({
                 }
             },
         }),
+        getAnimeRecommendations: builder.query<any, number>({
+            query: (id) => ({
+                url: id + "/recommendations",
+            }),
+            // providesTags: ["recommendations"]
+        }),
     }),
 });
 
@@ -213,5 +219,6 @@ export const {
     useGetUserAnimeListQuery,
     useGetRandomAnimeListQuery,
     useSetScoreToAnimeMutation,
-    useSetWatchedEpisodeMutation
+    useSetWatchedEpisodeMutation,
+    useGetAnimeRecommendationsQuery
 } = AnimeAPI;

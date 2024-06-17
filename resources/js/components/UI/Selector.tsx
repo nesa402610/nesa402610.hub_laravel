@@ -1,16 +1,17 @@
 import React, {FC, SetStateAction, useEffect, useState} from "react";
 import useClickOutside from "hooks/useClickOutside";
+import {useGetTagsQuery} from "services/Anime/TagService";
 
 interface SelectorProps {
     children?: React.ReactNode
     placeholder: string
-    values: any
     selected: string[]
     setSelected: React.Dispatch<SetStateAction<string[]>>
 }
 
 
-const Selector: FC<SelectorProps> = ({values, children, placeholder, selected, setSelected}) => {
+const Selector: FC<SelectorProps> = ({children, placeholder, selected, setSelected}) => {
+    const {data, isLoading} = useGetTagsQuery()
     const [freeItems, setFreeItems] = useState([]);
     const {setIsOpen, isOpen, ref} = useClickOutside()
     const dropdownHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -26,9 +27,10 @@ const Selector: FC<SelectorProps> = ({values, children, placeholder, selected, s
     }
 
     useEffect(() => {
-        const freeItems = values?.data?.filter(tag => !selected.map(itemTag => itemTag).includes(tag.name))
+        const allItems = !isLoading ? [...data.genres, ...data.tags] : []
+        const freeItems = allItems.filter(tag => !selected.map(itemTag => itemTag).includes(tag.name))
         setFreeItems(freeItems)
-    }, [values, selected]);
+    }, [selected, isLoading]);
     // console.log(values)
     return (
         <div className={'flex flex-col w-full'}>
@@ -50,7 +52,7 @@ const Selector: FC<SelectorProps> = ({values, children, placeholder, selected, s
                          className={"absolute z-50 max-h-[300px] overflow-scroll top-[40px] flex flex-col bg-neutral-700 rounded-lg border-[1px] border-neutral-400/30"}
                          onClick={e => e.stopPropagation()}>
                         {freeItems?.map(item =>
-                            <span key={item.id}
+                            <span key={item.name}
                                   className={'p-2 border-b-[1px] border-neutral-500 cursor-pointer hover:bg-neutral-700'}
                                   onClick={() => addItem(item)}>
                                 {item.name}

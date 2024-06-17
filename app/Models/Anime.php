@@ -70,7 +70,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property float|null $shiki_score
  * @property int $shiki_id
  * @property int $mal_id
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Tag> $genres
  * @property-read int|null $genres_count
  * @property-read int $score
  * @property-read mixed $user_score
@@ -144,6 +143,14 @@ class Anime extends Model
 //    public function getWatchedEpisodesAttribute()
 //    {
 //        return $this->watchedEpisodes();
+//    }
+//    public function getGenresAttribute()
+//    {
+//        return $this->genres;
+//    }
+//    public function getTagsAttribute()
+//    {
+//        return $this->tags;
 //    }
 
     public function getScoreAttribute()

@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
-import {useUpdateTitleMutation} from "services/Collections/HCollectionService";
+import {useUpdateTitleMutation} from "services/Anime/HCollectionService";
 import {useGetUserQuery} from "services/userService";
 import {ICollection} from "types/types";
 

@@ -1,8 +1,9 @@
 import React, {FC, useEffect, useState} from 'react';
 import {FaStar} from 'react-icons/fa';
-import {AnimeAPI, useSetScoreToAnimeMutation} from "services/Collections/AnimeService";
+import {AnimeAPI, useSetScoreToAnimeMutation} from "services/Anime/AnimeService";
 import {useAppDispatch, useAppSelector} from "hooks/redux";
 import {useSearchParams} from "react-router-dom";
+import {useGetUserQuery} from "services/userService";
 
 interface CollectionScoresProps {
     animeId: number
@@ -26,6 +27,8 @@ const AnimeScore: FC<CollectionScoresProps> = ({animeId, score}) => {
     const dispatch = useAppDispatch()
     const {filter} = useAppSelector(state => state.collection)
     const [params] = useSearchParams();
+    const {data: user} = useGetUserQuery();
+
     const setScoreHandle = (score: number) => {
         setScore({id: animeId, score})
             .unwrap()
@@ -38,6 +41,17 @@ const AnimeScore: FC<CollectionScoresProps> = ({animeId, score}) => {
                         const anim = draft.data.find(a => a.id === animeId);
                         if (anim) {
                             Object.assign(anim, r)
+                        }
+                    }),
+                )
+                dispatch(
+                    AnimeAPI.util.updateQueryData('getUserAnimeList', {
+                        userId: String(user.id), animestatus: window.location.pathname.split('/')[4]
+                    }, (draft) => {
+                        const anime = draft.find((anime) => anime.id === anime.id);
+                        if (anime) {
+                            Object.assign(anime, r)
+
                         }
                     }),
                 )

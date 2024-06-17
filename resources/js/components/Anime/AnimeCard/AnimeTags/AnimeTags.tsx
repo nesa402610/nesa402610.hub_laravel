@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
-import {ICollectionTag} from "types/Tag";
+import {IAnimeTag} from "types/Tag";
 import {useGetUserQuery} from "services/userService";
 import TagItem from "components/Anime/AnimeCard/AnimeTags/TagItem";
 import AdminTagSelector from "components/Anime/AnimeCard/AdminTagSelector";
 
 interface HCollectionTagsProps {
-    collectionTags: ICollectionTag[]
+    collectionTags: IAnimeTag[]
     collectionID: number | string
 }
 

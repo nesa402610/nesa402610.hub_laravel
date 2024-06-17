@@ -1,10 +1,6 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-import {
-    useDeleteAnimeDupliesMutation,
-    useGetAllAnimeQuery,
-    useGetAnimeDupliesQuery
-} from "services/Collections/AnimeService";
+import {useDeleteAnimeDupliesMutation, useGetAllAnimeQuery, useGetAnimeDupliesQuery} from "services/Anime/AnimeService";
 import Loader from "../../../components/Loader";
 import Paginator from "../../../components/UI/Paginator";
 import AnimeCard from "components/Anime/AnimeCard/AnimeCard";

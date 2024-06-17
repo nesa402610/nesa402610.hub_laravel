@@ -26,4 +26,11 @@ use Illuminate\Database\Eloquent\Model;
 class Genre extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'rx'];
+
+    public function animes()
+    {
+        return $this->belongsToMany(Anime::class, 'anime_tags');
+    }
 }
