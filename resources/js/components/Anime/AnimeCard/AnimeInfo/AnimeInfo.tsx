@@ -17,7 +17,7 @@ const AnimeInfo = ({collection}: { collection: ICollection }) => {
     let colKind = collection.kind.toUpperCase()
     colKind = collectionKind[colKind]
     return (
-        <div className={"text-neutral-300 flex gap-4 justify-between"}>
+        <div className={"text-neutral-300 flex xs:flex-col lg:flex-row gap-4 justify-between"}>
             <div>
                 <h3 className={"mt-4 font-bold"}>Информация</h3>
                 <div className={"flex flex-col"}>
@@ -40,8 +40,8 @@ const AnimeInfo = ({collection}: { collection: ICollection }) => {
                     <InfoField title={'Рейтинг:'} value={collection.rating}/>
                 </div>
             </div>
-            <div className={'flex flex-col p-4 gap-2 min-w-[10rem]'}>
-                <h2 className={'font-bold text-lg uppercase text-center'}>Рейтинг</h2>
+            <div className={'flex flex-col gap-2 min-w-[10rem]'}>
+                <h2 className={'font-bold text-lg uppercase xs:text-left text-center'}>Рейтинг</h2>
                 <Bauble className={'w-36 flex justify-between'}>
                     <span>Шикимори</span>
                     <span>{collection.shiki_score || '-'}</span>

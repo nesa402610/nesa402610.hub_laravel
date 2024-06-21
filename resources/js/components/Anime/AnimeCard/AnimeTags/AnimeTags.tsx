@@ -11,7 +11,7 @@ interface HCollectionTagsProps {
 
 const AnimeTags: FC<HCollectionTagsProps> = ({collectionTags, collectionID}) => {
     const {data: user} = useGetUserQuery()
-    const isAdmin = user?.role[0].name === 'Admin'
+    const isAdmin = user?.role[0]?.name === 'Admin'
 
     return (
         <div className={'text-sm text-neutral-400 flex flex-wrap gap-x-1'}>

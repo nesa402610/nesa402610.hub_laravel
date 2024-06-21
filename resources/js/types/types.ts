@@ -1,4 +1,4 @@
-import {ICollectionTag} from "./Tag";
+import {IAnimeTag} from "./Tag";
 import {IAnimeStudio} from "./Anime";
 
 
@@ -10,10 +10,11 @@ import {IAnimeStudio} from "./Anime";
 
 
 export interface ICollection {
+    shiki_id: number;
     shiki_score: number
     status: number
     score: number | null;
-    genres: ICollectionTag[];
+    genres: IAnimeTag[];
     kind: string;
     videosCount: number;
     type: number
@@ -36,7 +37,7 @@ export interface ICollection {
     description_short: string;
     episode_time: number;
     censure: boolean;
-    tags: ICollectionTag[];
+    tags: IAnimeTag[];
     links: { id: number, link: string, platform: string, episode: 1, iframe: boolean }[];
     image: string;
     announce_date: string;

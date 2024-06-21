@@ -26,7 +26,7 @@ class AnimeController extends Controller
 //        return response($anime, 200);
 //    }
 
-    public function createAnimeByShiki(Request $request): void
+    public function createAnimeByShiki(Request $request)
     {
 //        return response($request);
         $rating = '';
@@ -55,7 +55,7 @@ class AnimeController extends Controller
         $anime->description_short = $request['description_short'];
         $anime->episode_time = $request['duration'];
         $anime->censure = 0;
-        $anime->image = 'https://shikimori.me/' . $request['image']['preview'];
+        $anime->image = 'https://shikimori.one/' . $request['image']['preview'];
         $anime->announce_date = $request['aired_on'];
         $anime->release_date = $request['released_on'];
         $anime->episodes_released = $request['episodes_aired'] === 0 ? $request['episodes'] : $request['episodes_aired'];
@@ -68,11 +68,14 @@ class AnimeController extends Controller
         $anime->style = 0;
         $anime->save();
 
-        foreach ($genres as $genre) {
-            $genre = Genre::where('name', $genre['russian'])->first();
-            $addedTags = $anime->genres;
-            if ($genre && !$addedTags->contains('name', $genre['russian'])) {
-                $anime->genres()->attach($genre->id);
+        if ($anime->rating !== 'Rx') {
+            $anime->genres()->detach();
+            foreach ($genres as $genreData) {
+                $genre = Genre::where('name', $genreData['russian'])->first();
+                $addedTags = $anime->genres;
+                if (!$addedTags->contains('name', $genreData['russian'])) {
+                    $anime->genres()->attach($genre->id);
+                }
             }
         }
     }
@@ -445,7 +448,6 @@ class AnimeController extends Controller
         $anime->episodes_total = $request['episodes_total'];
         $anime->kind = $request['kind'];
         $anime->author = $request['author'];
-        $anime->review = $request['review'];
         $anime->rating = $request['rating'];
         $anime->style = $request['style'];
     }

@@ -34,7 +34,7 @@ button {
   @apply bg-neutral-600 hover:bg-neutral-800
 }
 .block--lighter {
-  @apply bg-neutral-600 sm:p-4 xs:p-2 rounded-lg
+    @apply bg-neutral-600 p-2 min-w-[200px] rounded-lg
 }
 .block--lighter button {
   @apply bg-neutral-700 hover:bg-neutral-800

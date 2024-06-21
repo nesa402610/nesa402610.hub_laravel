@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import Image from "components/Anime/AnimeCard/Image";
 import AnimeScore from "components/Anime/AnimeCard/AnimeScore";
 import AnimeStatus from "components/Anime/AnimeCard/AnimeStatus";
 import {FaMinus, FaPlus} from "react-icons/fa";
@@ -53,12 +52,12 @@ const AnimeUserStatus: FC<CollectionUserStatusProps> = ({link, path, anime}) => 
 
 
     }
-    return (
+
+    if (user) return (
         <div className={'flex-shrink-0 basis-auto flex flex-col gap-2'}>
-            <Image link={link} path={path} image={anime.image}/>
             <AnimeScore score={anime.userStatus?.score || 0} animeId={anime.id}/>
             <AnimeStatus status={anime.userStatus?.status} animeID={anime.id}/>
-            <div className={'flex gap-2 items-center justify-between w-[230px]'}>
+            <div className={'flex gap-2 items-center justify-between xs:w-auto w-[230px]'}>
                 <span>Просмотрено:</span>
 
                 <div className={'flex items-center gap-2 whitespace-nowrap'}>

@@ -22,13 +22,13 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->password = Hash::make($request->password);
         $user->email = $request->email;
-        $user->lastName = $request->lastName;
-        $user->middleName = $request->middleName;
-        $user->birthday = $request->birthday;
+//        $user->lastName = $request->lastName;
+//        $user->middleName = $request->middleName;
+//        $user->birthday = $request->birthday;
         $user->phone = $request->phone;
         $user->save();
 
-        return response()->status(200);
+//        return response()->status(200);
 
     }
 

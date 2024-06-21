@@ -28,7 +28,7 @@ const AnimeDetailedPage = () => {
             <AnimeVideos animeID={data.id}/>
             <div className={'block--light'}>
                 <h3 className={'font-bold text-xl'}>Похожие аниме</h3>
-                <div className={'grid grid-cols-7 gap-4 mt-4'}>
+                <div className={'grid lg:grid-cols-7 xs:grid-cols-1 sm:grid-cols-4 gap-4 mt-4'}>
                     {recs.map(rec =>
                         <AnimeCard_mini key={rec.id} anime={rec}/>
                     )}

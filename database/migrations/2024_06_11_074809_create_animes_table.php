@@ -34,7 +34,7 @@ return new class extends Migration {
             $table->string('author')->nullable();
             $table->integer('shiki_id')->nullable();
             $table->integer('mal_id')->nullable();
-            $table->integer('shiki_score')->nullable();
+            $table->float('shiki_score')->nullable();
             $table->timestamps();
         });
     }

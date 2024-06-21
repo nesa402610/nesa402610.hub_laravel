@@ -123,4 +123,9 @@ class User extends Authenticatable
 //        }
         return $rel;
     }
+
+    public function getAvatarAttribute($value)
+    {
+        return $value ?? '/public/storage/default/noava.jpg';
+    }
 }

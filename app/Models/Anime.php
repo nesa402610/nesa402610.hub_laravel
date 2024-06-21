@@ -112,9 +112,7 @@ class Anime extends Model
 
     public function animeStatus()
     {
-        if (!Auth::check()) return null;
-
-        return $this->hasOne(AnimeUserStatus::class, 'anime_id')->where('user_id', Auth::user()->id);
+        return $this->hasOne(AnimeUserStatus::class, 'anime_id');
     }
 
     public function getScores()
@@ -160,6 +158,8 @@ class Anime extends Model
 
     public function getUserStatusAttribute()
     {
-        return $this->animeStatus()->first();
+        if (Auth::check()) {
+            return $this->animeStatus()->where('user_id', Auth::user()->id)->first();
+        } else return null;
     }
 }

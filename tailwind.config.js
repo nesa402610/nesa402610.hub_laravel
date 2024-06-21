@@ -8,6 +8,19 @@ module.exports = {
         screens: {
             'xs': '320px',
             ...defaultTheme.screens,
+        },
+
+        extend: {
+            animation: {
+                'smoky': 'smoky 1s linear 4s',
+            },
+            keyframes: {
+                smoky: {
+                    '0%%': {opacity: 1},
+                    '100%': {opacity: 0},
+
+                }
+            }
         }
     },
     plugins: [],

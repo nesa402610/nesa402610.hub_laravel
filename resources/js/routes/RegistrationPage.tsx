@@ -26,14 +26,18 @@ const RegistrationPage: FC = () => {
                 email: user.email
             }).then(() => {
             navigate('/');
-        }).catch(err => {
-            setErrors(err.response.data.errors)
-            // for (const err in errorsArr) {
-            //     let errname
-            //     setErrors({errname: })
-            // console.log(err)
-            // }
         })
+            .then(() => {
+                navigate('/login')
+            })
+            .catch(err => {
+                setErrors(err.response.data.errors)
+                // for (const err in errorsArr) {
+                //     let errname
+                //     setErrors({errname: })
+                // console.log(err)
+                // }
+            })
     }
     useEffect(() => {
         if (authedUser) {

@@ -8,6 +8,9 @@ import {FiEdit} from "react-icons/fi";
 import {Link} from "react-router-dom";
 import AnimeTags from "components/Anime/AnimeCard/AnimeTags/AnimeTags";
 import AnimeUserStatus from "components/Anime/AnimeCard/AnimeUserStatus";
+import Image from "components/Anime/AnimeCard/Image";
+import {setError} from "store/reducers/errorSlice";
+import {useAppDispatch} from "hooks/redux";
 
 interface CollectionProps {
     collection: ICollection;
@@ -18,7 +21,41 @@ interface CollectionProps {
 
 const AnimeCard: FC<CollectionProps> = ({collection, link = false, admin = false, description = true}) => {
     const {data: user} = useGetUserQuery()
-    const isAdmin = user?.role[0].name === 'Admin'
+    const isAdmin = user?.role[0]?.name === 'Admin'
+    const dispatch = useAppDispatch();
+
+
+    const fetchAnime = async () => {
+        try {
+            const response = await fetch('https://shikimori.one/api/animes/' + collection.shiki_id)
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // .then(r => r.json())
+            // .then(r => {
+            //     if (r.id) {
+            //         fetch('/api/anime/newByShiki', {
+            //             headers: {
+            //                 'X-CSRF-TOKEN': csrf_token,
+            //                 'Content-Type': 'application/json'
+            //             },
+            //             method: 'post',
+            //             body: JSON.stringify(r),
+            //         })
+            //     }
+            // })
+            // .catch(e => {
+            //     alert(1)
+            //     dispatch(setError('Нет shiki_id'));
+            //
+            // })
+        } catch (e) {
+            // alert(1)
+            dispatch(setError('Нет shiki_id'));
+        }
+
+        return
+    }
 
     if (!collection) return null;
 
@@ -31,11 +68,15 @@ const AnimeCard: FC<CollectionProps> = ({collection, link = false, admin = false
                           className={'flex flex-col items-center text-neutral-300'}>
                         <FiEdit size={'1.5rem'}/>
                     </Link>
+                    <span onClick={fetchAnime}>refresh</span>
                 </div>
             }
             <div className={"flex flex-col gap-4"}>
                 <div className={'flex xs:flex-col md:flex-row gap-4'}>
-                    <AnimeUserStatus link={link} path={path} anime={collection}/>
+                    <div className={'flex flex-col gap-2'}>
+                        <Image link={link} path={path} image={collection.image}/>
+                        <AnimeUserStatus link={link} path={path} anime={collection}/>
+                    </div>
                     <div className={"flex flex-col w-full"}>
                         <Title path={path} link
                                RU={collection.title_ru}

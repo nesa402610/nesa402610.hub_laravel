@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import {AnimeAPI, useSetAnimeStatusMutation} from "services/Anime/AnimeService";
-import {useGetUserQuery} from "services/userService";
 import {IoCaretDown, IoCaretUp} from "react-icons/io5";
 import useClickOutside from "hooks/useClickOutside";
 import {useAppDispatch, useAppSelector} from "hooks/redux";
@@ -12,7 +11,6 @@ interface CollectionStatusProps {
 }
 
 const AnimeStatus: FC<CollectionStatusProps> = ({status, animeID}) => {
-    const {data: user} = useGetUserQuery();
     const [setStatus] = useSetAnimeStatusMutation()
     const statuses = [
         {status: 6, name: 'Просмотрено', color: 'bg-green-600', hover: 'hover:bg-green-600'},
@@ -47,7 +45,6 @@ const AnimeStatus: FC<CollectionStatusProps> = ({status, animeID}) => {
         if (statusId === status) {
             return setIsOpen(false)
         }
-        console.log(filter, +params.get('page'))
         setStatus({status: statusId, animeID})
             .unwrap()
             .then(r => {
@@ -70,7 +67,6 @@ const AnimeStatus: FC<CollectionStatusProps> = ({status, animeID}) => {
             })
     }
 
-    if (!user) return null;
     return (
         <div className={'relative cursor-pointer'} ref={ref}>
             <div className={'relative flex items-center'} onClick={(e) => {

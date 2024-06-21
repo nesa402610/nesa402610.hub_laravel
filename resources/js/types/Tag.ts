@@ -1,4 +1,5 @@
 export interface IAnimeTag {
+    genre_id: number;
     tag_id: number;
     name: string;
     rx: number
