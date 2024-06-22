@@ -9,6 +9,7 @@ use App\Models\AnimeVideo;
 use App\Models\Genre;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Tests\Integration\Database\EloquentWhereHasMorphTest\Video;
 
 class AnimeController extends Controller
 {
@@ -207,7 +208,7 @@ class AnimeController extends Controller
         }
 
         $collections = $query->paginate($IPP);
-        
+
         return response($collections, 200);
     }
 
@@ -223,9 +224,11 @@ class AnimeController extends Controller
     {
 //        $passkey = $this->checkPasskey($request);
 //        if ($passkey) {
-        $videos = Anime::find($id)->videos()->orderBy('episode')->get();
-        if ($videos->isEmpty()) return response(null);
-        return response($videos);
+        $anime = Anime::find($id);
+        $anime->videos;
+//        $animeVideos = AnimeVideo::all();
+//        if ($videos->isEmpty()) return response(null);
+        return $anime->videos;
 //        }
     }
 
@@ -265,22 +268,26 @@ class AnimeController extends Controller
 
         if ($requestVideos) {
             foreach ($requestVideos as $video) {
-                $videoEdit = AnimeVideo::find($video['id']);
-                if ($videoEdit) {
+                $videoEdit = AnimeVideo::findOrNew($video['id']);
+//                if ($videoEdit) {
                     $videoEdit->link = $video['link'];
-                    $videoEdit->platform = $video['platform'];
+                    $videoEdit->anime_id = $requestAnime['id'];
+                    $videoEdit->player = $video['player'];
+                    $videoEdit->team = $video['team'];
                     $videoEdit->iframe = $video['iframe'];
                     $videoEdit->episode = $video['episode'];
                     $videoEdit->save();
-                } else {
-                    $newVideo = new AnimeVideo();
-                    $newVideo->link = $video['link'];
-                    $newVideo->platform = $video['platform'];
-                    $newVideo->iframe = $video['iframe'];
-                    $newVideo->episode = $video['episode'];
-                    $newVideo->save();;
-                    $anime->links()->attach($newVideo->id);
-                }
+//                } else {
+//                    $newVideo = new AnimeVideo();
+//                    $newVideo->link = $video['link'];
+//                    $newVideo->anime_id = $requestAnime['id'];
+//                    $newVideo->player = $video['player'];
+//                    $newVideo->team = $video['team'];
+//                    $newVideo->iframe = $video['iframe'];
+//                    $newVideo->episode = $video['episode'];
+//                    $newVideo->save();;
+//                    $anime->videos->attach($newVideo->id);
+//                }
             }
         }
     }

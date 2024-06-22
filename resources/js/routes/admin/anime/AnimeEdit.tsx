@@ -46,7 +46,7 @@ const AnimeEdit = () => {
                 </button>
             </div>
             <AnimeFields anime={anime} setAnime={setAnime}/>
-            <AnimeVideoFields setVideos={setVideos} videos={videos}/>
+            <AnimeVideoFields animeId={animeData.id} setVideos={setVideos} videos={videos}/>
             {preview &&
                 <>
                     <AnimeCard collection={anime}/>

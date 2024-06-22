@@ -26,7 +26,7 @@ const AnimeVideoFields: FC<AnimeVideoFieldsProps> = ({videos, setVideos}) => {
 
 
     const addEpisodeHandler = () => {
-        const newVideo = {id: 1, link: "", episode: 1, platform: "", iframe: false}
+        const newVideo = {id: 1, link: "", episode: 1, player: "",team: '', iframe: false}
         if (!videos) {
             return setVideos([newVideo]);
         }
@@ -60,9 +60,14 @@ const AnimeVideoFields: FC<AnimeVideoFieldsProps> = ({videos, setVideos}) => {
                                    onChange={(e) => setLinkHandler(e, "link")}/>
                         </label>
                         <label>
-                            <span>Платформа</span>
-                            <input type="text" value={videos[episode].platform}
-                                   onChange={(e) => setLinkHandler(e, "platform")}/>
+                            <span>Плеер</span>
+                            <input type="text" value={videos[episode].player}
+                                   onChange={(e) => setLinkHandler(e, "player")}/>
+                        </label>
+                        <label>
+                            <span>Команда</span>
+                            <input type="text" value={videos[episode].team}
+                                   onChange={(e) => setLinkHandler(e, "team")}/>
                         </label>
                         <label className={"flex gap-2"}>
                             IFrame?

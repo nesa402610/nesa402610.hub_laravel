@@ -37,4 +37,9 @@ class AnimeVideo extends Model
 {
     protected $table = 'anime_video';
     use HasFactory;
+
+    public function anime()
+    {
+        return $this->belongsTo(Anime::class);
+    }
 }

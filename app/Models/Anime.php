@@ -107,7 +107,7 @@ class Anime extends Model
 
     public function videos()
     {
-        return $this->hasMany(AnimeVideo::class);
+        return $this->hasMany(AnimeVideo::class, 'anime_id');
     }
 
     public function userStatus()

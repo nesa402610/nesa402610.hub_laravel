@@ -4,9 +4,10 @@ export interface IAnimeStudio {
 }
 
 export interface IAnimeVideos {
+    team: string
     id?: number,
     link: string,
-    platform: string,
+    player: string,
     episode: number,
     iframe: boolean
 }

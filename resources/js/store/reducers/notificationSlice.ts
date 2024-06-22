@@ -15,6 +15,7 @@ const notificationSlice = createSlice({
     initialState,
     reducers: {
         setNotification: (state, action: PayloadAction<NotificationState | string>) => {
+            state.message = null
             if (typeof action.payload !== "string") {
                 state.type = action.payload.type
                 state.message = action.payload.message
