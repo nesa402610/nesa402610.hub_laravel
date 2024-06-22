@@ -8,8 +8,10 @@ use App\Models\AnimeUserStatus;
 use App\Models\AnimeVideo;
 use App\Models\Genre;
 use Auth;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Tests\Integration\Database\EloquentWhereHasMorphTest\Video;
+use function PHPUnit\Framework\isEmpty;
 
 class AnimeController extends Controller
 {
@@ -176,7 +178,8 @@ class AnimeController extends Controller
             });
         }
         if (!empty($years)) {
-            $query->whereYear('release_date', '>=', $years['start'])->whereYear('release_date', '<=', $years['end']);
+            $query->whereBetween('announce_date', ["{$years['start']}-01-01", "{$years['end']}-12-31"]);
+
         }
         if (!empty($tags)) {
             $query->whereHas('tags', function ($query) use ($tags) {
@@ -224,11 +227,13 @@ class AnimeController extends Controller
     {
 //        $passkey = $this->checkPasskey($request);
 //        if ($passkey) {
-        $anime = Anime::find($id);
-        $anime->videos;
+        $animeVideos = Anime::find($id)->videos;
+        if (isEmpty($animeVideos)){
+            return null;
+        }
 //        $animeVideos = AnimeVideo::all();
 //        if ($videos->isEmpty()) return response(null);
-        return $anime->videos;
+        return $animeVideos;
 //        }
     }
 
@@ -270,13 +275,13 @@ class AnimeController extends Controller
             foreach ($requestVideos as $video) {
                 $videoEdit = AnimeVideo::findOrNew($video['id']);
 //                if ($videoEdit) {
-                    $videoEdit->link = $video['link'];
-                    $videoEdit->anime_id = $requestAnime['id'];
-                    $videoEdit->player = $video['player'];
-                    $videoEdit->team = $video['team'];
-                    $videoEdit->iframe = $video['iframe'];
-                    $videoEdit->episode = $video['episode'];
-                    $videoEdit->save();
+                $videoEdit->link = $video['link'];
+                $videoEdit->anime_id = $requestAnime['id'];
+                $videoEdit->player = $video['player'];
+                $videoEdit->team = $video['team'];
+                $videoEdit->iframe = $video['iframe'];
+                $videoEdit->episode = $video['episode'];
+                $videoEdit->save();
 //                } else {
 //                    $newVideo = new AnimeVideo();
 //                    $newVideo->link = $video['link'];

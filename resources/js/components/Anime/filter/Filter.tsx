@@ -80,7 +80,7 @@ const HCollectionFilter: FC = () => {
                             <option value="release_date">по дате релиза</option>
                         </select>
                     </div>
-                    <YearsRange setYears={setYears}/>
+                    <YearsRange setYears={setYears} years={years}/>
                     <IPPField IPP={IPP} setIPP={setIPP}/>
                 </div>
                 <div className={'flex flex-col gap-4'}>

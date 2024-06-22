@@ -10,9 +10,9 @@ interface episodesProps {
 
 const Episodes: FC<episodesProps> = ({videos, setEpisode, selectedEp}) => {
     return (
-        <div className={"flex gap-4"}>
+        <div className={"flex gap-4 overflow-x-auto"}>
             {videos?.map((video, index) =>
-                <div key={video.id}
+                <div key={index}
                      className={`${index === selectedEp ? 'bg-slate-500' : 'bg-slate-700'} rounded-lg p-2`}
                      onClick={() => setEpisode(index)}>
                     Серия {video.episode}

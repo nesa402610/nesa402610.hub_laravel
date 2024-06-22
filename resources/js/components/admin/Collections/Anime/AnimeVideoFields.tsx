@@ -26,7 +26,7 @@ const AnimeVideoFields: FC<AnimeVideoFieldsProps> = ({videos, setVideos}) => {
 
 
     const addEpisodeHandler = () => {
-        const newVideo = {id: 1, link: "", episode: 1, player: "",team: '', iframe: false}
+        const newVideo = {link: "", episode: 1, player: "",team: '', iframe: false}
         if (!videos) {
             return setVideos([newVideo]);
         }
@@ -44,6 +44,7 @@ const AnimeVideoFields: FC<AnimeVideoFieldsProps> = ({videos, setVideos}) => {
             }));
         }
     };
+    console.log(videos)
     return (
         <div className={"flex flex-col gap-4"}>
             {videos &&
