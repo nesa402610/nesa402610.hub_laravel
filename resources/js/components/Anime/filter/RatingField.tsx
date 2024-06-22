@@ -12,7 +12,7 @@ const RatingField: FC<RatingFieldProps> = ({rating, setRating}) => {
             <select className={"bg-neutral-600 p-2 rounded-lg"}
                     value={rating}
                     onChange={e => setRating(e.target.value)}>
-                <option value={null}>Все</option>
+                <option value={null}>Любой</option>
                 <option value="0+">0+</option>
                 <option value="6+">6+</option>
                 <option value="13+">13+</option>

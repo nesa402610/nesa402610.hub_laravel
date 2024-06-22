@@ -17,7 +17,6 @@ const NewsComment: FC<BlogCommentProps> = ({comment: commentData}) => {
         <div key={commentData.id} className={'block--light sm:flex-col relative'}>
             <CommentEdit id={commentData.id}
                          userId={commentData.user_id}
-                         postId={commentData.post_id}
                          setIsEdit={setIsEdit}/>
             <div className={'flex gap-4 items-center'}>
                 <Link to={'/profile/' + commentData.user_id}

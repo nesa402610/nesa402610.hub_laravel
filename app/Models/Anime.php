@@ -84,7 +84,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Anime extends Model
 {
-    protected $appends = ['score', 'userStatus'];
+    protected $appends = ['score', 'userStatus', 'genres', 'tags'];
     protected $fillable = ['status', 'watched_episodes'];
 
 
@@ -97,12 +97,12 @@ class Anime extends Model
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, 'anime_genre', 'anime_id', 'genre_id')->select(['genre_id', 'name']);
+        return $this->belongsToMany(Genre::class, 'anime_genre', 'anime_id', 'genre_id');
     }
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'anime_tag', 'anime_id', 'tag_id')->select(['tag_id', 'name']);
+        return $this->belongsToMany(Tag::class, 'anime_tag', 'anime_id', 'tag_id');
     }
 
     public function videos()
@@ -110,14 +110,26 @@ class Anime extends Model
         return $this->hasMany(AnimeVideo::class);
     }
 
-    public function animeStatus()
+    public function userStatus()
     {
         return $this->hasOne(AnimeUserStatus::class, 'anime_id');
     }
 
+    public function userStatuses()
+    {
+
+        return $this->hasMany(AnimeUserStatus::class, 'anime_id');
+    }
+
+//    public function getAnimeStatusesAttribute()
+//    {
+//        $animeUserStatuses = $this->hasMany(AnimeUserStatus::class, 'anime_id');
+//        return $animeUserStatuses;
+//    }
+
     public function getScores()
     {
-        $scores = $this->animeStatus()->where('anime_id', $this->id)->pluck('score');
+        $scores = $this->userStatus()->where('anime_id', $this->id)->pluck('score');
         return $scores->sum() ? $scores->sum() / $scores->count() : 0;
     }
 
@@ -150,6 +162,15 @@ class Anime extends Model
 //    {
 //        return $this->tags;
 //    }
+    public function getGenresAttribute()
+    {
+        return $this->genres()->get(['genres.id', 'genres.name'])->makeHidden('pivot');
+    }
+
+    public function getTagsAttribute()
+    {
+        return $this->tags()->get(['tags.id', 'tags.name'])->makeHidden('pivot');
+    }
 
     public function getScoreAttribute()
     {
@@ -159,7 +180,8 @@ class Anime extends Model
     public function getUserStatusAttribute()
     {
         if (Auth::check()) {
-            return $this->animeStatus()->where('user_id', Auth::user()->id)->first();
-        } else return null;
+
+            return $this->userStatus()->where('user_id', Auth::id())->first();
+        }
     }
 }

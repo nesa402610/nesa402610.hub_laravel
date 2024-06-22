@@ -19,9 +19,9 @@ const AnimePage: FC = () => {
                         Я не при делах если что. Все данные взяты с открытых источников.
                     </h3>
                 </div>
-                <div className={"flex flex-col gap-4"}>
-                    <Filter/>
+                <div className={"flex gap-4 w-full"}>
                     <AnimeList/>
+                    <Filter/>
                 </div>
             </div>
         </div>

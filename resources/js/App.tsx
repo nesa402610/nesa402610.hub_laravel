@@ -5,7 +5,7 @@ import {ScrollRestoration} from "react-router-dom";
 import {useGetUserQuery} from "services/userService";
 import Loader from "components/Loader";
 import Header from "components/Header";
-import ErrorComponent from "components/UI/ErrorComponent";
+import NotificationComponent from "components/UI/NotificationComponent";
 
 const App = () => {
     const {isFetching, error} = useGetUserQuery()
@@ -23,7 +23,7 @@ const App = () => {
             <main className={`${start ? 'ml-0' : 'ml-[80px]'} transition-all`}>
                 <Outlet/>
                 <ScrollRestoration/>
-                <ErrorComponent/>
+                <NotificationComponent/>
             </main>
         </>
     );

@@ -9,17 +9,18 @@ import {Link} from "react-router-dom";
 import AnimeTags from "components/Anime/AnimeCard/AnimeTags/AnimeTags";
 import AnimeUserStatus from "components/Anime/AnimeCard/AnimeUserStatus";
 import Image from "components/Anime/AnimeCard/Image";
-import {setError} from "store/reducers/errorSlice";
 import {useAppDispatch} from "hooks/redux";
+import {setNotification} from "store/reducers/notificationSlice";
+import {csrf_token} from "../../../mockData";
 
 interface CollectionProps {
     collection: ICollection;
-    link?: boolean;
     admin?: boolean
+    link?: boolean
     description?: boolean
 }
 
-const AnimeCard: FC<CollectionProps> = ({collection, link = false, admin = false, description = true}) => {
+const AnimeCard: FC<CollectionProps> = ({link = false, collection, admin = false, description = true}) => {
     const {data: user} = useGetUserQuery()
     const isAdmin = user?.role[0]?.name === 'Admin'
     const dispatch = useAppDispatch();
@@ -28,30 +29,28 @@ const AnimeCard: FC<CollectionProps> = ({collection, link = false, admin = false
     const fetchAnime = async () => {
         try {
             const response = await fetch('https://shikimori.one/api/animes/' + collection.shiki_id)
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            const json = await response.json()
+            if (response.status !== 200) {
+                throw new Error(json.message);
             }
             // .then(r => r.json())
             // .then(r => {
-            //     if (r.id) {
-            //         fetch('/api/anime/newByShiki', {
-            //             headers: {
-            //                 'X-CSRF-TOKEN': csrf_token,
-            //                 'Content-Type': 'application/json'
-            //             },
-            //             method: 'post',
-            //             body: JSON.stringify(r),
-            //         })
-            //     }
-            // })
-            // .catch(e => {
-            //     alert(1)
-            //     dispatch(setError('Нет shiki_id'));
-            //
-            // })
+            if (json.id) {
+                await fetch('/api/anime/newByShiki', {
+                    headers: {
+                        'X-CSRF-TOKEN': csrf_token,
+                        'Content-Type': 'application/json'
+                    },
+                    method: 'post',
+                    body: JSON.stringify(json),
+                })
+                    .then(() => {
+                        dispatch(setNotification({type: 'success', message: 'Обновление успешно'}))
+                    })
+            }
         } catch (e) {
             // alert(1)
-            dispatch(setError('Нет shiki_id'));
+            dispatch(setNotification({type: 'error', message: e.message}));
         }
 
         return
@@ -75,10 +74,10 @@ const AnimeCard: FC<CollectionProps> = ({collection, link = false, admin = false
                 <div className={'flex xs:flex-col md:flex-row gap-4'}>
                     <div className={'flex flex-col gap-2'}>
                         <Image link={link} path={path} image={collection.image}/>
-                        <AnimeUserStatus link={link} path={path} anime={collection}/>
+                        <AnimeUserStatus anime={collection}/>
                     </div>
                     <div className={"flex flex-col w-full"}>
-                        <Title path={path} link
+                        <Title path={path} link={link}
                                RU={collection.title_ru}
                                EN={collection.title_en}
                                ORIGINAL={collection.title_original}/>

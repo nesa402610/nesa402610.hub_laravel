@@ -1,8 +1,8 @@
 import React, {Dispatch, FC, SetStateAction} from 'react';
-import InfoField from "components/HCollection/CollectionCard/CollectionInfo/InfoField";
-import CollectionDescription from "components/HCollection/CollectionCard/CollectionDescription";
 import {IKinopoiskItem} from "services/Kinopoisk";
 import {FaExternalLinkAlt} from 'react-icons/fa';
+import InfoField from "components/Anime/AnimeCard/AnimeInfo/InfoField";
+import AnimeDescription from "components/Anime/AnimeCard/AnimeDescription";
 
 interface KinopoiskPreviewProps {
     item: IKinopoiskItem
@@ -42,7 +42,7 @@ const KinopoiskPreview: FC<KinopoiskPreviewProps> = ({item, setPreview, clickToW
                         <InfoField title={'Рейтинг IMDB: '}>
                             {item.rating.imdb} ({item.votes.imdb})
                         </InfoField>
-                        <CollectionDescription description={item.description}/>
+                        <AnimeDescription description={item.description}/>
                     </div>
                 </div>
             </div>

@@ -78,6 +78,7 @@ class AnimeController extends Controller
                 }
             }
         }
+        return $anime;
     }
 
     public function createAnime(Request $request)
@@ -95,7 +96,7 @@ class AnimeController extends Controller
             $collection->tags->makeHidden('pivot');
             $collection->genres->makeHidden('pivot');
             $collection->studios->makeHidden('pivot');
-            $collection->status = $collection->animeStatus();
+            $collection->status = $collection->userStatus();
             $collection->videosCount = $collection->links()->count();
 
         }
@@ -124,7 +125,7 @@ class AnimeController extends Controller
 //            $collection->tags->makeHidden('pivot');
 //            $collection->genres->makeHidden('pivot');
 //            $collection->studios->makeHidden('pivot');
-            $collection->status = $collection->animeStatus();
+            $collection->status = $collection->userStatus();
 //            $collection->videosCount = $collection->links()->count();
         }
 
@@ -206,24 +207,13 @@ class AnimeController extends Controller
         }
 
         $collections = $query->paginate($IPP);
-
-        foreach ($collections as $collection) {
-            $collection->tags->makeHidden('pivot');
-            $collection->genres->makeHidden('pivot');
-//            $collection->studios->makeHidden('pivot');
-            $collection->status = $collection->animeStatus();
-//            $collection->videosCount = $collection->videos()->count();
-        }
+        
         return response($collections, 200);
     }
 
     public function getAnimeById($id)
     {
         $collection = Anime::find($id);
-        $collection->tags->makeHidden('pivot');
-        $collection->genres->makeHidden('pivot');
-//        $collection->studios->makeHidden('pivot');
-//        $collection->ratings = $collection->ratings();
         $collection->videosCount = $collection->videos()->count();
 
         return response($collection, 200);
@@ -327,7 +317,7 @@ class AnimeController extends Controller
     public function setWatchedEpisode($id, $symbol)
     {
         $anime = Anime::find($id);
-        $animeStatus = $anime->animeStatus()->first();
+        $animeStatus = $anime->userStatus()->first();
         $totalEp = $anime->episodes_total;
         $userWatchedEps = $animeStatus->watched_episodes ?? 0;
         $status = $animeStatus->status ?? null;
@@ -348,7 +338,7 @@ class AnimeController extends Controller
                     $animeStatus->watched_episodes += 1;
                 }
                 if ($status !== 0) {
-                    if (!$anime->animeStatus() || $userWatchedEps - 1 !== $totalEp) {
+                    if (!$anime->userStatus() || $userWatchedEps - 1 !== $totalEp) {
                         $animeStatus->status = 1;
                     }
                     if ($totalEp === $userWatchedEps + 1) {

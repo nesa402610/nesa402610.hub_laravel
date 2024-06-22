@@ -13,14 +13,14 @@ import collectionSlice from "./reducers/collectionSlice";
 import appSlice from "./reducers/appSlice";
 import {dashboardAPI} from "services/admin/dashboardService";
 import {kinopoiskAPI} from "services/Kinopoisk";
-import errorSlice from "store/reducers/errorSlice";
+import notificationSlice from "store/reducers/notificationSlice";
 
 export const store = configureStore({
     reducer: {
         app: appSlice,
         modal: modalSlice,
         collection: collectionSlice,
-        error: errorSlice,
+        notification: notificationSlice,
         [userAPI.reducerPath]: userAPI.reducer,
         [projectAPI.reducerPath]: projectAPI.reducer,
         [NewsAPI.reducerPath]: NewsAPI.reducer,

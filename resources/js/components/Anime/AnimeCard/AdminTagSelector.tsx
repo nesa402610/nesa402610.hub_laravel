@@ -1,11 +1,11 @@
 import React, {FC, useState} from 'react';
 import AdminChecker from "components/AdminChecker";
-import {ICollectionTag} from "types/Tag";
+import {IAnimeTag} from "types/Tag";
 import TagSelector from "components/Anime/TagSelector";
 
 interface TagSelectorProps {
     collectionID: number | string
-    items: ICollectionTag[]
+    items: IAnimeTag[]
     type: 'genre' | 'tag'
 }
 

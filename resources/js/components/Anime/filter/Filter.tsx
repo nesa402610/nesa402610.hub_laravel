@@ -39,21 +39,21 @@ const HCollectionFilter: FC = () => {
     }, [IPP, sort]);
 
     return (
-        <div className={"flex sm:p-4 xs:p-2 flex-col gap-4"}>
-            <div className={'flex gap-4 xs:flex-col sm:flex-row'}>
+        <div className={"flex sm:p-4 xs:p-2 flex-col gap-4 bg-neutral-700 rounded-lg"}>
+            <h2 className={'font-bold text-neutral-300 -mb-2'}>Фильтрация</h2>
+            <div className={'flex gap-4 flex-col'}>
                 <TitleField title={title} setTitle={setTitle} searchFn={searchWithFilterHandler}/>
-                <IPPField IPP={IPP} setIPP={setIPP}/>
             </div>
             <div className={"flex flex-col gap-4"}>
-                <div className={'flex gap-4 xs:flex-col sm:flex-row'}>
-                    <div className={'flex gap-4'}>
+                <div className={'flex gap-4 flex-col'}>
+                    <div className={'flex flex-col gap-4'}>
                         <label>
                             <span className={'block'}>Тип</span>
                             <select value={kind} onChange={e => setKind(e.target.value)}
-                                    className={'p-2 rounded-lg bg-neutral-600'}
+                                    className={'p-2 rounded-lg bg-neutral-600 w-full'}
                             >
 
-                                <option value={''}>Все</option>
+                                <option value={''}>Любой</option>
                                 <option value="tv">ТВ</option>
                                 <option value="ova">OVA</option>
                                 <option value="ona">ONA</option>
@@ -68,7 +68,7 @@ const HCollectionFilter: FC = () => {
                     <Selector placeholder={'Жанры и теги'} selected={tags}
                               setSelected={setTags}/>
                 </div>
-                <div className={'flex gap-4 items-center xs:flex-col md:flex-row'}>
+                <div className={'flex gap-4 flex-col'}>
                     <div className={'w-full'}>
                         <span>Сортировка</span>
                         <select className={'p-2 rounded-lg bg-neutral-600 w-full'}
@@ -81,8 +81,9 @@ const HCollectionFilter: FC = () => {
                         </select>
                     </div>
                     <YearsRange setYears={setYears}/>
+                    <IPPField IPP={IPP} setIPP={setIPP}/>
                 </div>
-                <div className={'flex sm:flex-row xs:flex-col gap-4'}>
+                <div className={'flex flex-col gap-4'}>
                     <button onClick={searchWithFilterHandler} className={'bg-red-700 hover:bg-red-800'}>Поиск с фильтром
                     </button>
                     <button onClick={clearFilterHandler} className={'bg-neutral-600 hover:bg-neutral-700'}>Сбросить

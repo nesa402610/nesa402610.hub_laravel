@@ -3,7 +3,7 @@ import {useParams} from "react-router";
 import Loader from "components/Loader";
 import {useGetAnimeByIdQuery, useGetAnimeRecommendationsQuery} from "services/Anime/AnimeService";
 import AnimeVideos from "components/Anime/AnimeVideos";
-import HCollectionCard from "components/Anime/AnimeCard/AnimeCard";
+import AnimeCard from "components/Anime/AnimeCard/AnimeCard";
 import AnimeCard_mini from "components/Anime/AnimeCard/AnimeCard_mini";
 
 const AnimeDetailedPage = () => {
@@ -24,7 +24,15 @@ const AnimeDetailedPage = () => {
 
     return (
         <div className={"m-4 flex flex-col gap-4"}>
-            <HCollectionCard collection={data}/>
+            <div>
+                <AnimeCard collection={data}/>
+                <div>
+                    <h3>В списках</h3>
+                    <div>
+
+                    </div>
+                </div>
+            </div>
             <AnimeVideos animeID={data.id}/>
             <div className={'block--light'}>
                 <h3 className={'font-bold text-xl'}>Похожие аниме</h3>

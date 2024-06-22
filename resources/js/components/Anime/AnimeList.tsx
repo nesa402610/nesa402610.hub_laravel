@@ -18,7 +18,7 @@ const AnimeList: FC = () => {
     if (isLoading) return <Loader/>;
 
     return (
-        <div className={"block--dark flex flex-col gap-4"}>
+        <div className={"block--dark !p-0 flex flex-col gap-4 flex-1"}>
             {!data?.data?.length &&
                 <h2 className={'text-center font-bold text-lg'}>
                     Кажется, по этому запросу еще ничего нет

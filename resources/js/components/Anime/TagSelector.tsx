@@ -1,11 +1,11 @@
 import React, {FC, useMemo, useState} from "react";
 import Loader from "../Loader";
 import {useGetTagsQuery} from "services/Anime/TagService";
-import {ICollectionTag, ITags} from "types/Tag";
+import {IAnimeTag, ITags} from "types/Tag";
 import {useAddTagToAnimeMutation} from "services/Anime/AnimeService";
 
 interface TagSelectorProps {
-    collectionTags: ICollectionTag[];
+    collectionTags: IAnimeTag[];
     collectionID: string | number
     tagType: 'genre' | 'tag'
 }

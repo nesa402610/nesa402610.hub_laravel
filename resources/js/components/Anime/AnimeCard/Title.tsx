@@ -9,11 +9,12 @@ interface TitleProps {
     path: string
 }
 
-const Title: FC<TitleProps> = ({link, RU, EN, ORIGINAL, path}) => {
+const Title: FC<TitleProps> = ({link = false, RU, EN, ORIGINAL, path}) => {
+    const WrapperTag = link ? Link : 'h3';
+    const wrapperProps = link ? {to: path} : null;
     return (
         <div className={'flex flex-col'}>
-            <Link
-                to={link ? path : ''}>
+            <WrapperTag {...wrapperProps}>
                 <div
                     className={`flex items-center flex-wrap ${link ? "hover:text-neutral-300 transition-all" : "cursor-default"}`}>
                     {RU &&
@@ -24,7 +25,7 @@ const Title: FC<TitleProps> = ({link, RU, EN, ORIGINAL, path}) => {
                     }
                     <span>{ORIGINAL}</span>
                 </div>
-            </Link>
+            </WrapperTag>
             <span className={'text-sm italic text-neutral-400'}>{EN}</span>
         </div>
     );

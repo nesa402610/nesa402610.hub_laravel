@@ -8,13 +8,11 @@ import {useAppDispatch, useAppSelector} from "hooks/redux";
 import {useSearchParams} from "react-router-dom";
 import {useGetUserQuery} from "services/userService";
 
-interface CollectionUserStatusProps {
-    link: boolean
-    path: string
+interface AnimeUserStatusProps {
     anime: ICollection
 }
 
-const AnimeUserStatus: FC<CollectionUserStatusProps> = ({link, path, anime}) => {
+const AnimeUserStatus: FC<AnimeUserStatusProps> = ({anime}) => {
     const [updateWatchedEpisode] = useSetWatchedEpisodeMutation()
     const dispatch = useAppDispatch()
     const {filter} = useAppSelector(state => state.collection)
