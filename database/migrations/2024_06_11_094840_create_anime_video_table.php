@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->integer('episode');
             $table->boolean('iframe')->default(false);
             $table->timestamps();
-            $table->unique(['anime_id', 'link']);
         });
     }
 
