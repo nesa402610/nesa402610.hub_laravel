@@ -39,7 +39,7 @@ const HCollectionFilter: FC = () => {
     }, [IPP, sort]);
 
     return (
-        <div className={"flex sm:p-4 xs:p-2 flex-col gap-4 bg-neutral-700 rounded-lg"}>
+        <div className={"flex sm:p-4 xs:p-2 flex-col gap-4 bg-neutral-700 rounded-lg md:order-2"}>
             <h2 className={'font-bold text-neutral-300 -mb-2'}>Фильтрация</h2>
             <div className={'flex gap-4 flex-col'}>
                 <TitleField title={title} setTitle={setTitle} searchFn={searchWithFilterHandler}/>

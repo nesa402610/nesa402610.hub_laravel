@@ -37,7 +37,7 @@ const Paginator = ({currentPage, setCurrentPage, totalPages}) => {
         }
     }, [totalPages, currentPage]);
     return (
-        <div className={"flex xs:gap-1 md:gap-4 items-center justify-center"}>
+        <div className={"flex xs:gap-1 md:gap-4 items-center justify-center p-4"}>
           <span onClick={() => toPageHandler(1)}
                 className={currentPage === 1 ? "text-neutral-500" : "cursor-pointer hover:text-neutral-500 text-neutral-300"}>
               <FaAngleDoubleLeft/>
