@@ -19,7 +19,7 @@ const HomePage: FC = () => {
                     </div>
                     <div className={'grid md:grid-cols-5 xs:grid-cols-2 sm:grid-cols-4 gap-4 mt-4'}>
                         {randomList?.map(anime =>
-                            <AnimeCard_mini anime={anime}/>
+                            <AnimeCard_mini key={anime.id} hideStatus anime={anime}/>
                         )}
                     </div>
                 </div>

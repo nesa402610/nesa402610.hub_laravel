@@ -8,7 +8,6 @@ use App\Models\AnimeUserStatus;
 use App\Models\AnimeVideo;
 use App\Models\Genre;
 use Auth;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Tests\Integration\Database\EloquentWhereHasMorphTest\Video;
 use function PHPUnit\Framework\isEmpty;
@@ -109,7 +108,7 @@ class AnimeController extends Controller
     public function getRandomAnimeList()
     {
         $query = Anime::query();
-        $query->inRandomOrder();
+        $query->inRandomOrder(1);
 
         $currentYear = date('Y');
         $userBirthday = Auth::user()->birthday ?? $currentYear;
@@ -118,19 +117,11 @@ class AnimeController extends Controller
         if ($userOld < 18) {
             $query->where('rating', '!=', 'Rx');
         }
-//        $query->whereDoesntHave('status', function ($query) {
-//           $query->whereIn('status', 4);
-//        });
-
+        $query->whereDoesntHave('userStatus', function ($query) {
+            $query->where('status', 4);
+        });
         $anime = $query->limit(10)->get();
 
-        foreach ($anime as $collection) {
-//            $collection->tags->makeHidden('pivot');
-//            $collection->genres->makeHidden('pivot');
-//            $collection->studios->makeHidden('pivot');
-            $collection->status = $collection->userStatus();
-//            $collection->videosCount = $collection->links()->count();
-        }
 
         return response($anime);
     }
