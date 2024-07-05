@@ -1,14 +1,38 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Link} from "react-router-dom";
 import {collectionKind} from "components/Anime/AnimeCard/AnimeInfo/AnimeInfo";
+import {ICollection} from "types/types";
+import AnimeUserStatus from "components/Anime/AnimeCard/AnimeUserStatus";
 
-const AnimeCard_mini = ({anime}) => {
+interface AnimeCard_miniProps {
+    anime: ICollection
+    className?: string
+    hideStatus?: boolean
+}
+
+enum AnimeStatus {
+    // @ts-ignore
+    'bg-red-600',
+    'bg-blue-600',
+    'bg-purple-600',
+    'bg-blue-600',
+    'bg-red-700',
+    'bg-red-700',
+    'bg-green-600',
+    'bg-neutral-700' = undefined
+}
+
+
+const AnimeCard_mini: FC<AnimeCard_miniProps> = ({anime, className, hideStatus}) => {
     const kind = collectionKind[anime.kind.toUpperCase()]
+    console.log(anime.userStatus?.status)
     return (
-        <Link to={`/NULL/unit/ZERO/${anime.id}`} className={'min-h-[200px] flex flex-col'}>
-            <img src={anime.image} className={'object-contain rounded-lg max-h-[250px] flex-1'} alt=""/>
+        <Link to={`/NULL/unit/ZERO/${anime.id}`}
+              className={`${AnimeStatus[anime.userStatus?.status]} p-4 rounded-xl min-h-[200px] flex flex-col ${className}`}>
+            <img src={anime.image} className={'object-cover rounded-lg max-h-[250px] flex-1'} alt=""/>
             <h3 className={'whitespace-nowrap overflow-hidden overflow-ellipsis'}>{anime.title_ru || anime.title_original}</h3>
-            <span>{kind}</span>
+            <span className={'text-neutral-300 text-sm'}>{kind}</span>
+            {!hideStatus && <AnimeUserStatus anime={anime}/>}
         </Link>
     );
 };

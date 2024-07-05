@@ -10,11 +10,15 @@ const initialState: collectionSlice = {
         sort: JSON.parse(localStorage.getItem('memFilter'))?.sort ?? 'id',
         years: {start: 2010, end: new Date().getFullYear() - 1}
     },
+    options: {
+        smallPreview: JSON.parse(localStorage.getItem('smallPreview')) || true
+    }
     // filteredCollection: []
 }
 
 interface collectionSlice {
     filter: collectionFilter
+    options: options
     // filteredCollection: ICollection[]
 }
 
@@ -26,6 +30,10 @@ interface collectionFilter {
     sort: string
     kind: string
     years: { start: number, end: number }
+}
+
+interface options {
+    smallPreview: boolean
 }
 
 const collectionSlice = createSlice({
@@ -50,6 +58,10 @@ const collectionSlice = createSlice({
             state.filter.years = {start: 1910, end: new Date().getFullYear() + 5}
             state.filter.kind = null
         },
+        changePreviewSize(state, action: PayloadAction<boolean>) {
+            state.options.smallPreview = !state.options.smallPreview
+            localStorage.setItem('memFilter', JSON.stringify(state.options.smallPreview))
+        }
     },
 })
 
@@ -57,4 +69,5 @@ export default collectionSlice.reducer
 export const {
     setFilter,
     clearFilter,
+    changePreviewSize,
 } = collectionSlice.actions

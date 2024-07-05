@@ -1,15 +1,16 @@
 import React, {FC, useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "hooks/redux";
-import {clearFilter, setFilter} from "store/reducers/collectionSlice";
+import {changePreviewSize, clearFilter, setFilter} from "store/reducers/collectionSlice";
 import RatingField from "./RatingField";
 import IPPField from "./IPPField";
 import TitleField from "./TitleField";
 import YearsRange from "./YearsRange";
 import Selector from "components/UI/Selector";
+import {IoGrid, IoReorderFour} from "react-icons/io5";
 
 const HCollectionFilter: FC = () => {
     const dispatch = useAppDispatch()
-    const {filter} = useAppSelector(state => state.collection)
+    const {filter, options} = useAppSelector(state => state.collection)
     const [title, setTitle] = useState(filter.title);
     const [tags, setTags] = useState(filter.tags);
     const [rating, setRating] = useState(filter.rating);
@@ -38,13 +39,14 @@ const HCollectionFilter: FC = () => {
         localStorage.setItem('memFilter', memFilter)
     }, [IPP, sort]);
 
+    const previewSizeHandle = () => {
+        dispatch(changePreviewSize())
+    };
     return (
-        <div className={"flex sm:p-4 xs:p-2 flex-col gap-4 bg-neutral-700 rounded-lg md:order-2"}>
+        <div className={"flex sm:p-4 xs:p-2 flex-col gap-4 bg-neutral-700 rounded-lg md:order-2 "}>
             <h2 className={'font-bold text-neutral-300 -mb-2'}>Фильтрация</h2>
-            <div className={'flex gap-4 flex-col'}>
-                <TitleField title={title} setTitle={setTitle} searchFn={searchWithFilterHandler}/>
-            </div>
             <div className={"flex flex-col gap-4"}>
+                <TitleField title={title} setTitle={setTitle} searchFn={searchWithFilterHandler}/>
                 <div className={'flex gap-4 flex-col'}>
                     <div className={'flex flex-col gap-4'}>
                         <label>
@@ -52,7 +54,6 @@ const HCollectionFilter: FC = () => {
                             <select value={kind} onChange={e => setKind(e.target.value)}
                                     className={'p-2 rounded-lg bg-neutral-600 w-full'}
                             >
-
                                 <option value={''}>Любой</option>
                                 <option value="tv">ТВ</option>
                                 <option value="ova">OVA</option>
@@ -82,6 +83,16 @@ const HCollectionFilter: FC = () => {
                     </div>
                     <YearsRange setYears={setYears} years={years}/>
                     <IPPField IPP={IPP} setIPP={setIPP}/>
+                    <div className={'flex gap-4 items-center justify-between'}>
+                        <span onClick={previewSizeHandle} className={'flex flex-col items-center justify-center'}>
+                            <IoReorderFour className={`${!options.smallPreview && 'text-red-600'}`} size={'24px'}/>
+                            <span className={` text-sm`}>Информативно</span>
+</span>
+                        <span onClick={previewSizeHandle} className={`flex flex-col items-center justify-center`}>
+                            <IoGrid className={`${options.smallPreview && 'text-red-600'}`} size={'24px'}/>
+                            <span className={`text-sm`}>Компактно</span>
+                        </span>
+                    </div>
                 </div>
                 <div className={'flex flex-col gap-4'}>
                     <button onClick={searchWithFilterHandler} className={'bg-red-700 hover:bg-red-800'}>Поиск с фильтром

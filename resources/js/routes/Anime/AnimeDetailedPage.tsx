@@ -15,7 +15,7 @@ const AnimeDetailedPage = () => {
 
     useEffect(() => {
         if (isFetchingAnime) return
-        document.title = `Смотреть аниме ${data?.title_ru} // n/esa | hub`
+        document.title = `${data?.title_ru || data?.title_original} // n/esa | hub`
         return () => {
             document.title = `n/esa | hub`
         }
@@ -38,7 +38,7 @@ const AnimeDetailedPage = () => {
                 <h3 className={'font-bold text-xl'}>Похожие аниме</h3>
                 <div className={'grid lg:grid-cols-7 xs:grid-cols-1 sm:grid-cols-4 gap-4 mt-4'}>
                     {recs.map(rec =>
-                        <AnimeCard_mini key={rec.id} anime={rec}/>
+                        <AnimeCard_mini key={rec.id} anime={rec} hideStatus/>
                     )}
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import Filter from "components/Anime/filter/Filter";
 import AnimeList from "components/Anime/AnimeList";
+import {useAppSelector} from "hooks/redux";
 
 // export const filterCollection = (collections, filter) => {
 //     const filteredByTitle = collections?.data.filter(c => c.title_ru.toLowerCase().includes(filter.title.toLowerCase()));
@@ -9,6 +10,7 @@ import AnimeList from "components/Anime/AnimeList";
 //     });
 // };
 const AnimePage: FC = () => {
+    const {smallPreview} = useAppSelector(state => state.collection.options)
 
     return (
         <div className={"m-4"}>
@@ -21,7 +23,7 @@ const AnimePage: FC = () => {
                 </div>
                 <div className={"gap-4 flex xs:flex-col md:flex-row"}>
                     <Filter/>
-                    <AnimeList/>
+                    <AnimeList smallPreview={smallPreview}/>
                 </div>
             </div>
         </div>
