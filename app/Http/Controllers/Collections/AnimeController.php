@@ -108,7 +108,7 @@ class AnimeController extends Controller
     public function getRandomAnimeList()
     {
         $query = Anime::query();
-        $query->inRandomOrder(1);
+        $query->inRandomOrder();
 
         $currentYear = date('Y');
         $userBirthday = Auth::user()->birthday ?? $currentYear;

@@ -52,7 +52,10 @@ const AnimeUserStatus: FC<AnimeUserStatusProps> = ({anime}) => {
     }
 
     if (user) return (
-        <div className={'flex-shrink-0 basis-auto flex flex-col gap-2'}>
+        <div className={'flex-shrink-0 basis-auto flex flex-col gap-2'} onClick={e => {
+            e.preventDefault()
+            e.stopPropagation()
+        }}>
             <AnimeScore score={anime.userStatus?.score || 0} animeId={anime.id}/>
             <AnimeStatus status={anime.userStatus?.status} animeID={anime.id}/>
             <div className={'flex gap-2 items-center justify-between xs:w-auto w-[230px]'}>

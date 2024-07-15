@@ -10,22 +10,18 @@ interface AnimeCard_miniProps {
     hideStatus?: boolean
 }
 
+// @ts-ignore
 enum AnimeStatus {
-    // @ts-ignore
-    'bg-red-600',
-    'bg-blue-600',
-    'bg-purple-600',
-    'bg-blue-600',
-    'bg-red-700',
-    'bg-red-700',
-    'bg-green-600',
+    'bg-red-600' = 0 | 4 | 5,
+    'bg-blue-600' = 1 | 3,
+    'bg-purple-600' = 2,
+    'bg-green-600' = 6,
     'bg-neutral-700' = undefined
 }
 
 
 const AnimeCard_mini: FC<AnimeCard_miniProps> = ({anime, className, hideStatus}) => {
-    const kind = collectionKind[anime.kind.toUpperCase()]
-    console.log(anime.userStatus?.status)
+    const kind = collectionKind[anime.kind?.toUpperCase()] || 'Не указан'
     return (
         <Link to={`/NULL/unit/ZERO/${anime.id}`}
               className={`${AnimeStatus[anime.userStatus?.status]} p-4 rounded-xl min-h-[200px] flex flex-col ${className}`}>
