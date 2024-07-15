@@ -21,7 +21,6 @@ const AnimeList: FC<AnimeListProps> = ({smallPreview = false}) => {
     });
 
     if (isLoading) return <Loader/>;
-    console.log(smallPreview)
 
     return (
         <div className={"block--dark !p-0 flex flex-col gap-4 flex-1"}>
@@ -31,7 +30,7 @@ const AnimeList: FC<AnimeListProps> = ({smallPreview = false}) => {
                 </h2>
             }
             <div
-                className={`relative  gap-4 min-h-[100px] ${smallPreview ? 'grid xs:grid-cols-1 md:grid-cols-3 lg:grid-cols-4' : 'flex flex-col'}`}>
+                className={`relative  gap-4 min-h-[100px] ${smallPreview ? 'grid xs:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5' : 'flex flex-col'}`}>
                 {isFetching &&
                     <div className={'z-40 absolute rounded-lg bg-neutral-700/70 h-full w-full'}>
                         <Loader center/>

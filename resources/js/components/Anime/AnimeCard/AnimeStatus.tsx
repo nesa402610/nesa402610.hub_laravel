@@ -70,15 +70,12 @@ const AnimeStatus: FC<CollectionStatusProps> = ({status, animeID}) => {
     return (
         <div className={'relative cursor-pointer'} ref={ref}>
             <div className={'relative flex items-center'} onClick={(e) => {
+                e.preventDefault()
                 e.stopPropagation()
-                setIsOpen(true)
+                setIsOpen(prevState => !prevState)
             }}>
                 {isOpen ?
-                    <div className={'absolute right-2 z-[1000]'}
-                         onClick={e => {
-                             e.stopPropagation();
-                             setIsOpen(false)
-                         }}>
+                    <div className={'absolute right-2 z-[1000]'}>
                         <IoCaretUp className={'text-2xl fill-neutral-300 hover:fill-white transition hover:scale-110'}/>
                     </div>
                     :
