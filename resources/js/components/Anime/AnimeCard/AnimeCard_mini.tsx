@@ -20,7 +20,7 @@ enum AnimeStatus {
 }
 
 
-const AnimeCard_mini: FC<AnimeCard_miniProps> = ({anime, className, hideStatus}) => {
+const AnimeCard_mini: FC<AnimeCard_miniProps> = ({anime, className = '', hideStatus}) => {
     const kind = collectionKind[anime.kind?.toUpperCase()] || 'Не указан'
     return (
         <Link to={`/NULL/unit/ZERO/${anime.id}`}
