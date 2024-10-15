@@ -5,13 +5,14 @@ import AnimeDescription from "./AnimeDescription";
 import AnimeInfo from "components/Anime/AnimeCard/AnimeInfo/AnimeInfo";
 import {useGetUserQuery} from "services/userService";
 import {FiEdit} from "react-icons/fi";
-import {Link} from "react-router-dom";
+import {Link, useSearchParams} from "react-router-dom";
 import AnimeTags from "components/Anime/AnimeCard/AnimeTags/AnimeTags";
 import AnimeUserStatus from "components/Anime/AnimeCard/AnimeUserStatus";
 import Image from "components/Anime/AnimeCard/Image";
-import {useAppDispatch} from "hooks/redux";
+import {useAppDispatch, useAppSelector} from "hooks/redux";
 import {setNotification} from "store/reducers/notificationSlice";
 import {csrf_token} from "../../../mockData";
+import {AnimeAPI} from "services/Anime/AnimeService";
 
 interface CollectionProps {
     collection: ICollection;
@@ -24,6 +25,8 @@ const AnimeCard: FC<CollectionProps> = ({link = false, collection, admin = false
     const {data: user} = useGetUserQuery()
     const isAdmin = user?.role[0]?.name === 'Admin'
     const dispatch = useAppDispatch();
+    const [params] = useSearchParams();
+    const filter = useAppSelector(state => state.collection.filter)
 
 
     const fetchAnime = async () => {
@@ -36,7 +39,7 @@ const AnimeCard: FC<CollectionProps> = ({link = false, collection, admin = false
             // .then(r => r.json())
             // .then(r => {
             if (json.id) {
-                await fetch('/api/anime/newByShiki', {
+                fetch('/api/anime/newByShiki', {
                     headers: {
                         'X-CSRF-TOKEN': csrf_token,
                         'Content-Type': 'application/json'
@@ -44,8 +47,19 @@ const AnimeCard: FC<CollectionProps> = ({link = false, collection, admin = false
                     method: 'post',
                     body: JSON.stringify(json),
                 })
-                    .then(() => {
+                    .then((r) => r.json())
+                    .then(r => {
                         dispatch(setNotification({type: 'success', message: 'Обновление успешно'}))
+                        dispatch(AnimeAPI.util.updateQueryData('getAllAnime', {
+                            page: +params.get('page') || 1,
+                            query: filter,
+                        }, (draft) => {
+                            const anime = draft.data.find(a => a.id === collection.id);
+                            if (anime) {
+                                Object.assign(anime, r)
+
+                            }
+                        }),)
                     })
             }
         } catch (e) {
